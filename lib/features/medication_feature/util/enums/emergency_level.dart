@@ -1,7 +1,8 @@
+import 'package:flutter/material.dart';
+
 enum EmergencyLevel {
   low,
   medium,
-  normal,
   high,
   critical,
   unknown,
@@ -14,8 +15,6 @@ extension EmergencyLevelX on EmergencyLevel {
         return 'Low';
       case EmergencyLevel.medium:
         return 'Medium';
-      case EmergencyLevel.normal:
-        return 'Normal';
       case EmergencyLevel.high:
         return 'High';
       case EmergencyLevel.critical:
@@ -31,8 +30,6 @@ extension EmergencyLevelX on EmergencyLevel {
         return 'منخفض';
       case EmergencyLevel.medium:
         return 'متوسط';
-      case EmergencyLevel.normal:
-        return 'عادي';
       case EmergencyLevel.high:
         return 'عالي';
       case EmergencyLevel.critical:
@@ -42,20 +39,18 @@ extension EmergencyLevelX on EmergencyLevel {
     }
   }
 
-  String get color {
+  Color get color {
     switch (this) {
       case EmergencyLevel.low:
-        return '#00FF00';
+        return Colors.green;
       case EmergencyLevel.medium:
-        return '#00FF00';
-      case EmergencyLevel.normal:
-        return '#00FF00';
+        return Colors.black;
       case EmergencyLevel.high:
-        return '#00FF00';
+        return Colors.orange;
       case EmergencyLevel.critical:
-        return '#00FF00';
+        return Colors.red;
       case EmergencyLevel.unknown:
-        return '#00FF00';
+        return Colors.grey;
     }
   }
 }
@@ -67,8 +62,6 @@ extension EmgLVL on String {
         return EmergencyLevel.low;
       case 'Medium':
         return EmergencyLevel.medium;
-      case 'Normal':
-        return EmergencyLevel.normal;
       case 'High':
         return EmergencyLevel.high;
       case 'Critical':

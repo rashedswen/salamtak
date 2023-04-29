@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:salamtak/features/medication_feature/domain/repository/medication_repository.dart';
 import 'package:salamtak/features/medication_feature/presentation/add_request/cubit/cubit.dart';
 import 'package:salamtak/features/medication_feature/presentation/add_request/widgets/add_request_body.dart';
 
@@ -17,12 +18,16 @@ class AddRequestPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => AddRequestCubit(),
-      child: const Scaffold(
-        body: AddRequestView(),
+      create: (context) =>
+          AddRequestCubit(context.read<MedicationRepository>()),
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('AddRequestPage'),
+        ),
+        body: const AddRequestView(),
       ),
     );
-  }    
+  }
 }
 
 /// {@template add_request_view}
@@ -34,6 +39,13 @@ class AddRequestView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const AddRequestBody();
+    return BlocListener<AddRequestCubit, AddRequestState>(
+      listener: (context, state) {
+        if (state.status == AddRequestStatus.success) {
+          // Navigator.of(context).pop();
+        }
+      },
+      child: const AddRequestBody(),
+    );
   }
 }

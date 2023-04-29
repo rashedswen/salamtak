@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:salamtak/features/medication_feature/data/model/medication_donation_model.dart';
 import 'package:salamtak/features/medication_feature/data/model/medication_request_model.dart';
 import 'package:salamtak/features/medication_feature/util/enums/enums.dart';
@@ -62,7 +65,19 @@ class FirebaseDatasource extends RemoteDatasource {
   Future<void> addMedicationRequest(
     MedicationRequestModel medication,
   ) async {
-    final user = _firebaseAuth.currentUser;
+    String? imgUrl;
+    if (medication.prescription != null) {
+      final path = 'requests/${medication.prescription!.name}';
+      final prescription = File(medication.prescription!.path!);
+
+      final ref = firebase_storage.FirebaseStorage.instance.ref().child(path);
+      final uploadTask = ref.putFile(prescription);
+
+      final p = await uploadTask.whenComplete(() => null);
+
+      imgUrl = await p.ref.getDownloadURL();
+    }
+
     final medicationId = FirebaseFirestore.instance
         .collection(
           _medicationsRequestsCollection,
@@ -70,8 +85,8 @@ class FirebaseDatasource extends RemoteDatasource {
         .doc();
     final medicationRequest = medication.copyWith(
       id: medicationId.id,
-      userId: user!.uid,
       status: MedicationStatus.pending,
+      image: imgUrl,
     );
     await medicationId.set(medicationRequest.toJson());
   }

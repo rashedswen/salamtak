@@ -3,21 +3,6 @@ import 'package:salamtak/features/medication_feature/domain/entity/medication_re
 import 'package:salamtak/features/medication_feature/util/enums/enums.dart';
 
 class MedicationRequestModel {
-  factory MedicationRequestModel.fromJson(Map<String, dynamic> map) {
-    return MedicationRequestModel(
-      id: map['id'] as String?,
-      image: map['image'] as String?,
-      createdAt: map['createdAt'] as String?,
-      updatedAt: map['updatedAt'] as String?,
-      prescription: map['prescription'] as PlatformFile?,
-      title: map['title'] as String,
-      description: map['description'] as String,
-      form: (map['form'] as String).toMedicineForm,
-      status: (map['status'] as String).toMedicineStatus,
-      userId: map['userId'] as String,
-      emergencyLevel: (map['emergencyLevel'] as String).toEmergencyLevel,
-    );
-  }
   const MedicationRequestModel({
     this.id,
     this.image,
@@ -31,6 +16,20 @@ class MedicationRequestModel {
     required this.userId,
     required this.description,
   });
+  factory MedicationRequestModel.fromJson(Map<String, dynamic> map) {
+    return MedicationRequestModel(
+      id: map['id'] as String?,
+      image: map['image'] as String?,
+      createdAt: map['createdAt'] as String?,
+      updatedAt: map['updatedAt'] as String?,
+      title: map['title'] as String,
+      description: map['description'] as String,
+      form: (map['form'] as String).toMedicineForm,
+      status: (map['status'] as String).toMedicineStatus,
+      userId: map['userId'] as String,
+      emergencyLevel: (map['emergencyLevel'] as String).toEmergencyLevel,
+    );
+  }
 
   final String? id;
   final String? image;
@@ -66,13 +65,12 @@ class MedicationRequestModel {
       'image': image,
       'createdAt': createdAt,
       'updatedAt': updatedAt,
-      'prescription': prescription,
       'title': title,
       'description': description,
-      'form': form,
-      'status': status,
+      'form': form.name,
+      'status': status.name,
       'userId': userId,
-      'emergencyLevel': emergencyLevel,
+      'emergencyLevel': emergencyLevel.name,
     };
   }
 
@@ -82,7 +80,6 @@ class MedicationRequestModel {
       image: image,
       createdAt: createdAt,
       updatedAt: updatedAt,
-      prescription: prescription,
       title: title,
       description: description,
       form: form,

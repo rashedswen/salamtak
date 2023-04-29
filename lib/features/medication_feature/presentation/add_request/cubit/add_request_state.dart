@@ -1,33 +1,55 @@
 part of 'add_request_cubit.dart';
 
-/// {@template add_request}
-/// AddRequestState description
-/// {@endtemplate}
+enum AddRequestStatus { initial, loading, success, failure }
+
 class AddRequestState extends Equatable {
   /// {@macro add_request}
   const AddRequestState({
-    this.customProperty = 'Default Value',
+    this.description,
+    this.emergencyLevel = EmergencyLevel.low,
+    this.form = MedicineForm.tablet,
+    this.prescription,
+    this.title,
+    this.status = AddRequestStatus.initial,
+    this.errorMassage,
   });
 
-  /// A description for customProperty
-  final String customProperty;
+  final String? title;
+  final String? description;
+  final EmergencyLevel emergencyLevel;
+  final MedicineForm form;
+  final PlatformFile? prescription;
+  final AddRequestStatus status;
+  final String? errorMassage;
 
   @override
-  List<Object> get props => [customProperty];
+  List<Object?> get props => [
+        title,
+        description,
+        emergencyLevel,
+        form,
+        prescription,
+        status,
+        errorMassage
+      ];
 
-  /// Creates a copy of the current AddRequestState with property changes
   AddRequestState copyWith({
-    String? customProperty,
+    String? title,
+    String? description,
+    EmergencyLevel? emergencyLevel,
+    MedicineForm? form,
+    PlatformFile? prescription,
+    AddRequestStatus? status,
+    String? errorMassage,
   }) {
     return AddRequestState(
-      customProperty: customProperty ?? this.customProperty,
+      title: title ?? this.title,
+      description: description ?? this.description,
+      emergencyLevel: emergencyLevel ?? this.emergencyLevel,
+      form: form ?? this.form,
+      prescription: prescription ?? this.prescription,
+      status: status ?? this.status,
+      errorMassage: errorMassage ?? this.errorMassage,
     );
   }
-}
-/// {@template add_request_initial}
-/// The initial state of AddRequestState
-/// {@endtemplate}
-class AddRequestInitial extends AddRequestState {
-  /// {@macro add_request_initial}
-  const AddRequestInitial() : super();
 }
