@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "47603181237",
+    "project_id": "salamtak-kwemrj",
+    "storage_bucket": "salamtak-kwemrj.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:47603181237:android:1797af536b0a7e7031c0fc",
+        "android_client_info": {
+          "package_name": "com.kwemrj.salamtak.salamtak"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "47603181237-lalkuaioe0jvoj31m50rebef1qdnb5dp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDu3WnOV0dfuTkyrU5kopYg7PSHwRpo9Ks"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "47603181237-lalkuaioe0jvoj31m50rebef1qdnb5dp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
