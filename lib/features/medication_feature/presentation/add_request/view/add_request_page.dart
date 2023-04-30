@@ -42,7 +42,7 @@ class AddRequestView extends StatelessWidget {
     return BlocListener<AddRequestCubit, AddRequestState>(
       listener: (context, state) {
         if (state.status == AddRequestStatus.success) {
-          // Navigator.of(context).pop();
+          Navigator.of(context).pop();
         }
       },
       child: const AddRequestBody(),

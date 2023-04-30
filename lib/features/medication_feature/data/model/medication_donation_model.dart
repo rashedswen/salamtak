@@ -15,6 +15,7 @@ class MedicationDonationModel {
       createdAt: map['createdAt'] as String?,
       updatedAt: map['updatedAt'] as String?,
       userId: map['userId'] as String,
+      quantity: map['quantity'] as String?,
     );
   }
   const MedicationDonationModel({
@@ -28,6 +29,7 @@ class MedicationDonationModel {
     this.createdAt,
     this.updatedAt,
     required this.userId,
+    this.quantity,
   });
   final String? id;
   final String title;
@@ -39,6 +41,7 @@ class MedicationDonationModel {
   final String? createdAt;
   final String? updatedAt;
   final String userId;
+  final String? quantity;
 
   @override
   List<Object?> get props => [
@@ -51,6 +54,8 @@ class MedicationDonationModel {
         createdAt,
         updatedAt,
         userId,
+        expiredAt,
+        quantity,
       ];
 
   Map<String, dynamic> toJson() {
@@ -59,12 +64,13 @@ class MedicationDonationModel {
       'title': title,
       'description': description,
       'image': image,
-      'form': form,
-      'status': status,
+      'form': form.name,
+      'status': status.name,
       'expiredAt': expiredAt,
       'createdAt': createdAt,
       'updatedAt': updatedAt,
       'userId': userId,
+      'quantity': quantity,
     };
   }
 
@@ -79,6 +85,8 @@ class MedicationDonationModel {
     String? createdAt,
     String? updatedAt,
     String? userId,
+    String? quantity,
+
   }) {
     return MedicationDonationModel(
       id: id ?? this.id,
@@ -91,6 +99,7 @@ class MedicationDonationModel {
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt ?? this.updatedAt,
       userId: userId ?? this.userId,
+      quantity: quantity ?? this.quantity,
     );
   }
 
@@ -105,6 +114,7 @@ class MedicationDonationModel {
       createdAt: createdAt,
       updatedAt: updatedAt,
       userId: userId,
+      quantity: quantity,
     );
   }
 }

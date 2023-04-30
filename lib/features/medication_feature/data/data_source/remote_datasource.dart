@@ -95,7 +95,20 @@ class FirebaseDatasource extends RemoteDatasource {
   Future<void> addMedicationDonation(
     MedicationDonationModel medication,
   ) async {
-    final user = _firebaseAuth.currentUser;
+    String? imgUrl;
+    if (medication.image != null) {
+      final name = medication.image!.split('/').last;
+      final path = 'requests/$name';
+      final prescription = File(medication.image!);
+
+      final ref = firebase_storage.FirebaseStorage.instance.ref().child(path);
+      final uploadTask = ref.putFile(prescription);
+
+      final p = await uploadTask.whenComplete(() => null);
+
+      imgUrl = await p.ref.getDownloadURL();
+    }
+    // final user = _firebaseAuth.currentUser;
     final medicationId = FirebaseFirestore.instance
         .collection(
           _medicationsDonationsCollection,
@@ -103,10 +116,12 @@ class FirebaseDatasource extends RemoteDatasource {
         .doc();
     final medicationRequest = medication.copyWith(
       id: medicationId.id,
-      userId: user!.uid,
+      // userId: user!.uid,
       status: MedicationStatus.pending,
+      image: imgUrl,
     );
     await medicationId.set(medicationRequest.toJson());
+    
   }
 
   @override

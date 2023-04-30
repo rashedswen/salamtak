@@ -19,7 +19,8 @@ class MedicationRepoisitoryImpl extends MedicationRepository {
     if (await networkInfo.isConnected) {
       try {
         await remoteDatasource.addMedicationDonation(medication.toModel());
-      } on Exception {
+      } catch (e) {
+        print(e);
         rethrow;
       }
     } else {

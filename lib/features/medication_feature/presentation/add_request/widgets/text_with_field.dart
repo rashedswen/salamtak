@@ -6,11 +6,17 @@ class TextWithField extends StatelessWidget {
     required this.text,
     required this.onChanged,
     this.maxLines = 1,
+    this.onTap,
+    this.value,
+    this.keyboardType,
   });
 
   final String text;
   final void Function(String) onChanged;
   final int maxLines;
+  final void Function()? onTap;
+  final String? value;
+  final TextInputType? keyboardType;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +29,12 @@ class TextWithField extends StatelessWidget {
         ),
         const SizedBox(height: 16),
         TextField(
+          onTap: onTap,
+          controller: value == null ? null : TextEditingController(text: value),
           maxLines: maxLines,
+          readOnly: onTap != null,
+          showCursor: onTap == null,
+          keyboardType: keyboardType,
           decoration: InputDecoration(
             fillColor: Colors.blue.shade100,
             filled: true,

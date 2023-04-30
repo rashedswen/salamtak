@@ -1,33 +1,63 @@
 part of 'add_donation_cubit.dart';
 
-/// {@template add_donation}
-/// AddDonationState description
-/// {@endtemplate}
+enum AddDonationStatus { initial, loading, success, failure }
+
 class AddDonationState extends Equatable {
-  /// {@macro add_donation}
+
   const AddDonationState({
-    this.customProperty = 'Default Value',
+    this.medicationName,
+    this.description,
+    this.quantity,
+    this.form = MedicineForm.tablet,
+    this.imageUrl,
+    this.status = AddDonationStatus.initial,
+    this.errorMassage,
+    this.expiredAt,
   });
 
-  /// A description for customProperty
-  final String customProperty;
+  final String? medicationName;
+  final String? description;
+  final String? quantity;
+  final MedicineForm form;
+  final PlatformFile? imageUrl;
+  final AddDonationStatus status;
+  final String? errorMassage;
+  final DateTime? expiredAt;
 
   @override
-  List<Object> get props => [customProperty];
+  List<Object?> get props => [
+        medicationName,
+        description,
+        quantity,
+        form,
+        imageUrl,
+        status,
+        errorMassage,
+        expiredAt
+  ];
 
-  /// Creates a copy of the current AddDonationState with property changes
   AddDonationState copyWith({
-    String? customProperty,
+    String? medicationName,
+    String? description,
+    String? quantity,
+    MedicineForm? form,
+    PlatformFile? imageUrl,
+    AddDonationStatus? status,
+    String? errorMassage,
+    DateTime? expiredAt,
   }) {
     return AddDonationState(
-      customProperty: customProperty ?? this.customProperty,
+      medicationName: medicationName ?? this.medicationName,
+      description: description ?? this.description,
+      quantity: quantity ?? this.quantity,
+      form: form ?? this.form,
+      imageUrl: imageUrl ?? this.imageUrl,
+      status: status ?? this.status,
+      errorMassage: errorMassage ?? this.errorMassage,
+      expiredAt: expiredAt ?? this.expiredAt,
     );
-  }
-}
-/// {@template add_donation_initial}
-/// The initial state of AddDonationState
-/// {@endtemplate}
-class AddDonationInitial extends AddDonationState {
-  /// {@macro add_donation_initial}
-  const AddDonationInitial() : super();
+  } 
+
+
+  
 }

@@ -38,7 +38,7 @@ class AddRequestBody extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       TextWithField(
-                        text: 'Medication Name s',
+                        text: 'Medication Name',
                         onChanged: (String value) =>
                             context.read<AddRequestCubit>().nameChanged(value),
                       ),

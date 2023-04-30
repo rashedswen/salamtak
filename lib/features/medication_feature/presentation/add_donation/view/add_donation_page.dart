@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:salamtak/features/medication_feature/domain/repository/medication_repository.dart';
 import 'package:salamtak/features/medication_feature/presentation/add_donation/cubit/cubit.dart';
 import 'package:salamtak/features/medication_feature/presentation/add_donation/widgets/add_donation_body.dart';
 
@@ -17,12 +18,16 @@ class AddDonationPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => AddDonationCubit(),
-      child: const Scaffold(
-        body: AddDonationView(),
+      create: (context) =>
+          AddDonationCubit(context.read<MedicationRepository>()),
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('AddDonationPage'),
+        ),
+        body: const AddDonationView(),
       ),
     );
-  }    
+  }
 }
 
 /// {@template add_donation_view}
@@ -34,6 +39,13 @@ class AddDonationView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const AddDonationBody();
+    return BlocListener<AddDonationCubit, AddDonationState>(
+      listener: (context, state) {
+        if (state.status == AddDonationStatus.success) {
+          Navigator.of(context).pop();
+        }
+      },
+      child: const AddDonationBody(),
+    );
   }
 }

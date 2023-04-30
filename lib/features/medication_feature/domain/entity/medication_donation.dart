@@ -16,6 +16,7 @@ class MedicationDonation extends Equatable {
     this.createdAt,
     this.updatedAt,
     required this.userId,
+    this.quantity = '1',
   });
   final String? id;
   final String title;
@@ -27,6 +28,7 @@ class MedicationDonation extends Equatable {
   final String? createdAt;
   final String? updatedAt;
   final String userId;
+  final String? quantity;
 
   @override
   List<Object?> get props => [
@@ -39,6 +41,7 @@ class MedicationDonation extends Equatable {
         createdAt,
         updatedAt,
         userId,
+        quantity,
       ];
 
   MedicationDonationModel toModel() {
@@ -53,6 +56,7 @@ class MedicationDonation extends Equatable {
       createdAt: DateTime.now().toIso8601String(),
       updatedAt: DateTime.now().toIso8601String(),
       userId: userId,
+      quantity: quantity,
     );
   }
 }
