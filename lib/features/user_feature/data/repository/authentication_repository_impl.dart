@@ -1,0 +1,97 @@
+import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
+import 'package:salamtak/features/user_feature/domain/entity/salamtak_user.dart';
+import 'package:salamtak/features/user_feature/domain/repository/authentication_repository.dart';
+
+class AuthenticationRepositoryImpl extends AuthenticationRepository {
+  AuthenticationRepositoryImpl({firebase_auth.FirebaseAuth? firebaseAuth})
+      : _firebaseAuth = firebaseAuth ?? firebase_auth.FirebaseAuth.instance;
+
+  final firebase_auth.FirebaseAuth _firebaseAuth;
+  @override
+  // TODO: enable cache
+  SalamtakUser get currentUser {
+    final firebaseUser = _firebaseAuth.currentUser;
+    final user =
+        firebaseUser == null ? SalamtakUser.empty : firebaseUser.toUser;
+
+    return user;
+  }
+
+  @override
+  // TODO: enable cache
+  Stream<SalamtakUser> get user {
+    return _firebaseAuth.authStateChanges().map((firebaseUser) {
+      final user =
+          firebaseUser == null ? SalamtakUser.empty : firebaseUser.toUser;
+
+      return user;
+    });
+  }
+
+  @override
+  Future<String> getUser() {
+    // TODO: implement getUser
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<bool> isSignedIn() async {
+    final currentUser = _firebaseAuth.currentUser;
+    return currentUser != null;
+  }
+
+  @override
+  Future<void> logInAnonymously() async {
+    await _firebaseAuth.signInAnonymously();
+  }
+
+  @override
+  Future<void> logInWithEmailAndPassword(String email, String password) async {
+    try {
+      await _firebaseAuth.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<void> logInWithGoogle() {
+    // TODO: implement logInWithGoogle
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> logOut() async {
+    try {
+      await _firebaseAuth.signOut();
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<void> signUpWithEmailAndPassword(String email, String password) async {
+    try {
+      await _firebaseAuth.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+    } catch (e) {
+      rethrow;
+    }
+  }
+}
+
+extension on firebase_auth.User {
+  SalamtakUser get toUser {
+    return SalamtakUser(
+      id: uid,
+      email: email,
+      name: displayName,
+      photo: photoURL,
+    );
+  }
+}

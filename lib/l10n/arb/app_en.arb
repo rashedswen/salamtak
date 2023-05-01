@@ -1,7 +1,33 @@
 {
-    "@@locale": "en",
-    "counterAppBarTitle": "Counter",
-    "@counterAppBarTitle": {
-        "description": "Text shown in the AppBar of the Counter Page"
-    }
+    "app_name": "Salamtak",
+
+    "medication_name": "Medication Name",
+
+    "medication_quantity": "Medication Quantity",
+
+    "medication_expiry_date": "Medication Expiry Date",
+
+    "extra_description": "Extra Description",
+
+    "medication_image": "Medication Image (Optional)",
+
+    "upload_image": "Upload Image",
+
+    "city": "City",
+
+    "address": "Address",
+
+    "add_donation": "Add Donation",
+
+    "donation" : "Donation",
+
+    "your_donation_has_been_added_successfully": "Your Donation has been added successfully",
+
+    "add_request": "Add Request",
+
+    "request" : "Request",
+
+    "your_request_has_been_added_successfully": "Your Request has been added successfully",
+
+    "prescription_image": "Prescription Image (Optional)"
 }

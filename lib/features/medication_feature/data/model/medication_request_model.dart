@@ -1,10 +1,9 @@
 import 'package:equatable/equatable.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:salamtak/features/medication_feature/domain/entity/medication_list.dart';
 import 'package:salamtak/features/medication_feature/domain/entity/medication_request.dart';
 import 'package:salamtak/features/medication_feature/util/enums/enums.dart';
 import 'package:salamtak/util/json/states_and_cities.dart';
-
-import '../../domain/entity/medication_list.dart';
 
 class MedicationRequestModel extends Equatable {
   const MedicationRequestModel({
@@ -95,7 +94,7 @@ class MedicationRequestModel extends Equatable {
       status: status,
       userId: userId,
       emergencyLevel: emergencyLevel,
-      location: location
+      location: location,
     );
   }
 
@@ -111,7 +110,7 @@ class MedicationRequestModel extends Equatable {
     MedicationStatus? status,
     String? userId,
     EmergencyLevel? emergencyLevel,
-    LocationSudan? location
+    LocationSudan? location,
   }) {
     return MedicationRequestModel(
       id: id ?? this.id,
@@ -125,20 +124,20 @@ class MedicationRequestModel extends Equatable {
       status: status ?? this.status,
       userId: userId ?? this.userId,
       emergencyLevel: emergencyLevel ?? this.emergencyLevel,
-      location: location ?? this.location
+      location: location ?? this.location,
     );
   }
 
   MedicationList toMedicationListItem() {
     return MedicationList(
       createdDate: DateTime.tryParse(createdAt!) ?? DateTime.now(),
+      description: description,
       name: title,
       requestType: MedicationRequestType.request,
-      price: 0 as double,
       form: form,
       location: location,
       image: image,
-      emergencyLevel: emergencyLevel
+      emergencyLevel: emergencyLevel,
     );
   }
 }

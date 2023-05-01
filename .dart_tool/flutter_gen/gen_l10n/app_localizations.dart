@@ -5,8 +5,8 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/intl.dart' as intl;
 
+import 'app_localizations_ar.dart';
 import 'app_localizations_en.dart';
-import 'app_localizations_es.dart';
 
 /// Callers can lookup localized strings with an instance of AppLocalizations
 /// returned by `AppLocalizations.of(context)`.
@@ -89,15 +89,105 @@ abstract class AppLocalizations {
 
   /// A list of this localizations delegate's supported locales.
   static const List<Locale> supportedLocales = <Locale>[
-    Locale('en'),
-    Locale('es')
+    Locale('ar'),
+    Locale('en')
   ];
 
-  /// Text shown in the AppBar of the Counter Page
+  /// No description provided for @app_name.
   ///
   /// In en, this message translates to:
-  /// **'Counter'**
-  String get counterAppBarTitle;
+  /// **'Salamtak'**
+  String get app_name;
+
+  /// No description provided for @medication_name.
+  ///
+  /// In en, this message translates to:
+  /// **'Medication Name'**
+  String get medication_name;
+
+  /// No description provided for @medication_quantity.
+  ///
+  /// In en, this message translates to:
+  /// **'Medication Quantity'**
+  String get medication_quantity;
+
+  /// No description provided for @medication_expiry_date.
+  ///
+  /// In en, this message translates to:
+  /// **'Medication Expiry Date'**
+  String get medication_expiry_date;
+
+  /// No description provided for @extra_description.
+  ///
+  /// In en, this message translates to:
+  /// **'Extra Description'**
+  String get extra_description;
+
+  /// No description provided for @medication_image.
+  ///
+  /// In en, this message translates to:
+  /// **'Medication Image (Optional)'**
+  String get medication_image;
+
+  /// No description provided for @upload_image.
+  ///
+  /// In en, this message translates to:
+  /// **'Upload Image'**
+  String get upload_image;
+
+  /// No description provided for @city.
+  ///
+  /// In en, this message translates to:
+  /// **'City'**
+  String get city;
+
+  /// No description provided for @address.
+  ///
+  /// In en, this message translates to:
+  /// **'Address'**
+  String get address;
+
+  /// No description provided for @add_donation.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Donation'**
+  String get add_donation;
+
+  /// No description provided for @donation.
+  ///
+  /// In en, this message translates to:
+  /// **'Donation'**
+  String get donation;
+
+  /// No description provided for @your_donation_has_been_added_successfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Your Donation has been added successfully'**
+  String get your_donation_has_been_added_successfully;
+
+  /// No description provided for @add_request.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Request'**
+  String get add_request;
+
+  /// No description provided for @request.
+  ///
+  /// In en, this message translates to:
+  /// **'Request'**
+  String get request;
+
+  /// No description provided for @your_request_has_been_added_successfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Your Request has been added successfully'**
+  String get your_request_has_been_added_successfully;
+
+  /// No description provided for @prescription_image.
+  ///
+  /// In en, this message translates to:
+  /// **'Prescription Image (Optional)'**
+  String get prescription_image;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
@@ -109,7 +199,7 @@ class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> 
   }
 
   @override
-  bool isSupported(Locale locale) => <String>['en', 'es'].contains(locale.languageCode);
+  bool isSupported(Locale locale) => <String>['ar', 'en'].contains(locale.languageCode);
 
   @override
   bool shouldReload(_AppLocalizationsDelegate old) => false;
@@ -120,8 +210,8 @@ AppLocalizations lookupAppLocalizations(Locale locale) {
 
   // Lookup logic when only language code is specified.
   switch (locale.languageCode) {
+    case 'ar': return AppLocalizationsAr();
     case 'en': return AppLocalizationsEn();
-    case 'es': return AppLocalizationsEs();
   }
 
   throw FlutterError(

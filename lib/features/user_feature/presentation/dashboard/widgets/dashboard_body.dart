@@ -35,7 +35,7 @@ class DashboardBody extends StatelessWidget {
                 onPressed: () {
                   context.pushNamed(Screens.medication.name);
                 },
-                child: const Text('Add Donation'),
+                child: const Text('Medication page'),
               ),
             ],
           ),

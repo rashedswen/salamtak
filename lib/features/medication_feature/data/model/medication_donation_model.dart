@@ -128,13 +128,13 @@ class MedicationDonationModel {
   MedicationList toMedicationListItem() {
     return MedicationList(
       createdDate: DateTime.tryParse(createdAt!) ?? DateTime.now(),
+      description: description,
       name: title,
       requestType: MedicationRequestType.donation,
-      price: 0 as double,
       form: form,
       location: location,
       image: image,
-      emergencyLevel: EmergencyLevel.low
+      emergencyLevel: EmergencyLevel.low,
     );
   }
 }

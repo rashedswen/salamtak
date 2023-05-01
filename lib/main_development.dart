@@ -7,6 +7,8 @@ import 'package:salamtak/core/connection/network_info.dart';
 import 'package:salamtak/features/medication_feature/data/data_source/remote_datasource.dart';
 import 'package:salamtak/features/medication_feature/data/repository/medication_repository_impl.dart';
 import 'package:salamtak/features/medication_feature/domain/repository/medication_repository.dart';
+import 'package:salamtak/features/user_feature/data/repository/authentication_repository_impl.dart';
+import 'package:salamtak/features/user_feature/domain/repository/authentication_repository.dart';
 import 'package:salamtak/firebase_options.dart';
 
 void main() async {
@@ -19,6 +21,9 @@ void main() async {
   final RemoteDatasource remoteDatasource = FirebaseDatasource();
   final NetworkInfo networkInfo =
       NetworkInfoImpl(InternetConnectionChecker.createInstance());
+  
+  final authenticationRepository = AuthenticationRepositoryImpl();
+  await authenticationRepository.user.first;
 
   final MedicationRepository medicationRepository = MedicationRepoisitoryImpl(
     remoteDatasource: remoteDatasource,
@@ -27,6 +32,7 @@ void main() async {
   await bootstrap(
     () => App(
       medicationRepository: medicationRepository,
+      authenticationRepository: authenticationRepository,
     ),
   );
 }

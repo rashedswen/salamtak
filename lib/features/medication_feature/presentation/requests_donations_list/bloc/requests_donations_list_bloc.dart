@@ -23,6 +23,11 @@ class RequestsDonationsListBloc
     GetListOfMedicationsRequestDonation event,
     Emitter<RequestsDonationsListState> emit,
   ) async {
+    emit(
+      const RequestsDonationsListState(
+        status: RequestsDonationsListStatus.loading,
+      ),
+    );
     final list = <MedicationList>[];
     try {
       final requestsList = await _medicationRepository.getMedicationsRequests();
@@ -37,10 +42,11 @@ class RequestsDonationsListBloc
       list
         ..addAll(mappedRequests)
         ..addAll(mappedDonations);
+      list.sort((a, b) => b.createdDate.compareTo(a.createdDate));
       emit(
         RequestsDonationsListState(
           medicationsList: list,
-          status: RequestsDonationsListStatus.success,
+          status: RequestsDonationsListStatus.loaded,
         ),
       );
     } catch (e) {

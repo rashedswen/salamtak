@@ -1,8 +1,9 @@
 import 'package:equatable/equatable.dart';
+import 'package:salamtak/util/json/states_and_cities.dart';
 
-class User extends Equatable {
+class SalamtakUser extends Equatable {
   /// {@macro user}
-  const User({
+  const SalamtakUser({
     required this.id,
     this.email,
     this.name,
@@ -11,8 +12,8 @@ class User extends Equatable {
     this.birthDate,
     this.region,
     this.authorization,
+    this.location,
   });
-
 
   final String? gender;
 
@@ -33,14 +34,17 @@ class User extends Equatable {
   final String? region;
 
   final String? authorization;
+
+  final LocationSudan? location;
+
   /// Empty user which represents an unauthenticated user.
-  static const empty = User(id: '');
+  static const empty = SalamtakUser(id: '');
 
   /// Convenience getter to determine whether the current user is empty.
-  bool get isEmpty => this == User.empty;
+  bool get isEmpty => this == SalamtakUser.empty;
 
   /// Convenience getter to determine whether the current user is not empty.
-  bool get isNotEmpty => this != User.empty;
+  bool get isNotEmpty => this != SalamtakUser.empty;
 
   /// Creates a new user from a [Map].
   ///
@@ -55,10 +59,10 @@ class User extends Equatable {
       'photo': photo,
       'authorization': authorization,
       'isActivated': true,
+      'location': location?.toJson(),
     };
   }
-  
 
   @override
-  List<Object?> get props => [email, id, name, photo];
+  List<Object?> get props => [email, id, name, photo, location];
 }

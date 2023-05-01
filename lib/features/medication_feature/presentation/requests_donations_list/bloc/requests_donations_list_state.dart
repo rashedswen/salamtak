@@ -1,6 +1,6 @@
 part of 'requests_donations_list_bloc.dart';
 
-enum RequestsDonationsListStatus { initial, loading, success, failure }
+enum RequestsDonationsListStatus { initial, loading, loaded, failure, success }
 
 /// {@template requests_donations_list_state}
 /// RequestsDonationsListState description

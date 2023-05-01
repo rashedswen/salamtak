@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:salamtak/features/medication_feature/domain/repository/medication_repository.dart';
 import 'package:salamtak/features/medication_feature/presentation/add_request/cubit/cubit.dart';
 import 'package:salamtak/features/medication_feature/presentation/add_request/widgets/add_request_body.dart';
+import 'package:salamtak/l10n/l10n.dart';
 
 /// {@template add_request_page}
 /// A description for AddRequestPage
@@ -22,7 +23,7 @@ class AddRequestPage extends StatelessWidget {
           AddRequestCubit(context.read<MedicationRepository>()),
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('AddRequestPage'),
+          title: Text(context.l10n.add_request),
         ),
         body: const AddRequestView(),
       ),
