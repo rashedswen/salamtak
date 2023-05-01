@@ -1,8 +1,12 @@
+import 'package:equatable/equatable.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:salamtak/features/medication_feature/domain/entity/medication_request.dart';
 import 'package:salamtak/features/medication_feature/util/enums/enums.dart';
+import 'package:salamtak/util/json/states_and_cities.dart';
 
-class MedicationRequestModel {
+import '../../domain/entity/medication_list.dart';
+
+class MedicationRequestModel extends Equatable {
   const MedicationRequestModel({
     this.id,
     this.image,
@@ -15,6 +19,7 @@ class MedicationRequestModel {
     required this.title,
     required this.userId,
     required this.description,
+    required this.location,
   });
   factory MedicationRequestModel.fromJson(Map<String, dynamic> map) {
     return MedicationRequestModel(
@@ -28,6 +33,7 @@ class MedicationRequestModel {
       status: (map['status'] as String).toMedicineStatus,
       userId: map['userId'] as String,
       emergencyLevel: (map['emergencyLevel'] as String).toEmergencyLevel,
+      location: LocationSudan.fromJson(map['location'] as Map<String, dynamic>),
     );
   }
 
@@ -43,6 +49,7 @@ class MedicationRequestModel {
   final MedicationStatus status;
   final String userId;
   final EmergencyLevel emergencyLevel;
+  final LocationSudan location;
 
   @override
   List<Object?> get props => [
@@ -57,6 +64,7 @@ class MedicationRequestModel {
         createdAt,
         updatedAt,
         userId,
+        location
       ];
 
   Map<String, dynamic> toJson() {
@@ -71,6 +79,7 @@ class MedicationRequestModel {
       'status': status.name,
       'userId': userId,
       'emergencyLevel': emergencyLevel.name,
+      'location': location.toJson()
     };
   }
 
@@ -86,6 +95,7 @@ class MedicationRequestModel {
       status: status,
       userId: userId,
       emergencyLevel: emergencyLevel,
+      location: location
     );
   }
 
@@ -101,6 +111,7 @@ class MedicationRequestModel {
     MedicationStatus? status,
     String? userId,
     EmergencyLevel? emergencyLevel,
+    LocationSudan? location
   }) {
     return MedicationRequestModel(
       id: id ?? this.id,
@@ -114,6 +125,20 @@ class MedicationRequestModel {
       status: status ?? this.status,
       userId: userId ?? this.userId,
       emergencyLevel: emergencyLevel ?? this.emergencyLevel,
+      location: location ?? this.location
+    );
+  }
+
+  MedicationList toMedicationListItem() {
+    return MedicationList(
+      createdDate: DateTime.tryParse(createdAt!) ?? DateTime.now(),
+      name: title,
+      requestType: MedicationRequestType.request,
+      price: 0 as double,
+      form: form,
+      location: location,
+      image: image,
+      emergencyLevel: emergencyLevel
     );
   }
 }

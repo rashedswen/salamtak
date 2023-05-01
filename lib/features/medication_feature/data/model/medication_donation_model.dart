@@ -1,8 +1,23 @@
-import 'package:file_picker/file_picker.dart';
 import 'package:salamtak/features/medication_feature/domain/entity/medication_donation.dart';
+import 'package:salamtak/features/medication_feature/domain/entity/medication_list.dart';
 import 'package:salamtak/features/medication_feature/util/enums/enums.dart';
+import 'package:salamtak/util/json/states_and_cities.dart';
 
 class MedicationDonationModel {
+  const MedicationDonationModel({
+    this.id,
+    required this.title,
+    required this.description,
+    this.image,
+    this.status = MedicationStatus.pending,
+    required this.form,
+    this.expiredAt,
+    this.createdAt,
+    this.updatedAt,
+    required this.userId,
+    this.quantity,
+    required this.location,
+  });
   factory MedicationDonationModel.fromJson(Map<String, dynamic> map) {
     return MedicationDonationModel(
       id: map['id'] as String?,
@@ -16,21 +31,9 @@ class MedicationDonationModel {
       updatedAt: map['updatedAt'] as String?,
       userId: map['userId'] as String,
       quantity: map['quantity'] as String?,
+      location: LocationSudan.fromJson(map['location'] as Map<String, dynamic>),
     );
   }
-  const MedicationDonationModel({
-    this.id,
-    required this.title,
-    required this.description,
-    this.image,
-    this.status = MedicationStatus.pending,
-    required this.form,
-    this.expiredAt,
-    this.createdAt,
-    this.updatedAt,
-    required this.userId,
-    this.quantity,
-  });
   final String? id;
   final String title;
   final String description;
@@ -42,6 +45,7 @@ class MedicationDonationModel {
   final String? updatedAt;
   final String userId;
   final String? quantity;
+  final LocationSudan location;
 
   @override
   List<Object?> get props => [
@@ -56,6 +60,7 @@ class MedicationDonationModel {
         userId,
         expiredAt,
         quantity,
+        location,
       ];
 
   Map<String, dynamic> toJson() {
@@ -71,6 +76,7 @@ class MedicationDonationModel {
       'updatedAt': updatedAt,
       'userId': userId,
       'quantity': quantity,
+      'location': location.toJson(),
     };
   }
 
@@ -86,7 +92,6 @@ class MedicationDonationModel {
     String? updatedAt,
     String? userId,
     String? quantity,
-
   }) {
     return MedicationDonationModel(
       id: id ?? this.id,
@@ -100,6 +105,7 @@ class MedicationDonationModel {
       updatedAt: updatedAt ?? this.updatedAt,
       userId: userId ?? this.userId,
       quantity: quantity ?? this.quantity,
+      location: location,
     );
   }
 
@@ -115,6 +121,20 @@ class MedicationDonationModel {
       updatedAt: updatedAt,
       userId: userId,
       quantity: quantity,
+      location: location,
+    );
+  }
+
+  MedicationList toMedicationListItem() {
+    return MedicationList(
+      createdDate: DateTime.tryParse(createdAt!) ?? DateTime.now(),
+      name: title,
+      requestType: MedicationRequestType.donation,
+      price: 0 as double,
+      form: form,
+      location: location,
+      image: image,
+      emergencyLevel: EmergencyLevel.low
     );
   }
 }

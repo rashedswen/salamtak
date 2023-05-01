@@ -1,5 +1,7 @@
 import 'package:salamtak/core/connection/network_info.dart';
 import 'package:salamtak/features/medication_feature/data/data_source/remote_datasource.dart';
+import 'package:salamtak/features/medication_feature/data/model/medication_donation_model.dart';
+import 'package:salamtak/features/medication_feature/data/model/medication_request_model.dart';
 import 'package:salamtak/features/medication_feature/domain/entity/medication_donation.dart';
 import 'package:salamtak/features/medication_feature/domain/entity/medication_request.dart';
 import 'package:salamtak/features/medication_feature/domain/repository/medication_repository.dart';
@@ -90,12 +92,12 @@ class MedicationRepoisitoryImpl extends MedicationRepository {
   }
 
   @override
-  Future<List<MedicationDonation>> getMedicationsDontations() async {
+  Future<List<MedicationDonationModel>> getMedicationsDontations() async {
     if (await networkInfo.isConnected) {
       try {
         final medicationDonationsModel =
             await remoteDatasource.getMedicationsDontations();
-        return medicationDonationsModel.map((e) => e.toEntity()).toList();
+        return medicationDonationsModel;
       } on Exception {
         rethrow;
       }
@@ -105,12 +107,12 @@ class MedicationRepoisitoryImpl extends MedicationRepository {
   }
 
   @override
-  Future<List<MedicationRequest>> getMedicationsRequests() async {
+  Future<List<MedicationRequestModel>> getMedicationsRequests() async {
     if (await networkInfo.isConnected) {
       try {
         final medicationRequestsModel =
             await remoteDatasource.getMedicationsRequests();
-        return medicationRequestsModel.map((e) => e.toEntity()).toList();
+        return medicationRequestsModel;
       } on Exception {
         rethrow;
       }

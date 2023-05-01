@@ -1,4 +1,4 @@
-enum MedicationRequestType {
+enum  MedicationRequestType {
   request,
   donation,
   sell,

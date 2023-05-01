@@ -6,10 +6,16 @@ import 'package:file_picker/file_picker.dart';
 import 'package:salamtak/features/medication_feature/domain/entity/medication_donation.dart';
 import 'package:salamtak/features/medication_feature/domain/repository/medication_repository.dart';
 import 'package:salamtak/features/medication_feature/util/enums/medication_form.dart';
+import 'package:salamtak/util/json/states_and_cities.dart';
 part 'add_donation_state.dart';
 
 class AddDonationCubit extends Cubit<AddDonationState> {
-  AddDonationCubit(this.medicationRepository) : super(const AddDonationState());
+  AddDonationCubit(this.medicationRepository)
+      : super(
+          AddDonationState(
+            location: LocationSudan.getSudanCities().first,
+          ),
+        );
 
   final MedicationRepository medicationRepository;
 
@@ -37,6 +43,14 @@ class AddDonationCubit extends Cubit<AddDonationState> {
     emit(state.copyWith(imageUrl: image));
   }
 
+  Future<void> locationChanged(LocationSudan location) async {
+    emit(state.copyWith(location: location));
+  }
+
+  Future<void> addressChanged(String address) async {
+    emit(state.copyWith(address: address));
+  }
+
   Future<void> addDonation() async {
     emit(state.copyWith(status: AddDonationStatus.loading));
     try {
@@ -48,6 +62,7 @@ class AddDonationCubit extends Cubit<AddDonationState> {
         quantity: state.quantity,
         expiredAt: state.expiredAt?.toIso8601String(),
         image: state.imageUrl,
+        location: state.location!.copyWith(address: state.address),
       );
       await medicationRepository.addMedicationDonation(donation);
       emit(

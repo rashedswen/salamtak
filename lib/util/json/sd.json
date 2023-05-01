@@ -1,0 +1,134 @@
+[
+  {
+    "city": "Khartoum",
+    "admin_name": "Khartoum"
+  }, 
+  {
+    "city": "Omdurman",
+    "admin_name": "Khartoum"
+  }, 
+  {
+    "city": "Khartoum North",
+    "admin_name": "Khartoum"
+  }, 
+  {
+    "city": "Kassala",
+    "admin_name": "Kassala"
+  }, 
+  {
+    "city": "Port Sudan",
+    "admin_name": "Red Sea"
+  }, 
+  {
+    "city": "El Obeid",
+    "admin_name": "North Kordofan"
+  }, 
+  {
+    "city": "Gedaref",
+    "admin_name": "Al Gedaref"
+  }, 
+  {
+    "city": "Kūstī",
+    "admin_name": "White Nile"
+  }, 
+  {
+    "city": "Wad Medani", 
+    "admin_name": "Al Gazira"
+  }, 
+  {
+    "city": "El Fasher", 
+    "admin_name": "North Darfur"
+  }, 
+  {
+    "city": "Kurmuk",
+    "admin_name": "Blue Nile"
+  }, 
+  {
+    "city": "Nyala",
+    "admin_name": "South Darfur"
+  }, 
+  {
+    "city": "Shendi",
+    "admin_name": "River Nile"
+  }, 
+  {
+    "city": "Ed Damazin",
+    "admin_name": "Blue Nile"
+  }, 
+  {
+    "city": "Kadugli", 
+    "admin_name": "South Kordofan"
+  }, 
+  {
+    "city": "El Geneina",
+    "admin_name": "West Darfur"
+  }, 
+  {
+    "city": "Al Manāqil", 
+    "admin_name": "Al Gazira"
+  }, 
+  {
+    "city": "Atbara", 
+    "admin_name": "River Nile"
+  }, 
+  {
+    "city": "Sannār", 
+    "admin_name": "Sennar"
+  }, 
+  {
+    "city": "An Nuhūd", 
+    "admin_name": "Western Kordofan"
+  }, 
+  {
+    "city": "EdDamer", 
+    "admin_name": "River Nile"
+  }, 
+  {
+    "city": "Ad Diwem", 
+    "admin_name": "White Nile"
+  }, 
+  {
+    "city": "Tokār", 
+    "admin_name": "Red Sea"
+  }, 
+  {
+    "city": "Umm Ruwaba", 
+    "admin_name": "North Kordofan"
+  }, 
+  {
+    "city": "Abū Ḩamad", 
+    "admin_name": "River Nile"
+  }, 
+  {
+    "city": "Berber", 
+    "admin_name": "River Nile"
+  }, 
+  {
+    "city": "Sawākin",
+    "admin_name": "Red Sea"
+  }, 
+  {
+    "city": "Dongola", 
+    "admin_name": "Northern"
+  }, 
+  {
+    "city": "Rabak",
+    "admin_name": "White Nile"
+  }, 
+  {
+    "city": "Singa",
+    "admin_name": "Sennar"
+  }, 
+  {
+    "city": "Ed Daein",
+    "admin_name": "East Darfur"
+  }, 
+  {
+    "city": "Zalingei",
+    "admin_name": "Central Darfur"
+  }, 
+  {
+    "city": "El Fula", 
+    "admin_name": "Western Kordofan"
+  }
+]

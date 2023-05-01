@@ -1,11 +1,11 @@
 import 'dart:async';
-
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:salamtak/features/medication_feature/domain/entity/medication_request.dart';
 import 'package:salamtak/features/medication_feature/domain/repository/medication_repository.dart';
 import 'package:salamtak/features/medication_feature/util/enums/enums.dart';
+import 'package:salamtak/util/json/states_and_cities.dart';
 part 'add_request_state.dart';
 
 class AddRequestCubit extends Cubit<AddRequestState> {
@@ -33,6 +33,14 @@ class AddRequestCubit extends Cubit<AddRequestState> {
     emit(state.copyWith(prescription: prescription));
   }
 
+  Future<void> locationChanged(LocationSudan location) async {
+    emit(state.copyWith(location: location));
+  }
+
+  Future<void> addressChanged(String address) async {
+    emit(state.copyWith(address: address));
+  }
+
   Future<void> addRequest() async {
     emit(state.copyWith(status: AddRequestStatus.loading));
     try {
@@ -43,6 +51,9 @@ class AddRequestCubit extends Cubit<AddRequestState> {
         description: state.description!,
         emergencyLevel: state.emergencyLevel,
         prescription: state.prescription,
+        location: state.location!.copyWith(
+          address: state.address,
+        ),
       );
       await medicationRepository.addMedicationRequest(request);
       emit(

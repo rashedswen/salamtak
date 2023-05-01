@@ -31,6 +31,12 @@ class DashboardBody extends StatelessWidget {
                 },
                 child: const Text('Add Donation'),
               ),
+              ElevatedButton(
+                onPressed: () {
+                  context.pushNamed(Screens.medication.name);
+                },
+                child: const Text('Add Donation'),
+              ),
             ],
           ),
         );

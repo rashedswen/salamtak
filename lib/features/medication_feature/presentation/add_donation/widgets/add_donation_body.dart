@@ -4,6 +4,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:salamtak/features/medication_feature/presentation/add_donation/cubit/cubit.dart';
+import 'package:salamtak/features/medication_feature/presentation/add_donation/widgets/city_selector.dart';
 import 'package:salamtak/features/medication_feature/presentation/add_request/widgets/add_request_body.dart';
 import 'package:salamtak/features/medication_feature/presentation/add_request/widgets/medication_form_section.dart';
 import 'package:salamtak/features/medication_feature/util/enums/enums.dart';
@@ -134,7 +135,54 @@ class AddDonationBody extends StatelessWidget {
                             ),
                         ],
                       ),
+                      const SizedBox(
+                        height: 16,
+                      ),
+                      // location dropdown
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            'city',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 8,
+                          ),
+                          SizedBox(
+                            height: 200,
+                            width: double.infinity,
+                            child: CitySelector(
+                              onTap: (location) {
+                                context
+                                    .read<AddDonationCubit>()
+                                    .locationChanged(
+                                      location,
+                                    );
+                              },
+                              selectedLocation: state.location,
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 16,
+                      ),
+                      TextWithField(
+                        text: 'Address',
+                        onChanged: (value) {
+                          context
+                              .read<AddDonationCubit>()
+                              .addressChanged(value);
+                        },
+                      ),
                       const Spacer(),
+                      const SizedBox(
+                        height: 16,
+                      ),
                       SizedBox(
                         width: double.infinity,
                         child: ElevatedButton(
