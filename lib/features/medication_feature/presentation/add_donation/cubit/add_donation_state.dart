@@ -3,7 +3,6 @@ part of 'add_donation_cubit.dart';
 enum AddDonationStatus { initial, loading, success, failure }
 
 class AddDonationState extends Equatable {
-
   const AddDonationState({
     this.medicationName,
     this.description,
@@ -13,6 +12,8 @@ class AddDonationState extends Equatable {
     this.status = AddDonationStatus.initial,
     this.errorMassage,
     this.expiredAt,
+    this.location,
+    this.address,
   });
 
   final String? medicationName;
@@ -23,6 +24,8 @@ class AddDonationState extends Equatable {
   final AddDonationStatus status;
   final String? errorMassage;
   final DateTime? expiredAt;
+  final LocationSudan? location;
+  final String? address;
 
   @override
   List<Object?> get props => [
@@ -33,8 +36,10 @@ class AddDonationState extends Equatable {
         imageUrl,
         status,
         errorMassage,
-        expiredAt
-  ];
+        expiredAt,
+        location,
+        address
+      ];
 
   AddDonationState copyWith({
     String? medicationName,
@@ -45,6 +50,8 @@ class AddDonationState extends Equatable {
     AddDonationStatus? status,
     String? errorMassage,
     DateTime? expiredAt,
+    LocationSudan? location,
+    String? address,
   }) {
     return AddDonationState(
       medicationName: medicationName ?? this.medicationName,
@@ -55,9 +62,8 @@ class AddDonationState extends Equatable {
       status: status ?? this.status,
       errorMassage: errorMassage ?? this.errorMassage,
       expiredAt: expiredAt ?? this.expiredAt,
+      location: location ?? this.location,
+      address: address ?? this.address,
     );
-  } 
-
-
-  
+  }
 }

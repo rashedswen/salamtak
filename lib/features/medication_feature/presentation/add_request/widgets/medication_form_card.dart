@@ -37,7 +37,7 @@ class MedicationFormCard extends StatelessWidget {
                 ),
                 FittedBox(
                   child: Text(
-                    context.l10n.localeName == 'en'
+                    context.l10n.localeName == 'ar'
                         ? form.arabicName
                         : form.englishName,
                     textAlign: TextAlign.center,

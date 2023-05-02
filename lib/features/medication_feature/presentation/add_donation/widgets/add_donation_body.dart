@@ -3,10 +3,12 @@ import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:salamtak/core/widgets/text_with_field.dart';
 import 'package:salamtak/features/medication_feature/presentation/add_donation/cubit/cubit.dart';
-import 'package:salamtak/features/medication_feature/presentation/add_request/widgets/add_request_body.dart';
+import 'package:salamtak/features/medication_feature/presentation/add_donation/widgets/city_selector.dart';
 import 'package:salamtak/features/medication_feature/presentation/add_request/widgets/medication_form_section.dart';
 import 'package:salamtak/features/medication_feature/util/enums/enums.dart';
+import 'package:salamtak/l10n/l10n.dart';
 
 /// {@template add_donation_body}
 /// Body of the AddDonationPage.
@@ -36,7 +38,7 @@ class AddDonationBody extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       TextWithField(
-                        text: 'Medication Name',
+                        text: context.l10n.medication_name,
                         onChanged: (String value) =>
                             context.read<AddDonationCubit>().nameChanged(value),
                       ),
@@ -55,7 +57,7 @@ class AddDonationBody extends StatelessWidget {
                         children: [
                           Expanded(
                             child: TextWithField(
-                              text: 'Medication Quantity',
+                              text: context.l10n.medication_quantity,
                               keyboardType: TextInputType.number,
                               onChanged: (String value) => context
                                   .read<AddDonationCubit>()
@@ -69,7 +71,7 @@ class AddDonationBody extends StatelessWidget {
                                   ? ''
                                   : DateFormat('y/M/d')
                                       .format(state.expiredAt!),
-                              text: 'Medication Expiry Date',
+                              text: context.l10n.medication_expiry_date,
                               onTap: () {
                                 showDatePicker(
                                   context: context,
@@ -93,16 +95,16 @@ class AddDonationBody extends StatelessWidget {
                       ),
                       const SizedBox(height: 32),
                       TextWithField(
-                        text: 'Medication Description',
+                        text: context.l10n.extra_description,
                         maxLines: 6,
                         onChanged: (String value) => context
                             .read<AddDonationCubit>()
                             .descriptionChanged(value),
                       ),
                       const SizedBox(height: 32),
-                      const Text(
-                        'Image (Optional)',
-                        style: TextStyle(
+                      Text(
+                        context.l10n.medication_image,
+                        style: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w500,
                         ),
@@ -120,7 +122,7 @@ class AddDonationBody extends StatelessWidget {
                                     .imageChanged(path);
                               }
                             },
-                            child: const Text('Upload Image'),
+                            child: Text(context.l10n.upload_image),
                           ),
                           const SizedBox(width: 16),
                           if (state.imageUrl != null)
@@ -134,14 +136,61 @@ class AddDonationBody extends StatelessWidget {
                             ),
                         ],
                       ),
+                      const SizedBox(
+                        height: 16,
+                      ),
+                      // location dropdown
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            context.l10n.city,
+                            style: const TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 8,
+                          ),
+                          SizedBox(
+                            height: 200,
+                            width: double.infinity,
+                            child: CitySelector(
+                              onTap: (location) {
+                                context
+                                    .read<AddDonationCubit>()
+                                    .locationChanged(
+                                      location,
+                                    );
+                              },
+                              selectedLocation: state.location,
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 16,
+                      ),
+                      TextWithField(
+                        text: context.l10n.address,
+                        onChanged: (value) {
+                          context
+                              .read<AddDonationCubit>()
+                              .addressChanged(value);
+                        },
+                      ),
                       const Spacer(),
+                      const SizedBox(
+                        height: 16,
+                      ),
                       SizedBox(
                         width: double.infinity,
                         child: ElevatedButton(
                           onPressed: () {
                             context.read<AddDonationCubit>().addDonation();
                           },
-                          child: const Text('Add Donation'),
+                          child: Text(context.l10n.donation),
                         ),
                       ),
                       const SizedBox(height: 16),

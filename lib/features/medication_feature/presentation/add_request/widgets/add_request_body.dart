@@ -3,12 +3,13 @@ import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:salamtak/core/widgets/text_with_field.dart';
+import 'package:salamtak/features/medication_feature/presentation/add_donation/widgets/city_selector.dart';
 import 'package:salamtak/features/medication_feature/presentation/add_request/cubit/cubit.dart';
 import 'package:salamtak/features/medication_feature/presentation/add_request/widgets/medication_form_section.dart';
 import 'package:salamtak/features/medication_feature/util/enums/enums.dart';
 import 'package:salamtak/l10n/l10n.dart';
 part 'medication_form_card.dart';
-part 'text_with_field.dart';
 
 /// {@template add_request_body}
 /// Body of the AddRequestPage.
@@ -38,7 +39,7 @@ class AddRequestBody extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       TextWithField(
-                        text: 'Medication Name',
+                        text: context.l10n.medication_name,
                         onChanged: (String value) =>
                             context.read<AddRequestCubit>().nameChanged(value),
                       ),
@@ -54,7 +55,7 @@ class AddRequestBody extends StatelessWidget {
                       ),
                       const SizedBox(height: 16),
                       TextWithField(
-                        text: 'Medication Description',
+                        text: context.l10n.extra_description,
                         maxLines: 6,
                         onChanged: (String value) => context
                             .read<AddRequestCubit>()
@@ -78,7 +79,9 @@ class AddRequestBody extends StatelessWidget {
                                               : Colors.white,
                                       child: Center(
                                         child: Text(
-                                          emergencyLevel.arabicName,
+                                          context.l10n.localeName == 'ar'
+                                              ? emergencyLevel.arabicName
+                                              : emergencyLevel.englishName,
                                           style: Theme.of(context)
                                               .textTheme
                                               .titleSmall
@@ -95,9 +98,9 @@ class AddRequestBody extends StatelessWidget {
                             .toList(),
                       ),
                       const SizedBox(height: 16),
-                      const Text(
-                        'Prescription Image (Optional)',
-                        style: TextStyle(
+                      Text(
+                        context.l10n.prescription_image,
+                        style: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w500,
                         ),
@@ -115,7 +118,7 @@ class AddRequestBody extends StatelessWidget {
                                     .prescriptionChanged(path);
                               }
                             },
-                            child: const Text('Upload Prescription Image'),
+                            child: Text(context.l10n.upload_image),
                           ),
                           const SizedBox(width: 16),
                           if (state.prescription != null)
@@ -129,6 +132,42 @@ class AddRequestBody extends StatelessWidget {
                             ),
                         ],
                       ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            context.l10n.city,
+                            style: const TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 8,
+                          ),
+                          SizedBox(
+                            height: 200,
+                            width: double.infinity,
+                            child: CitySelector(
+                              onTap: (location) {
+                                context.read<AddRequestCubit>().locationChanged(
+                                      location,
+                                    );
+                              },
+                              selectedLocation: state.location,
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 16,
+                      ),
+                      TextWithField(
+                        text: context.l10n.address,
+                        onChanged: (value) {
+                          context.read<AddRequestCubit>().addressChanged(value);
+                        },
+                      ),
                       const Spacer(),
                       SizedBox(
                         width: double.infinity,
@@ -136,7 +175,7 @@ class AddRequestBody extends StatelessWidget {
                           onPressed: () {
                             context.read<AddRequestCubit>().addRequest();
                           },
-                          child: const Text('Add Request'),
+                          child: Text(context.l10n.request),
                         ),
                       ),
                       const SizedBox(height: 16),

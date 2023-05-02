@@ -9,6 +9,7 @@ environment:
 dependencies:
   bloc: ^8.1.1
   cloud_firestore: ^4.5.3
+  duration: ^3.0.12
   equatable: ^2.0.5
   file_picker: ^5.2.11
   firebase_auth: ^4.4.2
@@ -21,10 +22,11 @@ dependencies:
     sdk: flutter
   font_awesome: ^5.10.1
   font_awesome_flutter: ^10.4.0
+  formz: ^0.6.0
   go_router: ^6.5.8
+  google_fonts: ^4.0.4
   iconsax: ^0.0.8
   internet_connection_checker: ^1.0.0+1
-  intl: ^0.17.0
 
 dev_dependencies:
   bloc_test: ^9.1.1

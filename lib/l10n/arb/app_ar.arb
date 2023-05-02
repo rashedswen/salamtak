@@ -1,0 +1,55 @@
+{
+    "app_name": "سلامتك",
+
+
+    "medication_name": "اسم الدواء",
+
+    "medication_quantity": "كمية الدواء",
+
+    "medication_expiry_date": "تاريخ انتهاء الصلاحية",
+
+    "extra_description": "وصف اضافي",
+
+    "medication_image": "صورة الدواء (اختياري)",
+
+    "upload_image": "رفع صورة",
+
+    "city": "المدينة",
+
+    "address": "العنوان الكامل",
+
+    "add_donation": "اضافة تبرع",
+
+    "donation": "تبرع",
+
+    "your_donation_has_been_added_successfully": "تم اضافة تبرعك بنجاح",
+
+    "add_request": "اضافة طلب (حوجة)",
+
+    "request": "طلب",
+
+    "your_request_has_been_added_successfully": "تم اضافة طلبك بنجاح",
+
+    "prescription_image": "صورة الروشتة (اختياري)",
+
+    "email": "البريد الالكتروني",
+
+    "password": "كلمة المرور",
+
+    "login": "تسجيل الدخول",
+
+    "signup": "انشاء حساب",
+
+    "forgot_password": "نسيت كلمة المرور؟",
+
+    "dont_have_an_account": "ليس لديك حساب؟",
+
+    "have_an_account": "لديك حساب؟",
+
+    "login_as_guest": "تسجيل الدخول كضيف",
+
+    "name": "الاسم",
+
+    "phone": "رقم الجوال"
+
+}

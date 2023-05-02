@@ -4,15 +4,16 @@ enum AddRequestStatus { initial, loading, success, failure }
 
 class AddRequestState extends Equatable {
   /// {@macro add_request}
-  const AddRequestState({
-    this.description,
-    this.emergencyLevel = EmergencyLevel.low,
-    this.form = MedicineForm.tablet,
-    this.prescription,
-    this.title,
-    this.status = AddRequestStatus.initial,
-    this.errorMassage,
-  });
+  const AddRequestState(
+      {this.description,
+      this.emergencyLevel = EmergencyLevel.low,
+      this.form = MedicineForm.tablet,
+      this.prescription,
+      this.title,
+      this.status = AddRequestStatus.initial,
+      this.errorMassage,
+      this.location,
+      this.address,});
 
   final String? title;
   final String? description;
@@ -21,6 +22,8 @@ class AddRequestState extends Equatable {
   final PlatformFile? prescription;
   final AddRequestStatus status;
   final String? errorMassage;
+  final LocationSudan? location;
+  final String? address;
 
   @override
   List<Object?> get props => [
@@ -30,26 +33,30 @@ class AddRequestState extends Equatable {
         form,
         prescription,
         status,
-        errorMassage
+        errorMassage,
+        location,
+        address
       ];
 
-  AddRequestState copyWith({
-    String? title,
-    String? description,
-    EmergencyLevel? emergencyLevel,
-    MedicineForm? form,
-    PlatformFile? prescription,
-    AddRequestStatus? status,
-    String? errorMassage,
-  }) {
+  AddRequestState copyWith(
+      {String? title,
+      String? description,
+      EmergencyLevel? emergencyLevel,
+      MedicineForm? form,
+      PlatformFile? prescription,
+      AddRequestStatus? status,
+      String? errorMassage,
+      LocationSudan? location,
+      String? address,}) {
     return AddRequestState(
-      title: title ?? this.title,
-      description: description ?? this.description,
-      emergencyLevel: emergencyLevel ?? this.emergencyLevel,
-      form: form ?? this.form,
-      prescription: prescription ?? this.prescription,
-      status: status ?? this.status,
-      errorMassage: errorMassage ?? this.errorMassage,
-    );
+        title: title ?? this.title,
+        description: description ?? this.description,
+        emergencyLevel: emergencyLevel ?? this.emergencyLevel,
+        form: form ?? this.form,
+        prescription: prescription ?? this.prescription,
+        status: status ?? this.status,
+        errorMassage: errorMassage ?? this.errorMassage,
+        location: location ?? this.location,
+        address: address ?? this.address,);
   }
 }

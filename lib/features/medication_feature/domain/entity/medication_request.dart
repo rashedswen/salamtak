@@ -3,6 +3,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:salamtak/features/medication_feature/data/model/medication_request_model.dart';
 
 import 'package:salamtak/features/medication_feature/util/enums/enums.dart';
+import 'package:salamtak/util/json/states_and_cities.dart';
 
 class MedicationRequest extends Equatable {
   const MedicationRequest({
@@ -17,7 +18,9 @@ class MedicationRequest extends Equatable {
     required this.title,
     required this.userId,
     required this.description,
+    required this.location
   });
+
 
   final String? id;
   final String? image;
@@ -31,6 +34,7 @@ class MedicationRequest extends Equatable {
   final MedicationStatus status;
   final String userId;
   final EmergencyLevel emergencyLevel;
+  final LocationSudan location;
 
   @override
   List<Object?> get props => [
@@ -45,6 +49,7 @@ class MedicationRequest extends Equatable {
         createdAt,
         updatedAt,
         userId,
+        location
       ];
 
   MedicationRequestModel toModel() {
@@ -60,6 +65,7 @@ class MedicationRequest extends Equatable {
       updatedAt: DateTime.now().toIso8601String(),
       userId: userId,
       emergencyLevel: emergencyLevel,
+      location: location
     );
   }
 }

@@ -18,18 +18,18 @@ class DashboardPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => DashboardCubit(),
-      child: const Scaffold(
-        body: DashboardView(),
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('Dashboard Page'),
+          automaticallyImplyLeading: false,
+        ),
+        body: const DashboardView(),
       ),
     );
-  }    
+  }
 }
 
-/// {@template dashboard_view}
-/// Displays the Body of DashboardView
-/// {@endtemplate}
 class DashboardView extends StatelessWidget {
-  /// {@macro dashboard_view}
   const DashboardView({super.key});
 
   @override
