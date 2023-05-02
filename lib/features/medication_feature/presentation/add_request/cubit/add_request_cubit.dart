@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:salamtak/features/medication_feature/domain/entity/medication_request.dart';
 import 'package:salamtak/features/medication_feature/domain/repository/medication_repository.dart';
 import 'package:salamtak/features/medication_feature/util/enums/enums.dart';
@@ -9,7 +10,12 @@ import 'package:salamtak/util/json/states_and_cities.dart';
 part 'add_request_state.dart';
 
 class AddRequestCubit extends Cubit<AddRequestState> {
-  AddRequestCubit(this.medicationRepository) : super(const AddRequestState());
+  AddRequestCubit(this.medicationRepository)
+      : super(
+          AddRequestState(
+            location: LocationSudan.getSudanCities().first,
+          ),
+        );
 
   final MedicationRepository medicationRepository;
 
@@ -47,7 +53,7 @@ class AddRequestCubit extends Cubit<AddRequestState> {
       final request = MedicationRequest(
         form: state.form,
         title: state.title!,
-        userId: 'fefewfwefwefw',
+        userId: FirebaseAuth.instance.currentUser?.uid ?? 'unknown',
         description: state.description!,
         emergencyLevel: state.emergencyLevel,
         prescription: state.prescription,

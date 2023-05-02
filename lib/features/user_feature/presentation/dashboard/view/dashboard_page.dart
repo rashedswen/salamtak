@@ -21,6 +21,7 @@ class DashboardPage extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Dashboard Page'),
+          automaticallyImplyLeading: false,
         ),
         body: const DashboardView(),
       ),

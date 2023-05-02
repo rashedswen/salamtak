@@ -1,14 +1,16 @@
-part of 'add_request_body.dart';
+import 'package:flutter/material.dart';
 
 class TextWithField extends StatelessWidget {
   const TextWithField({
     super.key,
     required this.text,
     required this.onChanged,
+    this.obscureText = false,
     this.maxLines = 1,
     this.onTap,
     this.value,
     this.keyboardType,
+    this.errorText,
   });
 
   final String text;
@@ -17,6 +19,8 @@ class TextWithField extends StatelessWidget {
   final void Function()? onTap;
   final String? value;
   final TextInputType? keyboardType;
+  final String? errorText;
+  final bool obscureText;
 
   @override
   Widget build(BuildContext context) {
@@ -27,9 +31,10 @@ class TextWithField extends StatelessWidget {
           text,
           style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
         ),
-        const SizedBox(height: 16),
-        TextField(
+        const SizedBox(height: 8),
+        TextFormField(
           onTap: onTap,
+          obscureText: obscureText,
           controller: value == null ? null : TextEditingController(text: value),
           maxLines: maxLines,
           readOnly: onTap != null,
@@ -38,6 +43,7 @@ class TextWithField extends StatelessWidget {
           decoration: InputDecoration(
             fillColor: Colors.blue.shade100,
             filled: true,
+            errorText: errorText,
             border: OutlineInputBorder(
               borderSide: BorderSide.none,
               borderRadius: BorderRadius.circular(4),

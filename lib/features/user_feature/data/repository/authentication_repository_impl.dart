@@ -1,4 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
+import 'package:salamtak/features/user_feature/data/model/salamtak_user_model.dart';
 import 'package:salamtak/features/user_feature/domain/entity/salamtak_user.dart';
 import 'package:salamtak/features/user_feature/domain/repository/authentication_repository.dart';
 
@@ -73,12 +75,22 @@ class AuthenticationRepositoryImpl extends AuthenticationRepository {
   }
 
   @override
-  Future<void> signUpWithEmailAndPassword(String email, String password) async {
+  Future<void> signUpWithEmailAndPassword(
+    String email,
+    String password,
+    SalamtakUserModel user,
+  ) async {
     try {
       await _firebaseAuth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
+      final id = _firebaseAuth.currentUser!.uid;
+      final userModified = user.copyWith(id: id);
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(id)
+          .set(userModified.toJson());
     } catch (e) {
       rethrow;
     }
@@ -91,7 +103,6 @@ extension on firebase_auth.User {
       id: uid,
       email: email,
       name: displayName,
-      photo: photoURL,
     );
   }
 }

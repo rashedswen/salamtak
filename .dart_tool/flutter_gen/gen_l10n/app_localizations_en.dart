@@ -51,4 +51,34 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get prescription_image => 'Prescription Image (Optional)';
+
+  @override
+  String get email => 'Email';
+
+  @override
+  String get password => 'Password';
+
+  @override
+  String get login => 'Login';
+
+  @override
+  String get signup => 'Signup';
+
+  @override
+  String get forgot_password => 'Forgot Password?';
+
+  @override
+  String get dont_have_an_account => 'Don\'t have an account?';
+
+  @override
+  String get have_an_account => 'Have an account?';
+
+  @override
+  String get login_as_guest => 'Login as Guest';
+
+  @override
+  String get name => 'Name';
+
+  @override
+  String get phone => 'Phone';
 }

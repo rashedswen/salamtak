@@ -37,6 +37,18 @@ class DashboardBody extends StatelessWidget {
                 },
                 child: const Text('Medication page'),
               ),
+              ElevatedButton(
+                onPressed: () {
+                  context.pushNamed(Screens.login.name);
+                },
+                child: const Text('Login page'),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  context.pushNamed(Screens.register.name);
+                },
+                child: const Text('Register page'),
+              ),
             ],
           ),
         );

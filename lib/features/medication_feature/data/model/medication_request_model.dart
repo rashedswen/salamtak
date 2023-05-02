@@ -33,6 +33,7 @@ class MedicationRequestModel extends Equatable {
       userId: map['userId'] as String,
       emergencyLevel: (map['emergencyLevel'] as String).toEmergencyLevel,
       location: LocationSudan.fromJson(map['location'] as Map<String, dynamic>),
+      
     );
   }
 
@@ -138,6 +139,7 @@ class MedicationRequestModel extends Equatable {
       location: location,
       image: image,
       emergencyLevel: emergencyLevel,
+      status: status,
     );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:salamtak/features/user_feature/data/model/salamtak_user_model.dart';
 import 'package:salamtak/util/json/states_and_cities.dart';
 
 class SalamtakUser extends Equatable {
@@ -7,17 +8,11 @@ class SalamtakUser extends Equatable {
     required this.id,
     this.email,
     this.name,
-    this.photo,
-    this.gender,
-    this.birthDate,
-    this.region,
     this.authorization,
     this.location,
+    this.phoneNumber,
+    this.isActivated = true,
   });
-
-  final String? gender;
-
-  final String? birthDate;
 
   /// The current user's email address.
   final String? email;
@@ -28,14 +23,13 @@ class SalamtakUser extends Equatable {
   /// The current user's name (display name).
   final String? name;
 
-  /// Url for the current user's photo.
-  final String? photo;
-
-  final String? region;
-
   final String? authorization;
 
   final LocationSudan? location;
+
+  final String? phoneNumber;
+
+  final bool isActivated;
 
   /// Empty user which represents an unauthenticated user.
   static const empty = SalamtakUser(id: '');
@@ -46,23 +40,18 @@ class SalamtakUser extends Equatable {
   /// Convenience getter to determine whether the current user is not empty.
   bool get isNotEmpty => this != SalamtakUser.empty;
 
-  /// Creates a new user from a [Map].
-  ///
-  Map<String, dynamic> toJson() {
-    return {
-      'gender': gender,
-      'birthDate': birthDate,
-      'name': name,
-      'region': region,
-      'email': email,
-      'id': id,
-      'photo': photo,
-      'authorization': authorization,
-      'isActivated': true,
-      'location': location?.toJson(),
-    };
+  SalamtakUserModel toModel() {
+    return SalamtakUserModel(
+      id: id,
+      email: email,
+      name: name,
+      authorization: authorization,
+      location: location,
+      phoneNumber: phoneNumber,
+      isActivated: isActivated,
+    );
   }
 
   @override
-  List<Object?> get props => [email, id, name, photo, location];
+  List<Object?> get props => [email, id, name, phoneNumber, location];
 }

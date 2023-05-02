@@ -29,5 +29,25 @@
 
     "your_request_has_been_added_successfully": "Your Request has been added successfully",
 
-    "prescription_image": "Prescription Image (Optional)"
+    "prescription_image": "Prescription Image (Optional)",
+
+    "email": "Email",
+
+    "password": "Password",
+
+    "login": "Login",
+
+    "signup": "Signup",
+
+    "forgot_password": "Forgot Password?",
+
+    "dont_have_an_account": "Don't have an account?",
+
+    "have_an_account": "Have an account?",
+
+    "login_as_guest": "Login as Guest",
+
+    "name": "Name",
+
+    "phone": "Phone"
 }

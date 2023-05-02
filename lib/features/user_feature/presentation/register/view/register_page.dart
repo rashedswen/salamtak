@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:salamtak/app/bloc/app_bloc.dart';
+import 'package:salamtak/features/user_feature/domain/repository/authentication_repository.dart';
 import 'package:salamtak/features/user_feature/presentation/register/cubit/cubit.dart';
 import 'package:salamtak/features/user_feature/presentation/register/widgets/register_body.dart';
+import 'package:salamtak/l10n/l10n.dart';
+import 'package:salamtak/util/router/screen.dart';
 
 /// {@template register_page}
 /// A description for RegisterPage
@@ -17,12 +22,17 @@ class RegisterPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => RegisterCubit(),
-      child: const Scaffold(
-        body: RegisterView(),
+      create: (context) => RegisterCubit(
+        authenticationRepository: context.read<AuthenticationRepository>(),
+      ),
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(context.l10n.signup),
+        ),
+        body: const RegisterView(),
       ),
     );
-  }    
+  }
 }
 
 /// {@template register_view}
@@ -34,6 +44,13 @@ class RegisterView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const RegisterBody();
+    return BlocListener<AppBloc, AppState>(
+      listener: (context, state) {
+        if (state.status == AppStatus.authenticated) {
+          context.pushReplacementNamed(Screens.dashboard.name);
+        }
+      },
+      child: const RegisterBody(),
+    );
   }
 }

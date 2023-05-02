@@ -3,9 +3,9 @@ import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:salamtak/core/widgets/text_with_field.dart';
 import 'package:salamtak/features/medication_feature/presentation/add_donation/cubit/cubit.dart';
 import 'package:salamtak/features/medication_feature/presentation/add_donation/widgets/city_selector.dart';
-import 'package:salamtak/features/medication_feature/presentation/add_request/widgets/add_request_body.dart';
 import 'package:salamtak/features/medication_feature/presentation/add_request/widgets/medication_form_section.dart';
 import 'package:salamtak/features/medication_feature/util/enums/enums.dart';
 import 'package:salamtak/l10n/l10n.dart';
@@ -143,9 +143,9 @@ class AddDonationBody extends StatelessWidget {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
-                            'city',
-                            style: TextStyle(
+                          Text(
+                            context.l10n.city,
+                            style: const TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.w500,
                             ),

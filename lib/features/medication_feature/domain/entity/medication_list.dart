@@ -13,6 +13,7 @@ class MedicationList extends Equatable {
     this.emergencyLevel,
     required this.createdDate,
     required this.form,
+    required this.status,
   });
 
   final String name;
@@ -24,6 +25,7 @@ class MedicationList extends Equatable {
   final EmergencyLevel? emergencyLevel;
   final DateTime createdDate;
   final MedicineForm form;
+  final MedicationStatus status;
 
   @override
   List<Object?> get props => [
@@ -35,5 +37,6 @@ class MedicationList extends Equatable {
         emergencyLevel,
         createdDate,
         form,
+        status,
       ];
 }

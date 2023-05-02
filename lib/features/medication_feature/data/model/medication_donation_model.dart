@@ -135,6 +135,7 @@ class MedicationDonationModel {
       location: location,
       image: image,
       emergencyLevel: EmergencyLevel.low,
+      status: status,
     );
   }
 }
