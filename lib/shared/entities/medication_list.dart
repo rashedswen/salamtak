@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:salamtak/features/medication_feature/util/enums/enums.dart';
+import 'package:salamtak/core/enums/enums.dart';
 import 'package:salamtak/util/json/states_and_cities.dart';
 
 class MedicationList extends Equatable {

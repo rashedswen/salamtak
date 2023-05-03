@@ -7,7 +7,7 @@ import 'package:salamtak/core/widgets/text_with_field.dart';
 import 'package:salamtak/features/medication_feature/presentation/add_donation/widgets/city_selector.dart';
 import 'package:salamtak/features/medication_feature/presentation/add_request/cubit/cubit.dart';
 import 'package:salamtak/features/medication_feature/presentation/add_request/widgets/medication_form_section.dart';
-import 'package:salamtak/features/medication_feature/util/enums/enums.dart';
+import 'package:salamtak/core/enums/enums.dart';
 import 'package:salamtak/l10n/l10n.dart';
 part 'medication_form_card.dart';
 

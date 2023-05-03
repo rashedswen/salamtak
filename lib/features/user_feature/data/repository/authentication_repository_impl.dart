@@ -31,9 +31,16 @@ class AuthenticationRepositoryImpl extends AuthenticationRepository {
   }
 
   @override
-  Future<String> getUser() {
-    // TODO: implement getUser
-    throw UnimplementedError();
+  Future<SalamtakUser> getUser() async {
+    final firebaseUser = _firebaseAuth.currentUser;
+    final user = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(firebaseUser!.uid)
+        .get();
+
+    final sUser = SalamtakUserModel.fromJson(user.data()!);
+
+    return sUser.toEntity();
   }
 
   @override

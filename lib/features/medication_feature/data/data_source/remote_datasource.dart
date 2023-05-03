@@ -5,7 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:salamtak/features/medication_feature/data/model/medication_donation_model.dart';
 import 'package:salamtak/features/medication_feature/data/model/medication_request_model.dart';
-import 'package:salamtak/features/medication_feature/util/enums/enums.dart';
+import 'package:salamtak/core/enums/enums.dart';
 
 const String _medicationsRequestsCollection = 'requests';
 const String _medicationsDonationsCollection = 'donations';

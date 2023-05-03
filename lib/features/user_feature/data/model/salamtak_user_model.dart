@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:salamtak/features/user_feature/domain/entity/salamtak_user.dart';
 import 'package:salamtak/util/json/states_and_cities.dart';
 
 class SalamtakUserModel extends Equatable {
@@ -78,6 +79,19 @@ class SalamtakUserModel extends Equatable {
     );
   }
 
+  SalamtakUser toEntity() {
+    return SalamtakUser(
+      email: email,
+      id: id,
+      name: name,
+      phoneNumber: phoneNumber,
+      authorization: authorization,
+      location: location,
+      isActivated: isActivated,
+    );
+  }
+
   @override
-  List<Object?> get props => [email, id, name, location];
+  List<Object?> get props =>
+      [email, id, name, location, phoneNumber, isActivated, authorization];
 }

@@ -2,7 +2,7 @@ import 'package:duration/duration.dart';
 import 'package:duration/locale.dart';
 import 'package:flutter/material.dart';
 import 'package:salamtak/features/medication_feature/presentation/requests_donations_list/bloc/bloc.dart';
-import 'package:salamtak/features/medication_feature/util/enums/enums.dart';
+import 'package:salamtak/core/enums/enums.dart';
 
 /// {@template requests_donations_list_body}
 /// Body of the RequestsDonationsListPage.

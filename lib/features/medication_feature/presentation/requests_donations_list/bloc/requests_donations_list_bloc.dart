@@ -2,9 +2,8 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:salamtak/features/medication_feature/domain/entity/medication_list.dart';
+import 'package:salamtak/core/enums/medication_status.dart';
 import 'package:salamtak/features/medication_feature/domain/repository/medication_repository.dart';
-import 'package:salamtak/features/medication_feature/util/enums/medication_status.dart';
 part 'requests_donations_list_event.dart';
 part 'requests_donations_list_state.dart';
 

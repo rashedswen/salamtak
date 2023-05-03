@@ -1,8 +1,8 @@
 import 'package:equatable/equatable.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:salamtak/features/medication_feature/domain/entity/medication_list.dart';
+import 'package:salamtak/shared/entities/medication_list.dart';
 import 'package:salamtak/features/medication_feature/domain/entity/medication_request.dart';
-import 'package:salamtak/features/medication_feature/util/enums/enums.dart';
+import 'package:salamtak/core/enums/enums.dart';
 import 'package:salamtak/util/json/states_and_cities.dart';
 
 class MedicationRequestModel extends Equatable {

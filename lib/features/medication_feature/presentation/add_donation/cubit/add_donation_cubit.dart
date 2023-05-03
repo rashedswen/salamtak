@@ -3,9 +3,10 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:salamtak/features/medication_feature/domain/entity/medication_donation.dart';
 import 'package:salamtak/features/medication_feature/domain/repository/medication_repository.dart';
-import 'package:salamtak/features/medication_feature/util/enums/medication_form.dart';
+import 'package:salamtak/core/enums/medication_form.dart';
 import 'package:salamtak/util/json/states_and_cities.dart';
 part 'add_donation_state.dart';
 
@@ -57,7 +58,7 @@ class AddDonationCubit extends Cubit<AddDonationState> {
       final donation = MedicationDonation(
         form: state.form,
         title: state.medicationName!,
-        userId: 'fefewfwefwefw',
+        userId: FirebaseAuth.instance.currentUser?.uid ?? 'unknown',
         description: state.description ?? '',
         quantity: state.quantity,
         expiredAt: state.expiredAt?.toIso8601String(),

@@ -53,5 +53,15 @@ class SalamtakUser extends Equatable {
   }
 
   @override
-  List<Object?> get props => [email, id, name, phoneNumber, location];
+  List<Object?> get props => [
+        email,
+        id,
+        name,
+        phoneNumber,
+        location,
+        isActivated,
+        authorization,
+        location,
+        phoneNumber,
+      ];
 }

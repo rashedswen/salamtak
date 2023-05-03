@@ -2,7 +2,7 @@ import 'package:salamtak/features/medication_feature/data/model/medication_donat
 import 'package:salamtak/features/medication_feature/data/model/medication_request_model.dart';
 import 'package:salamtak/features/medication_feature/domain/entity/medication_donation.dart';
 import 'package:salamtak/features/medication_feature/domain/entity/medication_request.dart';
-import 'package:salamtak/features/medication_feature/util/enums/enums.dart';
+import 'package:salamtak/core/enums/enums.dart';
 
 abstract class MedicationRepository {
   // get Requests and Donations

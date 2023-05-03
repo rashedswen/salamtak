@@ -5,7 +5,7 @@ import 'package:salamtak/features/medication_feature/data/model/medication_reque
 import 'package:salamtak/features/medication_feature/domain/entity/medication_donation.dart';
 import 'package:salamtak/features/medication_feature/domain/entity/medication_request.dart';
 import 'package:salamtak/features/medication_feature/domain/repository/medication_repository.dart';
-import 'package:salamtak/features/medication_feature/util/enums/enums.dart';
+import 'package:salamtak/core/enums/enums.dart';
 
 class MedicationRepoisitoryImpl extends MedicationRepository {
   MedicationRepoisitoryImpl({
