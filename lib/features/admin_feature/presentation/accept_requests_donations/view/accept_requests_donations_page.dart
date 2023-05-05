@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:salamtak/features/admin_feature/domain/repository/admin_medication_repository.dart';
 import 'package:salamtak/features/admin_feature/presentation/accept_requests_donations/cubit/cubit.dart';
 import 'package:salamtak/features/admin_feature/presentation/accept_requests_donations/widgets/accept_requests_donations_body.dart';
 
@@ -11,18 +12,26 @@ class AcceptRequestsDonationsPage extends StatelessWidget {
 
   /// The static route for AcceptRequestsDonationsPage
   static Route<dynamic> route() {
-    return MaterialPageRoute<dynamic>(builder: (_) => const AcceptRequestsDonationsPage());
+    return MaterialPageRoute<dynamic>(
+      builder: (_) => const AcceptRequestsDonationsPage(),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => AcceptRequestsDonationsCubit(),
-      child: const Scaffold(
-        body: AcceptRequestsDonationsView(),
+      create: (context) => AcceptRequestsDonationsCubit(
+        adminMedicationRepository: context.read<AdminMedicationRepository>(),
+      )..getMedicationDonationsList(),
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('Accept Requests Donations'),
+          // automaticallyImplyLeading: false,
+        ),
+        body: const AcceptRequestsDonationsView(),
       ),
     );
-  }    
+  }
 }
 
 /// {@template accept_requests_donations_view}

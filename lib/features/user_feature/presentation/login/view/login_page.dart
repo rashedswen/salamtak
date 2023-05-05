@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:salamtak/app/bloc/app_bloc.dart';
 import 'package:salamtak/features/user_feature/domain/repository/authentication_repository.dart';
 import 'package:salamtak/features/user_feature/presentation/login/cubit/cubit.dart';
 import 'package:salamtak/features/user_feature/presentation/login/widgets/login_body.dart';
 import 'package:salamtak/l10n/l10n.dart';
+import 'package:salamtak/util/router/screen.dart';
 
 /// {@template login_page}
 /// A description for LoginPage
@@ -46,7 +48,7 @@ class LoginView extends StatelessWidget {
       listener: (context, state) {
         if (state.status == AppStatus.authenticated) {
           print('authenticated');
-          // context.pushReplacementNamed(Screens.dashboard.name);
+          context.pushReplacementNamed(Screens.dashboard.name);
         }
       },
       child: const LoginBody(),

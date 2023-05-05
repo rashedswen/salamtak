@@ -1,3 +1,6 @@
+import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
 enum MedicineForm {
   tablet,
   capsule,
@@ -49,6 +52,27 @@ extension MedForm on MedicineForm {
         return 'Inhaler';
       case MedicineForm.other:
         return 'Other';
+    }
+  }
+
+  IconData get icon {
+    switch (this) {
+      case MedicineForm.tablet:
+        return Icons.tablet;
+      case MedicineForm.capsule:
+        return FontAwesomeIcons.capsules;
+      case MedicineForm.syrup:
+        return FontAwesomeIcons.bottleDroplet;
+      case MedicineForm.injection:
+        return Icons.local_hospital;
+      case MedicineForm.ointment:
+        return Icons.local_hospital;
+      case MedicineForm.drops:
+        return Icons.local_hospital;
+      case MedicineForm.inhaler:
+        return Icons.local_hospital;
+      case MedicineForm.other:
+        return Icons.local_hospital;
     }
   }
 }

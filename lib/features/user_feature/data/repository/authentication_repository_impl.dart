@@ -35,10 +35,12 @@ class AuthenticationRepositoryImpl extends AuthenticationRepository {
     final firebaseUser = _firebaseAuth.currentUser;
     final user = await FirebaseFirestore.instance
         .collection('users')
-        .doc(firebaseUser!.uid)
+        .doc(firebaseUser?.uid)
         .get();
 
-    final sUser = SalamtakUserModel.fromJson(user.data()!);
+    final sUser = user.data() == null
+        ? const SalamtakUserModel(id: '')
+        : SalamtakUserModel.fromJson(user.data()!);
 
     return sUser.toEntity();
   }

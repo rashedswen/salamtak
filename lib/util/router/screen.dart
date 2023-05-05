@@ -10,6 +10,8 @@ enum Screens {
   addRequest,
   addDonation,
   medication,
+  listOfRequestsDonations,
+  adminMedicationRequestsDonations,
   doctors,
 }
 
@@ -40,6 +42,10 @@ extension Routes on Screens {
         return '/medication';
       case Screens.doctors:
         return '/doctors';
+      case Screens.listOfRequestsDonations:
+        return '/list-of-requests-donations';
+      case Screens.adminMedicationRequestsDonations:
+        return '/admin-medication-requests-donations';
     }
   }
 
@@ -69,6 +75,10 @@ extension Routes on Screens {
         return 'Medication';
       case Screens.doctors:
         return 'Doctors';
+      case Screens.listOfRequestsDonations:
+        return 'List of Requests Donations';
+      case Screens.adminMedicationRequestsDonations:
+        return 'Admin Medication Requests Donations';
     }
   }
 }

@@ -1,33 +1,49 @@
 part of 'accept_requests_donations_cubit.dart';
 
-/// {@template accept_requests_donations}
-/// AcceptRequestsDonationsState description
-/// {@endtemplate}
+enum AcceptRequestsDonationsStatus { initial, loading, loaded, error }
+
 class AcceptRequestsDonationsState extends Equatable {
-  /// {@macro accept_requests_donations}
   const AcceptRequestsDonationsState({
-    this.customProperty = 'Default Value',
+    this.rejectionReason,
+    this.medicationsList = const [],
+    this.errorMessage,
   });
 
-  /// A description for customProperty
-  final String customProperty;
+  final List<AdminMedicationList> medicationsList;
+  final String? rejectionReason;
+  final String? errorMessage;
 
   @override
-  List<Object> get props => [customProperty];
+  List<Object?> get props => [rejectionReason, medicationsList, errorMessage];
 
-  /// Creates a copy of the current AcceptRequestsDonationsState with property changes
   AcceptRequestsDonationsState copyWith({
-    String? customProperty,
+    String? rejectionReason,
+    List<AdminMedicationList>? medicationsList,
+    AcceptRequestsDonationsStatus? status,
+    String? errorMessage,
   }) {
     return AcceptRequestsDonationsState(
-      customProperty: customProperty ?? this.customProperty,
+      rejectionReason: rejectionReason ?? this.rejectionReason,
+      medicationsList: medicationsList ?? this.medicationsList,
+      errorMessage: errorMessage ?? this.errorMessage,
     );
   }
 }
-/// {@template accept_requests_donations_initial}
-/// The initial state of AcceptRequestsDonationsState
-/// {@endtemplate}
+
 class AcceptRequestsDonationsInitial extends AcceptRequestsDonationsState {
-  /// {@macro accept_requests_donations_initial}
   const AcceptRequestsDonationsInitial() : super();
+}
+
+class AcceptRequestsDonationsLoading extends AcceptRequestsDonationsState {
+  const AcceptRequestsDonationsLoading() : super();
+}
+
+class AcceptRequestsDonationsLoaded extends AcceptRequestsDonationsState {
+  const AcceptRequestsDonationsLoaded(List<AdminMedicationList> medicationsList)
+      : super(medicationsList: medicationsList);
+}
+
+class AcceptRequestsDonationsError extends AcceptRequestsDonationsState {
+  const AcceptRequestsDonationsError(String errorMessage)
+      : super(errorMessage: errorMessage);
 }

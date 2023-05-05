@@ -1,8 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:salamtak/features/medication_feature/data/model/medication_donation_model.dart';
-
 import 'package:salamtak/core/enums/enums.dart';
+import 'package:salamtak/features/medication_feature/data/model/models.dart';
 import 'package:salamtak/util/json/states_and_cities.dart';
 
 class MedicationDonation extends Equatable {
@@ -26,9 +25,9 @@ class MedicationDonation extends Equatable {
   final PlatformFile? image;
   final MedicineForm form;
   final MedicationStatus status;
-  final String? expiredAt;
-  final String? createdAt;
-  final String? updatedAt;
+  final int? expiredAt;
+  final int? createdAt;
+  final int? updatedAt;
   final String userId;
   final String? quantity;
   final LocationSudan location;
@@ -57,8 +56,8 @@ class MedicationDonation extends Equatable {
       form: form,
       status: status,
       expiredAt: expiredAt,
-      createdAt: DateTime.now().toIso8601String(),
-      updatedAt: DateTime.now().toIso8601String(),
+      createdAt: DateTime.now().millisecondsSinceEpoch,
+      updatedAt: DateTime.now().millisecondsSinceEpoch,
       userId: userId,
       quantity: quantity,
       location: location,

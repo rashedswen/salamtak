@@ -81,4 +81,37 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get phone => 'Phone';
+
+  @override
+  String get accept => 'Accept';
+
+  @override
+  String get reject => 'Reject';
+
+  @override
+  String get cancel => 'Cancel';
+
+  @override
+  String get status => 'Status';
+
+  @override
+  String get description => 'Description';
+
+  @override
+  String get medication_details => 'Medication Details';
+
+  @override
+  String get request_type => 'Request Type';
+
+  @override
+  String get created_date => 'Created Date';
+
+  @override
+  String get updated_date => 'Updated Date';
+
+  @override
+  String get image => 'Image';
+
+  @override
+  String get total => 'Total';
 }

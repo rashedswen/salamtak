@@ -3,12 +3,13 @@ import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:salamtak/core/enums/enums.dart';
 import 'package:salamtak/core/widgets/text_with_field.dart';
 import 'package:salamtak/features/medication_feature/presentation/add_donation/widgets/city_selector.dart';
 import 'package:salamtak/features/medication_feature/presentation/add_request/cubit/cubit.dart';
 import 'package:salamtak/features/medication_feature/presentation/add_request/widgets/medication_form_section.dart';
-import 'package:salamtak/core/enums/enums.dart';
 import 'package:salamtak/l10n/l10n.dart';
+
 part 'medication_form_card.dart';
 
 /// {@template add_request_body}
@@ -78,16 +79,20 @@ class AddRequestBody extends StatelessWidget {
                                               ? Colors.blue.shade50
                                               : Colors.white,
                                       child: Center(
-                                        child: Text(
-                                          context.l10n.localeName == 'ar'
-                                              ? emergencyLevel.arabicName
-                                              : emergencyLevel.englishName,
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .titleSmall
-                                              ?.copyWith(
-                                                color: emergencyLevel.color,
-                                              ),
+                                        child: FittedBox(
+                                          child: Text(
+                                            context.l10n.localeName == 'ar'
+                                                ? emergencyLevel.arabicName
+                                                : emergencyLevel.englishName,
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .titleSmall
+                                                ?.copyWith(
+                                                  color: emergencyLevel.color,
+                                                ),
+                                            textAlign: TextAlign.center,
+                                            softWrap: true,
+                                          ),
                                         ),
                                       ),
                                     ),

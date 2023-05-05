@@ -1,5 +1,6 @@
 import 'package:go_router/go_router.dart';
 import 'package:salamtak/app/bloc/app_bloc.dart';
+import 'package:salamtak/features/admin_feature/presentation/accept_requests_donations/view/accept_requests_donations_page.dart';
 import 'package:salamtak/features/medication_feature/presentation/add_donation/view/add_donation_page.dart';
 import 'package:salamtak/features/medication_feature/presentation/add_request/add_request.dart';
 import 'package:salamtak/features/medication_feature/presentation/requests_donations_list/requests_donations_list.dart';
@@ -71,6 +72,13 @@ class AppRouter {
         path: Screens.register.route,
         builder: (context, state) {
           return const RegisterPage();
+        },
+      ),
+      GoRoute(
+        name: Screens.listOfRequestsDonations.name,
+        path: Screens.listOfRequestsDonations.route,
+        builder: (context, state) {
+          return const AcceptRequestsDonationsPage();
         },
       ),
     ],

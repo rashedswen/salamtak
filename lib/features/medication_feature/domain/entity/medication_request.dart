@@ -1,8 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:salamtak/features/medication_feature/data/model/medication_request_model.dart';
-
 import 'package:salamtak/core/enums/enums.dart';
+import 'package:salamtak/features/medication_feature/data/model/models.dart';
 import 'package:salamtak/util/json/states_and_cities.dart';
 
 class MedicationRequest extends Equatable {
@@ -18,15 +17,14 @@ class MedicationRequest extends Equatable {
     required this.title,
     required this.userId,
     required this.description,
-    required this.location
+    required this.location,
   });
-
 
   final String? id;
   final String? image;
   // automaticly set to current date
-  final String? createdAt;
-  final String? updatedAt;
+  final int? createdAt;
+  final int? updatedAt;
   final PlatformFile? prescription;
   final String title;
   final String description;
@@ -61,11 +59,11 @@ class MedicationRequest extends Equatable {
       form: form,
       status: status,
       prescription: prescription,
-      createdAt: DateTime.now().toIso8601String(),
-      updatedAt: DateTime.now().toIso8601String(),
+      createdAt: DateTime.now().millisecondsSinceEpoch,
+      updatedAt: DateTime.now().millisecondsSinceEpoch,
       userId: userId,
       emergencyLevel: emergencyLevel,
-      location: location
+      location: location,
     );
   }
 }

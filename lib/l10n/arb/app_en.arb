@@ -49,5 +49,28 @@
 
     "name": "Name",
 
-    "phone": "Phone"
+    "phone": "Phone",
+
+    "accept": "Accept",
+
+    "reject": "Reject",
+
+    "cancel": "Cancel",
+
+    "status": "Status",
+
+    "description": "Description",
+
+    "medication_details": "Medication Details",
+
+    "request_type": "Request Type",
+
+    "created_date": "Created Date",
+
+    "updated_date": "Updated Date",
+
+    "image": "Image",
+
+    "total": "Total"
+    
 }

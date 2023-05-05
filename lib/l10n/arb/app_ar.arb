@@ -50,6 +50,28 @@
 
     "name": "الاسم",
 
-    "phone": "رقم الجوال"
+    "phone": "رقم الجوال",
+
+    "accept": "موافق",
+
+    "reject": "رفض",
+
+    "cancel": "الغاء",
+
+    "status": "الحالة",
+
+    "description": "الوصف",
+
+    "medication_details": "تفاصيل الدواء",
+
+    "request_type": "نوع الطلب",
+
+    "created_date": "تاريخ الانشاء",
+
+    "updated_date": "تاريخ التحديث",
+
+    "image": "الصورة",
+
+    "total": "الاجمالي"
 
 }

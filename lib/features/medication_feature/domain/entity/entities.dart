@@ -1,0 +1,1 @@
+export 'package:salamtak/features/medication_feature/domain/entity/medication_list.dart';

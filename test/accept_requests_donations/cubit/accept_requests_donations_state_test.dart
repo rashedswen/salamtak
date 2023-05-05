@@ -29,7 +29,7 @@ void main() {
         'when no argument specified',
         () {
           const acceptRequestsDonationsState = AcceptRequestsDonationsState(
-            customProperty: 'My property',
+            rejectionReason: 'My property',
           );
           expect(
             acceptRequestsDonationsState.copyWith(),
@@ -43,16 +43,18 @@ void main() {
         'when all arguments specified',
         () {
           const acceptRequestsDonationsState = AcceptRequestsDonationsState(
-            customProperty: 'My property',
+            rejectionReason: 'My property',
           );
-          final otherAcceptRequestsDonationsState = AcceptRequestsDonationsState(
-            customProperty: 'My property 2',
+          final otherAcceptRequestsDonationsState =
+              AcceptRequestsDonationsState(
+            rejectionReason: 'My property 2',
           );
-          expect(acceptRequestsDonationsState, isNot(equals(otherAcceptRequestsDonationsState)));
+          expect(acceptRequestsDonationsState,
+              isNot(equals(otherAcceptRequestsDonationsState)));
 
           expect(
             acceptRequestsDonationsState.copyWith(
-              customProperty: otherAcceptRequestsDonationsState.customProperty,
+              customProperty: otherAcceptRequestsDonationsState.rejectionReason,
             ),
             equals(otherAcceptRequestsDonationsState),
           );

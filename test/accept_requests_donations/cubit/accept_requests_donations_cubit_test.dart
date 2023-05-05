@@ -17,7 +17,8 @@ void main() {
 
     test('initial state has default value for customProperty', () {
       final acceptRequestsDonationsCubit = AcceptRequestsDonationsCubit();
-      expect(acceptRequestsDonationsCubit.state.customProperty, equals('Default Value'));
+      expect(acceptRequestsDonationsCubit.state.rejectionReason,
+          equals('Default Value'));
     });
 
     blocTest<AcceptRequestsDonationsCubit, AcceptRequestsDonationsState>(

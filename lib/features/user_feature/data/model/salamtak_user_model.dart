@@ -20,7 +20,6 @@ class SalamtakUserModel extends Equatable {
       email: json['email'] as String?,
       name: json['name'] as String?,
       phoneNumber: json['phoneNumber'] as String?,
-      isActivated: json['isActivated'] as bool,
       authorization: json['authorization'] as String?,
       location: json['location'] != null
           ? LocationSudan.fromJson(json['location'] as Map<String, dynamic>)

@@ -50,7 +50,7 @@ extension Status on MedicationStatus {
 
 extension StatusJson on String {
   MedicationStatus get toMedicineStatus {
-    switch (this) {
+    switch (toLowerCase()) {
       case 'pending':
         return MedicationStatus.pending;
       case 'approved':

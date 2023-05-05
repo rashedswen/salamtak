@@ -248,6 +248,72 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Phone'**
   String get phone;
+
+  /// No description provided for @accept.
+  ///
+  /// In en, this message translates to:
+  /// **'Accept'**
+  String get accept;
+
+  /// No description provided for @reject.
+  ///
+  /// In en, this message translates to:
+  /// **'Reject'**
+  String get reject;
+
+  /// No description provided for @cancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get cancel;
+
+  /// No description provided for @status.
+  ///
+  /// In en, this message translates to:
+  /// **'Status'**
+  String get status;
+
+  /// No description provided for @description.
+  ///
+  /// In en, this message translates to:
+  /// **'Description'**
+  String get description;
+
+  /// No description provided for @medication_details.
+  ///
+  /// In en, this message translates to:
+  /// **'Medication Details'**
+  String get medication_details;
+
+  /// No description provided for @request_type.
+  ///
+  /// In en, this message translates to:
+  /// **'Request Type'**
+  String get request_type;
+
+  /// No description provided for @created_date.
+  ///
+  /// In en, this message translates to:
+  /// **'Created Date'**
+  String get created_date;
+
+  /// No description provided for @updated_date.
+  ///
+  /// In en, this message translates to:
+  /// **'Updated Date'**
+  String get updated_date;
+
+  /// No description provided for @image.
+  ///
+  /// In en, this message translates to:
+  /// **'Image'**
+  String get image;
+
+  /// No description provided for @total.
+  ///
+  /// In en, this message translates to:
+  /// **'Total'**
+  String get total;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

@@ -70,7 +70,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '47603181237',
     projectId: 'salamtak-kwemrj',
     storageBucket: 'salamtak-kwemrj.appspot.com',
-    iosClientId: '47603181237-cfodd8c842o1nf4qudrhm0ice817ltd9.apps.googleusercontent.com',
+    iosClientId:
+        '47603181237-cfodd8c842o1nf4qudrhm0ice817ltd9.apps.googleusercontent.com',
     iosBundleId: 'com.kwemrj.salamtak.salamtak',
   );
 }

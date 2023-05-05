@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:salamtak/shared/entities/medication_list.dart';
+import 'package:salamtak/features/medication_feature/domain/entity/medication_list.dart';
 import 'package:salamtak/features/medication_feature/domain/entity/medication_request.dart';
 import 'package:salamtak/core/enums/enums.dart';
 import 'package:salamtak/util/json/states_and_cities.dart';
@@ -24,8 +24,8 @@ class MedicationRequestModel extends Equatable {
     return MedicationRequestModel(
       id: map['id'] as String?,
       image: map['image'] as String?,
-      createdAt: map['createdAt'] as String?,
-      updatedAt: map['updatedAt'] as String?,
+      createdAt: map['createdAt'] as int?,
+      updatedAt: map['updatedAt'] as int?,
       title: map['title'] as String,
       description: map['description'] as String,
       form: (map['form'] as String).toMedicineForm,
@@ -40,8 +40,8 @@ class MedicationRequestModel extends Equatable {
   final String? id;
   final String? image;
   // automaticly set to current date
-  final String? createdAt;
-  final String? updatedAt;
+  final int? createdAt;
+  final int? updatedAt;
   final PlatformFile? prescription;
   final String title;
   final String description;
@@ -102,8 +102,8 @@ class MedicationRequestModel extends Equatable {
   MedicationRequestModel copyWith({
     String? id,
     String? image,
-    String? createdAt,
-    String? updatedAt,
+    int? createdAt,
+    int? updatedAt,
     PlatformFile? prescription,
     String? title,
     String? description,
@@ -131,7 +131,7 @@ class MedicationRequestModel extends Equatable {
 
   MedicationList toMedicationListItem() {
     return MedicationList(
-      createdDate: DateTime.tryParse(createdAt!) ?? DateTime.now(),
+      createdDate: DateTime.fromMillisecondsSinceEpoch(createdAt!),
       description: description,
       name: title,
       requestType: MedicationRequestType.request,

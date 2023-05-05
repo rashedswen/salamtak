@@ -49,6 +49,12 @@ class DashboardBody extends StatelessWidget {
                 },
                 child: const Text('Register page'),
               ),
+              ElevatedButton(
+                onPressed: () {
+                  context.pushNamed(Screens.listOfRequestsDonations.name);
+                },
+                child: const Text('list of requests donations'),
+              ),
             ],
           ),
         );
