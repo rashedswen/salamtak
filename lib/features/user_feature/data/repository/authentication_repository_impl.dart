@@ -54,6 +54,14 @@ class AuthenticationRepositoryImpl extends AuthenticationRepository {
   @override
   Future<void> logInAnonymously() async {
     await _firebaseAuth.signInAnonymously();
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc(_firebaseAuth.currentUser!.uid)
+        .set(
+      {
+        'id': _firebaseAuth.currentUser!.uid,
+      },
+    );
   }
 
   @override

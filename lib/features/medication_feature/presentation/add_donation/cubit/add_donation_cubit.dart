@@ -63,7 +63,7 @@ class AddDonationCubit extends Cubit<AddDonationState> {
         description: state.description ?? '',
         quantity: state.quantity,
         expiredAt: state.expiredAt?.millisecondsSinceEpoch,
-        image: state.imageUrl,
+        image: state.imageUrl?.path,
         location: state.location!.copyWith(address: state.address),
       );
       await medicationRepository.addMedicationDonation(donation);

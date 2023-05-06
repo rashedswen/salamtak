@@ -25,7 +25,7 @@ class MedicationRequest extends Equatable {
   // automaticly set to current date
   final int? createdAt;
   final int? updatedAt;
-  final PlatformFile? prescription;
+  final String? prescription;
   final String title;
   final String description;
   final MedicineForm form;
@@ -55,10 +55,10 @@ class MedicationRequest extends Equatable {
       id: id,
       title: title,
       description: description,
-      image: image,
       form: form,
       status: status,
       prescription: prescription,
+      image: image,
       createdAt: DateTime.now().millisecondsSinceEpoch,
       updatedAt: DateTime.now().millisecondsSinceEpoch,
       userId: userId,

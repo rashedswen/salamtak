@@ -104,7 +104,7 @@ class AddRequestBody extends StatelessWidget {
                       ),
                       const SizedBox(height: 16),
                       Text(
-                        context.l10n.prescription_image,
+                        context.l10n.medication_image,
                         style: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w500,
@@ -117,6 +117,39 @@ class AddRequestBody extends StatelessWidget {
                             onPressed: () async {
                               final path = await selectImage();
                               print(path);
+                              if (path != null) {
+                                await context
+                                    .read<AddRequestCubit>()
+                                    .imageChanged(path);
+                              }
+                            },
+                            child: Text(context.l10n.upload_image),
+                          ),
+                          const SizedBox(width: 16),
+                          if (state.image != null)
+                            SizedBox(
+                              height: 100,
+                              width: 100,
+                              child: Image.file(
+                                File(state.image!.path!),
+                                fit: BoxFit.contain,
+                              ),
+                            ),
+                        ],
+                      ),
+                      Text(
+                        context.l10n.prescription_image,
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      const SizedBox(height: 16),
+                      Row(
+                        children: [
+                          ElevatedButton(
+                            onPressed: () async {
+                              final path = await selectImage();
                               if (path != null) {
                                 await context
                                     .read<AddRequestCubit>()

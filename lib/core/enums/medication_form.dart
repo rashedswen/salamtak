@@ -58,17 +58,17 @@ extension MedForm on MedicineForm {
   IconData get icon {
     switch (this) {
       case MedicineForm.tablet:
-        return Icons.tablet;
+        return FontAwesomeIcons.tablets;
       case MedicineForm.capsule:
         return FontAwesomeIcons.capsules;
       case MedicineForm.syrup:
         return FontAwesomeIcons.bottleDroplet;
       case MedicineForm.injection:
-        return Icons.local_hospital;
+        return FontAwesomeIcons.userInjured;
       case MedicineForm.ointment:
-        return Icons.local_hospital;
+        return Icons.oil_barrel;
       case MedicineForm.drops:
-        return Icons.local_hospital;
+        return FontAwesomeIcons.eyeDropper;
       case MedicineForm.inhaler:
         return Icons.local_hospital;
       case MedicineForm.other:

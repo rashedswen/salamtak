@@ -22,7 +22,7 @@ class MedicationDonation extends Equatable {
   final String? id;
   final String title;
   final String description;
-  final PlatformFile? image;
+  final String? image;
   final MedicineForm form;
   final MedicationStatus status;
   final int? expiredAt;
@@ -52,7 +52,7 @@ class MedicationDonation extends Equatable {
       id: id,
       title: title,
       description: description,
-      image: image?.path,
+      image: image,
       form: form,
       status: status,
       expiredAt: expiredAt,

@@ -29,7 +29,7 @@ void main() {
         'when no argument specified',
         () {
           const dashboardState = DashboardState(
-            customProperty: 'My property',
+            errorMessage: 'My property',
           );
           expect(
             dashboardState.copyWith(),
@@ -43,16 +43,16 @@ void main() {
         'when all arguments specified',
         () {
           const dashboardState = DashboardState(
-            customProperty: 'My property',
+            errorMessage: 'My property',
           );
           final otherDashboardState = DashboardState(
-            customProperty: 'My property 2',
+            errorMessage: 'My property 2',
           );
           expect(dashboardState, isNot(equals(otherDashboardState)));
 
           expect(
             dashboardState.copyWith(
-              customProperty: otherDashboardState.customProperty,
+              customProperty: otherDashboardState.errorMessage,
             ),
             equals(otherDashboardState),
           );

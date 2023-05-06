@@ -1,8 +1,7 @@
 import 'package:equatable/equatable.dart';
-import 'package:file_picker/file_picker.dart';
+import 'package:salamtak/core/enums/enums.dart';
 import 'package:salamtak/features/medication_feature/domain/entity/medication_list.dart';
 import 'package:salamtak/features/medication_feature/domain/entity/medication_request.dart';
-import 'package:salamtak/core/enums/enums.dart';
 import 'package:salamtak/util/json/states_and_cities.dart';
 
 class MedicationRequestModel extends Equatable {
@@ -33,23 +32,21 @@ class MedicationRequestModel extends Equatable {
       userId: map['userId'] as String,
       emergencyLevel: (map['emergencyLevel'] as String).toEmergencyLevel,
       location: LocationSudan.fromJson(map['location'] as Map<String, dynamic>),
-      
     );
   }
 
   final String? id;
-  final String? image;
-  // automaticly set to current date
-  final int? createdAt;
-  final int? updatedAt;
-  final PlatformFile? prescription;
   final String title;
   final String description;
+  final String? image;
   final MedicineForm form;
   final MedicationStatus status;
+  final int? createdAt;
+  final int? updatedAt;
+  final String? prescription;
   final String userId;
-  final EmergencyLevel emergencyLevel;
   final LocationSudan location;
+  final EmergencyLevel emergencyLevel;
 
   @override
   List<Object?> get props => [
@@ -71,6 +68,7 @@ class MedicationRequestModel extends Equatable {
     return {
       'id': id,
       'image': image,
+      'prescription': prescription,
       'createdAt': createdAt,
       'updatedAt': updatedAt,
       'title': title,
@@ -104,7 +102,7 @@ class MedicationRequestModel extends Equatable {
     String? image,
     int? createdAt,
     int? updatedAt,
-    PlatformFile? prescription,
+    String? prescription,
     String? title,
     String? description,
     MedicineForm? form,
@@ -129,8 +127,9 @@ class MedicationRequestModel extends Equatable {
     );
   }
 
-  MedicationList toMedicationListItem() {
-    return MedicationList(
+  MedicationItem toMedicationListItem() {
+    return MedicationItem(
+      id: id!,
       createdDate: DateTime.fromMillisecondsSinceEpoch(createdAt!),
       description: description,
       name: title,
@@ -140,6 +139,7 @@ class MedicationRequestModel extends Equatable {
       image: image,
       emergencyLevel: emergencyLevel,
       status: status,
+      userId: userId,
     );
   }
 }

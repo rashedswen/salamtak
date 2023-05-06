@@ -1,7 +1,9 @@
 import 'package:salamtak/core/enums/enums.dart';
 import 'package:salamtak/features/medication_feature/data/model/models.dart';
+import 'package:salamtak/features/medication_feature/domain/entity/entities.dart';
 import 'package:salamtak/features/medication_feature/domain/entity/medication_donation.dart';
 import 'package:salamtak/features/medication_feature/domain/entity/medication_request.dart';
+import 'package:salamtak/features/user_feature/domain/entity/salamtak_user.dart';
 
 abstract class MedicationRepository {
   // get Requests and Donations
@@ -27,5 +29,15 @@ abstract class MedicationRepository {
   Future<void> deleteMedication(
     String id,
     MedicationRequestType medicationRequestType,
+  );
+
+  Future<void> acceptMedication({
+    required String medicationId,
+    required SalamtakUser user,
+    required MedicationRequestType medicationRequestType,
+  });
+
+  Future<List<MedicationItem>> getUserHistory(
+    String userId,
   );
 }

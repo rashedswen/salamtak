@@ -31,7 +31,7 @@ class RequestsDonationsListBloc
         status: RequestsDonationsListStatus.loading,
       ),
     );
-    final list = <MedicationList>[];
+    final list = <MedicationItem>[];
     try {
       final requestsList = await _medicationRepository.getMedicationsRequests();
       final donationsList =

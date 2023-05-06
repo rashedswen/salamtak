@@ -114,4 +114,40 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get total => 'Total';
+
+  @override
+  String get location => 'Location';
+
+  @override
+  String get i_can_help => 'I can help';
+
+  @override
+  String get i_need_it => 'I need it';
+
+  @override
+  String get report => 'Report';
+
+  @override
+  String get request_sent_successfully => 'Request sent successfully';
+
+  @override
+  String get recent_requests_and_donations => 'Recent Requests and Donations';
+
+  @override
+  String get view_all => 'View All';
+
+  @override
+  String get home => 'Home';
+
+  @override
+  String get profile => 'Profile';
+
+  @override
+  String get logout => 'Logout';
+
+  @override
+  String get settings => 'Settings';
+
+  @override
+  String get adminPanel => 'Admin Panel';
 }

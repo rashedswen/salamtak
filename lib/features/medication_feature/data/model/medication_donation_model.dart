@@ -40,12 +40,12 @@ class MedicationDonationModel {
   final String? image;
   final MedicineForm form;
   final MedicationStatus status;
-  final int? expiredAt;
   final int? createdAt;
   final int? updatedAt;
   final String userId;
-  final String? quantity;
   final LocationSudan location;
+  final int? expiredAt;
+  final String? quantity;
 
   @override
   List<Object?> get props => [
@@ -125,8 +125,9 @@ class MedicationDonationModel {
     );
   }
 
-  MedicationList toMedicationListItem() {
-    return MedicationList(
+  MedicationItem toMedicationListItem() {
+    return MedicationItem(
+      id: id!,
       createdDate: DateTime.fromMillisecondsSinceEpoch(createdAt ?? 0),
       description: description,
       name: title,
@@ -136,6 +137,7 @@ class MedicationDonationModel {
       image: image,
       emergencyLevel: EmergencyLevel.low,
       status: status,
+      userId: userId,
     );
   }
 }

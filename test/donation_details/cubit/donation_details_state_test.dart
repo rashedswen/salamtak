@@ -29,7 +29,7 @@ void main() {
         'when no argument specified',
         () {
           const donationDetailsState = DonationDetailsState(
-            customProperty: 'My property',
+            errorMessage: 'My property',
           );
           expect(
             donationDetailsState.copyWith(),
@@ -43,16 +43,17 @@ void main() {
         'when all arguments specified',
         () {
           const donationDetailsState = DonationDetailsState(
-            customProperty: 'My property',
+            errorMessage: 'My property',
           );
           final otherDonationDetailsState = DonationDetailsState(
-            customProperty: 'My property 2',
+            errorMessage: 'My property 2',
           );
-          expect(donationDetailsState, isNot(equals(otherDonationDetailsState)));
+          expect(
+              donationDetailsState, isNot(equals(otherDonationDetailsState)));
 
           expect(
             donationDetailsState.copyWith(
-              customProperty: otherDonationDetailsState.customProperty,
+              customProperty: otherDonationDetailsState.errorMessage,
             ),
             equals(otherDonationDetailsState),
           );

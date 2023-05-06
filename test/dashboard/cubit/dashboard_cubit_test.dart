@@ -17,7 +17,7 @@ void main() {
 
     test('initial state has default value for customProperty', () {
       final dashboardCubit = DashboardCubit();
-      expect(dashboardCubit.state.customProperty, equals('Default Value'));
+      expect(dashboardCubit.state.errorMessage, equals('Default Value'));
     });
 
     blocTest<DashboardCubit, DashboardState>(

@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:salamtak/core/enums/enums.dart';
 import 'package:salamtak/features/medication_feature/data/model/models.dart';
+import 'package:salamtak/features/user_feature/data/model/salamtak_user_model.dart';
 
 const String _medicationsRequestsCollection = 'requests';
 const String _medicationsDonationsCollection = 'donations';
@@ -51,6 +52,24 @@ abstract class RemoteDatasource {
     String id,
     MedicationStatus status,
   );
+
+  Future<void> acceptMedicationRequest(
+    String medicationId,
+    SalamtakUserModel user,
+  );
+
+  Future<void> acceptMedicationDonation(
+    String medicationId,
+    SalamtakUserModel user,
+  );
+
+  Future<List<MedicationDonationModel>> getUserMedicationDonations(
+    String userId,
+  );
+
+  Future<List<MedicationRequestModel>> getUserMedicationRequests(
+    String userId,
+  );
 }
 
 class FirebaseDatasource extends RemoteDatasource {
@@ -65,16 +84,16 @@ class FirebaseDatasource extends RemoteDatasource {
     MedicationRequestModel medication,
   ) async {
     String? imgUrl;
+    String? prescriptionUrl;
     if (medication.prescription != null) {
-      final path = 'requests/${medication.prescription!.name}';
-      final prescription = File(medication.prescription!.path!);
-
-      final ref = firebase_storage.FirebaseStorage.instance.ref().child(path);
-      final uploadTask = ref.putFile(prescription);
-
-      final p = await uploadTask.whenComplete(() => null);
-
-      imgUrl = await p.ref.getDownloadURL();
+      imgUrl = await uploadImageToFirebase(
+        medication.image ?? '',
+        'requests',
+      );
+      prescriptionUrl = await uploadImageToFirebase(
+        medication.prescription ?? '',
+        'prescriptions',
+      );
     }
 
     final medicationId = FirebaseFirestore.instance
@@ -86,6 +105,7 @@ class FirebaseDatasource extends RemoteDatasource {
       id: medicationId.id,
       status: MedicationStatus.pending,
       image: imgUrl,
+      prescription: prescriptionUrl,
     );
     await medicationId.set(medicationRequest.toJson());
   }
@@ -96,16 +116,7 @@ class FirebaseDatasource extends RemoteDatasource {
   ) async {
     String? imgUrl;
     if (medication.image != null) {
-      final name = medication.image!.split('/').last;
-      final path = 'requests/$name';
-      final prescription = File(medication.image!);
-
-      final ref = firebase_storage.FirebaseStorage.instance.ref().child(path);
-      final uploadTask = ref.putFile(prescription);
-
-      final p = await uploadTask.whenComplete(() => null);
-
-      imgUrl = await p.ref.getDownloadURL();
+      imgUrl = await uploadImageToFirebase(medication.image ?? '', 'donations');
     }
     // final user = _firebaseAuth.currentUser;
     final medicationId = FirebaseFirestore.instance
@@ -120,6 +131,22 @@ class FirebaseDatasource extends RemoteDatasource {
       image: imgUrl,
     );
     await medicationId.set(medicationRequest.toJson());
+  }
+
+  Future<String?> uploadImageToFirebase(
+    String imgaePath,
+    String folderName,
+  ) async {
+    final name = imgaePath.split('/').last;
+    final path = '$folderName/$name';
+    final prescription = File(imgaePath);
+
+    final ref = firebase_storage.FirebaseStorage.instance.ref().child(path);
+    final uploadTask = ref.putFile(prescription);
+
+    final p = await uploadTask.whenComplete(() => null);
+
+    return p.ref.getDownloadURL();
   }
 
   @override
@@ -156,17 +183,6 @@ class FirebaseDatasource extends RemoteDatasource {
 
   @override
   Future<List<MedicationDonationModel>> getMedicationsDontations() async {
-    // final user = _firebaseAuth.currentUser;
-    // final medications = await FirebaseFirestore.instance
-    //     .collection(_medicationsDonationsCollection)
-    //     .where('userId', isEqualTo: user!.uid)
-    //     .get();
-    // return medications.docs
-    //     .map((medication) => MedicationRequestModel.fromJson(
-    //           medication.data(),
-    //         ))
-    //     .toList();
-
     final medications = await FirebaseFirestore.instance
         .collection(_medicationsDonationsCollection)
         .get();
@@ -243,5 +259,71 @@ class FirebaseDatasource extends RemoteDatasource {
         .doc(medication.id);
 
     await medicationId.update(medication.toJson());
+  }
+
+  @override
+  Future<void> acceptMedicationDonation(
+    String medicationId,
+    SalamtakUserModel user,
+  ) async {
+    final donate = FirebaseFirestore.instance
+        .collection(_medicationsDonationsCollection)
+        .doc(medicationId)
+        .collection('users')
+        .doc(user.id);
+
+    final s = await donate.set(user.toJson());
+
+    print('s.toString()');
+  }
+
+  @override
+  Future<void> acceptMedicationRequest(
+    String medicationId,
+    SalamtakUserModel user,
+  ) async {
+    final request = FirebaseFirestore.instance
+        .collection(_medicationsRequestsCollection)
+        .doc(medicationId)
+        .collection('users')
+        .doc(user.id);
+
+    await request.set(user.toJson());
+  }
+
+  @override
+  Future<List<MedicationDonationModel>> getUserMedicationDonations(
+    String userId,
+  ) async {
+    final medications = await FirebaseFirestore.instance
+        .collection(_medicationsDonationsCollection)
+        .where('userId', isEqualTo: userId)
+        .get();
+
+    return medications.docs
+        .map(
+          (medication) => MedicationDonationModel.fromJson(
+            medication.data(),
+          ),
+        )
+        .toList();
+  }
+
+  @override
+  Future<List<MedicationRequestModel>> getUserMedicationRequests(
+    String userId,
+  ) async {
+    final medications = await FirebaseFirestore.instance
+        .collection(_medicationsRequestsCollection)
+        .where('userId', isEqualTo: userId)
+        .get();
+
+    return medications.docs
+        .map(
+          (medication) => MedicationRequestModel.fromJson(
+            medication.data(),
+          ),
+        )
+        .toList();
   }
 }

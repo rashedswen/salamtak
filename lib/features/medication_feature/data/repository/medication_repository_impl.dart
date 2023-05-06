@@ -3,8 +3,10 @@ import 'package:salamtak/core/enums/enums.dart';
 import 'package:salamtak/features/medication_feature/data/data_source/remote_datasource.dart';
 import 'package:salamtak/features/medication_feature/data/model/models.dart';
 import 'package:salamtak/features/medication_feature/domain/entity/medication_donation.dart';
+import 'package:salamtak/features/medication_feature/domain/entity/medication_list.dart';
 import 'package:salamtak/features/medication_feature/domain/entity/medication_request.dart';
 import 'package:salamtak/features/medication_feature/domain/repository/medication_repository.dart';
+import 'package:salamtak/features/user_feature/domain/entity/salamtak_user.dart';
 
 class MedicationRepoisitoryImpl extends MedicationRepository {
   MedicationRepoisitoryImpl({
@@ -138,6 +140,61 @@ class MedicationRepoisitoryImpl extends MedicationRepository {
     if (await networkInfo.isConnected) {
       try {
         await remoteDatasource.updateMedicationRequest(medication.toModel());
+      } on Exception {
+        rethrow;
+      }
+    } else {
+      throw Exception();
+    }
+  }
+
+  @override
+  Future<void> acceptMedication({
+    required String medicationId,
+    required SalamtakUser user,
+    required MedicationRequestType medicationRequestType,
+  }) async {
+    if (await networkInfo.isConnected) {
+      try {
+        if (medicationRequestType == MedicationRequestType.donation) {
+          await remoteDatasource.acceptMedicationDonation(
+            medicationId,
+            user.toModel(),
+          );
+        } else {
+          await remoteDatasource.acceptMedicationRequest(
+            medicationId,
+            user.toModel(),
+          );
+        }
+      } on Exception {
+        rethrow;
+      }
+    }
+  }
+
+  @override
+  Future<List<MedicationItem>> getUserHistory(
+    String userId,
+  ) async {
+    if (await networkInfo.isConnected) {
+      try {
+        final medicationRequestsModel =
+            await remoteDatasource.getUserMedicationRequests(userId);
+        final medicationDonationsModel =
+            await remoteDatasource.getUserMedicationDonations(userId);
+
+        final listOfMedication = <MedicationItem>[];
+        final mappedDonations =
+            medicationDonationsModel.map((e) => e.toMedicationListItem());
+        final mappedRequest =
+            medicationRequestsModel.map((e) => e.toMedicationListItem());
+
+        listOfMedication
+          ..addAll(mappedDonations)
+          ..addAll(mappedRequest);
+
+        return listOfMedication;
       } on Exception {
         rethrow;
       }

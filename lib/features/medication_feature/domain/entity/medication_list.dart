@@ -2,8 +2,9 @@ import 'package:equatable/equatable.dart';
 import 'package:salamtak/core/enums/enums.dart';
 import 'package:salamtak/util/json/states_and_cities.dart';
 
-class MedicationList extends Equatable {
-  const MedicationList({
+class MedicationItem extends Equatable {
+  const MedicationItem({
+    required this.id,
     required this.name,
     this.description,
     this.location,
@@ -14,8 +15,10 @@ class MedicationList extends Equatable {
     required this.createdDate,
     required this.form,
     required this.status,
+    required this.userId,
   });
 
+  final String id;
   final String name;
   final String? description;
   final LocationSudan? location;
@@ -26,9 +29,11 @@ class MedicationList extends Equatable {
   final DateTime createdDate;
   final MedicineForm form;
   final MedicationStatus status;
+  final String userId;
 
   @override
   List<Object?> get props => [
+        id,
         name,
         location,
         requestType,
@@ -38,5 +43,6 @@ class MedicationList extends Equatable {
         createdDate,
         form,
         status,
+        userId,
       ];
 }

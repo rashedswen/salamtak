@@ -314,6 +314,78 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Total'**
   String get total;
+
+  /// No description provided for @location.
+  ///
+  /// In en, this message translates to:
+  /// **'Location'**
+  String get location;
+
+  /// No description provided for @i_can_help.
+  ///
+  /// In en, this message translates to:
+  /// **'I can help'**
+  String get i_can_help;
+
+  /// No description provided for @i_need_it.
+  ///
+  /// In en, this message translates to:
+  /// **'I need it'**
+  String get i_need_it;
+
+  /// No description provided for @report.
+  ///
+  /// In en, this message translates to:
+  /// **'Report'**
+  String get report;
+
+  /// No description provided for @request_sent_successfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Request sent successfully'**
+  String get request_sent_successfully;
+
+  /// No description provided for @recent_requests_and_donations.
+  ///
+  /// In en, this message translates to:
+  /// **'Recent Requests and Donations'**
+  String get recent_requests_and_donations;
+
+  /// No description provided for @view_all.
+  ///
+  /// In en, this message translates to:
+  /// **'View All'**
+  String get view_all;
+
+  /// No description provided for @home.
+  ///
+  /// In en, this message translates to:
+  /// **'Home'**
+  String get home;
+
+  /// No description provided for @profile.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile'**
+  String get profile;
+
+  /// No description provided for @logout.
+  ///
+  /// In en, this message translates to:
+  /// **'Logout'**
+  String get logout;
+
+  /// No description provided for @settings.
+  ///
+  /// In en, this message translates to:
+  /// **'Settings'**
+  String get settings;
+
+  /// No description provided for @adminPanel.
+  ///
+  /// In en, this message translates to:
+  /// **'Admin Panel'**
+  String get adminPanel;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

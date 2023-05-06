@@ -12,16 +12,14 @@ class RequestsDonationsListState extends Equatable {
     this.status = RequestsDonationsListStatus.initial,
   });
 
- 
-
   @override
   List<Object> get props => [medicationsList];
 
-  final List<MedicationList> medicationsList;
+  final List<MedicationItem> medicationsList;
   final RequestsDonationsListStatus status;
 
   RequestsDonationsListState copyWith({
-    List<MedicationList>? medicationsList,
+    List<MedicationItem>? medicationsList,
     RequestsDonationsListStatus? status,
   }) {
     return RequestsDonationsListState(
