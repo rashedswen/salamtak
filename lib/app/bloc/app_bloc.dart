@@ -9,7 +9,6 @@ import 'package:salamtak/features/user_feature/domain/repository/authentication_
 part 'app_event.dart';
 part 'app_state.dart';
 
-
 class AppBloc extends Bloc<AppEvent, AppState> {
   AppBloc({
     required AuthenticationRepository authenticationRepository,
@@ -29,12 +28,14 @@ class AppBloc extends Bloc<AppEvent, AppState> {
   final AuthenticationRepository _authenticationRepository;
   late final StreamSubscription<SalamtakUser> _userSubscription;
 
-  void _onUserChanged(_AppUserChanged event, Emitter<AppState> emit) {
-    final user = event.user.isEmpty
+  Future<void> _onUserChanged(
+      _AppUserChanged event, Emitter<AppState> emit) async {
+    final userMod = await _authenticationRepository.getUser();
+    final state = event.user.isEmpty
         ? const AppState.unauthenticated()
-        : AppState.authenticated(event.user);
+        : AppState.authenticated(userMod);
     emit(
-      user,
+      state,
     );
   }
 
@@ -51,4 +52,3 @@ class AppBloc extends Bloc<AppEvent, AppState> {
     return super.close();
   }
 }
-

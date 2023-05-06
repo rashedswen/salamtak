@@ -13,11 +13,11 @@ abstract class AuthenticationRepository {
   );
 
   Future<void> logInWithGoogle();
-  
+
   Future<void> logInAnonymously();
 
   Future<void> logOut();
 
   Future<bool> isSignedIn();
-  Future<String> getUser();
+  Future<SalamtakUser> getUser();
 }

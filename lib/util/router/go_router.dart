@@ -1,8 +1,12 @@
 import 'package:go_router/go_router.dart';
 import 'package:salamtak/app/bloc/app_bloc.dart';
+import 'package:salamtak/features/admin_feature/presentation/accept_requests_donations/view/accept_requests_donations_page.dart';
+import 'package:salamtak/features/medication_feature/domain/entity/medication_list.dart';
 import 'package:salamtak/features/medication_feature/presentation/add_donation/view/add_donation_page.dart';
 import 'package:salamtak/features/medication_feature/presentation/add_request/add_request.dart';
+import 'package:salamtak/features/medication_feature/presentation/medication_details/medication_details.dart';
 import 'package:salamtak/features/medication_feature/presentation/requests_donations_list/requests_donations_list.dart';
+import 'package:salamtak/features/medication_feature/presentation/user_requests_history/user_requests_history.dart';
 import 'package:salamtak/features/user_feature/presentation/dashboard/dashboard.dart';
 import 'package:salamtak/features/user_feature/presentation/login/view/login_page.dart';
 import 'package:salamtak/features/user_feature/presentation/register/view/register_page.dart';
@@ -53,8 +57,8 @@ class AppRouter {
         },
       ),
       GoRoute(
-        name: Screens.medication.name,
-        path: Screens.medication.route,
+        name: Screens.requestsAndDonationslist.name,
+        path: Screens.requestsAndDonationslist.route,
         builder: (context, state) {
           return const RequestsDonationsListPage();
         },
@@ -71,6 +75,30 @@ class AppRouter {
         path: Screens.register.route,
         builder: (context, state) {
           return const RegisterPage();
+        },
+      ),
+      GoRoute(
+        name: Screens.approveMedicationsRequests.name,
+        path: Screens.approveMedicationsRequests.route,
+        builder: (context, state) {
+          return const AcceptRequestsDonationsPage();
+        },
+      ),
+      GoRoute(
+        name: Screens.medicationDetails.name,
+        path: Screens.medicationDetails.route,
+        builder: (context, state) {
+          final medicationItem = state.extra! as MedicationItem;
+          return MedicationDetailsPage(
+            medicationItem: medicationItem,
+          );
+        },
+      ),
+      GoRoute(
+        name: Screens.userHistory.name,
+        path: Screens.userHistory.route,
+        builder: (context, state) {
+          return const UserRequestsHistoryPage();
         },
       ),
     ],

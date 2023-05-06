@@ -9,6 +9,7 @@ class AddRequestState extends Equatable {
       this.emergencyLevel = EmergencyLevel.low,
       this.form = MedicineForm.tablet,
       this.prescription,
+      this.image,
       this.title,
       this.status = AddRequestStatus.initial,
       this.errorMassage,
@@ -20,6 +21,7 @@ class AddRequestState extends Equatable {
   final EmergencyLevel emergencyLevel;
   final MedicineForm form;
   final PlatformFile? prescription;
+  final PlatformFile? image;
   final AddRequestStatus status;
   final String? errorMassage;
   final LocationSudan? location;
@@ -32,6 +34,7 @@ class AddRequestState extends Equatable {
         emergencyLevel,
         form,
         prescription,
+        image,
         status,
         errorMassage,
         location,
@@ -44,6 +47,7 @@ class AddRequestState extends Equatable {
       EmergencyLevel? emergencyLevel,
       MedicineForm? form,
       PlatformFile? prescription,
+      PlatformFile? image,
       AddRequestStatus? status,
       String? errorMassage,
       LocationSudan? location,
@@ -54,6 +58,7 @@ class AddRequestState extends Equatable {
         emergencyLevel: emergencyLevel ?? this.emergencyLevel,
         form: form ?? this.form,
         prescription: prescription ?? this.prescription,
+        image: image ?? this.image,
         status: status ?? this.status,
         errorMassage: errorMassage ?? this.errorMassage,
         location: location ?? this.location,

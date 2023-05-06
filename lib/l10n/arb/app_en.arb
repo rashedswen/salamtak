@@ -49,5 +49,52 @@
 
     "name": "Name",
 
-    "phone": "Phone"
+    "phone": "Phone",
+
+    "accept": "Accept",
+
+    "reject": "Reject",
+
+    "cancel": "Cancel",
+
+    "status": "Status",
+
+    "description": "Description",
+
+    "medication_details": "Medication Details",
+
+    "request_type": "Request Type",
+
+    "created_date": "Created Date",
+
+    "updated_date": "Updated Date",
+
+    "image": "Image",
+
+    "total": "Total",
+
+    "location": "Location",
+
+    "i_can_help": "I can help",
+
+    "i_need_it": "I need it",
+
+    "report": "Report",
+
+    "request_sent_successfully": "Request sent successfully",
+
+    "recent_requests_and_donations": "Recent Requests and Donations",
+
+    "view_all": "View All",
+
+    "home": "Home",
+
+    "profile": "Profile",
+
+    "logout": "Logout",
+
+    "settings": "Settings",
+
+    "adminPanel": "Admin Panel"
+    
 }

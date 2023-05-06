@@ -1,12 +1,14 @@
 import 'dart:async';
+
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:salamtak/core/enums/enums.dart';
 import 'package:salamtak/features/medication_feature/domain/entity/medication_request.dart';
 import 'package:salamtak/features/medication_feature/domain/repository/medication_repository.dart';
-import 'package:salamtak/features/medication_feature/util/enums/enums.dart';
 import 'package:salamtak/util/json/states_and_cities.dart';
+
 part 'add_request_state.dart';
 
 class AddRequestCubit extends Cubit<AddRequestState> {
@@ -39,6 +41,10 @@ class AddRequestCubit extends Cubit<AddRequestState> {
     emit(state.copyWith(prescription: prescription));
   }
 
+  Future<void> imageChanged(PlatformFile image) async {
+    emit(state.copyWith(image: image));
+  }
+
   Future<void> locationChanged(LocationSudan location) async {
     emit(state.copyWith(location: location));
   }
@@ -56,7 +62,8 @@ class AddRequestCubit extends Cubit<AddRequestState> {
         userId: FirebaseAuth.instance.currentUser?.uid ?? 'unknown',
         description: state.description!,
         emergencyLevel: state.emergencyLevel,
-        prescription: state.prescription,
+        prescription: state.prescription?.path,
+        image: state.image?.path,
         location: state.location!.copyWith(
           address: state.address,
         ),

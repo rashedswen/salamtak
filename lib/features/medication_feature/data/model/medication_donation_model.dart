@@ -1,6 +1,6 @@
 import 'package:salamtak/features/medication_feature/domain/entity/medication_donation.dart';
 import 'package:salamtak/features/medication_feature/domain/entity/medication_list.dart';
-import 'package:salamtak/features/medication_feature/util/enums/enums.dart';
+import 'package:salamtak/core/enums/enums.dart';
 import 'package:salamtak/util/json/states_and_cities.dart';
 
 class MedicationDonationModel {
@@ -26,9 +26,9 @@ class MedicationDonationModel {
       image: map['image'] as String?,
       form: (map['form'] as String).toMedicineForm,
       status: (map['status'] as String).toMedicineStatus,
-      expiredAt: map['expiredAt'] as String?,
-      createdAt: map['createdAt'] as String?,
-      updatedAt: map['updatedAt'] as String?,
+      expiredAt: map['expiredAt'] as int?,
+      createdAt: map['createdAt'] as int?,
+      updatedAt: map['updatedAt'] as int?,
       userId: map['userId'] as String,
       quantity: map['quantity'] as String?,
       location: LocationSudan.fromJson(map['location'] as Map<String, dynamic>),
@@ -40,12 +40,12 @@ class MedicationDonationModel {
   final String? image;
   final MedicineForm form;
   final MedicationStatus status;
-  final String? expiredAt;
-  final String? createdAt;
-  final String? updatedAt;
+  final int? createdAt;
+  final int? updatedAt;
   final String userId;
-  final String? quantity;
   final LocationSudan location;
+  final int? expiredAt;
+  final String? quantity;
 
   @override
   List<Object?> get props => [
@@ -87,9 +87,9 @@ class MedicationDonationModel {
     String? image,
     MedicineForm? form,
     MedicationStatus? status,
-    String? expiredAt,
-    String? createdAt,
-    String? updatedAt,
+    int? expiredAt,
+    int? createdAt,
+    int? updatedAt,
     String? userId,
     String? quantity,
   }) {
@@ -125,9 +125,10 @@ class MedicationDonationModel {
     );
   }
 
-  MedicationList toMedicationListItem() {
-    return MedicationList(
-      createdDate: DateTime.tryParse(createdAt!) ?? DateTime.now(),
+  MedicationItem toMedicationListItem() {
+    return MedicationItem(
+      id: id!,
+      createdDate: DateTime.fromMillisecondsSinceEpoch(createdAt ?? 0),
       description: description,
       name: title,
       requestType: MedicationRequestType.donation,
@@ -136,6 +137,7 @@ class MedicationDonationModel {
       image: image,
       emergencyLevel: EmergencyLevel.low,
       status: status,
+      userId: userId,
     );
   }
 }

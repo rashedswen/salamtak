@@ -3,12 +3,13 @@ import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:salamtak/core/enums/enums.dart';
 import 'package:salamtak/core/widgets/text_with_field.dart';
 import 'package:salamtak/features/medication_feature/presentation/add_donation/widgets/city_selector.dart';
 import 'package:salamtak/features/medication_feature/presentation/add_request/cubit/cubit.dart';
 import 'package:salamtak/features/medication_feature/presentation/add_request/widgets/medication_form_section.dart';
-import 'package:salamtak/features/medication_feature/util/enums/enums.dart';
 import 'package:salamtak/l10n/l10n.dart';
+
 part 'medication_form_card.dart';
 
 /// {@template add_request_body}
@@ -78,16 +79,20 @@ class AddRequestBody extends StatelessWidget {
                                               ? Colors.blue.shade50
                                               : Colors.white,
                                       child: Center(
-                                        child: Text(
-                                          context.l10n.localeName == 'ar'
-                                              ? emergencyLevel.arabicName
-                                              : emergencyLevel.englishName,
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .titleSmall
-                                              ?.copyWith(
-                                                color: emergencyLevel.color,
-                                              ),
+                                        child: FittedBox(
+                                          child: Text(
+                                            context.l10n.localeName == 'ar'
+                                                ? emergencyLevel.arabicName
+                                                : emergencyLevel.englishName,
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .titleSmall
+                                                ?.copyWith(
+                                                  color: emergencyLevel.color,
+                                                ),
+                                            textAlign: TextAlign.center,
+                                            softWrap: true,
+                                          ),
                                         ),
                                       ),
                                     ),
@@ -98,6 +103,40 @@ class AddRequestBody extends StatelessWidget {
                             .toList(),
                       ),
                       const SizedBox(height: 16),
+                      Text(
+                        context.l10n.medication_image,
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      const SizedBox(height: 16),
+                      Row(
+                        children: [
+                          ElevatedButton(
+                            onPressed: () async {
+                              final path = await selectImage();
+                              print(path);
+                              if (path != null) {
+                                await context
+                                    .read<AddRequestCubit>()
+                                    .imageChanged(path);
+                              }
+                            },
+                            child: Text(context.l10n.upload_image),
+                          ),
+                          const SizedBox(width: 16),
+                          if (state.image != null)
+                            SizedBox(
+                              height: 100,
+                              width: 100,
+                              child: Image.file(
+                                File(state.image!.path!),
+                                fit: BoxFit.contain,
+                              ),
+                            ),
+                        ],
+                      ),
                       Text(
                         context.l10n.prescription_image,
                         style: const TextStyle(
@@ -111,7 +150,6 @@ class AddRequestBody extends StatelessWidget {
                           ElevatedButton(
                             onPressed: () async {
                               final path = await selectImage();
-                              print(path);
                               if (path != null) {
                                 await context
                                     .read<AddRequestCubit>()

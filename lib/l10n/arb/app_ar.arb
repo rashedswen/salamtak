@@ -50,6 +50,52 @@
 
     "name": "الاسم",
 
-    "phone": "رقم الجوال"
+    "phone": "رقم الجوال",
+
+    "accept": "موافق",
+
+    "reject": "رفض",
+
+    "cancel": "الغاء",
+
+    "status": "الحالة",
+
+    "description": "الوصف",
+
+    "medication_details": "تفاصيل الدواء",
+
+    "request_type": "نوع الطلب",
+
+    "created_date": "تاريخ الانشاء",
+
+    "updated_date": "تاريخ التحديث",
+
+    "image": "الصورة",
+
+    "total": "الاجمالي",
+
+    "location": "الموقع",
+
+    "i_can_help": "استطيع المساعدة",
+
+    "i_need_it": "احتاجه",
+
+    "report": "ابلاغ",
+
+    "request_sent_successfully": "تم ارسال طلبك بنجاح",
+
+    "recent_requests_and_donations" : "اخر الطلبات والتبرعات",
+
+    "view_all": "عرض الكل",
+
+    "home": "الرئيسية",
+
+    "profile": "الملف الشخصي",
+
+    "logout": "تسجيل الخروج",
+
+    "settings": "الاعدادات",
+
+    "adminPanel": "لوحة التحكم"
 
 }

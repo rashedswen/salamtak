@@ -230,8 +230,8 @@ class LocationSudan extends Equatable {
       city: city,
       cityArabic: cityArabic,
       state: state,
-      stateArabic: state,
-      address: address ?? this.address
+      stateArabic: stateArabic,
+      address: address ?? this.address,
     );
   }
 
@@ -267,6 +267,14 @@ class LocationSudan extends Equatable {
         'state_arabic': stateArabic,
         'address': address
       };
+
+  String toLocalString(String lang) {
+    if (lang == 'ar') {
+      return '$cityArabic, $stateArabic,  $address';
+    } else {
+      return '$city, $state, : $address';
+    }
+  }
 
   @override
   List<Object?> get props => [city, state, cityArabic, stateArabic, address];
