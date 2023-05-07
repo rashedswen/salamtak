@@ -96,6 +96,8 @@
 
     "settings": "الاعدادات",
 
-    "adminPanel": "لوحة التحكم"
+    "adminPanel": "لوحة التحكم",
+
+    "login_with_twitter": "تسجيل الدخول بتويتر"
 
 }

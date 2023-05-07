@@ -4,6 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:salamtak/app/app.dart';
 import 'package:salamtak/bootstrap.dart';
@@ -22,18 +23,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
-    // name: 'ssss',
   );
-
-  // if (kDebugMode) {
-  //   try {
-  //     FirebaseFirestore.instance.useFirestoreEmulator('localhost', 8088);
-  //     await FirebaseAuth.instance.useAuthEmulator('localhost', 9099);
-  //     await FirebaseStorage.instance.useStorageEmulator('localhost', 9200);
-  //   } catch (e) {
-  //     print(e);
-  //   }
-  // }
 
   FirebaseFirestore.instance.settings = const Settings(
     persistenceEnabled: true,

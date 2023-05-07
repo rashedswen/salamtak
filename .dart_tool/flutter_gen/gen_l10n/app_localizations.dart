@@ -386,6 +386,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Admin Panel'**
   String get adminPanel;
+
+  /// No description provided for @login_with_twitter.
+  ///
+  /// In en, this message translates to:
+  /// **'Login with Twitter'**
+  String get login_with_twitter;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

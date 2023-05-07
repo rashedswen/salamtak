@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:formz/formz.dart';
 import 'package:go_router/go_router.dart';
 import 'package:salamtak/core/widgets/text_with_field.dart';
@@ -78,6 +79,20 @@ class LoginBody extends StatelessWidget {
                                 context.pushNamed(Screens.register.name),
                             child: Text(context.l10n.signup),
                           ),
+                          const Divider(),
+                          // login with twitter
+                          ElevatedButton(
+                            onPressed: () {
+                              context.read<LoginCubit>().logInWithTwitter();
+                            },
+                            child: Row(
+                              children: [
+                                
+                                FaIcon(FontAwesomeIcons.twitter),
+                                Text(context.l10n.login_with_twitter),
+                              ],
+                            ),
+                          ),
                         ],
                       ),
                     ),
@@ -85,7 +100,6 @@ class LoginBody extends StatelessWidget {
                     TextButton(
                       onPressed: () {
                         context.read<LoginCubit>().logInAnonymously();
-                        context.pushNamed(Screens.dashboard.name);
                       },
                       child: Text(context.l10n.login_as_guest),
                     ),

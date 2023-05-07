@@ -150,8 +150,8 @@ class AcceptRequestsDonationsBody extends StatelessWidget {
                                               fit: BoxFit.cover,
                                             )
                                           else
-                                            const FaIcon(
-                                              FontAwesomeIcons.pills,
+                                            FaIcon(
+                                              medication.form.icon,
                                               size: 50,
                                             ),
                                           const SizedBox(width: 16),

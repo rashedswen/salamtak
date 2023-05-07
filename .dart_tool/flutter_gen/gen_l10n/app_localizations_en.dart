@@ -150,4 +150,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get adminPanel => 'Admin Panel';
+
+  @override
+  String get login_with_twitter => 'Login with Twitter';
 }

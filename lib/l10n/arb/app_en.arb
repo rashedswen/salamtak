@@ -95,6 +95,8 @@
 
     "settings": "Settings",
 
-    "adminPanel": "Admin Panel"
+    "adminPanel": "Admin Panel",
+
+    "login_with_twitter": "Login with Twitter"
     
 }

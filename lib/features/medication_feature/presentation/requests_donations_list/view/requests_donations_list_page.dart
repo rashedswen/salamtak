@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:salamtak/core/widgets/salamtak_drawer.dart';
 import 'package:salamtak/features/medication_feature/domain/repository/medication_repository.dart';
 import 'package:salamtak/features/medication_feature/presentation/requests_donations_list/bloc/bloc.dart';
 import 'package:salamtak/features/medication_feature/presentation/requests_donations_list/widgets/requests_donations_list_body.dart';
@@ -29,6 +30,7 @@ class RequestsDonationsListPage extends StatelessWidget {
         appBar: AppBar(
           title: const Text('Requests Donations List'),
         ),
+        drawer: const SalamtakDrawer(),
         floatingActionButton: FloatingActionButton.extended(
           onPressed: () {
             context.pushNamed(Screens.addRequest.name);

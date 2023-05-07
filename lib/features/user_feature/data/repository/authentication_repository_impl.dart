@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:salamtak/features/user_feature/data/model/salamtak_user_model.dart';
 import 'package:salamtak/features/user_feature/domain/entity/salamtak_user.dart';
 import 'package:salamtak/features/user_feature/domain/repository/authentication_repository.dart';
@@ -108,6 +110,21 @@ class AuthenticationRepositoryImpl extends AuthenticationRepository {
           .collection('users')
           .doc(id)
           .set(userModified.toJson());
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<void> logInWithTwitter() async {
+    try {
+      final twitterProvider = TwitterAuthProvider();
+
+      if (kIsWeb) {
+        await _firebaseAuth.signInWithPopup(twitterProvider);
+      } else {
+        await _firebaseAuth.signInWithProvider(twitterProvider);
+      }
     } catch (e) {
       rethrow;
     }

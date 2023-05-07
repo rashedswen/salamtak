@@ -36,13 +36,13 @@ class MedicationDetailsBody extends StatelessWidget {
                         if (medication.image != null)
                           Image.network(
                             medication.image!,
-                            width: constraints.maxWidth * 0.4,
-                            height: constraints.maxWidth * 0.4,
+                            width: 200,
+                            height: 200,
                           )
                         else
                           FaIcon(
                             medication.form.icon,
-                            size: constraints.maxWidth * 0.4,
+                            size: 200,
                           ),
                         const SizedBox(
                           height: 32,
@@ -80,7 +80,9 @@ class MedicationDetailsBody extends StatelessWidget {
                               .toLocalString(context.l10n.localeName),
                           style: Theme.of(context).textTheme.bodyMedium,
                         ),
-                        const Spacer(),
+                        if (state.medicationItem.userId !=
+                            context.read<AppBloc>().state.user.id)
+                          const Spacer(),
                         if (state.medicationItem.userId !=
                             context.read<AppBloc>().state.user.id)
                           Row(
@@ -134,27 +136,48 @@ class MedicationDetailsBody extends StatelessWidget {
                                   );
                                 },
                               ),
-                              Container(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 16,
-                                  vertical: 8,
-                                ),
-                                // color: Colors.red  .shade50,
+                              // Todo(report) : report medication or user
+                              // Container(
+                              //   padding: const EdgeInsets.symmetric(
+                              //     horizontal: 16,
+                              //     vertical: 8,
+                              //   ),
+                              //   // color: Colors.red  .shade50,
+                              //   child: Column(
+                              //     children: [
+                              //       const FaIcon(
+                              //         FontAwesomeIcons.warning,
+                              //         size: 32,
+                              //         color: Colors.red,
+                              //       ),
+                              //       const SizedBox(
+                              //         height: 8,
+                              //       ),
+                              //       Text(context.l10n.report)
+                              //     ],
+                              //   ),
+                              // ),
+                            ],
+                          ),
+                        if (state.medicationItem.userId ==
+                            context.read<AppBloc>().state.user.id)
+                          Expanded(
+                            child: Card(
+                              child: SingleChildScrollView(
                                 child: Column(
-                                  children: [
-                                    const FaIcon(
-                                      FontAwesomeIcons.warning,
-                                      size: 32,
-                                      color: Colors.red,
-                                    ),
-                                    const SizedBox(
-                                      height: 8,
-                                    ),
-                                    Text(context.l10n.report)
+                                  children: const [
+                                    ListTile(
+                                      leading: FaIcon(
+                                        FontAwesomeIcons.circleCheck,
+                                        color: Colors.green,
+                                      ),
+                                      title: Text('Ahmed'),
+                                      subtitle: Text('I need it'),
+                                    )
                                   ],
                                 ),
                               ),
-                            ],
+                            ),
                           ),
                       ],
                     ),

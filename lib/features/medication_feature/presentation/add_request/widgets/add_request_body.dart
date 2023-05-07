@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:salamtak/core/enums/enums.dart';
@@ -116,7 +117,6 @@ class AddRequestBody extends StatelessWidget {
                           ElevatedButton(
                             onPressed: () async {
                               final path = await selectImage();
-                              print(path);
                               if (path != null) {
                                 await context
                                     .read<AddRequestCubit>()
@@ -130,10 +130,15 @@ class AddRequestBody extends StatelessWidget {
                             SizedBox(
                               height: 100,
                               width: 100,
-                              child: Image.file(
-                                File(state.image!.path!),
-                                fit: BoxFit.contain,
-                              ),
+                              child: !kIsWeb
+                                  ? Image.file(
+                                      File(state.image!.path!),
+                                      fit: BoxFit.contain,
+                                    )
+                                  : Image.memory(
+                                      state.image!.bytes!,
+                                      fit: BoxFit.contain,
+                                    ),
                             ),
                         ],
                       ),
@@ -163,10 +168,15 @@ class AddRequestBody extends StatelessWidget {
                             SizedBox(
                               height: 100,
                               width: 100,
-                              child: Image.file(
-                                File(state.prescription!.path!),
-                                fit: BoxFit.contain,
-                              ),
+                              child: !kIsWeb
+                                  ? Image.file(
+                                      File(state.prescription!.path!),
+                                      fit: BoxFit.contain,
+                                    )
+                                  : Image.memory(
+                                      state.prescription!.bytes!,
+                                      fit: BoxFit.contain,
+                                    ),
                             ),
                         ],
                       ),
@@ -205,6 +215,9 @@ class AddRequestBody extends StatelessWidget {
                         onChanged: (value) {
                           context.read<AddRequestCubit>().addressChanged(value);
                         },
+                      ),
+                      const SizedBox(
+                        height: 16,
                       ),
                       const Spacer(),
                       SizedBox(

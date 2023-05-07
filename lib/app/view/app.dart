@@ -54,6 +54,7 @@ class AppView extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       theme: ThemeData(
+        useMaterial3: true,
         appBarTheme: const AppBarTheme(color: Color(0xFF13B9FF)),
         colorScheme: ColorScheme.fromSwatch(
           accentColor: const Color(0xFF13B9FF),
@@ -61,6 +62,7 @@ class AppView extends StatelessWidget {
         scaffoldBackgroundColor: const Color(0XFFFEF2F4),
         textTheme: GoogleFonts.cairoTextTheme(),
       ),
+      
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       routerDelegate: AppRouter.router.routerDelegate,

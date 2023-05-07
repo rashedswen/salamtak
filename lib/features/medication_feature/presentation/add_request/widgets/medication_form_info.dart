@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:salamtak/core/enums/medication_form.dart';
+import 'package:salamtak/core/widgets/icons.dart';
 
 final medicineFormList = [
   MedicineFormInfo(
@@ -25,7 +26,7 @@ final medicineFormList = [
   ),
   MedicineFormInfo(
     form: MedicineForm.ointment,
-    icon: FontAwesomeIcons.accusoft,
+    icon: UiIcons.ointment,
     color: Colors.blue,
   ),
   // TODO(add appropiate icon): this is not the right icon
@@ -36,7 +37,7 @@ final medicineFormList = [
   ),
   MedicineFormInfo(
     form: MedicineForm.inhaler,
-    icon: FontAwesomeIcons.sprayCanSparkles,
+    icon: UiIcons.inhaler,
     color: Colors.blue,
   ),
   MedicineFormInfo(

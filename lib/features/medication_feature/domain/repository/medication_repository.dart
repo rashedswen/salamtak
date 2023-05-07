@@ -1,3 +1,4 @@
+import 'package:file_picker/file_picker.dart';
 import 'package:salamtak/core/enums/enums.dart';
 import 'package:salamtak/features/medication_feature/data/model/models.dart';
 import 'package:salamtak/features/medication_feature/domain/entity/entities.dart';
@@ -16,9 +17,11 @@ abstract class MedicationRepository {
   Future<MedicationDonation> getMedicationDonation(String id);
 
   // add
-  Future<void> addMedicationRequest(MedicationRequest medication);
+  Future<void> addMedicationRequest(MedicationRequest medication,
+      PlatformFile? image, PlatformFile? prescription);
 
-  Future<void> addMedicationDonation(MedicationDonation medication);
+  Future<void> addMedicationDonation(
+      MedicationDonation medication, PlatformFile? image);
 
   // update
   Future<void> updateMedicationRequest(MedicationRequest medication);

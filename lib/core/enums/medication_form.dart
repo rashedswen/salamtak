@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:salamtak/core/widgets/icons.dart';
 
 enum MedicineForm {
   tablet,
@@ -62,17 +63,17 @@ extension MedForm on MedicineForm {
       case MedicineForm.capsule:
         return FontAwesomeIcons.capsules;
       case MedicineForm.syrup:
-        return FontAwesomeIcons.bottleDroplet;
+        return FontAwesomeIcons.prescriptionBottleMedical;
       case MedicineForm.injection:
-        return FontAwesomeIcons.userInjured;
+        return FontAwesomeIcons.syringe;
       case MedicineForm.ointment:
-        return Icons.oil_barrel;
+        return UiIcons.ointment;
       case MedicineForm.drops:
         return FontAwesomeIcons.eyeDropper;
       case MedicineForm.inhaler:
-        return Icons.local_hospital;
+        return UiIcons.inhaler;
       case MedicineForm.other:
-        return Icons.local_hospital;
+        return FontAwesomeIcons.x;
     }
   }
 }

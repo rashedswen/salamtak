@@ -46,8 +46,10 @@ class _RequestsDonationsListBodyState extends State<RequestsDonationsListBody> {
                         DateTime.now().difference(medication.createdDate);
                     return InkWell(
                       onTap: () {
-                        context.pushNamed(Screens.medicationDetails.name,
-                            extra: medication);
+                        context.pushNamed(
+                          Screens.medicationDetails.name,
+                          extra: medication,
+                        );
                       },
                       child: Card(
                         shape: RoundedRectangleBorder(
@@ -64,24 +66,25 @@ class _RequestsDonationsListBodyState extends State<RequestsDonationsListBody> {
                           padding: const EdgeInsets.all(8),
                           child: Row(
                             children: [
-                              // if (medication.image != null)
-                              //   ClipRRect(
-                              //     borderRadius: BorderRadius.circular(8),
-                              //     child: Image.network(
-                              //       medication.image!,
-                              //       width: 100,
-                              //       height: 100,
-                              //       fit: BoxFit.cover,
-                              //     ),
-                              //   )
-                              // else
-                              SizedBox(
-                                width: 100,
-                                height: 100,
-                                child: Center(
-                                  child: FaIcon(medication.form.icon, size: 80),
+                              if (medication.image != null)
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(8),
+                                  child: Image.network(
+                                    medication.image!,
+                                    width: 100,
+                                    height: 100,
+                                    fit: BoxFit.cover,
+                                  ),
+                                )
+                              else
+                                SizedBox(
+                                  width: 100,
+                                  height: 100,
+                                  child: Center(
+                                    child:
+                                        FaIcon(medication.form.icon, size: 80),
+                                  ),
                                 ),
-                              ),
                               const SizedBox(
                                 width: 16,
                               ),

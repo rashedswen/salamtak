@@ -70,7 +70,7 @@ class DashboardBody extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               const FaIcon(
-                                FontAwesomeIcons.tablets,
+                                FontAwesomeIcons.capsules,
                                 size: 100,
                               ),
                               const SizedBox(height: 16),
@@ -142,22 +142,30 @@ class DashboardBody extends StatelessWidget {
                                             child: Row(
                                               children: [
                                                 if (e.image != null)
-                                                  ClipRRect(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                      8,
-                                                    ),
-                                                    child: Image.network(
-                                                      e.image!,
-                                                      width: 100,
-                                                      height: 100,
-                                                      fit: BoxFit.cover,
+                                                  SizedBox(
+                                                    height: 70,
+                                                    width: 70,
+                                                    child: ClipRRect(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                        8,
+                                                      ),
+                                                      child: Image.network(
+                                                        e.image!,
+                                                        fit: BoxFit.cover,
+                                                      ),
                                                     ),
                                                   )
                                                 else
-                                                  const FaIcon(
-                                                    FontAwesomeIcons.tablets,
-                                                    size: 50,
+                                                  SizedBox(
+                                                    height: 70,
+                                                    width: 70,
+                                                    child: Center(
+                                                      child: FaIcon(
+                                                        e.form.icon,
+                                                        size: 50,
+                                                      ),
+                                                    ),
                                                   ),
                                                 const SizedBox(width: 16),
                                                 Expanded(
