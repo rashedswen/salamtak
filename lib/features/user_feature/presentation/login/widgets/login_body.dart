@@ -79,17 +79,30 @@ class LoginBody extends StatelessWidget {
                                 context.pushNamed(Screens.register.name),
                             child: Text(context.l10n.signup),
                           ),
-                          const Divider(),
+                          Divider(
+                            height: 40,
+                            thickness: 1,
+                            color: Colors.grey.shade400,
+                          ),
                           // login with twitter
                           ElevatedButton(
                             onPressed: () {
                               context.read<LoginCubit>().logInWithTwitter();
                             },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.blue,
+                            ),
                             child: Row(
                               children: [
-                                
-                                FaIcon(FontAwesomeIcons.twitter),
-                                Text(context.l10n.login_with_twitter),
+                                const FaIcon(
+                                  FontAwesomeIcons.twitter,
+                                  color: Colors.white,
+                                ),
+                                const SizedBox(width: 20),
+                                Text(
+                                  context.l10n.continue_with_twitter,
+                                  style: const TextStyle(color: Colors.white),
+                                ),
                               ],
                             ),
                           ),

@@ -22,4 +22,6 @@ abstract class AuthenticationRepository {
 
   Future<bool> isSignedIn();
   Future<SalamtakUser> getUser();
+
+  Future<void> changeValue(String key, dynamic value);
 }

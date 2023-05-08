@@ -7,6 +7,7 @@ import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:flutter/foundation.dart';
 import 'package:salamtak/core/enums/enums.dart';
 import 'package:salamtak/features/medication_feature/data/model/models.dart';
+import 'package:salamtak/features/medication_feature/data/model/users_accepted_requests_model.dart';
 import 'package:salamtak/features/user_feature/data/model/salamtak_user_model.dart';
 
 const String _medicationsRequestsCollection = 'requests';
@@ -74,6 +75,12 @@ abstract class RemoteDatasource {
 
   Future<List<MedicationRequestModel>> getUserMedicationRequests(
     String userId,
+  );
+
+  Future<List<UsersAcceptedRequestsModel>>
+      getUsersDonatingAndRequestingMedication(
+    String medicationId,
+    MedicationRequestType requestType,
   );
 }
 
@@ -347,5 +354,69 @@ class FirebaseDatasource extends RemoteDatasource {
           ),
         )
         .toList();
+  }
+
+  @override
+  Future<List<UsersAcceptedRequestsModel>>
+      getUsersDonatingAndRequestingMedication(
+    String medicationId,
+    MedicationRequestType requestType,
+  ) async {
+    if (requestType == MedicationRequestType.donation) {
+      final users = await FirebaseFirestore.instance
+          .collection(_medicationsDonationsCollection)
+          .doc(medicationId)
+          .collection('users')
+          .get();
+      final usersMapped = users.docs
+          .map(
+            (user) => UsersAcceptedRequestsModel.fromJson(
+              user.data(),
+            ),
+          )
+          .toList();
+
+      final list = <UsersAcceptedRequestsModel>[];
+      for (final element in usersMapped) {
+        final usersa = await FirebaseFirestore.instance
+            .collection('users')
+            .doc(element.id)
+            .get();
+
+        final user = UsersAcceptedRequestsModel.fromJson(usersa.data()!);
+
+        list.add(user);
+      }
+
+      return list;
+    } else {
+      final users = await FirebaseFirestore.instance
+          .collection(_medicationsRequestsCollection)
+          .doc(medicationId)
+          .collection('users')
+          .get();
+
+      final usersMapped = users.docs
+          .map(
+            (user) => UsersAcceptedRequestsModel.fromJson(
+              user.data(),
+            ),
+          )
+          .toList();
+
+      final list = <UsersAcceptedRequestsModel>[];
+      for (final element in usersMapped) {
+        final usersa = await FirebaseFirestore.instance
+            .collection('users')
+            .doc(element.id)
+            .get();
+
+        final user = UsersAcceptedRequestsModel.fromJson(usersa.data()!);
+
+        list.add(user);
+      }
+
+      return list;
+    }
   }
 }

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:salamtak/core/widgets/salamtak_drawer.dart';
+import 'package:salamtak/features/user_feature/domain/repository/authentication_repository.dart';
 import 'package:salamtak/features/user_feature/presentation/profile/cubit/cubit.dart';
 import 'package:salamtak/features/user_feature/presentation/profile/widgets/profile_body.dart';
 
@@ -17,12 +19,19 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => ProfileCubit(),
-      child: const Scaffold(
-        body: ProfileView(),
+      create: (context) => ProfileCubit(
+        authenticationRepository: context.read<AuthenticationRepository>(),
+      ),
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('Profile Page'),
+          centerTitle: true,
+        ),
+        body: const ProfileView(),
+        drawer: const SalamtakDrawer(),
       ),
     );
-  }    
+  }
 }
 
 /// {@template profile_view}

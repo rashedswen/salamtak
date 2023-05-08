@@ -20,6 +20,10 @@ class AcceptRequestsDonationsCubit extends Cubit<AcceptRequestsDonationsState> {
     try {
       final medicationList =
           await _adminMedicationRepository.getMedicationsRequestsAndDonations();
+
+      final list = medicationList
+          .where((element) => element.status != MedicationStatus.approved)
+          .toList();
       emit(AcceptRequestsDonationsLoaded(medicationList));
     } catch (e) {
       emit(AcceptRequestsDonationsError(e.toString()));

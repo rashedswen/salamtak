@@ -9,6 +9,7 @@ import 'package:salamtak/features/medication_feature/presentation/requests_donat
 import 'package:salamtak/features/medication_feature/presentation/user_requests_history/user_requests_history.dart';
 import 'package:salamtak/features/user_feature/presentation/dashboard/dashboard.dart';
 import 'package:salamtak/features/user_feature/presentation/login/view/login_page.dart';
+import 'package:salamtak/features/user_feature/presentation/profile/view/profile_page.dart';
 import 'package:salamtak/features/user_feature/presentation/register/view/register_page.dart';
 import 'package:salamtak/util/router/screen.dart';
 
@@ -99,6 +100,13 @@ class AppRouter {
         path: Screens.userHistory.route,
         builder: (context, state) {
           return const UserRequestsHistoryPage();
+        },
+      ),
+      GoRoute(
+        name: Screens.profile.name,
+        path: Screens.profile.route,
+        builder: (context, state) {
+          return const ProfilePage();
         },
       ),
     ],

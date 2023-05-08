@@ -4,6 +4,7 @@ import 'package:salamtak/features/medication_feature/data/model/models.dart';
 import 'package:salamtak/features/medication_feature/domain/entity/entities.dart';
 import 'package:salamtak/features/medication_feature/domain/entity/medication_donation.dart';
 import 'package:salamtak/features/medication_feature/domain/entity/medication_request.dart';
+import 'package:salamtak/features/medication_feature/domain/entity/users_accepted_requests.dart';
 import 'package:salamtak/features/user_feature/domain/entity/salamtak_user.dart';
 
 abstract class MedicationRepository {
@@ -17,11 +18,16 @@ abstract class MedicationRepository {
   Future<MedicationDonation> getMedicationDonation(String id);
 
   // add
-  Future<void> addMedicationRequest(MedicationRequest medication,
-      PlatformFile? image, PlatformFile? prescription);
+  Future<void> addMedicationRequest(
+    MedicationRequest medication,
+    PlatformFile? image,
+    PlatformFile? prescription,
+  );
 
   Future<void> addMedicationDonation(
-      MedicationDonation medication, PlatformFile? image);
+    MedicationDonation medication,
+    PlatformFile? image,
+  );
 
   // update
   Future<void> updateMedicationRequest(MedicationRequest medication);
@@ -42,5 +48,10 @@ abstract class MedicationRepository {
 
   Future<List<MedicationItem>> getUserHistory(
     String userId,
+  );
+
+  Future<List<UsersAcceptedRequests>> getUsersDonatingAndRequestingMedication(
+    String medicationId,
+    MedicationRequestType requestType,
   );
 }

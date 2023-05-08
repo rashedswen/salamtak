@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:intl/intl.dart';
 import 'package:salamtak/app/bloc/app_bloc.dart';
 import 'package:salamtak/core/enums/enums.dart';
 import 'package:salamtak/features/medication_feature/presentation/medication_details/cubit/cubit.dart';
@@ -33,52 +34,128 @@ class MedicationDetailsBody extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        if (medication.image != null)
-                          Image.network(
-                            medication.image!,
-                            width: 200,
-                            height: 200,
-                          )
-                        else
-                          FaIcon(
-                            medication.form.icon,
-                            size: 200,
-                          ),
+                        Container(
+                          color: Colors.grey.shade200,
+                          width: double.infinity,
+                          height: 200,
+                          child: medication.image != null
+                              ? Image.network(
+                                  medication.image!,
+                                  height: 200,
+                                )
+                              : FaIcon(
+                                  medication.form.icon,
+                                  size: 200,
+                                ),
+                        ),
                         const SizedBox(
                           height: 32,
                         ),
                         Text(
                           medication.name,
-                          style: Theme.of(context).textTheme.titleLarge,
+                          style:
+                              Theme.of(context).textTheme.titleLarge?.copyWith(
+                                    color: Colors.blue.shade700,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                        ),
+                        Text(
+                          DateFormat(
+                            context.l10n.localeName == 'ar'
+                                ? 'd MMM ..... HH:MM aa'
+                                : 'MMM d ..... HH:MM aa',
+                            context.l10n.localeName,
+                          ).format(medication.createdDate),
+                          style:
+                              Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                    color: Colors.grey.shade600,
+                                  ),
                         ),
                         const SizedBox(
                           height: 32,
                         ),
-                        Text(
-                          context.l10n.description,
-                          style: Theme.of(context).textTheme.titleSmall,
+                        Row(
+                          children: [
+                            FaIcon(
+                              FontAwesomeIcons.fileLines,
+                              size: 16,
+                              color: Colors.blue.shade700,
+                            ),
+                            const SizedBox(
+                              width: 8,
+                            ),
+                            Text(
+                              context.l10n.description,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleSmall
+                                  ?.copyWith(
+                                    color: Colors.blue.shade700,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16,
+                                  ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 8,
+                        ),
+                        SizedBox(
+                          width: double.infinity,
+                          child: Card(
+                            child: Padding(
+                              padding: const EdgeInsets.all(8),
+                              child: Text(
+                                medication.description ?? '',
+                                style: Theme.of(context).textTheme.bodyMedium,
+                              ),
+                            ),
+                          ),
                         ),
                         const SizedBox(
                           height: 16,
                         ),
-                        Text(
-                          medication.description ?? '',
-                          style: Theme.of(context).textTheme.bodyMedium,
+                        Row(
+                          children: [
+                            FaIcon(
+                              FontAwesomeIcons.locationPin,
+                              size: 16,
+                              color: Colors.blue.shade700,
+                            ),
+                            const SizedBox(
+                              width: 8,
+                            ),
+                            Text(
+                              context.l10n.location,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleSmall
+                                  ?.copyWith(
+                                    color: Colors.blue.shade700,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16,
+                                  ),
+                            ),
+                          ],
                         ),
                         const SizedBox(
-                          height: 32,
+                          height: 8,
                         ),
-                        Text(
-                          context.l10n.location,
-                          style: Theme.of(context).textTheme.titleSmall,
+                        SizedBox(
+                          width: double.maxFinite,
+                          child: Card(
+                            child: Padding(
+                              padding: const EdgeInsets.all(8),
+                              child: Text(
+                                medication.location!
+                                    .toLocalString(context.l10n.localeName),
+                                style: Theme.of(context).textTheme.bodyMedium,
+                              ),
+                            ),
+                          ),
                         ),
                         const SizedBox(
                           height: 16,
-                        ),
-                        Text(
-                          medication.location!
-                              .toLocalString(context.l10n.localeName),
-                          style: Theme.of(context).textTheme.bodyMedium,
                         ),
                         if (state.medicationItem.userId !=
                             context.read<AppBloc>().state.user.id)
@@ -162,21 +239,65 @@ class MedicationDetailsBody extends StatelessWidget {
                         if (state.medicationItem.userId ==
                             context.read<AppBloc>().state.user.id)
                           Expanded(
-                            child: Card(
-                              child: SingleChildScrollView(
-                                child: Column(
-                                  children: const [
-                                    ListTile(
-                                      leading: FaIcon(
-                                        FontAwesomeIcons.circleCheck,
-                                        color: Colors.green,
-                                      ),
-                                      title: Text('Ahmed'),
-                                      subtitle: Text('I need it'),
-                                    )
+                            child: Column(
+                              children: [
+                                Row(
+                                  children: [
+                                    FaIcon(
+                                      FontAwesomeIcons.users,
+                                      size: 16,
+                                      color: Colors.blue.shade700,
+                                    ),
+                                    const SizedBox(
+                                      width: 8,
+                                    ),
+                                    Text(
+                                      medication.requestType ==
+                                              MedicationRequestType.donation
+                                          ? context.l10n.needers
+                                          : context.l10n.helpers,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleSmall
+                                          ?.copyWith(
+                                            color: Colors.blue.shade700,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 16,
+                                          ),
+                                    ),
                                   ],
                                 ),
-                              ),
+                                Expanded(
+                                  child: Card(
+                                    child: SingleChildScrollView(
+                                      child: Column(
+                                        children: state.usersAcceptedRequest
+                                                ?.map(
+                                                  (e) => ListTile(
+                                                    leading: const Icon(
+                                                      Icons.check_circle,
+                                                      color: Colors.green,
+                                                    ),
+                                                    title: Text(e.name ?? ''),
+                                                    // subtitle: Text(
+                                                    //   e.location?.toLocalString(
+                                                    //         context.l10n
+                                                    //             .localeName,
+                                                    //       ) ??
+                                                    //       '',
+                                                    // ),
+                                                    subtitle: Text(
+                                                      e.phoneNumber ?? '',
+                                                    ),
+                                                  ),
+                                                )
+                                                .toList() ??
+                                            [],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                       ],

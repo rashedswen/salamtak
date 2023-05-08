@@ -6,6 +6,7 @@ import 'package:salamtak/features/medication_feature/data/model/models.dart';
 import 'package:salamtak/features/medication_feature/domain/entity/medication_donation.dart';
 import 'package:salamtak/features/medication_feature/domain/entity/medication_list.dart';
 import 'package:salamtak/features/medication_feature/domain/entity/medication_request.dart';
+import 'package:salamtak/features/medication_feature/domain/entity/users_accepted_requests.dart';
 import 'package:salamtak/features/medication_feature/domain/repository/medication_repository.dart';
 import 'package:salamtak/features/user_feature/domain/entity/salamtak_user.dart';
 
@@ -210,6 +211,27 @@ class MedicationRepoisitoryImpl extends MedicationRepository {
           ..addAll(mappedRequest);
 
         return listOfMedication;
+      } on Exception {
+        rethrow;
+      }
+    } else {
+      throw Exception();
+    }
+  }
+
+  @override
+  Future<List<UsersAcceptedRequests>> getUsersDonatingAndRequestingMedication(
+    String medicationId,
+    MedicationRequestType requestType,
+  ) async {
+    if (await networkInfo.isConnected) {
+      try {
+        final list =
+            await remoteDatasource.getUsersDonatingAndRequestingMedication(
+          medicationId,
+          requestType,
+        );
+        return list.map((e) => e.toEntity()).toList();
       } on Exception {
         rethrow;
       }

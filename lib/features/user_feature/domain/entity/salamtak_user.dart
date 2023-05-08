@@ -52,6 +52,26 @@ class SalamtakUser extends Equatable {
     );
   }
 
+  SalamtakUser copyWith({
+    String? email,
+    String? id,
+    String? name,
+    String? authorization,
+    LocationSudan? location,
+    String? phoneNumber,
+    bool? isActivated,
+  }) {
+    return SalamtakUser(
+      email: email ?? this.email,
+      id: id ?? this.id,
+      name: name ?? this.name,
+      authorization: authorization ?? this.authorization,
+      location: location ?? this.location,
+      phoneNumber: phoneNumber ?? this.phoneNumber,
+      isActivated: isActivated ?? this.isActivated,
+    );
+  }
+
   @override
   List<Object?> get props => [
         email,

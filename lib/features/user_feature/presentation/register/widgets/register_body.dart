@@ -33,6 +33,7 @@ class RegisterBody extends StatelessWidget {
                       );
                     },
                   ),
+                  const SizedBox(height: 24),
                   BlocBuilder<RegisterCubit, RegisterState>(
                     buildWhen: (previous, current) =>
                         previous.email != current.email,
@@ -114,6 +115,7 @@ class RegisterBody extends StatelessWidget {
                         builder: (context, state) {
                           return TextWithField(
                             text: context.l10n.phone,
+                            hintText: '249xxxxxxxxx',
                             onChanged: (value) {
                               context
                                   .read<RegisterCubit>()

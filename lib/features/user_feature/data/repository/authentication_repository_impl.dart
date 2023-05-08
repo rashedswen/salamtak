@@ -60,10 +60,8 @@ class AuthenticationRepositoryImpl extends AuthenticationRepository {
         .collection('users')
         .doc(_firebaseAuth.currentUser!.uid)
         .set(
-      {
-        'id': _firebaseAuth.currentUser!.uid,
-      },
-    );
+          SalamtakUserModel(id: _firebaseAuth.currentUser!.uid).toJson(),
+        );
   }
 
   @override
@@ -104,6 +102,7 @@ class AuthenticationRepositoryImpl extends AuthenticationRepository {
         email: email,
         password: password,
       );
+      await _firebaseAuth.currentUser!.updateDisplayName(user.name);
       final id = _firebaseAuth.currentUser!.uid;
       final userModified = user.copyWith(id: id);
       await FirebaseFirestore.instance
@@ -125,6 +124,29 @@ class AuthenticationRepositoryImpl extends AuthenticationRepository {
       } else {
         await _firebaseAuth.signInWithProvider(twitterProvider);
       }
+      final id = _firebaseAuth.currentUser!.uid;
+      // check if user exists
+      final user =
+          await FirebaseFirestore.instance.collection('users').doc(id).get();
+      if (user.data() == null) {
+        final userModified = SalamtakUserModel(id: id);
+        await FirebaseFirestore.instance
+            .collection('users')
+            .doc(id)
+            .set(userModified.toJson());
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<void> changeValue(String key, dynamic value) async {
+    try {
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(_firebaseAuth.currentUser!.uid)
+          .update({key: value});
     } catch (e) {
       rethrow;
     }

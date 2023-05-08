@@ -11,6 +11,7 @@ class TextWithField extends StatelessWidget {
     this.value,
     this.keyboardType,
     this.errorText,
+    this.hintText,
   });
 
   final String text;
@@ -21,6 +22,7 @@ class TextWithField extends StatelessWidget {
   final TextInputType? keyboardType;
   final String? errorText;
   final bool obscureText;
+  final String? hintText;
 
   @override
   Widget build(BuildContext context) {
@@ -41,6 +43,7 @@ class TextWithField extends StatelessWidget {
           showCursor: onTap == null,
           keyboardType: keyboardType,
           decoration: InputDecoration(
+            hintText: hintText,
             fillColor: Colors.blue.shade100,
             filled: true,
             errorText: errorText,

@@ -152,5 +152,23 @@ class AppLocalizationsEn extends AppLocalizations {
   String get adminPanel => 'Admin Panel';
 
   @override
-  String get login_with_twitter => 'Login with Twitter';
+  String get continue_with_twitter => 'Continue with Twitter';
+
+  @override
+  String get save => 'Save';
+
+  @override
+  String get changes_will_be_saved_soon => 'Changes will be saved soon';
+
+  @override
+  String get medications => 'Medications';
+
+  @override
+  String get donaters => 'Donaters';
+
+  @override
+  String get needers => 'Needers';
+
+  @override
+  String get helpers => 'Helpers';
 }

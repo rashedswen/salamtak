@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:salamtak/app/bloc/app_bloc.dart';
 import 'package:salamtak/core/widgets/salamtak_drawer.dart';
 import 'package:salamtak/features/medication_feature/domain/repository/medication_repository.dart';
 import 'package:salamtak/features/user_feature/presentation/dashboard/cubit/cubit.dart';
 import 'package:salamtak/features/user_feature/presentation/dashboard/widgets/dashboard_body.dart';
+import 'package:salamtak/util/router/screen.dart';
 
 /// {@template dashboard_page}
 /// A description for DashboardPage
@@ -39,6 +42,13 @@ class DashboardView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const DashboardBody();
+    return BlocListener<AppBloc, AppState>(
+      listener: (context, state) {
+        if (state.status == AppStatus.unauthenticated) {
+          context.pushNamed(Screens.login.name);
+        }
+      },
+      child: const DashboardBody(),
+    );
   }
 }

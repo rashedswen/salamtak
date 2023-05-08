@@ -98,6 +98,18 @@
 
     "adminPanel": "لوحة التحكم",
 
-    "login_with_twitter": "تسجيل الدخول بتويتر"
+    "continue_with_twitter": "الاستمرار باستخدام تويتر",
+
+    "save": "حفظ",
+
+    "changes_will_be_saved_soon": "سيتم حفظ التغييرات قريبا",
+
+    "medications": "الادوية",
+
+    "donaters": "المتبرعين",
+
+    "needers": "المحتاجين",
+
+    "helpers": "المساعدين"
 
 }

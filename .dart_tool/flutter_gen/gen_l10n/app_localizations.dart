@@ -387,11 +387,47 @@ abstract class AppLocalizations {
   /// **'Admin Panel'**
   String get adminPanel;
 
-  /// No description provided for @login_with_twitter.
+  /// No description provided for @continue_with_twitter.
   ///
   /// In en, this message translates to:
-  /// **'Login with Twitter'**
-  String get login_with_twitter;
+  /// **'Continue with Twitter'**
+  String get continue_with_twitter;
+
+  /// No description provided for @save.
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get save;
+
+  /// No description provided for @changes_will_be_saved_soon.
+  ///
+  /// In en, this message translates to:
+  /// **'Changes will be saved soon'**
+  String get changes_will_be_saved_soon;
+
+  /// No description provided for @medications.
+  ///
+  /// In en, this message translates to:
+  /// **'Medications'**
+  String get medications;
+
+  /// No description provided for @donaters.
+  ///
+  /// In en, this message translates to:
+  /// **'Donaters'**
+  String get donaters;
+
+  /// No description provided for @needers.
+  ///
+  /// In en, this message translates to:
+  /// **'Needers'**
+  String get needers;
+
+  /// No description provided for @helpers.
+  ///
+  /// In en, this message translates to:
+  /// **'Helpers'**
+  String get helpers;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

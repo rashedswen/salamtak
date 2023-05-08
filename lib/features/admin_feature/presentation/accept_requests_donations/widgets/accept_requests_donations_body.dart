@@ -31,7 +31,7 @@ class AcceptRequestsDonationsBody extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          context.l10n.medication_details,
+                          context.l10n.medications,
                           style: Theme.of(context).textTheme.titleLarge,
                         ),
                         Text(

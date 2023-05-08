@@ -97,6 +97,18 @@
 
     "adminPanel": "Admin Panel",
 
-    "login_with_twitter": "Login with Twitter"
+    "continue_with_twitter": "Continue with Twitter",
+
+    "save": "Save",
+
+    "changes_will_be_saved_soon": "Changes will be saved soon",
+
+    "medications": "Medications",
+
+    "donaters": "Donaters",
+
+    "needers": "Needers",
+
+    "helpers": "Helpers"
     
 }

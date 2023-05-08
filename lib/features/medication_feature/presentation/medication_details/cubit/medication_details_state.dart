@@ -13,6 +13,7 @@ class MedicationDetailsState extends Equatable with FormzMixin {
     this.location,
     this.address = const Address.pure(),
     this.status = FormzSubmissionStatus.initial,
+    this.usersAcceptedRequest,
   });
 
   /// A description for customProperty
@@ -23,9 +24,19 @@ class MedicationDetailsState extends Equatable with FormzMixin {
   final LocationSudan? location;
   final Address address;
   final FormzSubmissionStatus status;
+  final List<UsersAcceptedRequests>? usersAcceptedRequest;
 
   @override
-  List<Object?> get props => [errorMessage, medicationItem, name, phoneNumber, location, address];
+  List<Object?> get props => [
+        errorMessage,
+        medicationItem,
+        name,
+        phoneNumber,
+        location,
+        address,
+        status,
+        usersAcceptedRequest
+      ];
 
   /// Creates a copy of the current MedicationDetailsState with property changes
   MedicationDetailsState copyWith({
@@ -36,6 +47,7 @@ class MedicationDetailsState extends Equatable with FormzMixin {
     LocationSudan? location,
     Address? address,
     FormzSubmissionStatus? status,
+    List<UsersAcceptedRequests>? usersAcceptedRequest,
   }) {
     return MedicationDetailsState(
       errorMessage: errorMessage ?? this.errorMessage,
@@ -45,6 +57,7 @@ class MedicationDetailsState extends Equatable with FormzMixin {
       location: location ?? this.location,
       address: address ?? this.address,
       status: status ?? this.status,
+      usersAcceptedRequest: usersAcceptedRequest ?? this.usersAcceptedRequest,
     );
   }
 
