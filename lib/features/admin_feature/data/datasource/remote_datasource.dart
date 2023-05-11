@@ -1,8 +1,8 @@
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:salamtak/core/enums/enums.dart';
-import 'package:salamtak/features/admin_feature/data/model/models.dart';
+import '../../../../core/enums/enums.dart';
+import '../model/models.dart';
 
 const String _medicationsRequestsCollection = 'requests';
 const String _medicationsDonationsCollection = 'donations';
@@ -38,7 +38,7 @@ class FirebaseAdminDatasource implements AdminRemoteDatasource {
     MedicationStatus status,
     String? rejectionReason,
   ) async {
-    final s = await _firestore
+    await _firestore
         .collection(_medicationsDonationsCollection)
         .doc(id)
         .update({

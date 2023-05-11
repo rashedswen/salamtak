@@ -1,5 +1,5 @@
 import 'package:internet_connection_checker/internet_connection_checker.dart';
-import 'package:salamtak/core/connection/network_info.dart';
+import '../network_info.dart';
 
 class NetworkInfoImplMobile implements NetworkInfo {
   NetworkInfoImplMobile(this.connectionChecker);

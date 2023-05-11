@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:salamtak/features/admin_feature/presentation/admin_dashboard/cubit/cubit.dart';
+import '../cubit/cubit.dart';
 
 /// {@template admin_dashboard_body}
 /// Body of the AdminDashboardPage.

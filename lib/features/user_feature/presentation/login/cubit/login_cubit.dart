@@ -3,9 +3,9 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:formz/formz.dart';
-import 'package:salamtak/features/user_feature/domain/repository/authentication_repository.dart';
-import 'package:salamtak/features/user_feature/util/errors/login_failure.dart';
-import 'package:salamtak/features/user_feature/util/validators.dart';
+import '../../../domain/repository/authentication_repository.dart';
+import '../../../util/errors/login_failure.dart';
+import '../../../util/validators.dart';
 
 part 'login_state.dart';
 
@@ -37,6 +37,28 @@ class LoginCubit extends Cubit<LoginState> {
     );
   }
 
+  Future<void> logInWithTwitter() async {
+    emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
+
+    try {
+      await _authenticationRepository.logInWithTwitter();
+      emit(state.copyWith(status: FormzSubmissionStatus.success));
+    } on Exception {
+      emit(state.copyWith(status: FormzSubmissionStatus.failure));
+    }
+  }
+
+  Future<void> logInWithGoogle() async {
+    emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
+
+    try {
+      await _authenticationRepository.logInWithGoogle();
+      emit(state.copyWith(status: FormzSubmissionStatus.success));
+    } on Exception {
+      emit(state.copyWith(status: FormzSubmissionStatus.failure));
+    }
+  }
+
   Future<void> logInWithCredentials() async {
     if (!state.isValid) return;
     emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
@@ -64,7 +86,8 @@ class LoginCubit extends Cubit<LoginState> {
     try {
       await _authenticationRepository.logInAnonymously();
       emit(state.copyWith(status: FormzSubmissionStatus.success));
-    } on Exception {
+    } catch (e) {
+      print(e);
       emit(state.copyWith(status: FormzSubmissionStatus.failure));
     }
   }

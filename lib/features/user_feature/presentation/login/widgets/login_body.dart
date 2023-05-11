@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:formz/formz.dart';
 import 'package:go_router/go_router.dart';
-import 'package:salamtak/core/widgets/text_with_field.dart';
-import 'package:salamtak/features/user_feature/presentation/login/cubit/cubit.dart';
-import 'package:salamtak/l10n/l10n.dart';
-import 'package:salamtak/util/router/screen.dart';
+import '../../../../../core/widgets/text_with_field.dart';
+import '../cubit/cubit.dart';
+import '../../../../../l10n/l10n.dart';
+import '../../../../../util/router/screen.dart';
 
 class LoginBody extends StatelessWidget {
   const LoginBody({super.key});
@@ -78,6 +79,33 @@ class LoginBody extends StatelessWidget {
                                 context.pushNamed(Screens.register.name),
                             child: Text(context.l10n.signup),
                           ),
+                          Divider(
+                            height: 40,
+                            thickness: 1,
+                            color: Colors.grey.shade400,
+                          ),
+                          // login with twitter
+                          ElevatedButton(
+                            onPressed: () {
+                              context.read<LoginCubit>().logInWithTwitter();
+                            },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.blue,
+                            ),
+                            child: Row(
+                              children: [
+                                const FaIcon(
+                                  FontAwesomeIcons.twitter,
+                                  color: Colors.white,
+                                ),
+                                const SizedBox(width: 20),
+                                Text(
+                                  context.l10n.continue_with_twitter,
+                                  style: const TextStyle(color: Colors.white),
+                                ),
+                              ],
+                            ),
+                          ),
                         ],
                       ),
                     ),
@@ -85,7 +113,6 @@ class LoginBody extends StatelessWidget {
                     TextButton(
                       onPressed: () {
                         context.read<LoginCubit>().logInAnonymously();
-                        context.pushNamed(Screens.dashboard.name);
                       },
                       child: Text(context.l10n.login_as_guest),
                     ),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:salamtak/util/json/states_and_cities.dart';
+import '../../../../../util/json/states_and_cities.dart';
 
 class CitySelector extends StatelessWidget {
   const CitySelector({

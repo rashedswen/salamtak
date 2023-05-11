@@ -3,10 +3,10 @@ import 'package:duration/locale.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
-import 'package:salamtak/core/enums/enums.dart';
-import 'package:salamtak/features/user_feature/presentation/dashboard/cubit/cubit.dart';
-import 'package:salamtak/l10n/l10n.dart';
-import 'package:salamtak/util/router/screen.dart';
+import '../../../../../core/enums/enums.dart';
+import '../cubit/cubit.dart';
+import '../../../../../l10n/l10n.dart';
+import '../../../../../util/router/screen.dart';
 
 /// {@template dashboard_body}
 /// Body of the DashboardPage.
@@ -36,7 +36,7 @@ class DashboardBody extends StatelessWidget {
                         );
                       },
                       child: Card(
-                        color: Colors.blue.shade100,
+                        color: Colors.white,
                         child: Padding(
                           padding: const EdgeInsets.all(16),
                           child: Column(
@@ -45,6 +45,7 @@ class DashboardBody extends StatelessWidget {
                               const FaIcon(
                                 FontAwesomeIcons.handHoldingMedical,
                                 size: 100,
+                                color: Color(0xFF095D7E),
                               ),
                               const SizedBox(height: 16),
                               Text(context.l10n.add_donation),
@@ -70,7 +71,7 @@ class DashboardBody extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               const FaIcon(
-                                FontAwesomeIcons.tablets,
+                                FontAwesomeIcons.capsules,
                                 size: 100,
                               ),
                               const SizedBox(height: 16),
@@ -142,22 +143,30 @@ class DashboardBody extends StatelessWidget {
                                             child: Row(
                                               children: [
                                                 if (e.image != null)
-                                                  ClipRRect(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                      8,
-                                                    ),
-                                                    child: Image.network(
-                                                      e.image!,
-                                                      width: 100,
-                                                      height: 100,
-                                                      fit: BoxFit.cover,
+                                                  SizedBox(
+                                                    height: 70,
+                                                    width: 70,
+                                                    child: ClipRRect(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                        8,
+                                                      ),
+                                                      child: Image.network(
+                                                        e.image!,
+                                                        fit: BoxFit.cover,
+                                                      ),
                                                     ),
                                                   )
                                                 else
-                                                  const FaIcon(
-                                                    FontAwesomeIcons.tablets,
-                                                    size: 50,
+                                                  SizedBox(
+                                                    height: 70,
+                                                    width: 70,
+                                                    child: Center(
+                                                      child: FaIcon(
+                                                        e.form.icon,
+                                                        size: 50,
+                                                      ),
+                                                    ),
                                                   ),
                                                 const SizedBox(width: 16),
                                                 Expanded(

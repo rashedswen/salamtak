@@ -4,10 +4,11 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:salamtak/core/enums/enums.dart';
-import 'package:salamtak/features/medication_feature/domain/entity/medication_request.dart';
-import 'package:salamtak/features/medication_feature/domain/repository/medication_repository.dart';
-import 'package:salamtak/util/json/states_and_cities.dart';
+import 'package:flutter/foundation.dart';
+import '../../../../../core/enums/enums.dart';
+import '../../../domain/entity/medication_request.dart';
+import '../../../domain/repository/medication_repository.dart';
+import '../../../../../util/json/states_and_cities.dart';
 
 part 'add_request_state.dart';
 
@@ -55,6 +56,22 @@ class AddRequestCubit extends Cubit<AddRequestState> {
 
   Future<void> addRequest() async {
     emit(state.copyWith(status: AddRequestStatus.loading));
+
+    String? image;
+    if (state.image != null) {
+      if (!kIsWeb) {
+        image = state.image?.path;
+      }
+      image = String?.fromCharCodes(state.image?.bytes ?? []);
+    }
+    String? prescription;
+    if (state.prescription != null) {
+      if (!kIsWeb) {
+        prescription = state.prescription?.path;
+      }
+      prescription = String?.fromCharCodes(state.prescription?.bytes ?? []);
+    }
+
     try {
       final request = MedicationRequest(
         form: state.form,
@@ -62,13 +79,14 @@ class AddRequestCubit extends Cubit<AddRequestState> {
         userId: FirebaseAuth.instance.currentUser?.uid ?? 'unknown',
         description: state.description!,
         emergencyLevel: state.emergencyLevel,
-        prescription: state.prescription?.path,
-        image: state.image?.path,
+        prescription: prescription,
+        image: image,
         location: state.location!.copyWith(
           address: state.address,
         ),
       );
-      await medicationRepository.addMedicationRequest(request);
+      await medicationRepository.addMedicationRequest(
+          request, state.image, state.prescription);
       emit(
         state.copyWith(
           status: AddRequestStatus.success,

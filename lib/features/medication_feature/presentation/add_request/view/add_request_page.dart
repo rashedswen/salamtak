@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:salamtak/features/medication_feature/domain/repository/medication_repository.dart';
-import 'package:salamtak/features/medication_feature/presentation/add_request/cubit/cubit.dart';
-import 'package:salamtak/features/medication_feature/presentation/add_request/widgets/add_request_body.dart';
-import 'package:salamtak/l10n/l10n.dart';
+import '../../../domain/repository/medication_repository.dart';
+import '../cubit/cubit.dart';
+import '../widgets/add_request_body.dart';
+import '../../../../../l10n/l10n.dart';
 
 /// {@template add_request_page}
 /// A description for AddRequestPage

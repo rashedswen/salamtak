@@ -1,9 +1,11 @@
-import 'package:salamtak/core/enums/enums.dart';
-import 'package:salamtak/features/medication_feature/data/model/models.dart';
-import 'package:salamtak/features/medication_feature/domain/entity/entities.dart';
-import 'package:salamtak/features/medication_feature/domain/entity/medication_donation.dart';
-import 'package:salamtak/features/medication_feature/domain/entity/medication_request.dart';
-import 'package:salamtak/features/user_feature/domain/entity/salamtak_user.dart';
+import 'package:file_picker/file_picker.dart';
+import '../../../../core/enums/enums.dart';
+import '../../data/model/models.dart';
+import '../entity/entities.dart';
+import '../entity/medication_donation.dart';
+import '../entity/medication_request.dart';
+import '../entity/users_accepted_requests.dart';
+import '../../../user_feature/domain/entity/salamtak_user.dart';
 
 abstract class MedicationRepository {
   // get Requests and Donations
@@ -16,9 +18,16 @@ abstract class MedicationRepository {
   Future<MedicationDonation> getMedicationDonation(String id);
 
   // add
-  Future<void> addMedicationRequest(MedicationRequest medication);
+  Future<void> addMedicationRequest(
+    MedicationRequest medication,
+    PlatformFile? image,
+    PlatformFile? prescription,
+  );
 
-  Future<void> addMedicationDonation(MedicationDonation medication);
+  Future<void> addMedicationDonation(
+    MedicationDonation medication,
+    PlatformFile? image,
+  );
 
   // update
   Future<void> updateMedicationRequest(MedicationRequest medication);
@@ -39,5 +48,10 @@ abstract class MedicationRepository {
 
   Future<List<MedicationItem>> getUserHistory(
     String userId,
+  );
+
+  Future<List<UsersAcceptedRequests>> getUsersDonatingAndRequestingMedication(
+    String medicationId,
+    MedicationRequestType requestType,
   );
 }

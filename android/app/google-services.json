@@ -7,14 +7,22 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:47603181237:android:1797af536b0a7e7031c0fc",
+        "mobilesdk_app_id": "1:47603181237:android:e72ef75d86198a3331c0fc",
         "android_client_info": {
-          "package_name": "com.kwemrj.salamtak.salamtak.dev"
+          "package_name": "com.kwemrj.salamtak"
         }
       },
       "oauth_client": [
         {
-          "client_id": "47603181237-lalkuaioe0jvoj31m50rebef1qdnb5dp.apps.googleusercontent.com",
+          "client_id": "47603181237-rrnd4do1tl6sm52ajurjl1a9pom222nn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.kwemrj.salamtak",
+            "certificate_hash": "c55f10e700409c01990c29a724a44044ff40a129"
+          }
+        },
+        {
+          "client_id": "47603181237-6mq0h4t86n2dfnha7culoqb9fpkgli8p.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -27,8 +35,15 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "47603181237-lalkuaioe0jvoj31m50rebef1qdnb5dp.apps.googleusercontent.com",
+              "client_id": "47603181237-6mq0h4t86n2dfnha7culoqb9fpkgli8p.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "47603181237-5g6dm58sg076q15h7gf1obdbjh6tqddr.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.kwemrj.salamtak"
+              }
             }
           ]
         }

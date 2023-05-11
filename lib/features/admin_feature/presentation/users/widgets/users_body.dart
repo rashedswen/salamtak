@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:salamtak/features/admin_feature/presentation/users/cubit/cubit.dart';
+import '../cubit/cubit.dart';
 
 /// {@template users_body}
 /// Body of the UsersPage.

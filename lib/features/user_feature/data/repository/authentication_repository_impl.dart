@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
-import 'package:salamtak/features/user_feature/data/model/salamtak_user_model.dart';
-import 'package:salamtak/features/user_feature/domain/entity/salamtak_user.dart';
-import 'package:salamtak/features/user_feature/domain/repository/authentication_repository.dart';
+import 'package:flutter/foundation.dart';
+import '../model/salamtak_user_model.dart';
+import '../../domain/entity/providers.dart';
+import '../../domain/entity/salamtak_user.dart';
+import '../../domain/repository/authentication_repository.dart';
 
 class AuthenticationRepositoryImpl extends AuthenticationRepository {
   AuthenticationRepositoryImpl({firebase_auth.FirebaseAuth? firebaseAuth})
@@ -10,7 +12,6 @@ class AuthenticationRepositoryImpl extends AuthenticationRepository {
 
   final firebase_auth.FirebaseAuth _firebaseAuth;
   @override
-  // TODO: enable cache
   SalamtakUser get currentUser {
     final firebaseUser = _firebaseAuth.currentUser;
     final user =
@@ -19,6 +20,7 @@ class AuthenticationRepositoryImpl extends AuthenticationRepository {
     return user;
   }
 
+  /// monitor changes in authentication state (log in, log out)
   @override
   // TODO: enable cache
   Stream<SalamtakUser> get user {
@@ -30,6 +32,24 @@ class AuthenticationRepositoryImpl extends AuthenticationRepository {
     });
   }
 
+  /// monitor changes in user data
+  ///
+  @override
+  Stream<SalamtakUser> get userDataChanges {
+    return FirebaseFirestore.instance
+        .collection('users')
+        .doc(_firebaseAuth.currentUser!.uid)
+        .snapshots()
+        .map((user) {
+      final sUser = user.data() == null
+          ? const SalamtakUserModel(id: '')
+          : SalamtakUserModel.fromJson(user.data()!);
+
+      return sUser.toEntity();
+    });
+  }
+
+  /// get all user date from firebase model
   @override
   Future<SalamtakUser> getUser() async {
     final firebaseUser = _firebaseAuth.currentUser;
@@ -42,7 +62,12 @@ class AuthenticationRepositoryImpl extends AuthenticationRepository {
         ? const SalamtakUserModel(id: '')
         : SalamtakUserModel.fromJson(user.data()!);
 
-    return sUser.toEntity();
+    return sUser
+        .copyWith(
+          email: firebaseUser!.email,
+          name: firebaseUser.displayName,
+        )
+        .toEntity();
   }
 
   @override
@@ -58,10 +83,8 @@ class AuthenticationRepositoryImpl extends AuthenticationRepository {
         .collection('users')
         .doc(_firebaseAuth.currentUser!.uid)
         .set(
-      {
-        'id': _firebaseAuth.currentUser!.uid,
-      },
-    );
+          SalamtakUserModel(id: _firebaseAuth.currentUser!.uid).toJson(),
+        );
   }
 
   @override
@@ -102,12 +125,125 @@ class AuthenticationRepositoryImpl extends AuthenticationRepository {
         email: email,
         password: password,
       );
+      await _firebaseAuth.currentUser!.updateDisplayName(user.name);
       final id = _firebaseAuth.currentUser!.uid;
       final userModified = user.copyWith(id: id);
       await FirebaseFirestore.instance
           .collection('users')
           .doc(id)
           .set(userModified.toJson());
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<void> logInWithTwitter() async {
+    try {
+      final twitterProvider = firebase_auth.TwitterAuthProvider();
+
+      if (kIsWeb) {
+        await _firebaseAuth.signInWithPopup(twitterProvider);
+      } else {
+        await _firebaseAuth.signInWithProvider(twitterProvider);
+      }
+      final id = _firebaseAuth.currentUser!.uid;
+      // check if user exists
+      final user =
+          await FirebaseFirestore.instance.collection('users').doc(id).get();
+      if (user.data() == null) {
+        final userModified = SalamtakUserModel(id: id);
+        await FirebaseFirestore.instance
+            .collection('users')
+            .doc(id)
+            .set(userModified.toJson());
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<void> changeValue(String key, dynamic value) async {
+    try {
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(_firebaseAuth.currentUser!.uid)
+          .update({key: value});
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<void> linkWithEmailAndPassowrd(String email, String password) async {
+    try {
+      final credential = firebase_auth.EmailAuthProvider.credential(
+        email: email,
+        password: password,
+      );
+      await _firebaseAuth.currentUser!.linkWithCredential(credential);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<void> linkWithPhoneNumber(String phoneNumber) async {
+    try {
+      final credential = firebase_auth.PhoneAuthProvider.credential(
+        verificationId: '',
+        smsCode: '',
+      );
+      await _firebaseAuth.currentUser!.linkWithCredential(credential);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<ProvidersId> getProviders() async {
+    try {
+      final providers = _firebaseAuth.currentUser?.providerData;
+      if (providers == null) return ProvidersId.empty;
+      final providerId = providers.map((e) => e.providerId).toList();
+      final s = ProvidersId(
+        email: providerId.contains(
+          firebase_auth.EmailAuthProvider.PROVIDER_ID,
+        ),
+        google: providerId.contains(
+          firebase_auth.GoogleAuthProvider.PROVIDER_ID,
+        ),
+        twitter: providerId.contains(
+          firebase_auth.TwitterAuthProvider.PROVIDER_ID,
+        ),
+        facebook: providerId.contains(
+          firebase_auth.FacebookAuthProvider.PROVIDER_ID,
+        ),
+        phone: providerId.contains(
+          firebase_auth.PhoneAuthProvider.PROVIDER_ID,
+        ),
+        apple: providerId.contains(
+          firebase_auth.AppleAuthProvider.PROVIDER_ID,
+        ),
+        anonymous: providerId.isEmpty,
+      );
+      return s;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<void> linkWithTwitter() async {
+    try {
+      final twitterProvider = firebase_auth.TwitterAuthProvider();
+
+      if (kIsWeb) {
+        await _firebaseAuth.currentUser!.linkWithPopup(twitterProvider);
+      } else {
+        await _firebaseAuth.currentUser!.linkWithProvider(twitterProvider);
+      }
     } catch (e) {
       rethrow;
     }

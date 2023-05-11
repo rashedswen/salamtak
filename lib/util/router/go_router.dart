@@ -1,16 +1,17 @@
 import 'package:go_router/go_router.dart';
-import 'package:salamtak/app/bloc/app_bloc.dart';
-import 'package:salamtak/features/admin_feature/presentation/accept_requests_donations/view/accept_requests_donations_page.dart';
-import 'package:salamtak/features/medication_feature/domain/entity/medication_list.dart';
-import 'package:salamtak/features/medication_feature/presentation/add_donation/view/add_donation_page.dart';
-import 'package:salamtak/features/medication_feature/presentation/add_request/add_request.dart';
-import 'package:salamtak/features/medication_feature/presentation/medication_details/medication_details.dart';
-import 'package:salamtak/features/medication_feature/presentation/requests_donations_list/requests_donations_list.dart';
-import 'package:salamtak/features/medication_feature/presentation/user_requests_history/user_requests_history.dart';
-import 'package:salamtak/features/user_feature/presentation/dashboard/dashboard.dart';
-import 'package:salamtak/features/user_feature/presentation/login/view/login_page.dart';
-import 'package:salamtak/features/user_feature/presentation/register/view/register_page.dart';
-import 'package:salamtak/util/router/screen.dart';
+import '../../app/bloc/app_bloc.dart';
+import '../../features/admin_feature/presentation/accept_requests_donations/view/accept_requests_donations_page.dart';
+import '../../features/medication_feature/domain/entity/medication_list.dart';
+import '../../features/medication_feature/presentation/add_donation/view/add_donation_page.dart';
+import '../../features/medication_feature/presentation/add_request/add_request.dart';
+import '../../features/medication_feature/presentation/medication_details/medication_details.dart';
+import '../../features/medication_feature/presentation/requests_donations_list/requests_donations_list.dart';
+import '../../features/medication_feature/presentation/user_requests_history/user_requests_history.dart';
+import '../../features/user_feature/presentation/dashboard/dashboard.dart';
+import '../../features/user_feature/presentation/login/view/login_page.dart';
+import '../../features/user_feature/presentation/profile/view/profile_page.dart';
+import '../../features/user_feature/presentation/register/view/register_page.dart';
+import 'screen.dart';
 
 class AppRouter {
   static GoRouter router = GoRouter(
@@ -99,6 +100,13 @@ class AppRouter {
         path: Screens.userHistory.route,
         builder: (context, state) {
           return const UserRequestsHistoryPage();
+        },
+      ),
+      GoRoute(
+        name: Screens.profile.name,
+        path: Screens.profile.route,
+        builder: (context, state) {
+          return const ProfilePage();
         },
       ),
     ],

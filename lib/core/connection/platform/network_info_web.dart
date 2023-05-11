@@ -1,4 +1,4 @@
-import 'package:salamtak/core/connection/network_info.dart';
+import '../network_info.dart';
 
 class NetworkInfoImplWeb implements NetworkInfo {
   NetworkInfoImplWeb();

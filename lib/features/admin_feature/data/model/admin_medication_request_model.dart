@@ -1,8 +1,8 @@
 import 'package:equatable/equatable.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:salamtak/core/enums/enums.dart';
-import 'package:salamtak/features/admin_feature/domain/entity/entities.dart';
-import 'package:salamtak/util/json/states_and_cities.dart';
+import '../../../../core/enums/enums.dart';
+import '../../domain/entity/entities.dart';
+import '../../../../util/json/states_and_cities.dart';
 
 class AdminMedicationRequestModel extends Equatable {
   const AdminMedicationRequestModel({

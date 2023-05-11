@@ -2,9 +2,9 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:salamtak/core/enums/enums.dart';
-import 'package:salamtak/features/medication_feature/domain/entity/entities.dart';
-import 'package:salamtak/features/medication_feature/domain/repository/medication_repository.dart';
+import '../../../../../core/enums/enums.dart';
+import '../../../../medication_feature/domain/entity/entities.dart';
+import '../../../../medication_feature/domain/repository/medication_repository.dart';
 part 'dashboard_state.dart';
 
 class DashboardCubit extends Cubit<DashboardState> {

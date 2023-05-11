@@ -386,6 +386,78 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Admin Panel'**
   String get adminPanel;
+
+  /// No description provided for @continue_with_twitter.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue with Twitter'**
+  String get continue_with_twitter;
+
+  /// No description provided for @save.
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get save;
+
+  /// No description provided for @changes_will_be_saved_soon.
+  ///
+  /// In en, this message translates to:
+  /// **'Changes will be saved soon'**
+  String get changes_will_be_saved_soon;
+
+  /// No description provided for @medications.
+  ///
+  /// In en, this message translates to:
+  /// **'Medications'**
+  String get medications;
+
+  /// No description provided for @donaters.
+  ///
+  /// In en, this message translates to:
+  /// **'Donaters'**
+  String get donaters;
+
+  /// No description provided for @needers.
+  ///
+  /// In en, this message translates to:
+  /// **'Needers'**
+  String get needers;
+
+  /// No description provided for @helpers.
+  ///
+  /// In en, this message translates to:
+  /// **'Helpers'**
+  String get helpers;
+
+  /// No description provided for @link_with_email.
+  ///
+  /// In en, this message translates to:
+  /// **'Link with Email'**
+  String get link_with_email;
+
+  /// No description provided for @linked_successfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Linked successfully'**
+  String get linked_successfully;
+
+  /// No description provided for @error.
+  ///
+  /// In en, this message translates to:
+  /// **'Error'**
+  String get error;
+
+  /// No description provided for @the_request_was_not_accepted_by_any_user.
+  ///
+  /// In en, this message translates to:
+  /// **'The request was not accepted by any user'**
+  String get the_request_was_not_accepted_by_any_user;
+
+  /// No description provided for @link_with_twitter.
+  ///
+  /// In en, this message translates to:
+  /// **'Link with Twitter'**
+  String get link_with_twitter;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
-import 'package:salamtak/features/user_feature/data/model/salamtak_user_model.dart';
-import 'package:salamtak/util/json/states_and_cities.dart';
+import '../../data/model/salamtak_user_model.dart';
+import '../../../../util/json/states_and_cities.dart';
 
 class SalamtakUser extends Equatable {
   /// {@macro user}
@@ -49,6 +49,26 @@ class SalamtakUser extends Equatable {
       location: location,
       phoneNumber: phoneNumber,
       isActivated: isActivated,
+    );
+  }
+
+  SalamtakUser copyWith({
+    String? email,
+    String? id,
+    String? name,
+    String? authorization,
+    LocationSudan? location,
+    String? phoneNumber,
+    bool? isActivated,
+  }) {
+    return SalamtakUser(
+      email: email ?? this.email,
+      id: id ?? this.id,
+      name: name ?? this.name,
+      authorization: authorization ?? this.authorization,
+      location: location ?? this.location,
+      phoneNumber: phoneNumber ?? this.phoneNumber,
+      isActivated: isActivated ?? this.isActivated,
     );
   }
 

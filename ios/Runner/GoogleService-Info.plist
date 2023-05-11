@@ -3,9 +3,11 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>47603181237-cfodd8c842o1nf4qudrhm0ice817ltd9.apps.googleusercontent.com</string>
+	<string>47603181237-5g6dm58sg076q15h7gf1obdbjh6tqddr.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.47603181237-cfodd8c842o1nf4qudrhm0ice817ltd9</string>
+	<string>com.googleusercontent.apps.47603181237-5g6dm58sg076q15h7gf1obdbjh6tqddr</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>47603181237-nn7skb56v6c992td4rf3dqm4dubm5lkj.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
 	<string>AIzaSyDeYpG59kKSak6_8t1RbT6EOLxkg-fjrHg</string>
 	<key>GCM_SENDER_ID</key>
@@ -13,7 +15,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.kwemrj.salamtak.salamtak</string>
+	<string>com.kwemrj.salamtak</string>
 	<key>PROJECT_ID</key>
 	<string>salamtak-kwemrj</string>
 	<key>STORAGE_BUCKET</key>
@@ -29,6 +31,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:47603181237:ios:5e811cc0c65ac24231c0fc</string>
+	<string>1:47603181237:ios:e0668be01a6e117331c0fc</string>
 </dict>
 </plist>

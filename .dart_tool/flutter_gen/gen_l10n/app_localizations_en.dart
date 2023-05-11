@@ -150,4 +150,40 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get adminPanel => 'Admin Panel';
+
+  @override
+  String get continue_with_twitter => 'Continue with Twitter';
+
+  @override
+  String get save => 'Save';
+
+  @override
+  String get changes_will_be_saved_soon => 'Changes will be saved soon';
+
+  @override
+  String get medications => 'Medications';
+
+  @override
+  String get donaters => 'Donaters';
+
+  @override
+  String get needers => 'Needers';
+
+  @override
+  String get helpers => 'Helpers';
+
+  @override
+  String get link_with_email => 'Link with Email';
+
+  @override
+  String get linked_successfully => 'Linked successfully';
+
+  @override
+  String get error => 'Error';
+
+  @override
+  String get the_request_was_not_accepted_by_any_user => 'The request was not accepted by any user';
+
+  @override
+  String get link_with_twitter => 'Link with Twitter';
 }

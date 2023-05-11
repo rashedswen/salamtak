@@ -1,11 +1,14 @@
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
-import 'package:salamtak/core/enums/enums.dart';
-import 'package:salamtak/features/medication_feature/data/model/models.dart';
-import 'package:salamtak/features/user_feature/data/model/salamtak_user_model.dart';
+import 'package:flutter/foundation.dart';
+import '../../../../core/enums/enums.dart';
+import '../model/models.dart';
+import '../model/users_accepted_requests_model.dart';
+import '../../../user_feature/data/model/salamtak_user_model.dart';
 
 const String _medicationsRequestsCollection = 'requests';
 const String _medicationsDonationsCollection = 'donations';
@@ -25,10 +28,13 @@ abstract class RemoteDatasource {
 
   Future<void> addMedicationRequest(
     MedicationRequestModel medication,
+    PlatformFile? image,
+    PlatformFile? prescription,
   );
 
   Future<void> addMedicationDonation(
     MedicationDonationModel medication,
+    PlatformFile? image,
   );
 
   Future<void> updateMedicationRequest(
@@ -70,6 +76,12 @@ abstract class RemoteDatasource {
   Future<List<MedicationRequestModel>> getUserMedicationRequests(
     String userId,
   );
+
+  Future<List<UsersAcceptedRequestsModel>>
+      getUsersDonatingAndRequestingMedication(
+    String medicationId,
+    MedicationRequestType requestType,
+  );
 }
 
 class FirebaseDatasource extends RemoteDatasource {
@@ -82,16 +94,20 @@ class FirebaseDatasource extends RemoteDatasource {
   @override
   Future<void> addMedicationRequest(
     MedicationRequestModel medication,
+    PlatformFile? image,
+    PlatformFile? prescription,
   ) async {
     String? imgUrl;
     String? prescriptionUrl;
-    if (medication.prescription != null) {
+    if (image != null) {
       imgUrl = await uploadImageToFirebase(
-        medication.image ?? '',
+        image,
         'requests',
       );
+    }
+    if (prescription != null) {
       prescriptionUrl = await uploadImageToFirebase(
-        medication.prescription ?? '',
+        prescription,
         'prescriptions',
       );
     }
@@ -113,10 +129,11 @@ class FirebaseDatasource extends RemoteDatasource {
   @override
   Future<void> addMedicationDonation(
     MedicationDonationModel medication,
+    PlatformFile? image,
   ) async {
     String? imgUrl;
-    if (medication.image != null) {
-      imgUrl = await uploadImageToFirebase(medication.image ?? '', 'donations');
+    if (image != null) {
+      imgUrl = await uploadImageToFirebase(image, 'donations');
     }
     // final user = _firebaseAuth.currentUser;
     final medicationId = FirebaseFirestore.instance
@@ -133,20 +150,34 @@ class FirebaseDatasource extends RemoteDatasource {
     await medicationId.set(medicationRequest.toJson());
   }
 
-  Future<String?> uploadImageToFirebase(
-    String imgaePath,
+  Future<String> uploadImageToFirebase(
+    PlatformFile imagePath,
     String folderName,
   ) async {
-    final name = imgaePath.split('/').last;
-    final path = '$folderName/$name';
-    final prescription = File(imgaePath);
+    if (!kIsWeb) {
+      final name = imagePath.path?.split('/').last;
+      final path = '$folderName/$name';
+      final image = File(imagePath.path!);
 
-    final ref = firebase_storage.FirebaseStorage.instance.ref().child(path);
-    final uploadTask = ref.putFile(prescription);
+      final ref = firebase_storage.FirebaseStorage.instance.ref().child(path);
+      final uploadTask = ref.putFile(image);
 
-    final p = await uploadTask.whenComplete(() => null);
+      final p = await uploadTask.whenComplete(() => null);
 
-    return p.ref.getDownloadURL();
+      return p.ref.getDownloadURL();
+    } else {
+      // generate random name.
+      final name = imagePath.name;
+      final path = '$folderName/$name';
+      final image = imagePath.bytes!;
+
+      final ref = firebase_storage.FirebaseStorage.instance.ref().child(path);
+      final uploadTask = ref.putData(image);
+
+      final p = await uploadTask.whenComplete(() => null);
+
+      return p.ref.getDownloadURL();
+    }
   }
 
   @override
@@ -272,9 +303,7 @@ class FirebaseDatasource extends RemoteDatasource {
         .collection('users')
         .doc(user.id);
 
-    final s = await donate.set(user.toJson());
-
-    print('s.toString()');
+    await donate.set(user.toJson());
   }
 
   @override
@@ -325,5 +354,77 @@ class FirebaseDatasource extends RemoteDatasource {
           ),
         )
         .toList();
+  }
+
+  @override
+  Future<List<UsersAcceptedRequestsModel>>
+      getUsersDonatingAndRequestingMedication(
+    String medicationId,
+    MedicationRequestType requestType,
+  ) async {
+    if (requestType == MedicationRequestType.donation) {
+      final users = await FirebaseFirestore.instance
+          .collection(_medicationsDonationsCollection)
+          .doc(medicationId)
+          .collection('users')
+          .get();
+      final usersMapped = users.docs
+          .map(
+            (user) => UsersAcceptedRequestsModel.fromJson(
+              user.data(),
+            ),
+          )
+          .toList();
+
+      if (usersMapped.isEmpty) {
+        return [];
+      }
+
+      final list = <UsersAcceptedRequestsModel>[];
+      for (final element in usersMapped) {
+        final usersa = await FirebaseFirestore.instance
+            .collection('users')
+            .doc(element.id)
+            .get();
+
+        final user = UsersAcceptedRequestsModel.fromJson(usersa.data()!);
+
+        list.add(user);
+      }
+
+      return list;
+    } else {
+      final users = await FirebaseFirestore.instance
+          .collection(_medicationsRequestsCollection)
+          .doc(medicationId)
+          .collection('users')
+          .get();
+
+      final usersMapped = users.docs
+          .map(
+            (user) => UsersAcceptedRequestsModel.fromJson(
+              user.data(),
+            ),
+          )
+          .toList();
+
+      if (usersMapped.isEmpty) {
+        return [];
+      }
+
+      final list = <UsersAcceptedRequestsModel>[];
+      for (final element in usersMapped) {
+        final usersa = await FirebaseFirestore.instance
+            .collection('users')
+            .doc(element.id)
+            .get();
+
+        final user = UsersAcceptedRequestsModel.fromJson(usersa.data()!);
+
+        list.add(user);
+      }
+
+      return list;
+    }
   }
 }

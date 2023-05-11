@@ -3,10 +3,10 @@ import 'package:duration/locale.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
-import 'package:salamtak/core/enums/enums.dart';
-import 'package:salamtak/features/medication_feature/presentation/requests_donations_list/bloc/bloc.dart';
-import 'package:salamtak/l10n/l10n.dart';
-import 'package:salamtak/util/router/screen.dart';
+import '../../../../../core/enums/enums.dart';
+import '../bloc/bloc.dart';
+import '../../../../../l10n/l10n.dart';
+import '../../../../../util/router/screen.dart';
 
 /// {@template requests_donations_list_body}
 /// Body of the RequestsDonationsListPage.
@@ -46,8 +46,10 @@ class _RequestsDonationsListBodyState extends State<RequestsDonationsListBody> {
                         DateTime.now().difference(medication.createdDate);
                     return InkWell(
                       onTap: () {
-                        context.pushNamed(Screens.medicationDetails.name,
-                            extra: medication);
+                        context.pushNamed(
+                          Screens.medicationDetails.name,
+                          extra: medication,
+                        );
                       },
                       child: Card(
                         shape: RoundedRectangleBorder(
@@ -64,24 +66,25 @@ class _RequestsDonationsListBodyState extends State<RequestsDonationsListBody> {
                           padding: const EdgeInsets.all(8),
                           child: Row(
                             children: [
-                              // if (medication.image != null)
-                              //   ClipRRect(
-                              //     borderRadius: BorderRadius.circular(8),
-                              //     child: Image.network(
-                              //       medication.image!,
-                              //       width: 100,
-                              //       height: 100,
-                              //       fit: BoxFit.cover,
-                              //     ),
-                              //   )
-                              // else
-                              SizedBox(
-                                width: 100,
-                                height: 100,
-                                child: Center(
-                                  child: FaIcon(medication.form.icon, size: 80),
+                              if (medication.image != null)
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(8),
+                                  child: Image.network(
+                                    medication.image!,
+                                    width: 100,
+                                    height: 100,
+                                    fit: BoxFit.cover,
+                                  ),
+                                )
+                              else
+                                SizedBox(
+                                  width: 100,
+                                  height: 100,
+                                  child: Center(
+                                    child:
+                                        FaIcon(medication.form.icon, size: 80),
+                                  ),
                                 ),
-                              ),
                               const SizedBox(
                                 width: 16,
                               ),

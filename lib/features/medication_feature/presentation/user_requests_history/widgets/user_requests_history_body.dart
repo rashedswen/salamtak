@@ -3,10 +3,10 @@ import 'package:duration/locale.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
-import 'package:salamtak/core/enums/enums.dart';
-import 'package:salamtak/features/medication_feature/presentation/user_requests_history/cubit/cubit.dart';
-import 'package:salamtak/l10n/l10n.dart';
-import 'package:salamtak/util/router/screen.dart';
+import '../../../../../core/enums/enums.dart';
+import '../cubit/cubit.dart';
+import '../../../../../l10n/l10n.dart';
+import '../../../../../util/router/screen.dart';
 
 /// {@template user_requests_history_body}
 /// Body of the UserRequestsHistoryPage.

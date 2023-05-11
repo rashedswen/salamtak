@@ -96,6 +96,30 @@
 
     "settings": "الاعدادات",
 
-    "adminPanel": "لوحة التحكم"
+    "adminPanel": "لوحة التحكم",
+
+    "continue_with_twitter": "الاستمرار باستخدام تويتر",
+
+    "save": "حفظ",
+
+    "changes_will_be_saved_soon": "سيتم حفظ التغييرات قريبا",
+
+    "medications": "الادوية",
+
+    "donaters": "المتبرعين",
+
+    "needers": "المحتاجين",
+
+    "helpers": "المساعدين",
+
+    "link_with_email": "ربط بالبريد الالكتروني",
+
+    "linked_successfully": "تم الربط بنجاح",
+
+    "error": "خطأ",
+
+    "the_request_was_not_accepted_by_any_user": "لم يتم قبول الطلب من قبل اي مستخدم",
+
+    "link_with_twitter": "ربط بتويتر"
 
 }
