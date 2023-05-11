@@ -1,4 +1,4 @@
-package com.kwemrj.salamtak.salamtak
+package com.kwemrj.salamtak
 
 import io.flutter.embedding.android.FlutterActivity
 

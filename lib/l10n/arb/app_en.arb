@@ -109,6 +109,16 @@
 
     "needers": "Needers",
 
-    "helpers": "Helpers"
+    "helpers": "Helpers",
+
+    "link_with_email": "Link with Email",
+
+    "linked_successfully": "Linked successfully",
+
+    "error": "Error",
+
+    "the_request_was_not_accepted_by_any_user": "The request was not accepted by any user",
+
+    "link_with_twitter": "Link with Twitter"
     
 }

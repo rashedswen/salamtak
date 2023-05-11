@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:salamtak/features/medication_feature/presentation/add_request/widgets/add_request_body.dart';
-import 'package:salamtak/features/medication_feature/presentation/add_request/widgets/medication_form_info.dart';
-import 'package:salamtak/core/enums/enums.dart';
+import 'add_request_body.dart';
+import 'medication_form_info.dart';
+import '../../../../../core/enums/enums.dart';
 
 class MedicationFormSection extends StatelessWidget {
   const MedicationFormSection({

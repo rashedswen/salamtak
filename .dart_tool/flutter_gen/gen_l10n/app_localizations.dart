@@ -428,6 +428,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Helpers'**
   String get helpers;
+
+  /// No description provided for @link_with_email.
+  ///
+  /// In en, this message translates to:
+  /// **'Link with Email'**
+  String get link_with_email;
+
+  /// No description provided for @linked_successfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Linked successfully'**
+  String get linked_successfully;
+
+  /// No description provided for @error.
+  ///
+  /// In en, this message translates to:
+  /// **'Error'**
+  String get error;
+
+  /// No description provided for @the_request_was_not_accepted_by_any_user.
+  ///
+  /// In en, this message translates to:
+  /// **'The request was not accepted by any user'**
+  String get the_request_was_not_accepted_by_any_user;
+
+  /// No description provided for @link_with_twitter.
+  ///
+  /// In en, this message translates to:
+  /// **'Link with Twitter'**
+  String get link_with_twitter;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

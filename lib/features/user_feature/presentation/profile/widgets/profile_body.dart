@@ -2,19 +2,31 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:salamtak/app/bloc/app_bloc.dart';
-import 'package:salamtak/core/widgets/text_with_field.dart';
-import 'package:salamtak/features/user_feature/presentation/profile/cubit/cubit.dart';
-import 'package:salamtak/l10n/l10n.dart';
+import '../../../../../app/bloc/app_bloc.dart';
+import '../../../../../core/widgets/text_with_field.dart';
+import '../cubit/cubit.dart';
+import 'link_with_email.dart';
+import '../../../../../l10n/l10n.dart';
 
 /// {@template profile_body}
 /// Body of the ProfilePage.
 ///
 /// Add what it does
 /// {@endtemplate}
-class ProfileBody extends StatelessWidget {
+class ProfileBody extends StatefulWidget {
   /// {@macro profile_body}
   const ProfileBody({super.key});
+
+  @override
+  State<ProfileBody> createState() => _ProfileBodyState();
+}
+
+class _ProfileBodyState extends State<ProfileBody> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<ProfileCubit>().getProviders();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -67,11 +79,50 @@ class ProfileBody extends StatelessWidget {
               },
             ),
           ),
+          BlocBuilder<AppBloc, AppState>(
+            buildWhen: (previous, current) =>
+                previous.user.email != current.user.email,
+            builder: (context, state) {
+              if (state.user.email == null) {
+                return const SizedBox.shrink();
+              }
+              return Card(
+                child: ListTile(
+                  leading: const Icon(Icons.email),
+                  title: Text(context.l10n.email),
+                  subtitle: Text(state.user.email ?? ''),
+                ),
+              );
+            },
+          ),
+          const LinkWithEmail(),
+          BlocBuilder<ProfileCubit, ProfileState>(
+            builder: (context, state) {
+              if (state.providers.twitter) {
+                return const SizedBox.shrink();
+              }
+              return Card(
+                child: ListTile(
+                  leading: const Icon(Icons.link),
+                  title: Text(context.l10n.link_with_twitter),
+                  onTap: () {
+                    context.read<ProfileCubit>().linkWithTwitter();
+                  },
+                ),
+              );
+            },
+          ),
+          const Spacer(),
           Card(
             child: ListTile(
-              leading: const Icon(Icons.email),
-              title: Text(context.l10n.email),
-              subtitle: const Text('Email'),
+              leading: const Icon(Icons.logout, color: Colors.red),
+              title: Text(
+                context.l10n.logout,
+                style: const TextStyle(color: Colors.red),
+              ),
+              onTap: () {
+                context.read<AppBloc>().add(AppLogoutRequested());
+              },
             ),
           ),
         ],

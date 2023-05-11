@@ -2,9 +2,9 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:salamtak/core/enums/enums.dart';
-import 'package:salamtak/features/admin_feature/domain/entity/entities.dart';
-import 'package:salamtak/features/admin_feature/domain/repository/admin_medication_repository.dart';
+import '../../../../../core/enums/enums.dart';
+import '../../../domain/entity/entities.dart';
+import '../../../domain/repository/admin_medication_repository.dart';
 part 'accept_requests_donations_state.dart';
 
 class AcceptRequestsDonationsCubit extends Cubit<AcceptRequestsDonationsState> {
@@ -24,7 +24,7 @@ class AcceptRequestsDonationsCubit extends Cubit<AcceptRequestsDonationsState> {
       final list = medicationList
           .where((element) => element.status != MedicationStatus.approved)
           .toList();
-      emit(AcceptRequestsDonationsLoaded(medicationList));
+      emit(AcceptRequestsDonationsLoaded(list));
     } catch (e) {
       emit(AcceptRequestsDonationsError(e.toString()));
     }

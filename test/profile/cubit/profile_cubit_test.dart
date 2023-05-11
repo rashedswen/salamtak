@@ -17,7 +17,7 @@ void main() {
 
     test('initial state has default value for customProperty', () {
       final profileCubit = ProfileCubit();
-      expect(profileCubit.state.customProperty, equals('Default Value'));
+      expect(profileCubit.state.email, equals('Default Value'));
     });
 
     blocTest<ProfileCubit, ProfileState>(

@@ -1,7 +1,7 @@
-import 'package:salamtak/core/enums/medication_status.dart';
-import 'package:salamtak/features/admin_feature/data/datasource/remote_datasource.dart';
-import 'package:salamtak/features/admin_feature/domain/entity/entities.dart';
-import 'package:salamtak/features/admin_feature/domain/repository/admin_medication_repository.dart';
+import '../../../../core/enums/medication_status.dart';
+import '../datasource/remote_datasource.dart';
+import '../../domain/entity/entities.dart';
+import '../../domain/repository/admin_medication_repository.dart';
 
 class AdminMedicationRepositoryImpl extends AdminMedicationRepository {
   AdminMedicationRepositoryImpl({required this.remoteDataSource});

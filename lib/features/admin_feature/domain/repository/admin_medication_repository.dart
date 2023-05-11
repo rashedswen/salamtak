@@ -1,5 +1,5 @@
-import 'package:salamtak/core/enums/enums.dart';
-import 'package:salamtak/features/admin_feature/domain/entity/entities.dart';
+import '../../../../core/enums/enums.dart';
+import '../entity/entities.dart';
 
 abstract class AdminMedicationRepository {
   Future<void> changeRequestStatus(

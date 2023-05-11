@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:salamtak/app/bloc/app_bloc.dart';
-import 'package:salamtak/core/widgets/salamtak_drawer.dart';
-import 'package:salamtak/features/medication_feature/domain/repository/medication_repository.dart';
-import 'package:salamtak/features/user_feature/presentation/dashboard/cubit/cubit.dart';
-import 'package:salamtak/features/user_feature/presentation/dashboard/widgets/dashboard_body.dart';
-import 'package:salamtak/util/router/screen.dart';
+import '../../../../../app/bloc/app_bloc.dart';
+import '../../../../../core/widgets/salamtak_drawer.dart';
+import '../../../../medication_feature/domain/repository/medication_repository.dart';
+import '../cubit/cubit.dart';
+import '../widgets/dashboard_body.dart';
+import '../../../../../util/router/screen.dart';
 
 /// {@template dashboard_page}
 /// A description for DashboardPage

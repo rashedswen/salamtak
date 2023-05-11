@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
-import 'package:salamtak/app/bloc/app_bloc.dart';
-import 'package:salamtak/core/enums/enums.dart';
-import 'package:salamtak/features/medication_feature/presentation/medication_details/cubit/cubit.dart';
-import 'package:salamtak/l10n/l10n.dart';
+import '../../../../../app/bloc/app_bloc.dart';
+import '../../../../../core/enums/enums.dart';
+import '../cubit/cubit.dart';
+import '../../../../../l10n/l10n.dart';
 
 /// {@template medication_details_body}
 /// Body of the MedicationDetailsPage.
@@ -270,29 +270,68 @@ class MedicationDetailsBody extends StatelessWidget {
                                 Expanded(
                                   child: Card(
                                     child: SingleChildScrollView(
-                                      child: Column(
-                                        children: state.usersAcceptedRequest
-                                                ?.map(
-                                                  (e) => ListTile(
-                                                    leading: const Icon(
-                                                      Icons.check_circle,
-                                                      color: Colors.green,
+                                      child: BlocBuilder<MedicationDetailsCubit,
+                                          MedicationDetailsState>(
+                                        builder: (context, stateList) {
+                                          if (stateList.usersListStatus ==
+                                              MedicationDetailsUsersListStatus
+                                                  .loading) {
+                                            return const Center(
+                                              child:
+                                                  CircularProgressIndicator(),
+                                            );
+                                          }
+                                          if (stateList.usersListStatus ==
+                                              MedicationDetailsUsersListStatus
+                                                  .loaded) {
+                                            return stateList
+                                                    .usersAcceptedRequest!
+                                                    .isEmpty
+                                                ? Center(
+                                                    child: Text(
+                                                      context.l10n
+                                                          .the_request_was_not_accepted_by_any_user,
+                                                      style: Theme.of(context)
+                                                          .textTheme
+                                                          .bodyMedium,
                                                     ),
-                                                    title: Text(e.name ?? ''),
-                                                    // subtitle: Text(
-                                                    //   e.location?.toLocalString(
-                                                    //         context.l10n
-                                                    //             .localeName,
-                                                    //       ) ??
-                                                    //       '',
-                                                    // ),
-                                                    subtitle: Text(
-                                                      e.phoneNumber ?? '',
-                                                    ),
-                                                  ),
-                                                )
-                                                .toList() ??
-                                            [],
+                                                  )
+                                                : Column(
+                                                    children: state
+                                                            .usersAcceptedRequest
+                                                            ?.map(
+                                                              (e) => ListTile(
+                                                                leading:
+                                                                    const Icon(
+                                                                  Icons
+                                                                      .check_circle,
+                                                                  color: Colors
+                                                                      .green,
+                                                                ),
+                                                                title: Text(
+                                                                  e.name ?? '',
+                                                                ),
+                                                                // subtitle: Text(
+                                                                //   e.location?.toLocalString(
+                                                                //         context.l10n
+                                                                //             .localeName,
+                                                                //       ) ??
+                                                                //       '',
+                                                                // ),
+                                                                subtitle: Text(
+                                                                  e.phoneNumber ??
+                                                                      '',
+                                                                ),
+                                                              ),
+                                                            )
+                                                            .toList() ??
+                                                        [],
+                                                  );
+                                          }
+                                          return const SizedBox(
+                                            child: Text('error'),
+                                          );
+                                        },
                                       ),
                                     ),
                                   ),

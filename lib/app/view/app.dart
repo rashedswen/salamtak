@@ -1,13 +1,12 @@
-import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:salamtak/app/bloc/app_bloc.dart';
-import 'package:salamtak/features/admin_feature/domain/repository/admin_medication_repository.dart';
-import 'package:salamtak/features/medication_feature/domain/repository/medication_repository.dart';
-import 'package:salamtak/features/medication_feature/presentation/add_request/cubit/cubit.dart';
-import 'package:salamtak/features/user_feature/domain/repository/authentication_repository.dart';
-import 'package:salamtak/l10n/l10n.dart';
-import 'package:salamtak/util/router/go_router.dart';
+import '../bloc/app_bloc.dart';
+import '../../features/admin_feature/domain/repository/admin_medication_repository.dart';
+import '../../features/medication_feature/domain/repository/medication_repository.dart';
+import '../../features/medication_feature/presentation/add_request/cubit/cubit.dart';
+import '../../features/user_feature/domain/repository/authentication_repository.dart';
+import '../../l10n/l10n.dart';
+import '../../util/router/go_router.dart';
 
 class App extends StatelessWidget {
   const App({
@@ -55,14 +54,13 @@ class AppView extends StatelessWidget {
     return MaterialApp.router(
       theme: ThemeData(
         useMaterial3: true,
-        appBarTheme: const AppBarTheme(color: Color(0xFF13B9FF)),
+        appBarTheme: const AppBarTheme(color: Color(0xFF14967F)),
         colorScheme: ColorScheme.fromSwatch(
-          accentColor: const Color(0xFF13B9FF),
+          accentColor: const Color(0xFF14967F),
         ),
         scaffoldBackgroundColor: const Color(0XFFFEF2F4),
         textTheme: GoogleFonts.cairoTextTheme(),
       ),
-      
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       routerDelegate: AppRouter.router.routerDelegate,

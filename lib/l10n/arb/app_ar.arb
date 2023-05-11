@@ -110,6 +110,16 @@
 
     "needers": "المحتاجين",
 
-    "helpers": "المساعدين"
+    "helpers": "المساعدين",
+
+    "link_with_email": "ربط بالبريد الالكتروني",
+
+    "linked_successfully": "تم الربط بنجاح",
+
+    "error": "خطأ",
+
+    "the_request_was_not_accepted_by_any_user": "لم يتم قبول الطلب من قبل اي مستخدم",
+
+    "link_with_twitter": "ربط بتويتر"
 
 }

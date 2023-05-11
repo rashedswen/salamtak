@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:salamtak/features/admin_feature/domain/repository/admin_medication_repository.dart';
-import 'package:salamtak/features/admin_feature/presentation/accept_requests_donations/cubit/cubit.dart';
-import 'package:salamtak/features/admin_feature/presentation/accept_requests_donations/widgets/accept_requests_donations_body.dart';
+import '../../../domain/repository/admin_medication_repository.dart';
+import '../cubit/cubit.dart';
+import '../widgets/accept_requests_donations_body.dart';
 
 /// {@template accept_requests_donations_page}
 /// A description for AcceptRequestsDonationsPage

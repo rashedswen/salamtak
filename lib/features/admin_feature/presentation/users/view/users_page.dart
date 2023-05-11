@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:salamtak/features/admin_feature/presentation/users/cubit/cubit.dart';
-import 'package:salamtak/features/admin_feature/presentation/users/widgets/users_body.dart';
+import '../cubit/cubit.dart';
+import '../widgets/users_body.dart';
 
 /// {@template users_page}
 /// A description for UsersPage

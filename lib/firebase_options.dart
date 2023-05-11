@@ -48,17 +48,17 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions web = FirebaseOptions(
     apiKey: 'AIzaSyAG44ijfZqlo2YC7SVxidIKaC6qWgDkUpc',
-    appId: '1:47603181237:web:1f9adf73f9dd556f31c0fc',
+    appId: '1:47603181237:web:b60152f6af2b0a8031c0fc',
     messagingSenderId: '47603181237',
     projectId: 'salamtak-kwemrj',
     authDomain: 'salamtak-kwemrj.firebaseapp.com',
     storageBucket: 'salamtak-kwemrj.appspot.com',
-    measurementId: 'G-E2Q5Y85LLY',
+    measurementId: 'G-D1L3JFXY9E',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyDu3WnOV0dfuTkyrU5kopYg7PSHwRpo9Ks',
-    appId: '1:47603181237:android:1797af536b0a7e7031c0fc',
+    appId: '1:47603181237:android:e72ef75d86198a3331c0fc',
     messagingSenderId: '47603181237',
     projectId: 'salamtak-kwemrj',
     storageBucket: 'salamtak-kwemrj.appspot.com',
@@ -66,12 +66,12 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyDeYpG59kKSak6_8t1RbT6EOLxkg-fjrHg',
-    appId: '1:47603181237:ios:5e811cc0c65ac24231c0fc',
+    appId: '1:47603181237:ios:e0668be01a6e117331c0fc',
     messagingSenderId: '47603181237',
     projectId: 'salamtak-kwemrj',
     storageBucket: 'salamtak-kwemrj.appspot.com',
     androidClientId: '47603181237-nn7skb56v6c992td4rf3dqm4dubm5lkj.apps.googleusercontent.com',
-    iosClientId: '47603181237-cfodd8c842o1nf4qudrhm0ice817ltd9.apps.googleusercontent.com',
-    iosBundleId: 'com.kwemrj.salamtak.salamtak',
+    iosClientId: '47603181237-5g6dm58sg076q15h7gf1obdbjh6tqddr.apps.googleusercontent.com',
+    iosBundleId: 'com.kwemrj.salamtak',
   );
 }

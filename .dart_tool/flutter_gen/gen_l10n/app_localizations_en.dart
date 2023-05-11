@@ -171,4 +171,19 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get helpers => 'Helpers';
+
+  @override
+  String get link_with_email => 'Link with Email';
+
+  @override
+  String get linked_successfully => 'Linked successfully';
+
+  @override
+  String get error => 'Error';
+
+  @override
+  String get the_request_was_not_accepted_by_any_user => 'The request was not accepted by any user';
+
+  @override
+  String get link_with_twitter => 'Link with Twitter';
 }

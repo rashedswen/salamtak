@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
-import 'package:salamtak/app/bloc/app_bloc.dart';
-import 'package:salamtak/l10n/l10n.dart';
-import 'package:salamtak/util/router/screen.dart';
+import '../../app/bloc/app_bloc.dart';
+import '../../l10n/l10n.dart';
+import '../../util/router/screen.dart';
 
 class SalamtakDrawer extends StatelessWidget {
   const SalamtakDrawer({
@@ -53,21 +53,19 @@ class SalamtakDrawer extends StatelessWidget {
                           },
                         ),
                         const Spacer(),
-                        // if (context
-                        //         .read<AppBloc>()
-                        //         .state
-                        //         .user
-                        //         .authorization ==
-                        //     'checker')
-                        ListTile(
-                          leading: const FaIcon(FontAwesomeIcons.userShield),
-                          title: Text(context.l10n.adminPanel),
-                          onTap: () {
-                            context.pushNamed(
-                              Screens.approveMedicationsRequests.name,
-                            );
-                          },
-                        ),
+                        if (context.read<AppBloc>().state.user.authorization ==
+                                'checker' ||
+                            context.read<AppBloc>().state.user.authorization ==
+                                'admin')
+                          ListTile(
+                            leading: const FaIcon(FontAwesomeIcons.userShield),
+                            title: Text(context.l10n.adminPanel),
+                            onTap: () {
+                              context.pushNamed(
+                                Screens.approveMedicationsRequests.name,
+                              );
+                            },
+                          ),
                         ListTile(
                           leading: const FaIcon(FontAwesomeIcons.circleUser),
                           title: Text(context.l10n.profile),

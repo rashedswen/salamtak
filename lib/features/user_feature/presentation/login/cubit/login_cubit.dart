@@ -3,9 +3,9 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:formz/formz.dart';
-import 'package:salamtak/features/user_feature/domain/repository/authentication_repository.dart';
-import 'package:salamtak/features/user_feature/util/errors/login_failure.dart';
-import 'package:salamtak/features/user_feature/util/validators.dart';
+import '../../../domain/repository/authentication_repository.dart';
+import '../../../util/errors/login_failure.dart';
+import '../../../util/validators.dart';
 
 part 'login_state.dart';
 

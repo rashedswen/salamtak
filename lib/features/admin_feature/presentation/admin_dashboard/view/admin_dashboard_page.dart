@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:salamtak/features/admin_feature/presentation/admin_dashboard/cubit/cubit.dart';
-import 'package:salamtak/features/admin_feature/presentation/admin_dashboard/widgets/admin_dashboard_body.dart';
+import '../cubit/cubit.dart';
+import '../widgets/admin_dashboard_body.dart';
 
 /// {@template admin_dashboard_page}
 /// A description for AdminDashboardPage

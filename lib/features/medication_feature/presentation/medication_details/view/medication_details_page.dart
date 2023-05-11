@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:salamtak/features/medication_feature/domain/entity/medication_list.dart';
-import 'package:salamtak/features/medication_feature/domain/repository/medication_repository.dart';
-import 'package:salamtak/features/medication_feature/presentation/medication_details/cubit/cubit.dart';
-import 'package:salamtak/features/medication_feature/presentation/medication_details/widgets/medication_details_body.dart';
+import '../../../domain/entity/medication_list.dart';
+import '../../../domain/repository/medication_repository.dart';
+import '../cubit/cubit.dart';
+import '../widgets/medication_details_body.dart';
 
 /// {@template medication_details_page}
 /// A description for MedicationDetailsPage

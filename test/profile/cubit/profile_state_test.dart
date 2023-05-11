@@ -29,7 +29,7 @@ void main() {
         'when no argument specified',
         () {
           const profileState = ProfileState(
-            customProperty: 'My property',
+            email: 'My property',
           );
           expect(
             profileState.copyWith(),
@@ -43,16 +43,16 @@ void main() {
         'when all arguments specified',
         () {
           const profileState = ProfileState(
-            customProperty: 'My property',
+            email: 'My property',
           );
           final otherProfileState = ProfileState(
-            customProperty: 'My property 2',
+            email: 'My property 2',
           );
           expect(profileState, isNot(equals(otherProfileState)));
 
           expect(
             profileState.copyWith(
-              customProperty: otherProfileState.customProperty,
+              customProperty: otherProfileState.email,
             ),
             equals(otherProfileState),
           );

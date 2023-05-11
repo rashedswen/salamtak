@@ -1,10 +1,9 @@
 part of 'medication_details_cubit.dart';
 
-/// {@template medication_details}
-/// MedicationDetailsState description
-/// {@endtemplate}
+enum MedicationDetailsUsersListStatus { initial, loading, loaded, error }
+
 class MedicationDetailsState extends Equatable with FormzMixin {
-  /// {@macro medication_details}
+
   const MedicationDetailsState({
     this.errorMessage = 'Default Value',
     required this.medicationItem,
@@ -14,9 +13,9 @@ class MedicationDetailsState extends Equatable with FormzMixin {
     this.address = const Address.pure(),
     this.status = FormzSubmissionStatus.initial,
     this.usersAcceptedRequest,
+    this.usersListStatus = MedicationDetailsUsersListStatus.initial,
   });
 
-  /// A description for customProperty
   final String errorMessage;
   final MedicationItem medicationItem;
   final Name name;
@@ -25,6 +24,7 @@ class MedicationDetailsState extends Equatable with FormzMixin {
   final Address address;
   final FormzSubmissionStatus status;
   final List<UsersAcceptedRequests>? usersAcceptedRequest;
+  final MedicationDetailsUsersListStatus usersListStatus;
 
   @override
   List<Object?> get props => [
@@ -35,10 +35,10 @@ class MedicationDetailsState extends Equatable with FormzMixin {
         location,
         address,
         status,
-        usersAcceptedRequest
+        usersAcceptedRequest,
+        usersListStatus,
       ];
 
-  /// Creates a copy of the current MedicationDetailsState with property changes
   MedicationDetailsState copyWith({
     String? errorMessage,
     MedicationItem? medicationItem,
@@ -48,6 +48,7 @@ class MedicationDetailsState extends Equatable with FormzMixin {
     Address? address,
     FormzSubmissionStatus? status,
     List<UsersAcceptedRequests>? usersAcceptedRequest,
+    MedicationDetailsUsersListStatus? usersListStatus,
   }) {
     return MedicationDetailsState(
       errorMessage: errorMessage ?? this.errorMessage,
@@ -58,6 +59,7 @@ class MedicationDetailsState extends Equatable with FormzMixin {
       address: address ?? this.address,
       status: status ?? this.status,
       usersAcceptedRequest: usersAcceptedRequest ?? this.usersAcceptedRequest,
+      usersListStatus: usersListStatus ?? this.usersListStatus,
     );
   }
 
@@ -66,9 +68,6 @@ class MedicationDetailsState extends Equatable with FormzMixin {
   List<FormzInput> get inputs => [name, phoneNumber, address];
 }
 
-/// {@template medication_details_initial}
-/// The initial state of MedicationDetailsState
-/// {@endtemplate}
 class MedicationDetailsInitial extends MedicationDetailsState {
   /// {@macro medication_details_initial}
   const MedicationDetailsInitial(MedicationItem medicationItem)

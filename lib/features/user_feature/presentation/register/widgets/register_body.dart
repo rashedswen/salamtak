@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:formz/formz.dart';
 import 'package:go_router/go_router.dart';
-import 'package:salamtak/core/widgets/text_with_field.dart';
-import 'package:salamtak/features/medication_feature/presentation/add_donation/widgets/city_selector.dart';
-import 'package:salamtak/features/user_feature/presentation/register/cubit/cubit.dart';
-import 'package:salamtak/l10n/l10n.dart';
-import 'package:salamtak/util/router/screen.dart';
+import '../../../../../core/widgets/text_with_field.dart';
+import '../../../../medication_feature/presentation/add_donation/widgets/city_selector.dart';
+import '../cubit/cubit.dart';
+import '../../../../../l10n/l10n.dart';
+import '../../../../../util/router/screen.dart';
 
 class RegisterBody extends StatelessWidget {
   const RegisterBody({super.key});

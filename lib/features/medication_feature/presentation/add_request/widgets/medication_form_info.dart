@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:salamtak/core/enums/medication_form.dart';
-import 'package:salamtak/core/widgets/icons.dart';
+import '../../../../../core/enums/medication_form.dart';
+import '../../../../../core/widgets/icons.dart';
 
 final medicineFormList = [
   MedicineFormInfo(

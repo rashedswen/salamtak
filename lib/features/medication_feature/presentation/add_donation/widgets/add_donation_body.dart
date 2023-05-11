@@ -4,12 +4,12 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:salamtak/core/enums/enums.dart';
-import 'package:salamtak/core/widgets/text_with_field.dart';
-import 'package:salamtak/features/medication_feature/presentation/add_donation/cubit/cubit.dart';
-import 'package:salamtak/features/medication_feature/presentation/add_donation/widgets/city_selector.dart';
-import 'package:salamtak/features/medication_feature/presentation/add_request/widgets/medication_form_section.dart';
-import 'package:salamtak/l10n/l10n.dart';
+import '../../../../../core/enums/enums.dart';
+import '../../../../../core/widgets/text_with_field.dart';
+import '../cubit/cubit.dart';
+import 'city_selector.dart';
+import '../../add_request/widgets/medication_form_section.dart';
+import '../../../../../l10n/l10n.dart';
 
 /// {@template add_donation_body}
 /// Body of the AddDonationPage.

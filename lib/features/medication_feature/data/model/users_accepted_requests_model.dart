@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:salamtak/features/medication_feature/domain/entity/users_accepted_requests.dart';
-import 'package:salamtak/util/json/states_and_cities.dart';
+import '../../domain/entity/users_accepted_requests.dart';
+import '../../../../util/json/states_and_cities.dart';
 
 part 'users_accepted_requests_model.g.dart';
 

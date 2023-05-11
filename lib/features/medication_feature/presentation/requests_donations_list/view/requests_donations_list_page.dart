@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:salamtak/core/widgets/salamtak_drawer.dart';
-import 'package:salamtak/features/medication_feature/domain/repository/medication_repository.dart';
-import 'package:salamtak/features/medication_feature/presentation/requests_donations_list/bloc/bloc.dart';
-import 'package:salamtak/features/medication_feature/presentation/requests_donations_list/widgets/requests_donations_list_body.dart';
+import '../../../../../core/widgets/salamtak_drawer.dart';
+import '../../../domain/repository/medication_repository.dart';
+import '../bloc/bloc.dart';
+import '../widgets/requests_donations_list_body.dart';
 
 /// {@template requests_donations_list_page}
 /// A description for RequestsDonationsListPage

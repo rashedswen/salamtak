@@ -5,10 +5,10 @@ import 'package:file_picker/file_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:flutter/foundation.dart';
-import 'package:salamtak/core/enums/enums.dart';
-import 'package:salamtak/features/medication_feature/data/model/models.dart';
-import 'package:salamtak/features/medication_feature/data/model/users_accepted_requests_model.dart';
-import 'package:salamtak/features/user_feature/data/model/salamtak_user_model.dart';
+import '../../../../core/enums/enums.dart';
+import '../model/models.dart';
+import '../model/users_accepted_requests_model.dart';
+import '../../../user_feature/data/model/salamtak_user_model.dart';
 
 const String _medicationsRequestsCollection = 'requests';
 const String _medicationsDonationsCollection = 'donations';
@@ -376,6 +376,10 @@ class FirebaseDatasource extends RemoteDatasource {
           )
           .toList();
 
+      if (usersMapped.isEmpty) {
+        return [];
+      }
+
       final list = <UsersAcceptedRequestsModel>[];
       for (final element in usersMapped) {
         final usersa = await FirebaseFirestore.instance
@@ -403,6 +407,10 @@ class FirebaseDatasource extends RemoteDatasource {
             ),
           )
           .toList();
+
+      if (usersMapped.isEmpty) {
+        return [];
+      }
 
       final list = <UsersAcceptedRequestsModel>[];
       for (final element in usersMapped) {

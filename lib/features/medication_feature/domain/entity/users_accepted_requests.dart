@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:salamtak/util/json/states_and_cities.dart';
+import '../../../../util/json/states_and_cities.dart';
 
 class UsersAcceptedRequests extends Equatable {
   const UsersAcceptedRequests({
