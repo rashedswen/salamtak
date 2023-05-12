@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
-import '../../app/bloc/app_bloc.dart';
-import '../../l10n/l10n.dart';
-import '../../util/router/screen.dart';
+import 'package:salamtak/app/bloc/app_bloc.dart';
+import 'package:salamtak/l10n/l10n.dart';
+import 'package:salamtak/util/router/screen.dart';
 
 class SalamtakDrawer extends StatelessWidget {
   const SalamtakDrawer({
@@ -88,6 +88,16 @@ class SalamtakDrawer extends StatelessWidget {
                             context.read<AppBloc>().add(AppLogoutRequested());
                           },
                         ),
+                        Row(
+                          children: [
+                            TextButton(
+                              onPressed: () {
+                                context.pushNamed(Screens.privacyPolicy.name);
+                              },
+                              child: Text(context.l10n.privacy_policy),
+                            ),
+                          ],
+                        )
                       ],
                     ),
                   ),

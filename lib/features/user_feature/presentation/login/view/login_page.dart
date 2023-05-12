@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import '../../../../../app/bloc/app_bloc.dart';
-import '../../../domain/repository/authentication_repository.dart';
-import '../cubit/cubit.dart';
-import '../widgets/login_body.dart';
-import '../../../../../l10n/l10n.dart';
-import '../../../../../util/router/screen.dart';
+import 'package:salamtak/app/bloc/app_bloc.dart';
+import 'package:salamtak/features/user_feature/domain/repository/authentication_repository.dart';
+import 'package:salamtak/features/user_feature/presentation/login/cubit/cubit.dart';
+import 'package:salamtak/features/user_feature/presentation/login/widgets/login_body.dart';
+import 'package:salamtak/util/router/screen.dart';
 
 /// {@template login_page}
 /// A description for LoginPage
@@ -25,11 +24,8 @@ class LoginPage extends StatelessWidget {
       create: (context) => LoginCubit(
         authenticationRepository: context.read<AuthenticationRepository>(),
       ),
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text(context.l10n.login),
-        ),
-        body: const LoginView(),
+      child: const Scaffold(
+        body: LoginView(),
       ),
     );
   }

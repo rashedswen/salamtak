@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../../../util/json/states_and_cities.dart';
+import 'package:salamtak/util/json/states_and_cities.dart';
 
 class CitySelector extends StatelessWidget {
   const CitySelector({
@@ -14,34 +14,27 @@ class CitySelector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      child: ListView.builder(
-        shrinkWrap: true,
-        itemCount: LocationSudan.getSudanCities().length,
-        itemBuilder: (context, index) {
-          return InkWell(
-            onTap: () {
-              onTap(LocationSudan.getSudanCities()[index]);
-            },
-            child: Column(
-              children: [
-                Container(
-                  color:
-                      selectedLocation == LocationSudan.getSudanCities()[index]
-                          ? Colors.blue.shade50
-                          : null,
-                  width: double.infinity,
-                  padding: const EdgeInsets.all(8),
-                  child: Text(
-                    LocationSudan.getSudanCities()[index].cityArabic,
-                  ),
-                ),
-                if (LocationSudan.getSudanCities().last !=
-                    LocationSudan.getSudanCities()[index])
-                  const Divider()
-              ],
-            ),
-          );
+      color: Colors.white,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      child: DropdownButton<LocationSudan>(
+        value: selectedLocation,
+        hint: const Text('اختر المدينة'),
+        isExpanded: true,
+        style: Theme.of(context).textTheme.bodyLarge,
+        dropdownColor: Colors.white,
+        borderRadius: BorderRadius.circular(10),
+        underline: const SizedBox(),
+        menuMaxHeight: 200,
+        onChanged: (value) {
+          onTap(value!);
         },
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+        items: LocationSudan.getSudanCities().map((e) {
+          return DropdownMenuItem<LocationSudan>(
+            value: e,
+            child: Text(e.cityArabic),
+          );
+        }).toList(),
       ),
     );
   }

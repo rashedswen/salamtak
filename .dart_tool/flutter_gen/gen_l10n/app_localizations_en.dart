@@ -8,6 +8,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get app_name => 'Salamtak';
 
   @override
+  String get privacy_policy => 'Privacy Policy';
+
+  @override
   String get medication_name => 'Medication Name';
 
   @override
@@ -186,4 +189,40 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get link_with_twitter => 'Link with Twitter';
+
+  @override
+  String get delete_account => 'Delete Account';
+
+  @override
+  String get delete => 'Delete';
+
+  @override
+  String get delete_account_confirmation => 'Are you sure you want to delete your account?';
+
+  @override
+  String get login_to_continue => 'Login to continue';
+
+  @override
+  String get welcome => 'Welcome';
+
+  @override
+  String get welcome_to_salamtak => 'Welcome to Salamtak';
+
+  @override
+  String get welcome_to_salamtak_description => 'Salamtak is a platform that connects people who need medications with people who can help them';
+
+  @override
+  String get continue_with_phone_number => 'Continue with Phone Number';
+
+  @override
+  String get or => 'Or';
+
+  @override
+  String get search => 'Search';
+
+  @override
+  String get type_medication_name => 'Type medication name ...';
+
+  @override
+  String get more_info => 'More Info';
 }

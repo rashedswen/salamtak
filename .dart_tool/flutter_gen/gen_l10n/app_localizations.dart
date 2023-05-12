@@ -99,6 +99,12 @@ abstract class AppLocalizations {
   /// **'Salamtak'**
   String get app_name;
 
+  /// No description provided for @privacy_policy.
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy Policy'**
+  String get privacy_policy;
+
   /// No description provided for @medication_name.
   ///
   /// In en, this message translates to:
@@ -458,6 +464,78 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Link with Twitter'**
   String get link_with_twitter;
+
+  /// No description provided for @delete_account.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Account'**
+  String get delete_account;
+
+  /// No description provided for @delete.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get delete;
+
+  /// No description provided for @delete_account_confirmation.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to delete your account?'**
+  String get delete_account_confirmation;
+
+  /// No description provided for @login_to_continue.
+  ///
+  /// In en, this message translates to:
+  /// **'Login to continue'**
+  String get login_to_continue;
+
+  /// No description provided for @welcome.
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome'**
+  String get welcome;
+
+  /// No description provided for @welcome_to_salamtak.
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome to Salamtak'**
+  String get welcome_to_salamtak;
+
+  /// No description provided for @welcome_to_salamtak_description.
+  ///
+  /// In en, this message translates to:
+  /// **'Salamtak is a platform that connects people who need medications with people who can help them'**
+  String get welcome_to_salamtak_description;
+
+  /// No description provided for @continue_with_phone_number.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue with Phone Number'**
+  String get continue_with_phone_number;
+
+  /// No description provided for @or.
+  ///
+  /// In en, this message translates to:
+  /// **'Or'**
+  String get or;
+
+  /// No description provided for @search.
+  ///
+  /// In en, this message translates to:
+  /// **'Search'**
+  String get search;
+
+  /// No description provided for @type_medication_name.
+  ///
+  /// In en, this message translates to:
+  /// **'Type medication name ...'**
+  String get type_medication_name;
+
+  /// No description provided for @more_info.
+  ///
+  /// In en, this message translates to:
+  /// **'More Info'**
+  String get more_info;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

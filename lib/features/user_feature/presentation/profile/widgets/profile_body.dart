@@ -2,11 +2,12 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import '../../../../../app/bloc/app_bloc.dart';
-import '../../../../../core/widgets/text_with_field.dart';
-import '../cubit/cubit.dart';
-import 'link_with_email.dart';
-import '../../../../../l10n/l10n.dart';
+import 'package:salamtak/app/bloc/app_bloc.dart';
+import 'package:salamtak/core/widgets/text_with_field.dart';
+import 'package:salamtak/features/user_feature/presentation/profile/cubit/cubit.dart';
+import 'package:salamtak/features/user_feature/presentation/profile/widgets/link_with_email.dart';
+import 'package:salamtak/l10n/l10n.dart';
+import 'package:salamtak/util/router/screen.dart';
 
 /// {@template profile_body}
 /// Body of the ProfilePage.
@@ -113,6 +114,47 @@ class _ProfileBodyState extends State<ProfileBody> {
             },
           ),
           const Spacer(),
+          Card(
+            child: ListTile(
+              leading: const Icon(Icons.delete),
+              title: Text(
+                context.l10n.delete_account,
+                style: const TextStyle(color: Colors.red),
+              ),
+              onTap: () {
+                // show dialog to confirm delete
+                showDialog<bool>(
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                      title: Text(context.l10n.delete_account),
+                      content: Text(context.l10n.delete_account_confirmation),
+                      actions: [
+                        TextButton(
+                          onPressed: () {
+                            context.pop(false);
+                          },
+                          child: Text(context.l10n.cancel),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            context.pop(true);
+                          },
+                          child: Text(context.l10n.delete),
+                        ),
+                      ],
+                    );
+                  },
+                ).then((value) async {
+                  if (value != null && value == true) {
+                    await context.read<ProfileCubit>().deleteAccount();
+                    if (!mounted) return;
+                    await context.pushNamed(Screens.login.name);
+                  }
+                });
+              },
+            ),
+          ),
           Card(
             child: ListTile(
               leading: const Icon(Icons.logout, color: Colors.red),

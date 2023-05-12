@@ -1,9 +1,10 @@
-import '../../domain/entity/medication_donation.dart';
-import '../../domain/entity/medication_list.dart';
-import '../../../../core/enums/enums.dart';
-import '../../../../util/json/states_and_cities.dart';
+import 'package:equatable/equatable.dart';
+import 'package:salamtak/features/medication_feature/domain/entity/medication_donation.dart';
+import 'package:salamtak/features/medication_feature/domain/entity/medication_list.dart';
+import 'package:salamtak/core/enums/enums.dart';
+import 'package:salamtak/util/json/states_and_cities.dart';
 
-class MedicationDonationModel {
+class MedicationDonationModel extends Equatable {
   const MedicationDonationModel({
     this.id,
     required this.title,

@@ -2,9 +2,8 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:meta/meta.dart';
-import '../../features/user_feature/domain/entity/salamtak_user.dart';
-import '../../features/user_feature/domain/repository/authentication_repository.dart';
+import 'package:salamtak/features/user_feature/domain/entity/salamtak_user.dart';
+import 'package:salamtak/features/user_feature/domain/repository/authentication_repository.dart';
 
 part 'app_event.dart';
 part 'app_state.dart';
@@ -29,7 +28,9 @@ class AppBloc extends Bloc<AppEvent, AppState> {
   late final StreamSubscription<SalamtakUser> _userSubscription;
 
   Future<void> _onUserChanged(
-      _AppUserChanged event, Emitter<AppState> emit) async {
+    _AppUserChanged event,
+    Emitter<AppState> emit,
+  ) async {
     final userMod = await _authenticationRepository.getUser();
     final state = event.user.isEmpty
         ? const AppState.unauthenticated()

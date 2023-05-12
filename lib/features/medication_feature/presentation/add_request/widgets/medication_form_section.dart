@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'add_request_body.dart';
-import 'medication_form_info.dart';
-import '../../../../../core/enums/enums.dart';
+import 'package:salamtak/core/enums/enums.dart';
+import 'package:salamtak/features/medication_feature/presentation/add_request/widgets/add_request_body.dart';
+import 'package:salamtak/features/medication_feature/presentation/add_request/widgets/medication_form_info.dart';
+import 'package:salamtak/util/constants.dart';
 
 class MedicationFormSection extends StatelessWidget {
   const MedicationFormSection({
@@ -15,18 +16,29 @@ class MedicationFormSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: medicineFormList
-          .map(
-            (item) => MedicationFormCard(
-              form: item.form,
-              onSelect: () => onSelect(item.form),
-              icon: item.icon,
-              color: item.color,
-              isSelected: selectedForm == item.form,
-            ),
-          )
-          .toList(),
+    return Card(
+      color: lemon,
+      elevation: 6,
+      child: Padding(
+        padding:
+            const EdgeInsetsDirectional.only(top: 16, bottom: 16, start: 16),
+        child: SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            children: medicineFormList
+                .map(
+                  (item) => MedicationFormCard(
+                    form: item.form,
+                    onSelect: () => onSelect(item.form),
+                    icon: item.icon,
+                    color: item.color,
+                    isSelected: selectedForm == item.form,
+                  ),
+                )
+                .toList(),
+          ),
+        ),
+      ),
     );
   }
 }

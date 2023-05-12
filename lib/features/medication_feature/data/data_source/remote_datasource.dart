@@ -2,13 +2,12 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:flutter/foundation.dart';
-import '../../../../core/enums/enums.dart';
-import '../model/models.dart';
-import '../model/users_accepted_requests_model.dart';
-import '../../../user_feature/data/model/salamtak_user_model.dart';
+import 'package:salamtak/core/enums/enums.dart';
+import 'package:salamtak/features/medication_feature/data/model/models.dart';
+import 'package:salamtak/features/medication_feature/data/model/users_accepted_requests_model.dart';
+import 'package:salamtak/features/user_feature/data/model/salamtak_user_model.dart';
 
 const String _medicationsRequestsCollection = 'requests';
 const String _medicationsDonationsCollection = 'donations';
@@ -85,11 +84,7 @@ abstract class RemoteDatasource {
 }
 
 class FirebaseDatasource extends RemoteDatasource {
-  FirebaseDatasource({
-    firebase_auth.FirebaseAuth? firebaseAuth,
-  }) : _firebaseAuth = firebaseAuth ?? firebase_auth.FirebaseAuth.instance;
-
-  final firebase_auth.FirebaseAuth _firebaseAuth;
+  FirebaseDatasource();
 
   @override
   Future<void> addMedicationRequest(

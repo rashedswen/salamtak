@@ -1,10 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:flutter/foundation.dart';
-import '../model/salamtak_user_model.dart';
-import '../../domain/entity/providers.dart';
-import '../../domain/entity/salamtak_user.dart';
-import '../../domain/repository/authentication_repository.dart';
+import 'package:salamtak/features/user_feature/data/model/salamtak_user_model.dart';
+import 'package:salamtak/features/user_feature/domain/entity/providers.dart';
+import 'package:salamtak/features/user_feature/domain/entity/salamtak_user.dart';
+import 'package:salamtak/features/user_feature/domain/repository/authentication_repository.dart';
 
 class AuthenticationRepositoryImpl extends AuthenticationRepository {
   AuthenticationRepositoryImpl({firebase_auth.FirebaseAuth? firebaseAuth})
@@ -53,18 +53,17 @@ class AuthenticationRepositoryImpl extends AuthenticationRepository {
   @override
   Future<SalamtakUser> getUser() async {
     final firebaseUser = _firebaseAuth.currentUser;
+    if (firebaseUser == null) return SalamtakUser.empty;
     final user = await FirebaseFirestore.instance
         .collection('users')
-        .doc(firebaseUser?.uid)
+        .doc(firebaseUser.uid)
         .get();
 
-    final sUser = user.data() == null
-        ? const SalamtakUserModel(id: '')
-        : SalamtakUserModel.fromJson(user.data()!);
+    final sUser = SalamtakUserModel.fromJson(user.data()!);
 
     return sUser
         .copyWith(
-          email: firebaseUser!.email,
+          email: firebaseUser.email,
           name: firebaseUser.displayName,
         )
         .toEntity();
@@ -248,6 +247,15 @@ class AuthenticationRepositoryImpl extends AuthenticationRepository {
       rethrow;
     }
   }
+
+  @override
+  Future<void> deleteAccount() async {
+    try {
+      await _firebaseAuth.currentUser!.delete();
+    } catch (e) {
+      rethrow;
+    }
+  }
 }
 
 extension on firebase_auth.User {
@@ -258,4 +266,6 @@ extension on firebase_auth.User {
       name: displayName,
     );
   }
+
+
 }

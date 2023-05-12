@@ -36,4 +36,6 @@ abstract class AuthenticationRepository {
   Future<void> linkWithPhoneNumber(String phoneNumber);
 
   Future<ProvidersId> getProviders();
+
+  Future<void> deleteAccount();
 }

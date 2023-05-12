@@ -72,4 +72,15 @@ class ProfileCubit extends Cubit<ProfileState> {
       emit(state.copyWith(status: ProfileStatus.error));
     }
   }
+
+  Future<void> deleteAccount() async {
+    try {
+      await _authenticationRepository.deleteAccount();
+      emit(state.copyWith(status: ProfileStatus.success));
+      await Future.delayed(const Duration(seconds: 1), () {});
+      emit(state.copyWith(status: ProfileStatus.initial));
+    } on Exception {
+      emit(state.copyWith(status: ProfileStatus.error));
+    }
+  }
 }

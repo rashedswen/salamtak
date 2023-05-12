@@ -2,10 +2,10 @@ import 'package:duration/duration.dart';
 import 'package:duration/locale.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import '../../../../../core/enums/enums.dart';
-import '../../../domain/repository/admin_medication_repository.dart';
-import '../cubit/cubit.dart';
-import '../../../../../l10n/l10n.dart';
+import 'package:salamtak/core/enums/enums.dart';
+import 'package:salamtak/features/admin_feature/domain/repository/admin_medication_repository.dart';
+import 'package:salamtak/features/admin_feature/presentation/accept_requests_donations/cubit/cubit.dart';
+import 'package:salamtak/l10n/l10n.dart';
 
 /// Get List of Medications and Accept Requests Donations Body
 ///
@@ -48,7 +48,7 @@ class AcceptRequestsDonationsBody extends StatelessWidget {
                               .map(
                                 (medication) => InkWell(
                                   onTap: () {
-                                    showDialog(
+                                    showDialog<void>(
                                       context: context,
                                       builder: (_) {
                                         return BlocProvider(

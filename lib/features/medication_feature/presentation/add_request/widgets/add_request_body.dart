@@ -1,15 +1,18 @@
-import 'dart:io';
-
 import 'package:file_picker/file_picker.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import '../../../../../core/enums/enums.dart';
-import '../../../../../core/widgets/text_with_field.dart';
-import '../../add_donation/widgets/city_selector.dart';
-import '../cubit/cubit.dart';
-import 'medication_form_section.dart';
-import '../../../../../l10n/l10n.dart';
+import 'package:salamtak/core/enums/enums.dart';
+import 'package:salamtak/core/widgets/salamtak_app_bar.dart';
+import 'package:salamtak/core/widgets/salamtak_background.dart';
+import 'package:salamtak/core/widgets/text_with_field.dart';
+import 'package:salamtak/features/medication_feature/presentation/add_donation/widgets/widgets.dart';
+import 'package:salamtak/features/medication_feature/presentation/add_request/cubit/cubit.dart';
+import 'package:salamtak/features/medication_feature/presentation/add_request/widgets/emergency_section.dart';
+import 'package:salamtak/features/medication_feature/presentation/add_request/widgets/medication_form_section.dart';
+import 'package:salamtak/features/medication_feature/presentation/add_request/widgets/select_image.dart';
+import 'package:salamtak/l10n/l10n.dart';
+import 'package:salamtak/util/constants.dart';
+import 'package:salamtak/util/json/states_and_cities.dart';
 
 part 'medication_form_card.dart';
 
@@ -24,232 +27,118 @@ class AddRequestBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        return SingleChildScrollView(
-          padding: const EdgeInsets.all(16),
-          child: BlocBuilder<AddRequestCubit, AddRequestState>(
-            builder: (context, state) {
-              return ConstrainedBox(
-                constraints: BoxConstraints(
-                  minHeight: constraints.maxHeight,
-                  minWidth: constraints.maxWidth,
-                ),
-                child: IntrinsicHeight(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      TextWithField(
-                        text: context.l10n.medication_name,
-                        onChanged: (String value) =>
-                            context.read<AddRequestCubit>().nameChanged(value),
+    return Stack(
+      children: [
+        const SalamtakBackground(),
+        LayoutBuilder(
+          builder: (context, constraints) {
+            return SafeArea(
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.all(16),
+                child: BlocBuilder<AddRequestCubit, AddRequestState>(
+                  builder: (context, state) {
+                    return ConstrainedBox(
+                      constraints: BoxConstraints(
+                        minHeight: constraints.maxHeight,
+                        minWidth: constraints.maxWidth,
                       ),
-                      const SizedBox(height: 16),
-                      SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: MedicationFormSection(
-                          selectedForm: state.form,
-                          onSelect: (MedicineForm value) => context
-                              .read<AddRequestCubit>()
-                              .formChanged(value),
-                        ),
-                      ),
-                      const SizedBox(height: 16),
-                      TextWithField(
-                        text: context.l10n.extra_description,
-                        maxLines: 6,
-                        onChanged: (String value) => context
-                            .read<AddRequestCubit>()
-                            .descriptionChanged(value),
-                      ),
-                      const SizedBox(height: 16),
-                      Row(
-                        children: EmergencyLevel.values
-                            .map(
-                              (emergencyLevel) => Expanded(
-                                child: SizedBox(
-                                  height: 100,
-                                  child: InkWell(
-                                    onTap: () => context
-                                        .read<AddRequestCubit>()
-                                        .emergencyLevelChanged(emergencyLevel),
-                                    child: Card(
-                                      color:
-                                          state.emergencyLevel == emergencyLevel
-                                              ? Colors.blue.shade50
-                                              : Colors.white,
-                                      child: Center(
-                                        child: FittedBox(
-                                          child: Text(
-                                            context.l10n.localeName == 'ar'
-                                                ? emergencyLevel.arabicName
-                                                : emergencyLevel.englishName,
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .titleSmall
-                                                ?.copyWith(
-                                                  color: emergencyLevel.color,
-                                                ),
-                                            textAlign: TextAlign.center,
-                                            softWrap: true,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
+                      child: IntrinsicHeight(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            const SalamtakAppBar(),
+                            TextWithField(
+                              text: context.l10n.medication_name,
+                              onChanged: (String value) => context
+                                  .read<AddRequestCubit>()
+                                  .nameChanged(value),
+                            ),
+                            const SizedBox(height: 16),
+                            MedicationFormSection(
+                              selectedForm: state.form,
+                              onSelect: (MedicineForm value) => context
+                                  .read<AddRequestCubit>()
+                                  .formChanged(value),
+                            ),
+                            const SizedBox(height: 16),
+                            TextWithField(
+                              text: context.l10n.extra_description,
+                              maxLines: 6,
+                              onChanged: (String value) => context
+                                  .read<AddRequestCubit>()
+                                  .descriptionChanged(value),
+                            ),
+                            const SizedBox(height: 16),
+                            EmergencySection(
+                              selectedLevel: state.emergencyLevel,
+                              onTap: (EmergencyLevel value) => context
+                                  .read<AddRequestCubit>()
+                                  .emergencyLevelChanged(value),
+                            ),
+                            const SizedBox(height: 16),
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: SelectImage(
+                                    title: context.l10n.medication_image,
+                                    image: state.image,
+                                    onImageChanged: (PlatformFile value) =>
+                                        context
+                                            .read<AddRequestCubit>()
+                                            .imageChanged(value),
                                   ),
                                 ),
-                              ),
-                            )
-                            .toList(),
-                      ),
-                      const SizedBox(height: 16),
-                      Text(
-                        context.l10n.medication_image,
-                        style: const TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                      const SizedBox(height: 16),
-                      Row(
-                        children: [
-                          ElevatedButton(
-                            onPressed: () async {
-                              final path = await selectImage();
-                              if (path != null) {
-                                await context
-                                    .read<AddRequestCubit>()
-                                    .imageChanged(path);
-                              }
-                            },
-                            child: Text(context.l10n.upload_image),
-                          ),
-                          const SizedBox(width: 16),
-                          if (state.image != null)
-                            SizedBox(
-                              height: 100,
-                              width: 100,
-                              child: !kIsWeb
-                                  ? Image.file(
-                                      File(state.image!.path!),
-                                      fit: BoxFit.contain,
-                                    )
-                                  : Image.memory(
-                                      state.image!.bytes!,
-                                      fit: BoxFit.contain,
-                                    ),
+                                const SizedBox(height: 16),
+                                Expanded(
+                                  child: SelectImage(
+                                    title: context.l10n.prescription_image,
+                                    image: state.prescription,
+                                    onImageChanged: (PlatformFile value) {
+                                      context
+                                          .read<AddRequestCubit>()
+                                          .prescriptionChanged(value);
+                                    },
+                                  ),
+                                ),
+                              ],
                             ),
-                        ],
-                      ),
-                      Text(
-                        context.l10n.prescription_image,
-                        style: const TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                      const SizedBox(height: 16),
-                      Row(
-                        children: [
-                          ElevatedButton(
-                            onPressed: () async {
-                              final path = await selectImage();
-                              if (path != null) {
-                                await context
-                                    .read<AddRequestCubit>()
-                                    .prescriptionChanged(path);
-                              }
-                            },
-                            child: Text(context.l10n.upload_image),
-                          ),
-                          const SizedBox(width: 16),
-                          if (state.prescription != null)
-                            SizedBox(
-                              height: 100,
-                              width: 100,
-                              child: !kIsWeb
-                                  ? Image.file(
-                                      File(state.prescription!.path!),
-                                      fit: BoxFit.contain,
-                                    )
-                                  : Image.memory(
-                                      state.prescription!.bytes!,
-                                      fit: BoxFit.contain,
-                                    ),
-                            ),
-                        ],
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            context.l10n.city,
-                            style: const TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 8,
-                          ),
-                          SizedBox(
-                            height: 200,
-                            width: double.infinity,
-                            child: CitySelector(
-                              onTap: (location) {
-                                context.read<AddRequestCubit>().locationChanged(
-                                      location,
-                                    );
-                              },
+                            LocationSection(
                               selectedLocation: state.location,
+                              selectedAddress: state.address,
+                              onAddressChanged: (String value) => context
+                                  .read<AddRequestCubit>()
+                                  .addressChanged(value),
+                              onLocationChanged: (LocationSudan value) =>
+                                  context
+                                      .read<AddRequestCubit>()
+                                      .locationChanged(value),
                             ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 16,
-                      ),
-                      TextWithField(
-                        text: context.l10n.address,
-                        onChanged: (value) {
-                          context.read<AddRequestCubit>().addressChanged(value);
-                        },
-                      ),
-                      const SizedBox(
-                        height: 16,
-                      ),
-                      const Spacer(),
-                      SizedBox(
-                        width: double.infinity,
-                        child: ElevatedButton(
-                          onPressed: () {
-                            context.read<AddRequestCubit>().addRequest();
-                          },
-                          child: Text(context.l10n.request),
+                            const SizedBox(
+                              height: 16,
+                            ),
+                            const Spacer(),
+                            SizedBox(
+                              width: double.infinity,
+                              child: ElevatedButton(
+                                onPressed: () {
+                                  context.read<AddRequestCubit>().addRequest();
+                                },
+                                child: Text(context.l10n.request),
+                              ),
+                            ),
+                            const SizedBox(height: 16),
+                          ],
                         ),
                       ),
-                      const SizedBox(height: 16),
-                    ],
-                  ),
+                    );
+                  },
                 ),
-              );
-            },
-          ),
-        );
-      },
+              ),
+            );
+          },
+        ),
+      ],
     );
-  }
-
-  Future<PlatformFile?> selectImage() async {
-    final pickedFile = await FilePicker.platform.pickFiles(
-      type: FileType.image,
-    );
-
-    if (pickedFile != null) {
-      final s = pickedFile.files.first;
-      return s;
-    }
-    return null;
   }
 }

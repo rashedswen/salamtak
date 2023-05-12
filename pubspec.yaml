@@ -54,3 +54,8 @@ flutter:
     - family: UiIcons
       fonts:
         - asset: assets/icons/fonts/ui_icons.ttf
+
+  assets:
+    - assets/icons/
+    - assets/images/
+    

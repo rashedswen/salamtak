@@ -15,6 +15,8 @@ enum Screens {
   adminMedicationRequestsDonations,
   doctors,
   userHistory,
+  privacyPolicy,
+  deleteAccount,
 }
 
 extension Routes on Screens {
@@ -52,6 +54,11 @@ extension Routes on Screens {
         return '/medication-details';
       case Screens.userHistory:
         return '/user-history';
+      case Screens.privacyPolicy:
+        return '/privacy-policy';
+      case Screens.deleteAccount:
+        return '/delete-account';
+
     }
   }
 
@@ -89,6 +96,10 @@ extension Routes on Screens {
         return 'Medication Details';
       case Screens.userHistory:
         return 'User History';
+      case Screens.privacyPolicy:
+        return 'Privacy Policy';
+      case Screens.deleteAccount:
+        return 'Delete Account';
     }
   }
 }

@@ -3,7 +3,6 @@ part of 'medication_details_cubit.dart';
 enum MedicationDetailsUsersListStatus { initial, loading, loaded, error }
 
 class MedicationDetailsState extends Equatable with FormzMixin {
-
   const MedicationDetailsState({
     this.errorMessage = 'Default Value',
     required this.medicationItem,

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import '../../../domain/repository/medication_repository.dart';
-import '../cubit/cubit.dart';
-import '../widgets/add_donation_body.dart';
-import '../../../../../l10n/l10n.dart';
+import 'package:salamtak/core/widgets/salamtak_drawer.dart';
+import 'package:salamtak/features/medication_feature/domain/repository/medication_repository.dart';
+import 'package:salamtak/features/medication_feature/presentation/add_donation/cubit/cubit.dart';
+import 'package:salamtak/features/medication_feature/presentation/add_donation/widgets/add_donation_body.dart';
 
 /// {@template add_donation_page}
 /// A description for AddDonationPage
@@ -21,11 +21,9 @@ class AddDonationPage extends StatelessWidget {
     return BlocProvider(
       create: (context) =>
           AddDonationCubit(context.read<MedicationRepository>()),
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text(context.l10n.add_donation),
-        ),
-        body: const AddDonationView(),
+      child: const Scaffold(
+        body: AddDonationView(),
+        drawer: SalamtakDrawer(),
       ),
     );
   }
