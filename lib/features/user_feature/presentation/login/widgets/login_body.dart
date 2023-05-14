@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 import 'package:salamtak/core/widgets/salamtak_background.dart';
 import 'package:salamtak/features/user_feature/presentation/login/cubit/cubit.dart';
 import 'package:salamtak/features/user_feature/presentation/login/widgets/salamtal_login_button.dart';
 import 'package:salamtak/l10n/l10n.dart';
+import 'package:salamtak/util/router/screen.dart';
 
 class LoginBody extends StatelessWidget {
   const LoginBody({super.key});
@@ -50,11 +52,13 @@ class LoginBody extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(height: 64),
+
                         SalamtalLoginButton(
                           text: context.l10n.continue_with_phone_number,
                           icon: FontAwesomeIcons.phone,
                           onPressed: () {
-                            context.read<LoginCubit>().logInWithGoogle();
+                            context
+                                .pushNamed(Screens.loginWithPhoneNumber.name);
                           },
                         ),
                         const SizedBox(height: 16),

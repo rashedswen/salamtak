@@ -225,4 +225,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get more_info => 'More Info';
+
+  @override
+  String get no_description => 'No Description';
+
+  @override
+  String get level_of_need => 'Level of Need';
+
+  @override
+  String get medication_type => 'Medication Type';
 }

@@ -38,4 +38,8 @@ abstract class AuthenticationRepository {
   Future<ProvidersId> getProviders();
 
   Future<void> deleteAccount();
+
+  Future<void> loginWithPhoneNumber(String phoneNumber);
+
+  Future<void> verifyPhoneNumber(String smsCode);
 }

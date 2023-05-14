@@ -58,6 +58,7 @@ class AppView extends StatelessWidget {
         colorScheme: ColorScheme.fromSwatch(
           accentColor: const Color(0xFF14967F),
         ),
+        primaryColor: const Color(0xFF14967F),
         scaffoldBackgroundColor: const Color(0XFFFEF2F4),
         textTheme: GoogleFonts.cairoTextTheme(),
       ),

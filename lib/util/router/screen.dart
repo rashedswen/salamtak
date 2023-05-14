@@ -1,5 +1,6 @@
 enum Screens {
   login,
+  loginWithPhoneNumber,
   register,
   dashboard,
   profile,
@@ -24,6 +25,8 @@ extension Routes on Screens {
     switch (this) {
       case Screens.login:
         return '/login';
+      case Screens.loginWithPhoneNumber:
+        return '/login-with-phone-number';
       case Screens.register:
         return '/register';
       case Screens.dashboard:
@@ -58,7 +61,6 @@ extension Routes on Screens {
         return '/privacy-policy';
       case Screens.deleteAccount:
         return '/delete-account';
-
     }
   }
 
@@ -66,6 +68,8 @@ extension Routes on Screens {
     switch (this) {
       case Screens.login:
         return 'Login';
+      case Screens.loginWithPhoneNumber:
+        return 'Login With Phone Number';
       case Screens.register:
         return 'Register';
       case Screens.dashboard:

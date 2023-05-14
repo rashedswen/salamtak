@@ -270,7 +270,7 @@ class LocationSudan extends Equatable {
 
   String toLocalString(String lang) {
     if (lang == 'ar') {
-      return '$cityArabic, $stateArabic,  $address';
+      return '$stateArabic, $cityArabic,  ${address ?? ''}';
     } else {
       return '$city, $state, : $address';
     }

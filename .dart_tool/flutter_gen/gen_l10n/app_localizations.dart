@@ -536,6 +536,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'More Info'**
   String get more_info;
+
+  /// No description provided for @no_description.
+  ///
+  /// In en, this message translates to:
+  /// **'No Description'**
+  String get no_description;
+
+  /// No description provided for @level_of_need.
+  ///
+  /// In en, this message translates to:
+  /// **'Level of Need'**
+  String get level_of_need;
+
+  /// No description provided for @medication_type.
+  ///
+  /// In en, this message translates to:
+  /// **'Medication Type'**
+  String get medication_type;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

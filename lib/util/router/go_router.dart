@@ -11,6 +11,7 @@ import 'package:salamtak/features/medication_feature/presentation/requests_donat
 import 'package:salamtak/features/medication_feature/presentation/user_requests_history/user_requests_history.dart';
 import 'package:salamtak/features/user_feature/presentation/dashboard/dashboard.dart';
 import 'package:salamtak/features/user_feature/presentation/login/view/login_page.dart';
+import 'package:salamtak/features/user_feature/presentation/login_with_phone_number/view/login_with_phone_number_page.dart';
 import 'package:salamtak/features/user_feature/presentation/profile/view/profile_page.dart';
 import 'package:salamtak/features/user_feature/presentation/register/view/register_page.dart';
 import 'package:salamtak/util/router/screen.dart';
@@ -22,6 +23,8 @@ class AppRouter {
       final registering = state.location == Screens.register.route;
       final privacyPolicy = state.location == Screens.privacyPolicy.route;
       final deleteAccount = state.location == Screens.deleteAccount.route;
+      final loginWithPhoneNumber =
+          state.location == Screens.loginWithPhoneNumber.route;
       // final resetingPassword = state.location == Screens.resetPassword.route;
       final loggedIn =
           context.read<AppBloc>().state.status == AppStatus.authenticated;
@@ -35,7 +38,7 @@ class AppRouter {
       if (registering && loggedIn) {
         return Screens.dashboard.route;
       }
-      if (!loggingIn && !registering && !loggedIn) {
+      if (!loggingIn && !registering && !loggedIn && !loginWithPhoneNumber) {
         return Screens.login.route;
       }
 
@@ -45,12 +48,12 @@ class AppRouter {
     routes: <RouteBase>[
       GoRoute(
         path: '/',
-        builder: (context, state) => DashboardPage(),
+        builder: (context, state) => const DashboardPage(),
       ),
       GoRoute(
         name: Screens.dashboard.name,
         path: Screens.dashboard.route,
-        builder: (context, state) => DashboardPage(),
+        builder: (context, state) => const DashboardPage(),
       ),
       GoRoute(
         path: Screens.addRequest.route,
@@ -128,6 +131,13 @@ class AppRouter {
         path: Screens.deleteAccount.route,
         builder: (context, state) {
           return const DeleteAccountPage();
+        },
+      ),
+      GoRoute(
+        name: Screens.loginWithPhoneNumber.name,
+        path: Screens.loginWithPhoneNumber.route,
+        builder: (context, state) {
+          return const LoginWithPhoneNumberPage();
         },
       ),
     ],

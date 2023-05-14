@@ -45,6 +45,15 @@ class MedicationDetailsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MedicationDetailsBody();
+    return BlocListener<MedicationDetailsCubit, MedicationDetailsState>(
+      listener: (context, state) {
+        if (state.submitStatus == MedicationDetailsSubmitRequestStatus.error) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Error'), backgroundColor: Colors.red),
+          );
+        }
+      },
+      child: const MedicationDetailsBody(),
+    );
   }
 }

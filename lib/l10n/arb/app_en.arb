@@ -145,6 +145,13 @@
 
     "type_medication_name": "Type medication name ...",
 
-    "more_info": "More Info"
+    "more_info": "More Info",
+
+    "no_description": "No Description",
+
+    "level_of_need": "Level of Need",
+
+    "medication_type": "Medication Type"
+
     
 }

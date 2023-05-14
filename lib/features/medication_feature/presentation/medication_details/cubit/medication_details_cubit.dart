@@ -2,13 +2,10 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:formz/formz.dart';
-import '../../../domain/entity/medication_list.dart';
-import '../../../domain/entity/users_accepted_requests.dart';
-import '../../../domain/repository/medication_repository.dart';
-import '../../../../user_feature/domain/entity/salamtak_user.dart';
-import '../../../../user_feature/util/validators.dart';
-import '../../../../../util/json/states_and_cities.dart';
+import 'package:salamtak/features/medication_feature/domain/entity/medication_list.dart';
+import 'package:salamtak/features/medication_feature/domain/entity/users_accepted_requests.dart';
+import 'package:salamtak/features/medication_feature/domain/repository/medication_repository.dart';
+import 'package:salamtak/features/user_feature/domain/entity/salamtak_user.dart';
 part 'medication_details_state.dart';
 
 class MedicationDetailsCubit extends Cubit<MedicationDetailsState> {
@@ -25,7 +22,7 @@ class MedicationDetailsCubit extends Cubit<MedicationDetailsState> {
   Future<void> _getUsersAcceptedRequest() async {
     emit(
       state.copyWith(
-        usersListStatus: MedicationDetailsUsersListStatus.loading,
+        usersListStatus: MedicationDetailsUserListStatus.loading,
       ),
     );
 
@@ -38,62 +35,60 @@ class MedicationDetailsCubit extends Cubit<MedicationDetailsState> {
       emit(
         state.copyWith(
           usersAcceptedRequest: users,
-          usersListStatus: MedicationDetailsUsersListStatus.loaded,
+          usersListStatus: MedicationDetailsUserListStatus.loaded,
         ),
       );
     } on Exception {
       emit(
         state.copyWith(
-          usersListStatus: MedicationDetailsUsersListStatus.error,
+          usersListStatus: MedicationDetailsUserListStatus.error,
         ),
       );
     }
   }
 
-  void nameChanged(String value) {
-    final name = Name.dirty(value);
-    emit(
-      state.copyWith(
-        name: name,
-        status: FormzSubmissionStatus.initial,
-      ),
-    );
-  }
-
-  void phoneNumberChanged(String value) {
-    final phoneNumber = PhoneNumber.dirty(value);
-    emit(
-      state.copyWith(
-        phoneNumber: phoneNumber,
-        status: FormzSubmissionStatus.initial,
-      ),
-    );
-  }
-
-  void addressChanged(String value) {
-    final address = Address.dirty(value);
-    emit(
-      state.copyWith(
-        address: address,
-        status: FormzSubmissionStatus.initial,
-      ),
-    );
-  }
-
-  void locationChanged(LocationSudan value) {
-    emit(
-      state.copyWith(
-        location: value,
-        status: FormzSubmissionStatus.initial,
-      ),
-    );
-  }
-
   Future<void> acceptMedicatin(SalamtakUser salamtakUser) async {
-    await _medicationRepository.acceptMedication(
-      medicationId: state.medicationItem.id,
-      user: salamtakUser,
-      medicationRequestType: state.medicationItem.requestType,
+    final finfIfUserAlreadyAccepted = state.usersAcceptedRequest?.where(
+      (element) => element.id == salamtakUser.id,
     );
+    if (finfIfUserAlreadyAccepted != null) {
+      emit(
+        state.copyWith(
+          submitStatus: MedicationDetailsSubmitRequestStatus.error,
+          errorMessage: 'You already accepted this medication',
+        ),
+      );
+      emit(
+        state.copyWith(
+          submitStatus: MedicationDetailsSubmitRequestStatus.initial,
+        ),
+      );
+      return;
+    }
+    emit(
+      state.copyWith(
+        submitStatus: MedicationDetailsSubmitRequestStatus.loading,
+      ),
+    );
+    try {
+      await _medicationRepository.acceptMedication(
+        medicationId: state.medicationItem.id,
+        user: salamtakUser,
+        medicationRequestType: state.medicationItem.requestType,
+      );
+      emit(
+        state.copyWith(
+          submitStatus: MedicationDetailsSubmitRequestStatus.success,
+        ),
+      );
+      await _getUsersAcceptedRequest();
+    } on Exception catch (e) {
+      emit(
+        state.copyWith(
+          submitStatus: MedicationDetailsSubmitRequestStatus.error,
+          errorMessage: e.toString(),
+        ),
+      );
+    }
   }
 }

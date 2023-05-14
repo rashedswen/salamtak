@@ -145,6 +145,12 @@
 
     "type_medication_name": "اكتب اسم الدواء ...",
 
-    "more_info": "المزيد من المعلومات"
+    "more_info": "المزيد من المعلومات",
+
+    "no_description": "لا يوجد وصف",
+
+    "level_of_need": "مستوى الحوجة",
+
+    "medication_type": "نوع الدواء"
 
 }

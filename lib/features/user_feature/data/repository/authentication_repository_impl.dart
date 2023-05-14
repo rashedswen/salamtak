@@ -256,6 +256,76 @@ class AuthenticationRepositoryImpl extends AuthenticationRepository {
       rethrow;
     }
   }
+
+  late firebase_auth.ConfirmationResult confirmationResult;
+  late String verificationId;
+
+  @override
+  Future<void> loginWithPhoneNumber(String phoneNumber) async {
+    if (kIsWeb) {
+      confirmationResult = await _firebaseAuth.signInWithPhoneNumber(
+        phoneNumber,
+      );
+    } else {
+      await _firebaseAuth.verifyPhoneNumber(
+        phoneNumber: phoneNumber,
+        verificationCompleted: (credential) async {
+          await _firebaseAuth.signInWithCredential(credential);
+          final id = _firebaseAuth.currentUser!.uid;
+          // check if user exists
+          final user = await FirebaseFirestore.instance
+              .collection('users')
+              .doc(id)
+              .get();
+          if (user.data() == null) {
+            final userModified = SalamtakUserModel(id: id);
+            await FirebaseFirestore.instance
+                .collection('users')
+                .doc(id)
+                .set(userModified.toJson());
+          }
+        },
+        verificationFailed: (e) {
+          throw e;
+        },
+        codeSent: (id, token) {
+          verificationId = id;
+        },
+        codeAutoRetrievalTimeout: (id) {
+          verificationId = id;
+        },
+      );
+    }
+  }
+
+  @override
+  Future<void> verifyPhoneNumber(String smsCode) async {
+    try {
+      if (kIsWeb) {
+        await confirmationResult.confirm(smsCode);
+      } else {
+        await _firebaseAuth.signInWithCredential(
+          firebase_auth.PhoneAuthProvider.credential(
+            verificationId: verificationId,
+            smsCode: smsCode,
+          ),
+        );
+        final id = _firebaseAuth.currentUser!.uid;
+        // check if user exists
+        final user =
+            await FirebaseFirestore.instance.collection('users').doc(id).get();
+        if (user.data() == null) {
+          final userModified = SalamtakUserModel(id: id);
+          await FirebaseFirestore.instance
+              .collection('users')
+              .doc(id)
+              .set(userModified.toJson());
+        }
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
 }
 
 extension on firebase_auth.User {
@@ -264,8 +334,7 @@ extension on firebase_auth.User {
       id: uid,
       email: email,
       name: displayName,
+      phoneNumber: phoneNumber,
     );
   }
-
-
 }

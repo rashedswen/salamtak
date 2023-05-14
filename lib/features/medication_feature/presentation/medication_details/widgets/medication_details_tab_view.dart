@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:salamtak/core/enums/enums.dart';
+import 'package:salamtak/features/medication_feature/domain/entity/entities.dart';
 import 'package:salamtak/l10n/l10n.dart';
+import 'package:salamtak/util/constants.dart';
 
 class MedicationDetailsTabView extends StatefulWidget {
-  const MedicationDetailsTabView({super.key});
+  const MedicationDetailsTabView({super.key, required this.medicationItem});
+
+  final MedicationItem medicationItem;
 
   @override
   State<MedicationDetailsTabView> createState() =>
@@ -15,54 +20,135 @@ class _MedicationDetailsTabViewState extends State<MedicationDetailsTabView>
   Widget build(BuildContext context) {
     final tabViewController = TabController(length: 3, vsync: this);
 
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        return ConstrainedBox(
-          constraints: BoxConstraints(
-            maxHeight: constraints.maxHeight,
-            maxWidth: constraints.maxWidth,
-          ),
-          child: IntrinsicHeight(
-            child: Column(
-              children: [
-                SizedBox(
-                  height: 100,
-                  child: TabBar(
-                    controller: tabViewController,
-                    tabs: [
-                      Tab(
-                        text: context.l10n.description,
-                      ),
-                      Tab(
-                        text: context.l10n.location,
-                      ),
-                      Tab(
-                        text: context.l10n.more_info,
-                      ),
-                    ],
+    return Column(
+      children: [
+        SizedBox(
+          child: TabBar(
+            controller: tabViewController,
+            indicatorColor: const Color(0xFFD0EFE9),
+            labelColor: darkGreen,
+            unselectedLabelColor: Theme.of(context).primaryColorLight,
+            dividerColor: Colors.transparent,
+            tabs: [
+              Tab(
+                child: FittedBox(
+                  child: Text(
+                    context.l10n.description,
+                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                          color: Theme.of(context).primaryColor,
+                          fontWeight: FontWeight.bold,
+                        ),
                   ),
                 ),
-                Expanded(
-                  child: TabBarView(
-                    controller: tabViewController,
+              ),
+              Tab(
+                child: FittedBox(
+                  child: Text(
+                    context.l10n.location,
+                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                          color: Theme.of(context).primaryColor,
+                          fontWeight: FontWeight.bold,
+                        ),
+                  ),
+                ),
+              ),
+              Tab(
+                child: FittedBox(
+                  child: Text(
+                    context.l10n.more_info,
+                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                          color: Theme.of(context).primaryColor,
+                          fontWeight: FontWeight.bold,
+                        ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(height: 16),
+        Expanded(
+          child: TabBarView(
+            controller: tabViewController,
+            children: [
+              Card(
+                color: lemon,
+                child: Padding(
+                  padding: const EdgeInsets.all(8),
+                  child: Text(
+                    widget.medicationItem.description ??
+                        context.l10n.no_description,
+                    style: Theme.of(context).textTheme.bodyLarge,
+                  ),
+                ),
+              ),
+              Card(
+                color: lemon,
+                child: Padding(
+                  padding: const EdgeInsets.all(8),
+                  child: Column(
                     children: [
-                      Container(
-                        child: const Text('Description'),
-                      ),
-                      Container(
-                        child: const Text('Location'),
-                      ),
-                      Container(
-                        child: const Text('More Info'),
+                      const Spacer(),
+                      Text(
+                        widget.medicationItem.location
+                                ?.toLocalString(context.l10n.localeName) ??
+                            '',
+                        style: Theme.of(context).textTheme.bodyLarge,
                       ),
                     ],
                   ),
                 ),
-              ],
-            ),
+              ),
+              Card(
+                color: lemon,
+                child: Padding(
+                  padding: const EdgeInsets.all(8),
+                  child: Column(
+                    children: [
+                      Row(
+                        children: [
+                          Text(
+                            context.l10n.level_of_need,
+                            style:
+                                Theme.of(context).textTheme.bodyLarge?.copyWith(
+                                      color: Theme.of(context).primaryColor,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                          ),
+                          const SizedBox(width: 8),
+                          Text(
+                            widget.medicationItem.emergencyLevel?.arabicName ??
+                                '',
+                            style: Theme.of(context).textTheme.bodyLarge,
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 8),
+                      Row(
+                        children: [
+                          Text(
+                            context.l10n.medication_type,
+                            style:
+                                Theme.of(context).textTheme.bodyLarge?.copyWith(
+                                      color: Theme.of(context).primaryColor,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                          ),
+                          const SizedBox(width: 8),
+                          Text(
+                            widget.medicationItem.form.arabicName,
+                            style: Theme.of(context).textTheme.bodyLarge,
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
           ),
-        );
-      },
+        ),
+      ],
     );
   }
 }
