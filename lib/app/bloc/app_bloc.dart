@@ -31,13 +31,23 @@ class AppBloc extends Bloc<AppEvent, AppState> {
     _AppUserChanged event,
     Emitter<AppState> emit,
   ) async {
+    // final state = event.user.isEmpty
+    //     ? const AppState.unauthenticated()
+    //     : AppState.authenticated(event.user);
+    // emit(
+    //   state,
+    // );
+    // await Future.delayed(const Duration(seconds: 2));
+
+    // if (state.status == AppStatus.authenticated) {
     final userMod = await _authenticationRepository.getUser();
-    final state = event.user.isEmpty
+    final newState = userMod.isEmpty
         ? const AppState.unauthenticated()
         : AppState.authenticated(userMod);
     emit(
-      state,
+      newState,
     );
+    // }
   }
 
   Future<void> _onLogoutRequested(

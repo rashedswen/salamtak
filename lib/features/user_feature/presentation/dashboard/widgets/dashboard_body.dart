@@ -23,42 +23,52 @@ class DashboardBody extends StatelessWidget {
     return Stack(
       children: [
         const SalamtakBackground(),
-        SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.all(16),
-            child: Column(
-              children: [
-                const SalamtakAppBar(),
-                const SizedBox(height: 16),
-                const SizedBox(
-                  height: 210,
-                  child: AddSection(),
-                ),
-                const SizedBox(height: 16),
-                const SearchSection(),
-                const SizedBox(height: 16),
-                Row(
-                  children: [
-                    Text(
-                      context.l10n.recent_requests_and_donations,
-                      style: Theme.of(context).textTheme.titleMedium,
-                    ),
-                    const Spacer(),
-                    IconButton(
-                      onPressed: () {
-                        context.pushNamed(
-                          Screens.requestsAndDonationslist.name,
-                        );
-                      },
-                      icon: const Icon(
-                        FontAwesomeIcons.sliders,
-                        size: 24,
+        Positioned.fill(
+          child: SafeArea(
+            child: LayoutBuilder(
+              builder: (context, constrain) {
+                return SingleChildScrollView(
+                  child: IntrinsicHeight(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8),
+                      child: Column(
+                        children: [
+                          const SalamtakAppBar(),
+                          const SizedBox(height: 16),
+                          const SizedBox(
+                            height: 210,
+                            child: AddSection(),
+                          ),
+                          const SizedBox(height: 16),
+                          const SearchSection(),
+                          const SizedBox(height: 16),
+                          Row(
+                            children: [
+                              Text(
+                                context.l10n.recent_requests_and_donations,
+                                style: Theme.of(context).textTheme.titleMedium,
+                              ),
+                              const Spacer(),
+                              IconButton(
+                                onPressed: () {
+                                  context.pushNamed(
+                                    Screens.requestsAndDonationslist.name,
+                                  );
+                                },
+                                icon: const Icon(
+                                  FontAwesomeIcons.sliders,
+                                  size: 24,
+                                ),
+                              ),
+                            ],
+                          ),
+                          const ListOfItemsSection()
+                        ],
                       ),
                     ),
-                  ],
-                ),
-                const ListOfItemsSection()
-              ],
+                  ),
+                );
+              },
             ),
           ),
         )

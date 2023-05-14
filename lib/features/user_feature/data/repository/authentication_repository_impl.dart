@@ -52,6 +52,7 @@ class AuthenticationRepositoryImpl extends AuthenticationRepository {
   /// get all user date from firebase model
   @override
   Future<SalamtakUser> getUser() async {
+    await Future.delayed(const Duration(seconds: 1));
     final firebaseUser = _firebaseAuth.currentUser;
     if (firebaseUser == null) return SalamtakUser.empty;
     final user = await FirebaseFirestore.instance
@@ -65,6 +66,8 @@ class AuthenticationRepositoryImpl extends AuthenticationRepository {
         .copyWith(
           email: firebaseUser.email,
           name: firebaseUser.displayName,
+          phoneNumber: firebaseUser.phoneNumber,
+          
         )
         .toEntity();
   }
@@ -304,11 +307,12 @@ class AuthenticationRepositoryImpl extends AuthenticationRepository {
       if (kIsWeb) {
         await confirmationResult.confirm(smsCode);
       } else {
+        final s = firebase_auth.PhoneAuthProvider.credential(
+          verificationId: verificationId,
+          smsCode: smsCode,
+        );
         await _firebaseAuth.signInWithCredential(
-          firebase_auth.PhoneAuthProvider.credential(
-            verificationId: verificationId,
-            smsCode: smsCode,
-          ),
+          s,
         );
         final id = _firebaseAuth.currentUser!.uid;
         // check if user exists

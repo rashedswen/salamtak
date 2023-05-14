@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
-import '../../domain/entity/salamtak_user.dart';
-import '../../../../util/json/states_and_cities.dart';
+import 'package:salamtak/features/user_feature/domain/entity/salamtak_user.dart';
+import 'package:salamtak/util/json/states_and_cities.dart';
 
 class SalamtakUserModel extends Equatable {
   const SalamtakUserModel({

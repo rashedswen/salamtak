@@ -45,6 +45,7 @@ class AppRouter {
       return null;
     },
     debugLogDiagnostics: true,
+    initialLocation: Screens.login.route,
     routes: <RouteBase>[
       GoRoute(
         path: '/',

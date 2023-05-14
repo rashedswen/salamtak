@@ -6,6 +6,7 @@ import 'package:salamtak/features/medication_feature/domain/repository/medicatio
 import 'package:salamtak/features/medication_feature/presentation/add_request/cubit/cubit.dart';
 import 'package:salamtak/features/user_feature/domain/repository/authentication_repository.dart';
 import 'package:salamtak/l10n/l10n.dart';
+import 'package:salamtak/util/constants.dart';
 import 'package:salamtak/util/router/go_router.dart';
 
 class App extends StatelessWidget {
@@ -59,7 +60,7 @@ class AppView extends StatelessWidget {
           accentColor: const Color(0xFF14967F),
         ),
         primaryColor: const Color(0xFF14967F),
-        scaffoldBackgroundColor: const Color(0XFFFEF2F4),
+        scaffoldBackgroundColor: lemon,
         textTheme: GoogleFonts.cairoTextTheme(),
       ),
       localizationsDelegates: AppLocalizations.localizationsDelegates,

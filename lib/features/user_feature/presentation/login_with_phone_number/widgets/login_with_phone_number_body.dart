@@ -3,9 +3,16 @@ import 'package:salamtak/core/widgets/salamtak_background.dart';
 import 'package:salamtak/features/user_feature/presentation/login_with_phone_number/cubit/cubit.dart';
 import 'package:salamtak/features/user_feature/presentation/login_with_phone_number/widgets/my_number_keyboard.dart';
 
-class LoginWithPhoneNumberBody extends StatelessWidget {
+class LoginWithPhoneNumberBody extends StatefulWidget {
   const LoginWithPhoneNumberBody({super.key});
 
+  @override
+  State<LoginWithPhoneNumberBody> createState() =>
+      _LoginWithPhoneNumberBodyState();
+}
+
+class _LoginWithPhoneNumberBodyState extends State<LoginWithPhoneNumberBody> {
+  bool isOtpSent = false;
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<LoginWithPhoneNumberCubit, LoginWithPhoneNumberState>(
@@ -14,6 +21,60 @@ class LoginWithPhoneNumberBody extends StatelessWidget {
           children: [
             const SalamtakBackground(
               isDashboard: false,
+            ),
+            AnimatedPositioned(
+              top:
+                  state.submitStatus == LoginWithPhoneNumberSubmitStatus.success
+                      ? 150
+                      : MediaQuery.of(context).size.height,
+              left: 0,
+              right: 0,
+              duration: const Duration(milliseconds: 300),
+              child: AnimatedOpacity(
+                opacity: state.submitStatus ==
+                        LoginWithPhoneNumberSubmitStatus.success
+                    ? 1
+                    : 0,
+                duration: const Duration(milliseconds: 300),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: Row(
+                    textDirection: TextDirection.ltr,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      // 6 digits 6 fields
+                      for (var i = 0; i < 6; i++)
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8),
+                            child: Container(
+                              height: 64,
+                              decoration: BoxDecoration(
+                                color: Colors.grey,
+                                borderRadius: BorderRadius.circular(
+                                  4,
+                                ),
+                              ),
+                              child: Center(
+                                child: FittedBox(
+                                  child: Text(
+                                    state.otp.length > i ? state.otp[i] : '',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .titleLarge
+                                        ?.copyWith(
+                                          color: Colors.black,
+                                        ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                    ],
+                  ),
+                ),
+              ),
             ),
             SafeArea(
               child: SizedBox.expand(
