@@ -80,11 +80,6 @@ class LoginWithPhoneNumberCubit extends Cubit<LoginWithPhoneNumberState> {
       await _authenticationRepository.verifyPhoneNumber(
         state.otp.join(),
       );
-      emit(
-        state.copyWith(
-          verificationStatus: LoginWithPhoneNumberVerificationStatus.success,
-        ),
-      );
     } on Exception {
       emit(
         state.copyWith(

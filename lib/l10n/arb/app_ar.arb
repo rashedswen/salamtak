@@ -161,7 +161,10 @@
 
     "signup_with_phone_number": "انشاء حساب باستخدام رقم الجوال",
 
+    "sent_otp": "ارسال رمز التحقق",
 
-    "sent_otp": "ارسال رمز التحقق"
+    "no_requests_found": "لا يوجد طلبات",
+
+    "medication_not_found": "الدواء غير موجود"
 
 }

@@ -161,8 +161,11 @@
 
     "signup_with_phone_number": "Signup with Phone Number",
 
+    "sent_otp": "Sent OTP",
 
-    "sent_otp": "Sent OTP"
+    "no_requests_found": "No Requests Found",
+
+    "medication_not_found": "Medication Not Found"
 
     
 }

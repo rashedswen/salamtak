@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:go_router/go_router.dart';
 import 'package:salamtak/core/widgets/salamtak_app_bar.dart';
 import 'package:salamtak/core/widgets/salamtak_background.dart';
 import 'package:salamtak/features/user_feature/presentation/dashboard/widgets/add_section.dart';
 import 'package:salamtak/features/user_feature/presentation/dashboard/widgets/list_of_items_section.dart';
 import 'package:salamtak/features/user_feature/presentation/dashboard/widgets/search_section.dart';
 import 'package:salamtak/l10n/l10n.dart';
-import 'package:salamtak/util/router/screen.dart';
 
 /// {@template dashboard_body}
 /// Body of the DashboardPage.
@@ -48,18 +45,18 @@ class DashboardBody extends StatelessWidget {
                                 context.l10n.recent_requests_and_donations,
                                 style: Theme.of(context).textTheme.titleMedium,
                               ),
-                              const Spacer(),
-                              IconButton(
-                                onPressed: () {
-                                  context.pushNamed(
-                                    Screens.requestsAndDonationslist.name,
-                                  );
-                                },
-                                icon: const Icon(
-                                  FontAwesomeIcons.sliders,
-                                  size: 24,
-                                ),
-                              ),
+                              // const Spacer(),
+                              // IconButton(
+                              //   onPressed: () {
+                              //     context.pushNamed(
+                              //       Screens.requestsAndDonationslist.name,
+                              //     );
+                              //   },
+                              //   icon: const Icon(
+                              //     FontAwesomeIcons.sliders,
+                              //     size: 24,
+                              //   ),
+                              // ),
                             ],
                           ),
                           const ListOfItemsSection()

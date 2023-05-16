@@ -79,99 +79,109 @@ class _ProfileTabViewState extends State<ProfileTabView>
           child: _selectedIndex == 0
               ? BlocBuilder<ProfileCubit, ProfileState>(
                   builder: (context, state) {
-                    if (state.userRequests != null &&
-                        state.userRequests!.isNotEmpty) {
-                      return SingleChildScrollView(
-                        child: Column(
-                          children: state.userRequests!.map((request) {
-                            return SizedBox(
-                              height: 100,
-                              child: Row(
-                                children: [
-                                  Container(
-                                    padding: const EdgeInsets.all(8),
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.circular(8),
+                    if (state.userRequests != null) {
+                      if (state.userRequests!.isNotEmpty) {
+                        return SingleChildScrollView(
+                          child: Column(
+                            children: state.userRequests!.map((request) {
+                              return SizedBox(
+                                height: 100,
+                                child: Row(
+                                  children: [
+                                    Container(
+                                      padding: const EdgeInsets.all(8),
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.circular(8),
+                                      ),
+                                      width: 70,
+                                      height: 70,
+                                      alignment: Alignment.center,
+                                      child: request.image != null
+                                          ? Image.network(
+                                              request.image!,
+                                              fit: BoxFit.cover,
+                                              width: 62,
+                                              height: 62,
+                                            )
+                                          : FaIcon(request.form.icon, size: 40),
                                     ),
-                                    width: 70,
-                                    height: 70,
-                                    alignment: Alignment.center,
-                                    child: request.image != null
-                                        ? Image.network(
-                                            request.image!,
-                                            fit: BoxFit.cover,
-                                            width: 62,
-                                            height: 62,
+                                    const SizedBox(
+                                      width: 16,
+                                    ),
+                                    Expanded(
+                                      flex: 4,
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            request.name,
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .bodyMedium
+                                                ?.copyWith(
+                                                  color: darkGreen,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                          ),
+                                          Row(
+                                            children: [
+                                              Chip(
+                                                backgroundColor:
+                                                    request.requestType.color,
+                                                padding: EdgeInsets.zero,
+                                                label: Text(
+                                                  context.l10n.localeName ==
+                                                          'ar'
+                                                      ? request.requestType
+                                                          .arabicName
+                                                      : request.requestType
+                                                          .englishName,
+                                                  style: const TextStyle(
+                                                    color: Colors.white,
+                                                  ),
+                                                ),
+                                              ),
+                                              const SizedBox(
+                                                width: 8,
+                                              ),
+                                              Chip(
+                                                backgroundColor:
+                                                    request.status.color,
+                                                padding: EdgeInsets.zero,
+                                                label: Text(
+                                                  context.l10n
+                                                              .localeName ==
+                                                          'ar'
+                                                      ? request
+                                                          .status.arabicName
+                                                      : request
+                                                          .status.englishName,
+                                                  style: const TextStyle(
+                                                    color: Colors.white,
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
                                           )
-                                        : FaIcon(request.form.icon, size: 40),
-                                  ),
-                                  const SizedBox(
-                                    width: 16,
-                                  ),
-                                  Expanded(
-                                    flex: 4,
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          request.name,
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .bodyMedium
-                                              ?.copyWith(
-                                                color: darkGreen,
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                        ),
-                                        Row(
-                                          children: [
-                                            Chip(
-                                              backgroundColor:
-                                                  request.requestType.color,
-                                              padding: EdgeInsets.zero,
-                                              label: Text(
-                                                context.l10n.localeName == 'ar'
-                                                    ? request
-                                                        .requestType.arabicName
-                                                    : request.requestType
-                                                        .englishName,
-                                                style: const TextStyle(
-                                                  color: Colors.white,
-                                                ),
-                                              ),
-                                            ),
-                                            const SizedBox(
-                                              width: 8,
-                                            ),
-                                            Chip(
-                                              backgroundColor:
-                                                  request.status.color,
-                                              padding: EdgeInsets.zero,
-                                              label: Text(
-                                                context.l10n.localeName == 'ar'
-                                                    ? request.status.arabicName
-                                                    : request
-                                                        .status.englishName,
-                                                style: const TextStyle(
-                                                  color: Colors.white,
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        )
-                                      ],
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                ],
-                              ),
-                            );
-                          }).toList(),
-                        ),
-                      );
+                                  ],
+                                ),
+                              );
+                            }).toList(),
+                          ),
+                        );
+                      }
+                      if (state.userRequests!.isEmpty) {
+                        return Center(
+                          child: Text(context.l10n.no_requests_found),
+                        );
+                      }
                     }
                     return const Center(
                       child: CircularProgressIndicator(),

@@ -29,23 +29,20 @@ class AppRouter {
       final loggedIn =
           context.read<AppBloc>().state.status == AppStatus.authenticated;
 
-      if (privacyPolicy || deleteAccount) {
-        return null;
-      }
       if (loggingIn && loggedIn) {
         return Screens.dashboard.route;
       }
-      if (registering && loggedIn) {
-        return Screens.dashboard.route;
-      }
-      if (!loggingIn && !registering && !loggedIn && !loginWithPhoneNumber) {
-        return Screens.login.route;
-      }
+      // if (registering && loggedIn) {
+      //   return Screens.dashboard.route;
+      // }
+      // if (!loggingIn && !registering && !loggedIn && !loginWithPhoneNumber) {
+      //   return Screens.login.route;
+      // }
 
-      return null;
+      return state.location;
     },
     debugLogDiagnostics: true,
-    initialLocation: Screens.login.route,
+    initialLocation: Screens.dashboard.route,
     routes: <RouteBase>[
       GoRoute(
         path: '/',
@@ -100,9 +97,13 @@ class AppRouter {
         name: Screens.medicationDetails.name,
         path: Screens.medicationDetails.route,
         builder: (context, state) {
-          final medicationItem = state.extra! as MedicationItem;
+          final medicationItem = state.extra as MedicationItem?;
+          final medicationType = state.queryParameters['requestType'] as String;
+          final medicationId = state.queryParameters['medicationId'] as String;
           return MedicationDetailsPage(
             medicationItem: medicationItem,
+            type: medicationType,
+            medicationId: medicationId,
           );
         },
       ),

@@ -59,11 +59,11 @@ class AppView extends StatelessWidget {
         colorScheme: ColorScheme.fromSwatch(
           accentColor: const Color(0xFF14967F),
         ),
-        primaryColor: const Color(0xFF14967F),
+        primaryColor: darkGreen,
         scaffoldBackgroundColor: lemon,
         textTheme: GoogleFonts.cairoTextTheme(),
       ),
-      locale: const Locale('ar'),
+      locale: const Locale('en'),
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       routerDelegate: AppRouter.router.routerDelegate,

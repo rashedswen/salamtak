@@ -3,6 +3,8 @@ import 'package:salamtak/core/widgets/salamtak_drawer.dart';
 import 'package:salamtak/features/medication_feature/domain/repository/medication_repository.dart';
 import 'package:salamtak/features/medication_feature/presentation/add_donation/cubit/cubit.dart';
 import 'package:salamtak/features/medication_feature/presentation/add_donation/widgets/add_donation_body.dart';
+import 'package:salamtak/features/medication_feature/presentation/add_donation/widgets/web/add_donation_web.dart';
+import 'package:salamtak/util/layout/responsive_layout.dart';
 
 /// {@template add_donation_page}
 /// A description for AddDonationPage
@@ -44,7 +46,11 @@ class AddDonationView extends StatelessWidget {
           Navigator.of(context).pop();
         }
       },
-      child: const AddDonationBody(),
+      child: const ResponsiveLayout(
+        mobileBody: AddDonationBody(),
+        tabletBody: AddDonationWebBody(),
+        webBody: AddDonationWebBody(),
+      ),
     );
   }
 }

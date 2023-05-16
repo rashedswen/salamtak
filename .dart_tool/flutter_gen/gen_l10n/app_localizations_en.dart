@@ -249,4 +249,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get sent_otp => 'Sent OTP';
+
+  @override
+  String get no_requests_found => 'No Requests Found';
+
+  @override
+  String get medication_not_found => 'Medication Not Found';
 }

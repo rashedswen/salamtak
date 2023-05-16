@@ -67,7 +67,6 @@ class AuthenticationRepositoryImpl extends AuthenticationRepository {
           email: firebaseUser.email,
           name: firebaseUser.displayName,
           phoneNumber: firebaseUser.phoneNumber,
-          
         )
         .toEntity();
   }
@@ -168,6 +167,12 @@ class AuthenticationRepositoryImpl extends AuthenticationRepository {
   @override
   Future<void> changeValue(String key, dynamic value) async {
     try {
+      if (key == 'name') {
+        await _firebaseAuth.currentUser!.updateDisplayName(value as String);
+      }
+      if (key == 'email') {
+        await _firebaseAuth.currentUser!.updateEmail(value as String);
+      }
       await FirebaseFirestore.instance
           .collection('users')
           .doc(_firebaseAuth.currentUser!.uid)
@@ -339,6 +344,7 @@ extension on firebase_auth.User {
       email: email,
       name: displayName,
       phoneNumber: phoneNumber,
+      photoUrl: photoURL,
     );
   }
 }

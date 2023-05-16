@@ -123,79 +123,85 @@ class _LoginWithPhoneNumberBodyState extends State<LoginWithPhoneNumberBody> {
                                               MainAxisAlignment.center,
                                           children: [
                                             for (int i = 0; i < 6; i++)
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                  horizontal: 4,
-                                                ),
-                                                child: SizedBox(
-                                                  width: 48,
-                                                  child: PhysicalModel(
-                                                    color: Colors.transparent,
-                                                    elevation: 3,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                      16,
-                                                    ),
-                                                    child: TextFormField(
-                                                      style: const TextStyle(
-                                                        fontSize: 16,
-                                                        fontWeight:
-                                                            FontWeight.w500,
+                                              Flexible(
+                                                child: Padding(
+                                                  padding: const EdgeInsets
+                                                      .symmetric(
+                                                    horizontal: 4,
+                                                  ),
+                                                  child: SizedBox(
+                                                    width: 48,
+                                                    child: PhysicalModel(
+                                                      color: Colors.transparent,
+                                                      elevation: 3,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                        16,
                                                       ),
-                                                      keyboardType:
-                                                          TextInputType.number,
-                                                      inputFormatters: [
-                                                        LengthLimitingTextInputFormatter(
-                                                          1,
+                                                      child: TextFormField(
+                                                        style: const TextStyle(
+                                                          fontSize: 16,
+                                                          fontWeight:
+                                                              FontWeight.w500,
                                                         ),
-                                                        FilteringTextInputFormatter
-                                                            .digitsOnly
-                                                      ],
-                                                      textAlign:
-                                                          TextAlign.center,
-                                                      decoration:
-                                                          InputDecoration(
-                                                        filled: true,
-                                                        border:
-                                                            OutlineInputBorder(
-                                                          borderSide:
-                                                              BorderSide.none,
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                            16,
+                                                        keyboardType:
+                                                            TextInputType
+                                                                .number,
+                                                        inputFormatters: [
+                                                          LengthLimitingTextInputFormatter(
+                                                            1,
+                                                          ),
+                                                          FilteringTextInputFormatter
+                                                              .digitsOnly
+                                                        ],
+                                                        textAlign:
+                                                            TextAlign.center,
+                                                        decoration:
+                                                            InputDecoration(
+                                                          filled: true,
+                                                          border:
+                                                              OutlineInputBorder(
+                                                            borderSide:
+                                                                BorderSide.none,
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                              16,
+                                                            ),
+                                                          ),
+                                                          contentPadding:
+                                                              const EdgeInsets
+                                                                  .all(
+                                                            8,
                                                           ),
                                                         ),
-                                                        contentPadding:
-                                                            const EdgeInsets
-                                                                .all(
-                                                          8,
-                                                        ),
-                                                      ),
-                                                      onChanged: (value) {
-                                                        if (value.length == 1 &&
-                                                            i != 5) {
-                                                          FocusScope.of(context)
-                                                              .nextFocus();
-                                                        }
-                                                        context
-                                                            .read<
-                                                                LoginWithPhoneNumberCubit>()
-                                                            .otpChanged(
-                                                              value,
-                                                              i,
-                                                            );
-                                                        if (i == 5) {
-                                                          FocusScope.of(context)
-                                                              .unfocus();
+                                                        onChanged: (value) {
+                                                          if (value.length ==
+                                                                  1 &&
+                                                              i != 5) {
+                                                            FocusScope.of(
+                                                                    context)
+                                                                .nextFocus();
+                                                          }
                                                           context
                                                               .read<
                                                                   LoginWithPhoneNumberCubit>()
-                                                              .verifyOtp();
-                                                        }
-                                                      },
-                                                      autofocus: i == 0,
+                                                              .otpChanged(
+                                                                value,
+                                                                i,
+                                                              );
+                                                          if (i == 5) {
+                                                            FocusScope.of(
+                                                                    context)
+                                                                .unfocus();
+                                                            context
+                                                                .read<
+                                                                    LoginWithPhoneNumberCubit>()
+                                                                .verifyOtp();
+                                                          }
+                                                        },
+                                                        autofocus: i == 0,
+                                                      ),
                                                     ),
                                                   ),
                                                 ),

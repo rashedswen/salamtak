@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:salamtak/app/bloc/app_bloc.dart';
 import 'package:salamtak/core/widgets/salamtak_drawer.dart';
 import 'package:salamtak/features/medication_feature/domain/repository/medication_repository.dart';
 import 'package:salamtak/features/user_feature/domain/repository/authentication_repository.dart';
@@ -9,7 +7,6 @@ import 'package:salamtak/features/user_feature/presentation/dashboard/widgets/da
 import 'package:salamtak/features/user_feature/presentation/dashboard/widgets/web/dashboard_web_body.dart';
 import 'package:salamtak/features/user_feature/presentation/profile/cubit/cubit.dart';
 import 'package:salamtak/util/layout/responsive_layout.dart';
-import 'package:salamtak/util/router/screen.dart';
 
 /// {@template dashboard_page}
 /// A description for DashboardPage
@@ -52,11 +49,13 @@ class DashboardView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<AppBloc, AppState>(
+    return BlocListener<ProfileCubit, ProfileState>(
       listener: (context, state) {
-        if (state.status == AppStatus.unauthenticated) {
-          context.pushNamed(
-            Screens.login.name,
+        if (state.status == ProfileStatus.error) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(state.error ?? 'An unknown error occured'),
+            ),
           );
         }
       },

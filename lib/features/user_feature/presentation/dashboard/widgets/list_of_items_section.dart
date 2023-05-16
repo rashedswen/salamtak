@@ -1,7 +1,4 @@
-import 'package:flutter/src/material/progress_indicator.dart';
-import 'package:flutter/src/material/refresh_indicator.dart';
-import 'package:flutter/src/widgets/basic.dart';
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/src/bloc_builder.dart';
 import 'package:provider/src/provider.dart';
 import 'package:salamtak/features/user_feature/presentation/dashboard/cubit/dashboard_cubit.dart';
@@ -14,30 +11,48 @@ class ListOfItemsSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: BlocBuilder<DashboardCubit, DashboardState>(
-        builder: (context, state) {
-          return RefreshIndicator(
-            onRefresh: () async {
-              context.read<DashboardCubit>().getRequestsAndDonations();
-            },
-            child: state is DashboardLoading
-                ? const Center(
-                    child: CircularProgressIndicator(),
-                  )
-                : Column(
-                    children: state.medicationItems
-                            ?.map(
-                              (medication) => MedicationListItem(
-                                medication: medication,
-                              ),
-                            )
-                            .toList() ??
-                        [],
-                  ),
-          );
-        },
-      ),
+    return BlocBuilder<DashboardCubit, DashboardState>(
+      builder: (context, state) {
+        return RefreshIndicator(
+          onRefresh: () async {
+            context.read<DashboardCubit>().getRequestsAndDonations();
+          },
+          child: state is DashboardLoading
+              ? const Center(
+                  child: CircularProgressIndicator(),
+                )
+              : Column(
+                  children: [
+                    // const Row(
+                    //   children: [
+                    //     // const Spacer(),
+                    //     // IconButton(
+                    //     //   onPressed: () {
+                    //     //     context.pushNamed(
+                    //     //       Screens.requestsAndDonationslist.name,
+                    //     //     );
+                    //     //   },
+                    //     //   icon: const Icon(
+                    //     //     FontAwesomeIcons.sliders,
+                    //     //     size: 24,
+                    //     //   ),
+                    //     // ),
+                    //   ],
+                    // ),
+                    Column(
+                      children: state.medicationItems
+                              ?.map(
+                                (medication) => MedicationListItem(
+                                  medication: medication,
+                                ),
+                              )
+                              .toList() ??
+                          [],
+                    ),
+                  ],
+                ),
+        );
+      },
     );
   }
 }

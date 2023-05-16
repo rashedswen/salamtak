@@ -584,6 +584,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Sent OTP'**
   String get sent_otp;
+
+  /// No description provided for @no_requests_found.
+  ///
+  /// In en, this message translates to:
+  /// **'No Requests Found'**
+  String get no_requests_found;
+
+  /// No description provided for @medication_not_found.
+  ///
+  /// In en, this message translates to:
+  /// **'Medication Not Found'**
+  String get medication_not_found;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

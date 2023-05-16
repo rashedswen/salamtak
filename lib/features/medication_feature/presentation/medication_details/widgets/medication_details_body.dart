@@ -31,7 +31,28 @@ class MedicationDetailsBody extends StatelessWidget {
                 child:
                     BlocBuilder<MedicationDetailsCubit, MedicationDetailsState>(
                   builder: (context, state) {
-                    final medication = state.medicationItem;
+                    if (state.medicationInfoStatus ==
+                        MedicationDetailsMedicationInfoStatus.loading) {
+                      return const Center(child: CircularProgressIndicator());
+                    }
+                    if (state.medicationInfoStatus ==
+                        MedicationDetailsMedicationInfoStatus.error) {
+                      return Center(
+                        child: Text(
+                          context.l10n.error,
+                          style: Theme.of(context).textTheme.titleLarge,
+                        ),
+                      );
+                    }
+                    if (state.medicationItem == null) {
+                      return Center(
+                        child: Text(
+                          context.l10n.medication_not_found,
+                          style: Theme.of(context).textTheme.titleLarge,
+                        ),
+                      );
+                    }
+                    final medication = state.medicationItem!;
                     return ConstrainedBox(
                       constraints: BoxConstraints(
                         minHeight: constraints.maxHeight,
@@ -39,7 +60,12 @@ class MedicationDetailsBody extends StatelessWidget {
                       ),
                       child: IntrinsicHeight(
                         child: Padding(
-                          padding: const EdgeInsets.all(16),
+                          padding: MediaQuery.of(context).size.width < 700
+                              ? const EdgeInsets.all(16)
+                              : const EdgeInsets.symmetric(
+                                  horizontal: 128,
+                                  vertical: 16,
+                                ),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [

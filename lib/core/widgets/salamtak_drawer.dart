@@ -20,6 +20,7 @@ class SalamtakDrawer extends StatelessWidget {
         }
       },
       child: Drawer(
+        backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
         child: Padding(
           padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
           child: LayoutBuilder(
@@ -33,71 +34,54 @@ class SalamtakDrawer extends StatelessWidget {
                   child: IntrinsicHeight(
                     child: Column(
                       children: [
-                        ListTile(
-                          leading: const Icon(Icons.home),
-                          title: Text(context.l10n.home),
+                        DrawetItem(
+                          text: context.l10n.home,
+                          icon: FontAwesomeIcons.house,
                           onTap: () {
                             context.pushNamed(
                               Screens.dashboard.name,
                             );
                           },
                         ),
-                        ListTile(
-                          leading: const FaIcon(FontAwesomeIcons.clock),
-                          title:
-                              Text(context.l10n.recent_requests_and_donations),
-                          onTap: () {
-                            context.pushNamed(
-                              Screens.userHistory.name,
-                            );
-                          },
-                        ),
+                        // DrawetItem(
+                        //   icon: FontAwesomeIcons.clock,
+                        //   text: context.l10n.recent_requests_and_donations,
+                        //   onTap: () {
+                        //     context.pushNamed(
+                        //       Screens.userHistory.name,
+                        //     );
+                        //   },
+                        // ),
                         const Spacer(),
                         if (context.read<AppBloc>().state.user.authorization ==
                                 'checker' ||
                             context.read<AppBloc>().state.user.authorization ==
                                 'admin')
-                          ListTile(
-                            leading: const FaIcon(FontAwesomeIcons.userShield),
-                            title: Text(context.l10n.adminPanel),
+                          DrawetItem(
+                            icon: FontAwesomeIcons.userShield,
+                            text: context.l10n.adminPanel,
                             onTap: () {
                               context.pushNamed(
                                 Screens.approveMedicationsRequests.name,
                               );
                             },
                           ),
-                        ListTile(
-                          leading: const FaIcon(FontAwesomeIcons.circleUser),
-                          title: Text(context.l10n.profile),
+                        DrawetItem(
+                          icon: FontAwesomeIcons.circleUser,
+                          text: context.l10n.profile,
                           onTap: () {
                             context.pushNamed(
                               Screens.profile.name,
                             );
                           },
                         ),
-                        ListTile(
-                          leading: const FaIcon(
-                            FontAwesomeIcons.arrowRightToBracket,
-                            color: Colors.red,
-                          ),
-                          title: Text(
-                            context.l10n.logout,
-                            style: const TextStyle(color: Colors.red),
-                          ),
+                        DrawetItem(
+                          icon: FontAwesomeIcons.arrowRightToBracket,
+                          text: context.l10n.logout,
                           onTap: () {
                             context.read<AppBloc>().add(AppLogoutRequested());
                           },
                         ),
-                        Row(
-                          children: [
-                            TextButton(
-                              onPressed: () {
-                                context.pushNamed(Screens.privacyPolicy.name);
-                              },
-                              child: Text(context.l10n.privacy_policy),
-                            ),
-                          ],
-                        )
                       ],
                     ),
                   ),
@@ -107,6 +91,36 @@ class SalamtakDrawer extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+class DrawetItem extends StatelessWidget {
+  const DrawetItem({
+    super.key,
+    required this.text,
+    required this.icon,
+    required this.onTap,
+  });
+
+  final String text;
+  final IconData icon;
+  final void Function() onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      leading: Icon(
+        icon,
+        color: Theme.of(context).colorScheme.onPrimary,
+      ),
+      title: Text(
+        text,
+        style: TextStyle(
+          color: Theme.of(context).colorScheme.onPrimary,
+        ),
+      ),
+      onTap: onTap,
     );
   }
 }

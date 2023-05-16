@@ -12,6 +12,7 @@ class SalamtakUser extends Equatable {
     this.location,
     this.phoneNumber,
     this.isActivated = true,
+    this.photoUrl,
   });
 
   /// The current user's email address.
@@ -30,6 +31,8 @@ class SalamtakUser extends Equatable {
   final String? phoneNumber;
 
   final bool isActivated;
+
+  final String? photoUrl;
 
   /// Empty user which represents an unauthenticated user.
   static const empty = SalamtakUser(id: '');
@@ -60,6 +63,7 @@ class SalamtakUser extends Equatable {
     LocationSudan? location,
     String? phoneNumber,
     bool? isActivated,
+    String? photoUrl,
   }) {
     return SalamtakUser(
       email: email ?? this.email,
@@ -69,6 +73,7 @@ class SalamtakUser extends Equatable {
       location: location ?? this.location,
       phoneNumber: phoneNumber ?? this.phoneNumber,
       isActivated: isActivated ?? this.isActivated,
+      photoUrl: photoUrl ?? this.photoUrl,
     );
   }
 
