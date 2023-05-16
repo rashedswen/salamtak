@@ -554,6 +554,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Medication Type'**
   String get medication_type;
+
+  /// No description provided for @edit.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit'**
+  String get edit;
+
+  /// No description provided for @not_set.
+  ///
+  /// In en, this message translates to:
+  /// **'Not Set'**
+  String get not_set;
+
+  /// No description provided for @requests_status.
+  ///
+  /// In en, this message translates to:
+  /// **'Requests Status'**
+  String get requests_status;
+
+  /// No description provided for @signup_with_phone_number.
+  ///
+  /// In en, this message translates to:
+  /// **'Signup with Phone Number'**
+  String get signup_with_phone_number;
+
+  /// No description provided for @sent_otp.
+  ///
+  /// In en, this message translates to:
+  /// **'Sent OTP'**
+  String get sent_otp;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

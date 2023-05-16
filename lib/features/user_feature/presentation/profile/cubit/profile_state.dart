@@ -9,6 +9,7 @@ class ProfileState extends Equatable {
     this.password,
     this.status = ProfileStatus.initial,
     this.providers = const ProvidersId(),
+    this.userRequests,
   });
 
   /// A description for customProperty
@@ -16,9 +17,10 @@ class ProfileState extends Equatable {
   final String? password;
   final ProfileStatus status;
   final ProvidersId providers;
+  final List<MedicationItem>? userRequests;
 
   @override
-  List<Object?> get props => [email, password, status, providers];
+  List<Object?> get props => [email, password, status, providers, userRequests];
 
   /// Creates a copy of the current ProfileState with property changes
   ProfileState copyWith({
@@ -26,12 +28,14 @@ class ProfileState extends Equatable {
     String? password,
     ProfileStatus? status,
     ProvidersId? providers,
+    List<MedicationItem>? userRequests,
   }) {
     return ProfileState(
       email: email ?? this.email,
       password: password ?? this.password,
       status: status ?? this.status,
       providers: providers ?? this.providers,
+      userRequests: userRequests ?? this.userRequests,
     );
   }
 }

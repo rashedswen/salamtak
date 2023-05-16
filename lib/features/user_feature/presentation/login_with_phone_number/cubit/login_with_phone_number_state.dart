@@ -1,6 +1,12 @@
 part of 'login_with_phone_number_cubit.dart';
 
-enum LoginWithPhoneNumberSubmitStatus { initial, success, error, loading }
+enum LoginWithPhoneNumberSubmitStatus {
+  initial,
+  success,
+  error,
+  otpSent,
+  loading
+}
 
 enum LoginWithPhoneNumberVerificationStatus {
   initial,
@@ -13,23 +19,23 @@ enum LoginWithPhoneNumberVerificationStatus {
 class LoginWithPhoneNumberState extends Equatable {
   const LoginWithPhoneNumberState({
     this.phoneNumber = '',
-    this.otp = '',
+    this.otp = const ['', '', '', '', '', ''],
     this.submitStatus = LoginWithPhoneNumberSubmitStatus.initial,
     this.verificationStatus = LoginWithPhoneNumberVerificationStatus.initial,
   });
 
   final String phoneNumber;
-  final String otp;
+  final List<String> otp;
   final LoginWithPhoneNumberSubmitStatus submitStatus;
   final LoginWithPhoneNumberVerificationStatus verificationStatus;
 
   @override
   List<Object?> get props =>
-      [phoneNumber, submitStatus, otp, verificationStatus];
+      [phoneNumber, submitStatus, verificationStatus, otp];
 
   LoginWithPhoneNumberState copyWith({
     String? phoneNumber,
-    String? otp,
+    List<String>? otp,
     LoginWithPhoneNumberSubmitStatus? submitStatus,
     LoginWithPhoneNumberVerificationStatus? verificationStatus,
   }) {

@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:salamtak/l10n/l10n.dart';
 import 'package:salamtak/util/constants.dart';
 
 class SalamtakButton extends StatelessWidget {
   const SalamtakButton({
     super.key,
+    required this.text,
+    required this.onTap,
   });
+
+  final String text;
+  final void Function() onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +33,7 @@ class SalamtakButton extends StatelessWidget {
         ],
       ),
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: onTap,
         style: ElevatedButton.styleFrom(
           backgroundColor: Colors.transparent,
           shadowColor: Colors.transparent,
@@ -38,7 +42,7 @@ class SalamtakButton extends StatelessWidget {
           ),
         ),
         child: Text(
-          context.l10n.search,
+          text,
           style: const TextStyle(
             fontSize: 20,
             color: Colors.white,

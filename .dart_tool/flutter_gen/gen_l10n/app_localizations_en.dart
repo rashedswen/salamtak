@@ -234,4 +234,19 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get medication_type => 'Medication Type';
+
+  @override
+  String get edit => 'Edit';
+
+  @override
+  String get not_set => 'Not Set';
+
+  @override
+  String get requests_status => 'Requests Status';
+
+  @override
+  String get signup_with_phone_number => 'Signup with Phone Number';
+
+  @override
+  String get sent_otp => 'Sent OTP';
 }

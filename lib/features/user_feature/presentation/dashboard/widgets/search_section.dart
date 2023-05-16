@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:salamtak/core/widgets/salamtak_button.dart';
+import 'package:salamtak/features/user_feature/presentation/dashboard/widgets/salamtak_search_bar.dart';
 import 'package:salamtak/l10n/l10n.dart';
 import 'package:salamtak/util/constants.dart';
 
@@ -12,26 +13,14 @@ class SearchSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        TextField(
-          decoration: InputDecoration(
-            fillColor: Colors.white,
-            filled: true,
-            hintText: context.l10n.type_medication_name,
-            prefixIcon: Icon(
-              Icons.search,
-              color: lightGreen,
-            ),
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(24),
-              borderSide: BorderSide.none,
-            ),
-            contentPadding: EdgeInsets.zero,
-          ),
-        ),
+        const SalamtakSearchBar(),
         const SizedBox(height: 16),
-        const SizedBox(
+        SizedBox(
           width: double.infinity,
-          child: SalamtakButton(),
+          child: SalamtakButton(
+            text: context.l10n.search,
+            onTap: () {},
+          ),
         ),
       ],
     );

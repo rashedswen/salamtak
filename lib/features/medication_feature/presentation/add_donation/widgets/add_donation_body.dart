@@ -45,6 +45,7 @@ class AddDonationBody extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             const SalamtakAppBar(),
+                            const SizedBox(height: 16),
                             TextWithField(
                               text: context.l10n.medication_name,
                               onChanged: (String value) => context

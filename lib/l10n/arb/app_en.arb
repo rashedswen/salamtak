@@ -151,7 +151,18 @@
 
     "level_of_need": "Level of Need",
 
-    "medication_type": "Medication Type"
+    "medication_type": "Medication Type",
+
+    "edit": "Edit",
+
+    "not_set": "Not Set",
+
+    "requests_status": "Requests Status",
+
+    "signup_with_phone_number": "Signup with Phone Number",
+
+
+    "sent_otp": "Sent OTP"
 
     
 }

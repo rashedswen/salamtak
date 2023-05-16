@@ -13,11 +13,10 @@ class LoginWithPhoneNumberCubit extends Cubit<LoginWithPhoneNumberState> {
 
   final AuthenticationRepository _authenticationRepository;
 
-  FutureOr<void> numberAdded(String number) {
-    final newNumber = state.phoneNumber + number;
+  FutureOr<void> phoneNumberChanged(String number) {
     emit(
       state.copyWith(
-        phoneNumber: newNumber,
+        phoneNumber: number,
       ),
     );
   }
@@ -48,7 +47,7 @@ class LoginWithPhoneNumberCubit extends Cubit<LoginWithPhoneNumberState> {
       );
       emit(
         state.copyWith(
-          submitStatus: LoginWithPhoneNumberSubmitStatus.success,
+          submitStatus: LoginWithPhoneNumberSubmitStatus.otpSent,
           phoneNumber: '',
         ),
       );
@@ -61,23 +60,12 @@ class LoginWithPhoneNumberCubit extends Cubit<LoginWithPhoneNumberState> {
     }
   }
 
-  Future<void> otpChanged(String otp) async {
-    final newOtp = state.otp + otp;
+  Future<void> otpChanged(String otp, int index) async {
+    final newOtpList = [...state.otp];
+    newOtpList[index] = otp;
     emit(
       state.copyWith(
-        otp: newOtp,
-      ),
-    );
-  }
-
-  Future<void> otpDeleted() async {
-    final newOtp = state.otp.substring(
-      0,
-      state.otp.length - 1,
-    );
-    emit(
-      state.copyWith(
-        otp: newOtp,
+        otp: newOtpList,
       ),
     );
   }
@@ -90,7 +78,7 @@ class LoginWithPhoneNumberCubit extends Cubit<LoginWithPhoneNumberState> {
     );
     try {
       await _authenticationRepository.verifyPhoneNumber(
-        state.otp,
+        state.otp.join(),
       );
       emit(
         state.copyWith(

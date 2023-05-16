@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:salamtak/core/widgets/salamtak_background.dart';
+import 'package:salamtak/core/widgets/salamtak_button.dart';
 import 'package:salamtak/features/user_feature/presentation/login_with_phone_number/cubit/cubit.dart';
-import 'package:salamtak/features/user_feature/presentation/login_with_phone_number/widgets/my_number_keyboard.dart';
+import 'package:salamtak/l10n/l10n.dart';
+import 'package:salamtak/util/layout/dimensions.dart';
 
 class LoginWithPhoneNumberBody extends StatefulWidget {
   const LoginWithPhoneNumberBody({super.key});
@@ -12,7 +15,6 @@ class LoginWithPhoneNumberBody extends StatefulWidget {
 }
 
 class _LoginWithPhoneNumberBodyState extends State<LoginWithPhoneNumberBody> {
-  bool isOtpSent = false;
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<LoginWithPhoneNumberCubit, LoginWithPhoneNumberState>(
@@ -22,51 +24,211 @@ class _LoginWithPhoneNumberBodyState extends State<LoginWithPhoneNumberBody> {
             const SalamtakBackground(
               isDashboard: false,
             ),
-            AnimatedPositioned(
-              top:
-                  state.submitStatus == LoginWithPhoneNumberSubmitStatus.success
-                      ? 150
-                      : MediaQuery.of(context).size.height,
-              left: 0,
-              right: 0,
-              duration: const Duration(milliseconds: 300),
-              child: AnimatedOpacity(
-                opacity: state.submitStatus ==
-                        LoginWithPhoneNumberSubmitStatus.success
-                    ? 1
-                    : 0,
-                duration: const Duration(milliseconds: 300),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Center(
+                child: SingleChildScrollView(
                   child: Row(
-                    textDirection: TextDirection.ltr,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      // 6 digits 6 fields
-                      for (var i = 0; i < 6; i++)
-                        Expanded(
-                          child: Padding(
-                            padding: const EdgeInsets.all(8),
-                            child: Container(
-                              height: 64,
-                              decoration: BoxDecoration(
-                                color: Colors.grey,
-                                borderRadius: BorderRadius.circular(
-                                  4,
-                                ),
-                              ),
-                              child: Center(
-                                child: FittedBox(
-                                  child: Text(
-                                    state.otp.length > i ? state.otp[i] : '',
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .titleLarge
-                                        ?.copyWith(
-                                          color: Colors.black,
-                                        ),
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 32),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              if (state.submitStatus ==
+                                  LoginWithPhoneNumberSubmitStatus.otpSent)
+                                const SizedBox(
+                                  child: Image(
+                                    image: AssetImage(
+                                      'assets/images/otp_phone.png',
+                                    ),
+                                    height: 200,
+                                    fit: BoxFit.cover,
                                   ),
                                 ),
+                              Text(
+                                context.l10n.signup_with_phone_number,
+                                style: const TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              const SizedBox(height: 48),
+                              BlocBuilder<LoginWithPhoneNumberCubit,
+                                  LoginWithPhoneNumberState>(
+                                builder: (context, state) {
+                                  if (state.submitStatus !=
+                                      LoginWithPhoneNumberSubmitStatus
+                                          .otpSent) {
+                                    return Column(
+                                      children: [
+                                        PhysicalModel(
+                                          color: Colors.transparent,
+                                          elevation: 3,
+                                          borderRadius:
+                                              BorderRadius.circular(16),
+                                          child: Directionality(
+                                            textDirection: TextDirection.ltr,
+                                            child: TextFormField(
+                                              style: const TextStyle(
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w500,
+                                              ),
+                                              textDirection: TextDirection.ltr,
+                                              keyboardType: TextInputType.phone,
+                                              decoration: InputDecoration(
+                                                hintText: '249 123 456 789',
+                                                filled: true,
+                                                border: OutlineInputBorder(
+                                                  borderSide: BorderSide.none,
+                                                  borderRadius:
+                                                      BorderRadius.circular(16),
+                                                ),
+                                                contentPadding:
+                                                    const EdgeInsets.all(8),
+                                              ),
+                                              onChanged: (value) {
+                                                context
+                                                    .read<
+                                                        LoginWithPhoneNumberCubit>()
+                                                    .phoneNumberChanged(value);
+                                              },
+                                            ),
+                                          ),
+                                        ),
+                                        const SizedBox(height: 16),
+                                        SalamtakButton(
+                                          text: context.l10n.sent_otp,
+                                          onTap: () {
+                                            context
+                                                .read<
+                                                    LoginWithPhoneNumberCubit>()
+                                                .loginWithPhoneNumber();
+                                          },
+                                        ),
+                                      ],
+                                    );
+                                  }
+                                  // otp 6 digits text fields auto focus change
+                                  return Column(
+                                    children: [
+                                      // show phone image animated
+
+                                      Directionality(
+                                        textDirection: TextDirection.ltr,
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            for (int i = 0; i < 6; i++)
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                  horizontal: 4,
+                                                ),
+                                                child: SizedBox(
+                                                  width: 48,
+                                                  child: PhysicalModel(
+                                                    color: Colors.transparent,
+                                                    elevation: 3,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                      16,
+                                                    ),
+                                                    child: TextFormField(
+                                                      style: const TextStyle(
+                                                        fontSize: 16,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                      ),
+                                                      keyboardType:
+                                                          TextInputType.number,
+                                                      inputFormatters: [
+                                                        LengthLimitingTextInputFormatter(
+                                                          1,
+                                                        ),
+                                                        FilteringTextInputFormatter
+                                                            .digitsOnly
+                                                      ],
+                                                      textAlign:
+                                                          TextAlign.center,
+                                                      decoration:
+                                                          InputDecoration(
+                                                        filled: true,
+                                                        border:
+                                                            OutlineInputBorder(
+                                                          borderSide:
+                                                              BorderSide.none,
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                            16,
+                                                          ),
+                                                        ),
+                                                        contentPadding:
+                                                            const EdgeInsets
+                                                                .all(
+                                                          8,
+                                                        ),
+                                                      ),
+                                                      onChanged: (value) {
+                                                        if (value.length == 1 &&
+                                                            i != 5) {
+                                                          FocusScope.of(context)
+                                                              .nextFocus();
+                                                        }
+                                                        context
+                                                            .read<
+                                                                LoginWithPhoneNumberCubit>()
+                                                            .otpChanged(
+                                                              value,
+                                                              i,
+                                                            );
+                                                        if (i == 5) {
+                                                          FocusScope.of(context)
+                                                              .unfocus();
+                                                          context
+                                                              .read<
+                                                                  LoginWithPhoneNumberCubit>()
+                                                              .verifyOtp();
+                                                        }
+                                                      },
+                                                      autofocus: i == 0,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                          ],
+                                        ),
+                                      ),
+                                      const SizedBox(height: 16),
+                                      SalamtakButton(
+                                        text: context.l10n.login,
+                                        onTap: () {
+                                          context
+                                              .read<LoginWithPhoneNumberCubit>()
+                                              .verifyOtp();
+                                        },
+                                      ),
+                                    ],
+                                  );
+                                },
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      if (MediaQuery.of(context).size.width > tabletWidth)
+                        Expanded(
+                          child: Container(
+                            height: MediaQuery.of(context).size.height * 0.8,
+                            decoration: const BoxDecoration(
+                              image: DecorationImage(
+                                image:
+                                    AssetImage('assets/images/login_logo.png'),
+                                fit: BoxFit.contain,
                               ),
                             ),
                           ),
@@ -76,170 +238,6 @@ class _LoginWithPhoneNumberBodyState extends State<LoginWithPhoneNumberBody> {
                 ),
               ),
             ),
-            SafeArea(
-              child: SizedBox.expand(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    // const SignInWithPhoneNumberForm(),
-                    const Spacer(
-                      flex: 3,
-                    ),
-                    Expanded(
-                      flex: 5,
-                      child: SizedBox.expand(
-                        child: Card(
-                          color: Colors.white,
-                          child: Directionality(
-                            textDirection: TextDirection.ltr,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const SizedBox(
-                                  height: 16,
-                                ),
-                                Align(
-                                  child: Text(
-                                    'Enter your phone number',
-                                    style:
-                                        Theme.of(context).textTheme.titleLarge,
-                                  ),
-                                ),
-                                const SizedBox(
-                                  height: 8,
-                                ),
-                                SizedBox(
-                                  height: 48,
-                                  child: Padding(
-                                    padding: const EdgeInsetsDirectional.only(
-                                      start: 16,
-                                    ),
-                                    child: Row(
-                                      children: [
-                                        if (state.submitStatus ==
-                                            LoginWithPhoneNumberSubmitStatus
-                                                .success)
-                                          Row(
-                                            children: [
-                                              // 6 digits 6 fields
-                                              for (var i = 0; i < 6; i++)
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(8),
-                                                  child: Container(
-                                                    width: 24,
-                                                    height: 24,
-                                                    decoration: BoxDecoration(
-                                                      color: Colors.grey[200],
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                        4,
-                                                      ),
-                                                    ),
-                                                    child: Center(
-                                                      child: Text(
-                                                        state.otp.length > i
-                                                            ? state.otp[i]
-                                                            : '',
-                                                        style: Theme.of(context)
-                                                            .textTheme
-                                                            .titleLarge
-                                                            ?.copyWith(
-                                                              color:
-                                                                  Colors.black,
-                                                            ),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                            ],
-                                          )
-                                        else
-                                          Text(
-                                            state.phoneNumber.isEmpty
-                                                ? '249xxxxxxxxx'
-                                                : state.phoneNumber,
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .titleLarge
-                                                ?.copyWith(
-                                                  color:
-                                                      state.phoneNumber.isEmpty
-                                                          ? Colors.grey
-                                                          : Colors.black,
-                                                ),
-                                          ),
-                                        const Spacer(),
-                                        if (state.phoneNumber.isNotEmpty)
-                                          IconButton(
-                                            onPressed: () {
-                                              context
-                                                  .read<
-                                                      LoginWithPhoneNumberCubit>()
-                                                  .numberDeleted();
-                                            },
-                                            icon: const Icon(
-                                              Icons.backspace,
-                                              color: Colors.grey,
-                                            ),
-                                          ),
-                                        if (state.otp.isNotEmpty)
-                                          IconButton(
-                                            onPressed: () {
-                                              context
-                                                  .read<
-                                                      LoginWithPhoneNumberCubit>()
-                                                  .otpDeleted();
-                                            },
-                                            icon: const Icon(
-                                              Icons.backspace,
-                                              color: Colors.grey,
-                                            ),
-                                          ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                Expanded(
-                                  child: MyNumberKeyboard(
-                                    onTap: (number) {
-                                      if (state.submitStatus ==
-                                          LoginWithPhoneNumberSubmitStatus
-                                              .success) {
-                                        context
-                                            .read<LoginWithPhoneNumberCubit>()
-                                            .otpChanged(number.toString());
-                                      } else {
-                                        context
-                                            .read<LoginWithPhoneNumberCubit>()
-                                            .numberAdded(number.toString());
-                                      }
-                                    },
-                                    onSubmit: () {
-                                      if (state.submitStatus ==
-                                          LoginWithPhoneNumberSubmitStatus
-                                              .success) {
-                                        context
-                                            .read<LoginWithPhoneNumberCubit>()
-                                            .verifyOtp();
-                                      } else {
-                                        context
-                                            .read<LoginWithPhoneNumberCubit>()
-                                            .loginWithPhoneNumber();
-                                      }
-                                    },
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-            )
           ],
         );
       },

@@ -151,6 +151,17 @@
 
     "level_of_need": "مستوى الحوجة",
 
-    "medication_type": "نوع الدواء"
+    "medication_type": "نوع الدواء",
+
+    "edit": "تعديل",
+
+    "not_set": "غير محدد",
+
+    "requests_status": "حالة الطلبات",
+
+    "signup_with_phone_number": "انشاء حساب باستخدام رقم الجوال",
+
+
+    "sent_otp": "ارسال رمز التحقق"
 
 }

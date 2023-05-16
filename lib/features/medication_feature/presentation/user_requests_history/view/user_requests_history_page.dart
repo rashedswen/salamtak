@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../../domain/repository/medication_repository.dart';
-import '../cubit/cubit.dart';
-import '../widgets/user_requests_history_body.dart';
+import 'package:salamtak/features/medication_feature/domain/repository/medication_repository.dart';
+import 'package:salamtak/features/medication_feature/presentation/user_requests_history/cubit/cubit.dart';
+import 'package:salamtak/features/medication_feature/presentation/user_requests_history/widgets/user_requests_history_body.dart';
 
 /// {@template user_requests_history_page}
 /// A description for UserRequestsHistoryPage
@@ -24,9 +24,7 @@ class UserRequestsHistoryPage extends StatelessWidget {
         medicationRepository: context.read<MedicationRepository>(),
       )..getHistory(),
       child: Scaffold(
-        appBar: AppBar(
-          title: const Text('User Requests History'),
-        ),
+        backgroundColor: Colors.teal[100],
         body: const UserRequestsHistoryView(),
       ),
     );

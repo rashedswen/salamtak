@@ -4,6 +4,8 @@ import 'package:salamtak/app/bloc/app_bloc.dart';
 import 'package:salamtak/features/user_feature/domain/repository/authentication_repository.dart';
 import 'package:salamtak/features/user_feature/presentation/login/cubit/cubit.dart';
 import 'package:salamtak/features/user_feature/presentation/login/widgets/login_body.dart';
+import 'package:salamtak/features/user_feature/presentation/login/widgets/web/login_body_web.dart';
+import 'package:salamtak/util/layout/responsive_layout.dart';
 import 'package:salamtak/util/router/screen.dart';
 
 /// {@template login_page}
@@ -47,7 +49,11 @@ class LoginView extends StatelessWidget {
           context.pushReplacementNamed(Screens.dashboard.name);
         }
       },
-      child: const LoginBody(),
+      child: const ResponsiveLayout(
+        mobileBody: LoginBody(),
+        tabletBody: LoginBody(),
+        webBody: LoginWebBody(),
+      ),
     );
   }
 }

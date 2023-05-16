@@ -37,16 +37,16 @@ class AddSection extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
+                    // Expanded(
+                    //   child: RowAddCard(
+                    //     icon: FontAwesomeIcons.arrowRightArrowLeft,
+                    //     text: 'تبادل',
+                    //     isVertical: false,
+                    //     onTap: () {},
+                    //   ),
+                    // ),
                     Expanded(
-                      child: RowAddCard(
-                        icon: FontAwesomeIcons.arrowRightArrowLeft,
-                        text: 'تبادل',
-                        isVertical: false,
-                        onTap: () {},
-                      ),
-                    ),
-                    Expanded(
-                      child: RowAddCard(
+                      child: AddCardItem(
                         icon: FontAwesomeIcons.capsules,
                         text: context.l10n.request,
                         onTap: () {
