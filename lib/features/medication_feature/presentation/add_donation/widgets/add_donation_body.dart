@@ -1,7 +1,9 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:salamtak/app/bloc/app_bloc.dart';
 import 'package:salamtak/core/enums/enums.dart';
+import 'package:salamtak/core/widgets/login_to_continue_widget.dart';
 import 'package:salamtak/core/widgets/salamtak_app_bar.dart';
 import 'package:salamtak/core/widgets/salamtak_background.dart';
 import 'package:salamtak/core/widgets/text_with_field.dart';
@@ -24,146 +26,152 @@ class AddDonationBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        const SalamtakBackground(),
-        SafeArea(
-          child: LayoutBuilder(
-            builder: (context, constraints) {
-              return SingleChildScrollView(
-                padding: const EdgeInsets.all(16),
-                child: BlocBuilder<AddDonationCubit, AddDonationState>(
-                  builder: (context, state) {
-                    return ConstrainedBox(
-                      constraints: BoxConstraints(
-                        minHeight: constraints.maxHeight,
-                        minWidth: constraints.maxWidth,
-                      ),
-                      child: IntrinsicHeight(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            const SalamtakAppBar(),
-                            const SizedBox(height: 16),
-                            TextWithField(
-                              text: context.l10n.medication_name,
-                              onChanged: (String value) => context
-                                  .read<AddDonationCubit>()
-                                  .nameChanged(value),
+    return context.read<AppBloc>().state.status == AppStatus.authenticated
+        ? Stack(
+            children: [
+              const SalamtakBackground(),
+              SafeArea(
+                child: LayoutBuilder(
+                  builder: (context, constraints) {
+                    return SingleChildScrollView(
+                      padding: const EdgeInsets.all(16),
+                      child: BlocBuilder<AddDonationCubit, AddDonationState>(
+                        builder: (context, state) {
+                          return ConstrainedBox(
+                            constraints: BoxConstraints(
+                              minHeight: constraints.maxHeight,
+                              minWidth: constraints.maxWidth,
                             ),
-                            const SizedBox(height: 32),
-                            MedicationFormSection(
-                              selectedForm: state.form,
-                              onSelect: (MedicineForm value) => context
-                                  .read<AddDonationCubit>()
-                                  .formChanged(value),
-                            ),
-                            const SizedBox(height: 32),
-                            Row(
-                              children: [
-                                Expanded(
-                                  child: TextWithField(
-                                    text: context.l10n.medication_quantity,
-                                    keyboardType: TextInputType.number,
+                            child: IntrinsicHeight(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: [
+                                  const SalamtakAppBar(),
+                                  const SizedBox(height: 16),
+                                  TextWithField(
+                                    text: context.l10n.medication_name,
                                     onChanged: (String value) => context
                                         .read<AddDonationCubit>()
-                                        .quantityChanged(value),
+                                        .nameChanged(value),
                                   ),
-                                ),
-                                const SizedBox(width: 16),
-                                Expanded(
-                                  child: TextWithField(
-                                    value: state.expiredAt == null
-                                        ? ''
-                                        : DateFormat('y/M/d')
-                                            .format(state.expiredAt!),
-                                    text: context.l10n.medication_expiry_date,
-                                    onTap: () {
-                                      showDatePicker(
-                                        context: context,
-                                        initialDate: DateTime.now(),
-                                        firstDate: DateTime.now(),
-                                        lastDate: DateTime.now().add(
-                                          const Duration(days: 365),
+                                  const SizedBox(height: 32),
+                                  MedicationFormSection(
+                                    selectedForm: state.form,
+                                    onSelect: (MedicineForm value) => context
+                                        .read<AddDonationCubit>()
+                                        .formChanged(value),
+                                  ),
+                                  const SizedBox(height: 32),
+                                  Row(
+                                    children: [
+                                      Expanded(
+                                        child: TextWithField(
+                                          text:
+                                              context.l10n.medication_quantity,
+                                          keyboardType: TextInputType.number,
+                                          onChanged: (String value) => context
+                                              .read<AddDonationCubit>()
+                                              .quantityChanged(value),
                                         ),
-                                      ).then(
-                                        (value) => context
+                                      ),
+                                      const SizedBox(width: 16),
+                                      Expanded(
+                                        child: TextWithField(
+                                          value: state.expiredAt == null
+                                              ? ''
+                                              : DateFormat('y/M/d')
+                                                  .format(state.expiredAt!),
+                                          text: context
+                                              .l10n.medication_expiry_date,
+                                          onTap: () {
+                                            showDatePicker(
+                                              context: context,
+                                              initialDate: DateTime.now(),
+                                              firstDate: DateTime.now(),
+                                              lastDate: DateTime.now().add(
+                                                const Duration(days: 365),
+                                              ),
+                                            ).then(
+                                              (value) => context
+                                                  .read<AddDonationCubit>()
+                                                  .expiredAtChanged(value!),
+                                            );
+                                          },
+                                          onChanged: (String value) => context
+                                              .read<AddDonationCubit>()
+                                              .expiredAtChanged(
+                                                DateTime(int.parse(value)),
+                                              ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 32),
+                                  TextWithField(
+                                    text: context.l10n.extra_description,
+                                    maxLines: 6,
+                                    onChanged: (String value) => context
+                                        .read<AddDonationCubit>()
+                                        .descriptionChanged(value),
+                                  ),
+                                  const SizedBox(height: 32),
+                                  SelectImage(
+                                    title: context.l10n.medication_image,
+                                    image: state.imageUrl,
+                                    onImageChanged: (PlatformFile value) =>
+                                        context
                                             .read<AddDonationCubit>()
-                                            .expiredAtChanged(value!),
-                                      );
-                                    },
-                                    onChanged: (String value) => context
-                                        .read<AddDonationCubit>()
-                                        .expiredAtChanged(
-                                          DateTime(int.parse(value)),
-                                        ),
+                                            .imageChanged(value),
                                   ),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(height: 32),
-                            TextWithField(
-                              text: context.l10n.extra_description,
-                              maxLines: 6,
-                              onChanged: (String value) => context
-                                  .read<AddDonationCubit>()
-                                  .descriptionChanged(value),
-                            ),
-                            const SizedBox(height: 32),
-                            SelectImage(
-                              title: context.l10n.medication_image,
-                              image: state.imageUrl,
-                              onImageChanged: (PlatformFile value) => context
-                                  .read<AddDonationCubit>()
-                                  .imageChanged(value),
-                            ),
-                            const SizedBox(
-                              height: 16,
-                            ),
-                            // location dropdown
-                            LocationSection(
-                              selectedLocation: state.location,
-                              selectedAddress: state.address,
-                              onAddressChanged: (String value) => context
-                                  .read<AddDonationCubit>()
-                                  .addressChanged(value),
-                              onLocationChanged: (LocationSudan value) =>
-                                  context
-                                      .read<AddDonationCubit>()
-                                      .locationChanged(value),
-                            ),
-                            const SizedBox(
-                              height: 16,
-                            ),
-                            const Spacer(),
-                            const SizedBox(
-                              height: 16,
-                            ),
-                            SizedBox(
-                              width: double.infinity,
-                              child: ElevatedButton(
-                                onPressed: () {
-                                  context
-                                      .read<AddDonationCubit>()
-                                      .addDonation();
-                                },
-                                child: Text(context.l10n.donation),
+                                  const SizedBox(
+                                    height: 16,
+                                  ),
+                                  // location dropdown
+                                  LocationSection(
+                                    selectedLocation: state.location,
+                                    selectedAddress: state.address,
+                                    onAddressChanged: (String value) => context
+                                        .read<AddDonationCubit>()
+                                        .addressChanged(value),
+                                    onLocationChanged: (LocationSudan value) =>
+                                        context
+                                            .read<AddDonationCubit>()
+                                            .locationChanged(value),
+                                  ),
+                                  const SizedBox(
+                                    height: 16,
+                                  ),
+                                  const Spacer(),
+                                  const SizedBox(
+                                    height: 16,
+                                  ),
+                                  SizedBox(
+                                    width: double.infinity,
+                                    child: ElevatedButton(
+                                      onPressed: () {
+                                        context
+                                            .read<AddDonationCubit>()
+                                            .addDonation();
+                                      },
+                                      child: Text(context.l10n.donation),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 16),
+                                ],
                               ),
                             ),
-                            const SizedBox(height: 16),
-                          ],
-                        ),
+                          );
+                        },
                       ),
                     );
                   },
                 ),
-              );
-            },
-          ),
-        ),
-      ],
-    );
+              ),
+            ],
+          )
+        : const LoginToContinueWidget();
   }
 
   Future<PlatformFile?> selectImage() async {

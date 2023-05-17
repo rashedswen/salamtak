@@ -165,6 +165,8 @@
 
     "no_requests_found": "لا يوجد طلبات",
 
-    "medication_not_found": "الدواء غير موجود"
+    "medication_not_found": "الدواء غير موجود",
+
+    "please_login_to_continue": "الرجاء تسجيل الدخول للمتابعة"
 
 }

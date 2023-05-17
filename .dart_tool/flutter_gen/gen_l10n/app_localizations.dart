@@ -596,6 +596,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Medication Not Found'**
   String get medication_not_found;
+
+  /// No description provided for @please_login_to_continue.
+  ///
+  /// In en, this message translates to:
+  /// **'Please login to continue'**
+  String get please_login_to_continue;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

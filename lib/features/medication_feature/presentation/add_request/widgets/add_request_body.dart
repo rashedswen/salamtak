@@ -1,7 +1,9 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:salamtak/app/bloc/app_bloc.dart';
 import 'package:salamtak/core/enums/enums.dart';
+import 'package:salamtak/core/widgets/login_to_continue_widget.dart';
 import 'package:salamtak/core/widgets/salamtak_app_bar.dart';
 import 'package:salamtak/core/widgets/salamtak_background.dart';
 import 'package:salamtak/core/widgets/text_with_field.dart';
@@ -27,118 +29,124 @@ class AddRequestBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        const SalamtakBackground(),
-        LayoutBuilder(
-          builder: (context, constraints) {
-            return SafeArea(
-              child: SingleChildScrollView(
-                padding: const EdgeInsets.all(16),
-                child: BlocBuilder<AddRequestCubit, AddRequestState>(
-                  builder: (context, state) {
-                    return ConstrainedBox(
-                      constraints: BoxConstraints(
-                        minHeight: constraints.maxHeight,
-                        minWidth: constraints.maxWidth,
-                      ),
-                      child: IntrinsicHeight(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            const SalamtakAppBar(),
-                            TextWithField(
-                              text: context.l10n.medication_name,
-                              onChanged: (String value) => context
-                                  .read<AddRequestCubit>()
-                                  .nameChanged(value),
+    return context.read<AppBloc>().state.status == AppStatus.authenticated
+        ? Stack(
+            children: [
+              const SalamtakBackground(),
+              LayoutBuilder(
+                builder: (context, constraints) {
+                  return SafeArea(
+                    child: SingleChildScrollView(
+                      padding: const EdgeInsets.all(16),
+                      child: BlocBuilder<AddRequestCubit, AddRequestState>(
+                        builder: (context, state) {
+                          return ConstrainedBox(
+                            constraints: BoxConstraints(
+                              minHeight: constraints.maxHeight,
+                              minWidth: constraints.maxWidth,
                             ),
-                            const SizedBox(height: 16),
-                            MedicationFormSection(
-                              selectedForm: state.form,
-                              onSelect: (MedicineForm value) => context
-                                  .read<AddRequestCubit>()
-                                  .formChanged(value),
-                            ),
-                            const SizedBox(height: 16),
-                            TextWithField(
-                              text: context.l10n.extra_description,
-                              maxLines: 6,
-                              onChanged: (String value) => context
-                                  .read<AddRequestCubit>()
-                                  .descriptionChanged(value),
-                            ),
-                            const SizedBox(height: 16),
-                            EmergencySection(
-                              selectedLevel: state.emergencyLevel,
-                              onTap: (EmergencyLevel value) => context
-                                  .read<AddRequestCubit>()
-                                  .emergencyLevelChanged(value),
-                            ),
-                            const SizedBox(height: 16),
-                            Row(
-                              children: [
-                                Expanded(
-                                  child: SelectImage(
-                                    title: context.l10n.medication_image,
-                                    image: state.image,
-                                    onImageChanged: (PlatformFile value) =>
+                            child: IntrinsicHeight(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: [
+                                  const SalamtakAppBar(),
+                                  TextWithField(
+                                    text: context.l10n.medication_name,
+                                    onChanged: (String value) => context
+                                        .read<AddRequestCubit>()
+                                        .nameChanged(value),
+                                  ),
+                                  const SizedBox(height: 16),
+                                  MedicationFormSection(
+                                    selectedForm: state.form,
+                                    onSelect: (MedicineForm value) => context
+                                        .read<AddRequestCubit>()
+                                        .formChanged(value),
+                                  ),
+                                  const SizedBox(height: 16),
+                                  TextWithField(
+                                    text: context.l10n.extra_description,
+                                    maxLines: 6,
+                                    onChanged: (String value) => context
+                                        .read<AddRequestCubit>()
+                                        .descriptionChanged(value),
+                                  ),
+                                  const SizedBox(height: 16),
+                                  EmergencySection(
+                                    selectedLevel: state.emergencyLevel,
+                                    onTap: (EmergencyLevel value) => context
+                                        .read<AddRequestCubit>()
+                                        .emergencyLevelChanged(value),
+                                  ),
+                                  const SizedBox(height: 16),
+                                  Row(
+                                    children: [
+                                      Expanded(
+                                        child: SelectImage(
+                                          title: context.l10n.medication_image,
+                                          image: state.image,
+                                          onImageChanged:
+                                              (PlatformFile value) => context
+                                                  .read<AddRequestCubit>()
+                                                  .imageChanged(value),
+                                        ),
+                                      ),
+                                      const SizedBox(height: 16),
+                                      Expanded(
+                                        child: SelectImage(
+                                          title:
+                                              context.l10n.prescription_image,
+                                          image: state.prescription,
+                                          onImageChanged: (PlatformFile value) {
+                                            context
+                                                .read<AddRequestCubit>()
+                                                .prescriptionChanged(value);
+                                          },
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  LocationSection(
+                                    selectedLocation: state.location,
+                                    selectedAddress: state.address,
+                                    onAddressChanged: (String value) => context
+                                        .read<AddRequestCubit>()
+                                        .addressChanged(value),
+                                    onLocationChanged: (LocationSudan value) =>
                                         context
                                             .read<AddRequestCubit>()
-                                            .imageChanged(value),
+                                            .locationChanged(value),
                                   ),
-                                ),
-                                const SizedBox(height: 16),
-                                Expanded(
-                                  child: SelectImage(
-                                    title: context.l10n.prescription_image,
-                                    image: state.prescription,
-                                    onImageChanged: (PlatformFile value) {
-                                      context
-                                          .read<AddRequestCubit>()
-                                          .prescriptionChanged(value);
-                                    },
+                                  const SizedBox(
+                                    height: 16,
                                   ),
-                                ),
-                              ],
-                            ),
-                            LocationSection(
-                              selectedLocation: state.location,
-                              selectedAddress: state.address,
-                              onAddressChanged: (String value) => context
-                                  .read<AddRequestCubit>()
-                                  .addressChanged(value),
-                              onLocationChanged: (LocationSudan value) =>
-                                  context
-                                      .read<AddRequestCubit>()
-                                      .locationChanged(value),
-                            ),
-                            const SizedBox(
-                              height: 16,
-                            ),
-                            const Spacer(),
-                            SizedBox(
-                              width: double.infinity,
-                              child: ElevatedButton(
-                                onPressed: () {
-                                  context.read<AddRequestCubit>().addRequest();
-                                },
-                                child: Text(context.l10n.request),
+                                  const Spacer(),
+                                  SizedBox(
+                                    width: double.infinity,
+                                    child: ElevatedButton(
+                                      onPressed: () {
+                                        context
+                                            .read<AddRequestCubit>()
+                                            .addRequest();
+                                      },
+                                      child: Text(context.l10n.request),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 16),
+                                ],
                               ),
                             ),
-                            const SizedBox(height: 16),
-                          ],
-                        ),
+                          );
+                        },
                       ),
-                    );
-                  },
-                ),
+                    ),
+                  );
+                },
               ),
-            );
-          },
-        ),
-      ],
-    );
+            ],
+          )
+        : const LoginToContinueWidget();
   }
 }

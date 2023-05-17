@@ -255,4 +255,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get medication_not_found => 'Medication Not Found';
+
+  @override
+  String get please_login_to_continue => 'Please login to continue';
 }

@@ -63,7 +63,7 @@ class AppView extends StatelessWidget {
         scaffoldBackgroundColor: lemon,
         textTheme: GoogleFonts.cairoTextTheme(),
       ),
-      locale: const Locale('en'),
+      locale: const Locale('ar'),
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       routerDelegate: AppRouter.router.routerDelegate,

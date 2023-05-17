@@ -165,7 +165,9 @@
 
     "no_requests_found": "No Requests Found",
 
-    "medication_not_found": "Medication Not Found"
+    "medication_not_found": "Medication Not Found",
+
+    "please_login_to_continue": "Please login to continue"
 
     
 }

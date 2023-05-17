@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:salamtak/app/bloc/app_bloc.dart';
+import 'package:salamtak/core/widgets/login_to_continue_widget.dart';
 import 'package:salamtak/core/widgets/salamtak_app_bar.dart';
 import 'package:salamtak/core/widgets/salamtak_background.dart';
 import 'package:salamtak/features/user_feature/presentation/profile/cubit/cubit.dart';
@@ -8,7 +8,6 @@ import 'package:salamtak/features/user_feature/presentation/profile/widgets/prof
 import 'package:salamtak/l10n/l10n.dart';
 import 'package:salamtak/util/constants.dart';
 import 'package:salamtak/util/layout/dimensions.dart';
-import 'package:salamtak/util/router/screen.dart';
 
 /// {@template profile_body}
 /// Body of the ProfilePage.
@@ -170,20 +169,6 @@ class _ProfileBodyState extends State<ProfileBody>
               ),
             ],
           )
-        : Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text('You are not logged in'),
-                const SizedBox(height: 16),
-                ElevatedButton(
-                  onPressed: () {
-                    context.pushNamed(Screens.login.name);
-                  },
-                  child: const Text('Login'),
-                ),
-              ],
-            ),
-          );
+        : const LoginToContinueWidget();
   }
 }
