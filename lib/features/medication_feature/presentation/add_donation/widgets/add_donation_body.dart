@@ -78,32 +78,44 @@ class AddDonationBody extends StatelessWidget {
                                       ),
                                       const SizedBox(width: 16),
                                       Expanded(
-                                        child: TextWithField(
-                                          value: state.expiredAt == null
-                                              ? ''
-                                              : DateFormat('y/M/d')
-                                                  .format(state.expiredAt!),
-                                          text: context
-                                              .l10n.medication_expiry_date,
-                                          onTap: () {
-                                            showDatePicker(
-                                              context: context,
-                                              initialDate: DateTime.now(),
-                                              firstDate: DateTime.now(),
-                                              lastDate: DateTime.now().add(
-                                                const Duration(days: 365),
-                                              ),
-                                            ).then(
-                                              (value) => context
-                                                  .read<AddDonationCubit>()
-                                                  .expiredAtChanged(value!),
+                                        child: BlocBuilder<AddDonationCubit,
+                                            AddDonationState>(
+                                          // buildWhen: (previous, current) =>
+                                          //     previous.expiredAt !=
+                                          //     current.expiredAt,
+                                          builder: (context, state) {
+                                            return TextWithField(
+                                              value: state.expiredAt == null
+                                                  ? ''
+                                                  : DateFormat('y/M/d')
+                                                      .format(state.expiredAt!),
+                                              text: context
+                                                  .l10n.medication_expiry_date,
+                                              onTap: () async {
+                                                final date =
+                                                    await showDatePicker(
+                                                  context: context,
+                                                  initialDate: DateTime.now(),
+                                                  firstDate: DateTime.now(),
+                                                  lastDate: DateTime.now().add(
+                                                    const Duration(days: 365),
+                                                  ),
+                                                );
+
+                                                await context
+                                                    .read<AddDonationCubit>()
+                                                    .expiredAtChanged(date!);
+                                              },
+                                              onChanged: (String value) =>
+                                                  context
+                                                      .read<AddDonationCubit>()
+                                                      .expiredAtChanged(
+                                                        DateTime(
+                                                          int.parse(value),
+                                                        ),
+                                                      ),
                                             );
                                           },
-                                          onChanged: (String value) => context
-                                              .read<AddDonationCubit>()
-                                              .expiredAtChanged(
-                                                DateTime(int.parse(value)),
-                                              ),
                                         ),
                                       ),
                                     ],

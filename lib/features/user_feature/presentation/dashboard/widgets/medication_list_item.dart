@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
-import 'package:salamtak/core/enums/medication_form.dart';
-import 'package:salamtak/core/enums/medication_request_type.dart';
+import 'package:salamtak/core/enums/enums.dart';
 import 'package:salamtak/features/medication_feature/domain/entity/medication_list.dart';
 import 'package:salamtak/l10n/l10n.dart';
 import 'package:salamtak/util/router/screen.dart';
@@ -138,6 +137,22 @@ class MedicationListItem extends StatelessWidget {
                       //   ),
                       // ),
                     ],
+                  ),
+                ),
+                FittedBox(
+                  child: DecoratedBox(
+                    decoration: BoxDecoration(
+                      color: medication.emergencyLevel!.color,
+                      shape: BoxShape.circle,
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(17),
+                      child: Center(
+                        child: Text(
+                          medication.emergencyLevel!.englishName,
+                        ),
+                      ),
+                    ),
                   ),
                 ),
                 const Icon(

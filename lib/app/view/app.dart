@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:salamtak/app/bloc/app_bloc.dart';
 import 'package:salamtak/features/admin_feature/domain/repository/admin_medication_repository.dart';
@@ -52,6 +53,10 @@ class AppView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
     return MaterialApp.router(
       theme: ThemeData(
         useMaterial3: true,
@@ -64,6 +69,7 @@ class AppView extends StatelessWidget {
         textTheme: GoogleFonts.cairoTextTheme(),
       ),
       locale: const Locale('ar'),
+      debugShowCheckedModeBanner: false,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       routerDelegate: AppRouter.router.routerDelegate,
