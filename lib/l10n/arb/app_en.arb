@@ -1,6 +1,8 @@
 {
     "app_name": "Salamtak",
 
+    "privacy_policy": "Privacy Policy",
+
     "medication_name": "Medication Name",
 
     "medication_quantity": "Medication Quantity",
@@ -119,6 +121,53 @@
 
     "the_request_was_not_accepted_by_any_user": "The request was not accepted by any user",
 
-    "link_with_twitter": "Link with Twitter"
+    "link_with_twitter": "Link with Twitter",
+
+    "delete_account": "Delete Account",
+
+    "delete": "Delete",
+
+    "delete_account_confirmation": "Are you sure you want to delete your account?",
+
+    "login_to_continue": "Login to continue",
+
+    "welcome": "Welcome",
+
+    "welcome_to_salamtak": "Welcome to Salamtak",
+
+    "welcome_to_salamtak_description": "Salamtak is a platform that connects people who need medications with people who can help them",
+
+    "continue_with_phone_number": "Continue with Phone Number",
+
+    "or": "Or",
+
+    "search": "Search",
+
+    "type_medication_name": "Type medication name ...",
+
+    "more_info": "More Info",
+
+    "no_description": "No Description",
+
+    "level_of_need": "Level of Need",
+
+    "medication_type": "Medication Type",
+
+    "edit": "Edit",
+
+    "not_set": "Not Set",
+
+    "requests_status": "Requests Status",
+
+    "signup_with_phone_number": "Signup with Phone Number",
+
+    "sent_otp": "Sent OTP",
+
+    "no_requests_found": "No Requests Found",
+
+    "medication_not_found": "Medication Not Found",
+
+    "please_login_to_continue": "Please login to continue"
+
     
 }

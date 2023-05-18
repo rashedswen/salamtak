@@ -18,7 +18,8 @@ class LoginState extends Equatable with FormzMixin {
   final LoginStatus loginStatus;
 
   @override
-  List<Object?> get props => [email, password, status, errorMessage, loginStatus];
+  List<Object?> get props =>
+      [email, password, status, errorMessage, loginStatus];
 
   LoginState copyWith({
     Email? email,

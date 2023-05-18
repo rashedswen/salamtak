@@ -1,10 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:flutter/foundation.dart';
-import '../model/salamtak_user_model.dart';
-import '../../domain/entity/providers.dart';
-import '../../domain/entity/salamtak_user.dart';
-import '../../domain/repository/authentication_repository.dart';
+import 'package:salamtak/features/user_feature/data/model/salamtak_user_model.dart';
+import 'package:salamtak/features/user_feature/domain/entity/providers.dart';
+import 'package:salamtak/features/user_feature/domain/entity/salamtak_user.dart';
+import 'package:salamtak/features/user_feature/domain/repository/authentication_repository.dart';
 
 class AuthenticationRepositoryImpl extends AuthenticationRepository {
   AuthenticationRepositoryImpl({firebase_auth.FirebaseAuth? firebaseAuth})
@@ -52,20 +52,21 @@ class AuthenticationRepositoryImpl extends AuthenticationRepository {
   /// get all user date from firebase model
   @override
   Future<SalamtakUser> getUser() async {
+    await Future.delayed(const Duration(seconds: 1));
     final firebaseUser = _firebaseAuth.currentUser;
+    if (firebaseUser == null) return SalamtakUser.empty;
     final user = await FirebaseFirestore.instance
         .collection('users')
-        .doc(firebaseUser?.uid)
+        .doc(firebaseUser.uid)
         .get();
 
-    final sUser = user.data() == null
-        ? const SalamtakUserModel(id: '')
-        : SalamtakUserModel.fromJson(user.data()!);
+    final sUser = SalamtakUserModel.fromJson(user.data()!);
 
     return sUser
         .copyWith(
-          email: firebaseUser!.email,
+          email: firebaseUser.email,
           name: firebaseUser.displayName,
+          phoneNumber: firebaseUser.phoneNumber,
         )
         .toEntity();
   }
@@ -166,6 +167,12 @@ class AuthenticationRepositoryImpl extends AuthenticationRepository {
   @override
   Future<void> changeValue(String key, dynamic value) async {
     try {
+      if (key == 'name') {
+        await _firebaseAuth.currentUser!.updateDisplayName(value as String);
+      }
+      if (key == 'email') {
+        await _firebaseAuth.currentUser!.updateEmail(value as String);
+      }
       await FirebaseFirestore.instance
           .collection('users')
           .doc(_firebaseAuth.currentUser!.uid)
@@ -248,6 +255,86 @@ class AuthenticationRepositoryImpl extends AuthenticationRepository {
       rethrow;
     }
   }
+
+  @override
+  Future<void> deleteAccount() async {
+    try {
+      await _firebaseAuth.currentUser!.delete();
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  late firebase_auth.ConfirmationResult confirmationResult;
+  late String verificationId;
+
+  @override
+  Future<void> loginWithPhoneNumber(String phoneNumber) async {
+    if (kIsWeb) {
+      confirmationResult = await _firebaseAuth.signInWithPhoneNumber(
+        phoneNumber,
+      );
+    } else {
+      await _firebaseAuth.verifyPhoneNumber(
+        phoneNumber: phoneNumber,
+        verificationCompleted: (credential) async {
+          await _firebaseAuth.signInWithCredential(credential);
+          final id = _firebaseAuth.currentUser!.uid;
+          // check if user exists
+          final user = await FirebaseFirestore.instance
+              .collection('users')
+              .doc(id)
+              .get();
+          if (user.data() == null) {
+            final userModified = SalamtakUserModel(id: id);
+            await FirebaseFirestore.instance
+                .collection('users')
+                .doc(id)
+                .set(userModified.toJson());
+          }
+        },
+        verificationFailed: (e) {
+          throw e;
+        },
+        codeSent: (id, token) {
+          verificationId = id;
+        },
+        codeAutoRetrievalTimeout: (id) {
+          verificationId = id;
+        },
+      );
+    }
+  }
+
+  @override
+  Future<void> verifyPhoneNumber(String smsCode) async {
+    try {
+      if (kIsWeb) {
+        await confirmationResult.confirm(smsCode);
+      } else {
+        final s = firebase_auth.PhoneAuthProvider.credential(
+          verificationId: verificationId,
+          smsCode: smsCode,
+        );
+        await _firebaseAuth.signInWithCredential(
+          s,
+        );
+        final id = _firebaseAuth.currentUser!.uid;
+        // check if user exists
+        final user =
+            await FirebaseFirestore.instance.collection('users').doc(id).get();
+        if (user.data() == null) {
+          final userModified = SalamtakUserModel(id: id);
+          await FirebaseFirestore.instance
+              .collection('users')
+              .doc(id)
+              .set(userModified.toJson());
+        }
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
 }
 
 extension on firebase_auth.User {
@@ -256,6 +343,8 @@ extension on firebase_auth.User {
       id: uid,
       email: email,
       name: displayName,
+      phoneNumber: phoneNumber,
+      photoUrl: photoURL,
     );
   }
 }

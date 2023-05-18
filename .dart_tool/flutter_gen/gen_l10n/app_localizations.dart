@@ -99,6 +99,12 @@ abstract class AppLocalizations {
   /// **'Salamtak'**
   String get app_name;
 
+  /// No description provided for @privacy_policy.
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy Policy'**
+  String get privacy_policy;
+
   /// No description provided for @medication_name.
   ///
   /// In en, this message translates to:
@@ -458,6 +464,144 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Link with Twitter'**
   String get link_with_twitter;
+
+  /// No description provided for @delete_account.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Account'**
+  String get delete_account;
+
+  /// No description provided for @delete.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get delete;
+
+  /// No description provided for @delete_account_confirmation.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to delete your account?'**
+  String get delete_account_confirmation;
+
+  /// No description provided for @login_to_continue.
+  ///
+  /// In en, this message translates to:
+  /// **'Login to continue'**
+  String get login_to_continue;
+
+  /// No description provided for @welcome.
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome'**
+  String get welcome;
+
+  /// No description provided for @welcome_to_salamtak.
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome to Salamtak'**
+  String get welcome_to_salamtak;
+
+  /// No description provided for @welcome_to_salamtak_description.
+  ///
+  /// In en, this message translates to:
+  /// **'Salamtak is a platform that connects people who need medications with people who can help them'**
+  String get welcome_to_salamtak_description;
+
+  /// No description provided for @continue_with_phone_number.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue with Phone Number'**
+  String get continue_with_phone_number;
+
+  /// No description provided for @or.
+  ///
+  /// In en, this message translates to:
+  /// **'Or'**
+  String get or;
+
+  /// No description provided for @search.
+  ///
+  /// In en, this message translates to:
+  /// **'Search'**
+  String get search;
+
+  /// No description provided for @type_medication_name.
+  ///
+  /// In en, this message translates to:
+  /// **'Type medication name ...'**
+  String get type_medication_name;
+
+  /// No description provided for @more_info.
+  ///
+  /// In en, this message translates to:
+  /// **'More Info'**
+  String get more_info;
+
+  /// No description provided for @no_description.
+  ///
+  /// In en, this message translates to:
+  /// **'No Description'**
+  String get no_description;
+
+  /// No description provided for @level_of_need.
+  ///
+  /// In en, this message translates to:
+  /// **'Level of Need'**
+  String get level_of_need;
+
+  /// No description provided for @medication_type.
+  ///
+  /// In en, this message translates to:
+  /// **'Medication Type'**
+  String get medication_type;
+
+  /// No description provided for @edit.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit'**
+  String get edit;
+
+  /// No description provided for @not_set.
+  ///
+  /// In en, this message translates to:
+  /// **'Not Set'**
+  String get not_set;
+
+  /// No description provided for @requests_status.
+  ///
+  /// In en, this message translates to:
+  /// **'Requests Status'**
+  String get requests_status;
+
+  /// No description provided for @signup_with_phone_number.
+  ///
+  /// In en, this message translates to:
+  /// **'Signup with Phone Number'**
+  String get signup_with_phone_number;
+
+  /// No description provided for @sent_otp.
+  ///
+  /// In en, this message translates to:
+  /// **'Sent OTP'**
+  String get sent_otp;
+
+  /// No description provided for @no_requests_found.
+  ///
+  /// In en, this message translates to:
+  /// **'No Requests Found'**
+  String get no_requests_found;
+
+  /// No description provided for @medication_not_found.
+  ///
+  /// In en, this message translates to:
+  /// **'Medication Not Found'**
+  String get medication_not_found;
+
+  /// No description provided for @please_login_to_continue.
+  ///
+  /// In en, this message translates to:
+  /// **'Please login to continue'**
+  String get please_login_to_continue;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../bloc/app_bloc.dart';
-import '../../features/admin_feature/domain/repository/admin_medication_repository.dart';
-import '../../features/medication_feature/domain/repository/medication_repository.dart';
-import '../../features/medication_feature/presentation/add_request/cubit/cubit.dart';
-import '../../features/user_feature/domain/repository/authentication_repository.dart';
-import '../../l10n/l10n.dart';
-import '../../util/router/go_router.dart';
+import 'package:salamtak/app/bloc/app_bloc.dart';
+import 'package:salamtak/features/admin_feature/domain/repository/admin_medication_repository.dart';
+import 'package:salamtak/features/medication_feature/domain/repository/medication_repository.dart';
+import 'package:salamtak/features/medication_feature/presentation/add_request/cubit/cubit.dart';
+import 'package:salamtak/features/user_feature/domain/repository/authentication_repository.dart';
+import 'package:salamtak/l10n/l10n.dart';
+import 'package:salamtak/util/constants.dart';
+import 'package:salamtak/util/router/go_router.dart';
 
 class App extends StatelessWidget {
   const App({
@@ -58,9 +59,11 @@ class AppView extends StatelessWidget {
         colorScheme: ColorScheme.fromSwatch(
           accentColor: const Color(0xFF14967F),
         ),
-        scaffoldBackgroundColor: const Color(0XFFFEF2F4),
+        primaryColor: darkGreen,
+        scaffoldBackgroundColor: lemon,
         textTheme: GoogleFonts.cairoTextTheme(),
       ),
+      locale: const Locale('ar'),
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       routerDelegate: AppRouter.router.routerDelegate,

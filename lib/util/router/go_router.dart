@@ -1,23 +1,30 @@
 import 'package:go_router/go_router.dart';
-import '../../app/bloc/app_bloc.dart';
-import '../../features/admin_feature/presentation/accept_requests_donations/view/accept_requests_donations_page.dart';
-import '../../features/medication_feature/domain/entity/medication_list.dart';
-import '../../features/medication_feature/presentation/add_donation/view/add_donation_page.dart';
-import '../../features/medication_feature/presentation/add_request/add_request.dart';
-import '../../features/medication_feature/presentation/medication_details/medication_details.dart';
-import '../../features/medication_feature/presentation/requests_donations_list/requests_donations_list.dart';
-import '../../features/medication_feature/presentation/user_requests_history/user_requests_history.dart';
-import '../../features/user_feature/presentation/dashboard/dashboard.dart';
-import '../../features/user_feature/presentation/login/view/login_page.dart';
-import '../../features/user_feature/presentation/profile/view/profile_page.dart';
-import '../../features/user_feature/presentation/register/view/register_page.dart';
-import 'screen.dart';
+import 'package:salamtak/app/bloc/app_bloc.dart';
+import 'package:salamtak/app/view/delete_account.dart';
+import 'package:salamtak/app/view/privacy_policy.dart';
+import 'package:salamtak/features/admin_feature/presentation/accept_requests_donations/view/accept_requests_donations_page.dart';
+import 'package:salamtak/features/medication_feature/domain/entity/medication_list.dart';
+import 'package:salamtak/features/medication_feature/presentation/add_donation/view/add_donation_page.dart';
+import 'package:salamtak/features/medication_feature/presentation/add_request/add_request.dart';
+import 'package:salamtak/features/medication_feature/presentation/medication_details/medication_details.dart';
+import 'package:salamtak/features/medication_feature/presentation/requests_donations_list/requests_donations_list.dart';
+import 'package:salamtak/features/medication_feature/presentation/user_requests_history/user_requests_history.dart';
+import 'package:salamtak/features/user_feature/presentation/dashboard/dashboard.dart';
+import 'package:salamtak/features/user_feature/presentation/login/view/login_page.dart';
+import 'package:salamtak/features/user_feature/presentation/login_with_phone_number/view/login_with_phone_number_page.dart';
+import 'package:salamtak/features/user_feature/presentation/profile/view/profile_page.dart';
+import 'package:salamtak/features/user_feature/presentation/register/view/register_page.dart';
+import 'package:salamtak/util/router/screen.dart';
 
 class AppRouter {
   static GoRouter router = GoRouter(
     redirect: (context, state) {
       final loggingIn = state.location == Screens.login.route;
       final registering = state.location == Screens.register.route;
+      final privacyPolicy = state.location == Screens.privacyPolicy.route;
+      final deleteAccount = state.location == Screens.deleteAccount.route;
+      final loginWithPhoneNumber =
+          state.location == Screens.loginWithPhoneNumber.route;
       // final resetingPassword = state.location == Screens.resetPassword.route;
       final loggedIn =
           context.read<AppBloc>().state.status == AppStatus.authenticated;
@@ -25,16 +32,17 @@ class AppRouter {
       if (loggingIn && loggedIn) {
         return Screens.dashboard.route;
       }
-      if (registering && loggedIn) {
-        return Screens.dashboard.route;
-      }
-      if (!loggingIn && !registering && !loggedIn) {
-        return Screens.login.route;
-      }
+      // if (registering && loggedIn) {
+      //   return Screens.dashboard.route;
+      // }
+      // if (!loggingIn && !registering && !loggedIn && !loginWithPhoneNumber) {
+      //   return Screens.login.route;
+      // }
 
-      return null;
+      return state.location;
     },
     debugLogDiagnostics: true,
+    initialLocation: Screens.dashboard.route,
     routes: <RouteBase>[
       GoRoute(
         path: '/',
@@ -89,9 +97,13 @@ class AppRouter {
         name: Screens.medicationDetails.name,
         path: Screens.medicationDetails.route,
         builder: (context, state) {
-          final medicationItem = state.extra! as MedicationItem;
+          final medicationItem = state.extra as MedicationItem?;
+          final medicationType = state.queryParameters['requestType'] as String;
+          final medicationId = state.queryParameters['medicationId'] as String;
           return MedicationDetailsPage(
             medicationItem: medicationItem,
+            type: medicationType,
+            medicationId: medicationId,
           );
         },
       ),
@@ -107,6 +119,27 @@ class AppRouter {
         path: Screens.profile.route,
         builder: (context, state) {
           return const ProfilePage();
+        },
+      ),
+      GoRoute(
+        name: Screens.privacyPolicy.name,
+        path: Screens.privacyPolicy.route,
+        builder: (context, state) {
+          return const PrivacyPolicyPage();
+        },
+      ),
+      GoRoute(
+        name: Screens.deleteAccount.name,
+        path: Screens.deleteAccount.route,
+        builder: (context, state) {
+          return const DeleteAccountPage();
+        },
+      ),
+      GoRoute(
+        name: Screens.loginWithPhoneNumber.name,
+        path: Screens.loginWithPhoneNumber.route,
+        builder: (context, state) {
+          return const LoginWithPhoneNumberPage();
         },
       ),
     ],

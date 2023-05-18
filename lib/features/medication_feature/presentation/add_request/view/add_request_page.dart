@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import '../../../domain/repository/medication_repository.dart';
-import '../cubit/cubit.dart';
-import '../widgets/add_request_body.dart';
-import '../../../../../l10n/l10n.dart';
+import 'package:salamtak/core/widgets/salamtak_drawer.dart';
+import 'package:salamtak/features/medication_feature/domain/repository/medication_repository.dart';
+import 'package:salamtak/features/medication_feature/presentation/add_request/cubit/cubit.dart';
+import 'package:salamtak/features/medication_feature/presentation/add_request/widgets/add_request_body.dart';
+import 'package:salamtak/features/medication_feature/presentation/add_request/widgets/web/add_request_web_body.dart';
+import 'package:salamtak/util/layout/responsive_layout.dart';
 
 /// {@template add_request_page}
 /// A description for AddRequestPage
@@ -21,11 +23,9 @@ class AddRequestPage extends StatelessWidget {
     return BlocProvider(
       create: (context) =>
           AddRequestCubit(context.read<MedicationRepository>()),
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text(context.l10n.add_request),
-        ),
-        body: const AddRequestView(),
+      child: const Scaffold(
+        body: AddRequestView(),
+        drawer: SalamtakDrawer(),
       ),
     );
   }
@@ -46,7 +46,11 @@ class AddRequestView extends StatelessWidget {
           Navigator.of(context).pop();
         }
       },
-      child: const AddRequestBody(),
+      child: const ResponsiveLayout(
+        mobileBody: AddRequestBody(),
+        tabletBody: AddRequestWebBody(),
+        webBody: AddRequestWebBody(),
+      ),
     );
   }
 }

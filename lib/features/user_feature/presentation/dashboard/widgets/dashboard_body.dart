@@ -1,12 +1,10 @@
-import 'package:duration/duration.dart';
-import 'package:duration/locale.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:go_router/go_router.dart';
-import '../../../../../core/enums/enums.dart';
-import '../cubit/cubit.dart';
-import '../../../../../l10n/l10n.dart';
-import '../../../../../util/router/screen.dart';
+import 'package:salamtak/core/widgets/salamtak_app_bar.dart';
+import 'package:salamtak/core/widgets/salamtak_background.dart';
+import 'package:salamtak/features/user_feature/presentation/dashboard/widgets/add_section.dart';
+import 'package:salamtak/features/user_feature/presentation/dashboard/widgets/list_of_items_section.dart';
+import 'package:salamtak/features/user_feature/presentation/dashboard/widgets/search_section.dart';
+import 'package:salamtak/l10n/l10n.dart';
 
 /// {@template dashboard_body}
 /// Body of the DashboardPage.
@@ -19,239 +17,59 @@ class DashboardBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<DashboardCubit, DashboardState>(
-      builder: (context, state) {
-        return Padding(
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                    child: InkWell(
-                      onTap: () {
-                        context.pushNamed(
-                          Screens.addDonation.name,
-                        );
-                      },
-                      child: Card(
-                        color: Colors.white,
-                        child: Padding(
-                          padding: const EdgeInsets.all(16),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    return Stack(
+      children: [
+        const SalamtakBackground(),
+        Positioned.fill(
+          child: SafeArea(
+            child: LayoutBuilder(
+              builder: (context, constrain) {
+                return SingleChildScrollView(
+                  child: IntrinsicHeight(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8),
+                      child: Column(
+                        children: [
+                          const SalamtakAppBar(),
+                          const SizedBox(height: 16),
+                          const SizedBox(
+                            height: 210,
+                            child: AddSection(),
+                          ),
+                          const SizedBox(height: 16),
+                          const SearchSection(),
+                          const SizedBox(height: 16),
+                          Row(
                             children: [
-                              const FaIcon(
-                                FontAwesomeIcons.handHoldingMedical,
-                                size: 100,
-                                color: Color(0xFF095D7E),
+                              Text(
+                                context.l10n.recent_requests_and_donations,
+                                style: Theme.of(context).textTheme.titleMedium,
                               ),
-                              const SizedBox(height: 16),
-                              Text(context.l10n.add_donation),
+                              // const Spacer(),
+                              // IconButton(
+                              //   onPressed: () {
+                              //     context.pushNamed(
+                              //       Screens.requestsAndDonationslist.name,
+                              //     );
+                              //   },
+                              //   icon: const Icon(
+                              //     FontAwesomeIcons.sliders,
+                              //     size: 24,
+                              //   ),
+                              // ),
                             ],
                           ),
-                        ),
+                          const ListOfItemsSection()
+                        ],
                       ),
                     ),
                   ),
-                  const SizedBox(width: 16),
-                  Expanded(
-                    child: InkWell(
-                      onTap: () {
-                        context.pushNamed(
-                          Screens.addRequest.name,
-                        );
-                      },
-                      child: Card(
-                        color: Colors.blue.shade100,
-                        child: Padding(
-                          padding: const EdgeInsets.all(16),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              const FaIcon(
-                                FontAwesomeIcons.capsules,
-                                size: 100,
-                              ),
-                              const SizedBox(height: 16),
-                              Text(context.l10n.add_request),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 16),
-              Row(
-                children: [
-                  Text(
-                    context.l10n.recent_requests_and_donations,
-                    style: Theme.of(context).textTheme.titleMedium,
-                  ),
-                  const Spacer(),
-                  TextButton(
-                    onPressed: () {
-                      context.pushNamed(
-                        Screens.requestsAndDonationslist.name,
-                      );
-                    },
-                    child: Text(context.l10n.view_all),
-                  ),
-                ],
-              ),
-              Expanded(
-                child: RefreshIndicator(
-                  onRefresh: () async {
-                    context.read<DashboardCubit>().getRequestsAndDonations();
-                  },
-                  child: state is DashboardLoading
-                      ? const Center(
-                          child: CircularProgressIndicator(),
-                        )
-                      : SingleChildScrollView(
-                          child: Column(
-                            children: state.medicationItems
-                                    ?.map(
-                                      (e) => InkWell(
-                                        onTap: () {
-                                          context.pushNamed(
-                                            Screens.medicationDetails.name,
-                                            extra: e,
-                                          );
-                                        },
-                                        child: Card(
-                                          shape: RoundedRectangleBorder(
-                                            side: BorderSide(
-                                              color: e.requestType ==
-                                                      MedicationRequestType
-                                                          .donation
-                                                  ? Colors.green
-                                                  : Colors.red,
-                                            ),
-                                            borderRadius:
-                                                BorderRadius.circular(8),
-                                          ),
-                                          elevation: 1,
-                                          child: Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                              horizontal: 16,
-                                              vertical: 8,
-                                            ),
-                                            child: Row(
-                                              children: [
-                                                if (e.image != null)
-                                                  SizedBox(
-                                                    height: 70,
-                                                    width: 70,
-                                                    child: ClipRRect(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                        8,
-                                                      ),
-                                                      child: Image.network(
-                                                        e.image!,
-                                                        fit: BoxFit.cover,
-                                                      ),
-                                                    ),
-                                                  )
-                                                else
-                                                  SizedBox(
-                                                    height: 70,
-                                                    width: 70,
-                                                    child: Center(
-                                                      child: FaIcon(
-                                                        e.form.icon,
-                                                        size: 50,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                const SizedBox(width: 16),
-                                                Expanded(
-                                                  child: Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Row(
-                                                        children: [
-                                                          Text(
-                                                            e.name,
-                                                            style:
-                                                                const TextStyle(
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold,
-                                                            ),
-                                                          ),
-                                                          const Spacer(),
-                                                          Text(
-                                                            prettyDuration(
-                                                              DateTime.now()
-                                                                  .difference(
-                                                                e.createdDate,
-                                                              ),
-                                                              abbreviated: true,
-                                                              locale: DurationLocale
-                                                                  .fromLanguageCode(
-                                                                context.l10n
-                                                                    .localeName,
-                                                              )!,
-                                                              first: true,
-                                                            ),
-                                                            style:
-                                                                const TextStyle(
-                                                              color:
-                                                                  Colors.grey,
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                      const SizedBox(height: 8),
-                                                      Text(
-                                                        e.description ?? '',
-                                                        maxLines: 1,
-                                                        overflow: TextOverflow
-                                                            .ellipsis,
-                                                      ),
-                                                      const SizedBox(height: 8),
-                                                      Text(
-                                                        e.requestType ==
-                                                                MedicationRequestType
-                                                                    .donation
-                                                            ? context
-                                                                .l10n.donation
-                                                            : context
-                                                                .l10n.request,
-                                                        style: TextStyle(
-                                                          color: e.requestType ==
-                                                                  MedicationRequestType
-                                                                      .donation
-                                                              ? Colors.green
-                                                              : Colors.red,
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    )
-                                    .toList() ??
-                                [],
-                          ),
-                        ),
-                ),
-              )
-            ],
+                );
+              },
+            ),
           ),
-        );
-      },
+        )
+      ],
     );
   }
 }

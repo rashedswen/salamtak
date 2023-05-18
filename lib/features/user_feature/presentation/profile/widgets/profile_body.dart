@@ -1,12 +1,13 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import '../../../../../app/bloc/app_bloc.dart';
-import '../../../../../core/widgets/text_with_field.dart';
-import '../cubit/cubit.dart';
-import 'link_with_email.dart';
-import '../../../../../l10n/l10n.dart';
+import 'package:salamtak/app/bloc/app_bloc.dart';
+import 'package:salamtak/core/widgets/login_to_continue_widget.dart';
+import 'package:salamtak/core/widgets/salamtak_app_bar.dart';
+import 'package:salamtak/core/widgets/salamtak_background.dart';
+import 'package:salamtak/features/user_feature/presentation/profile/cubit/cubit.dart';
+import 'package:salamtak/features/user_feature/presentation/profile/widgets/profile_tab_view.dart';
+import 'package:salamtak/l10n/l10n.dart';
+import 'package:salamtak/util/constants.dart';
+import 'package:salamtak/util/layout/dimensions.dart';
 
 /// {@template profile_body}
 /// Body of the ProfilePage.
@@ -21,157 +22,153 @@ class ProfileBody extends StatefulWidget {
   State<ProfileBody> createState() => _ProfileBodyState();
 }
 
-class _ProfileBodyState extends State<ProfileBody> {
+class _ProfileBodyState extends State<ProfileBody>
+    with TickerProviderStateMixin {
+  late TabController tabViewController;
   @override
   void initState() {
+    tabViewController = TabController(length: 2, vsync: this);
     super.initState();
     context.read<ProfileCubit>().getProviders();
+    context.read<ProfileCubit>().getUserRequests();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(16),
-      child: Column(
-        children: [
-          Card(
-            child: BlocBuilder<AppBloc, AppState>(
-              builder: (context, state) {
-                return ListTile(
-                  leading: const Icon(Icons.person),
-                  title: Text(context.l10n.name),
-                  subtitle: BlocBuilder<AppBloc, AppState>(
-                    builder: (context, state) {
-                      return Text(state.user.name ?? '');
+    return context.read<AppBloc>().state.status == AppStatus.authenticated
+        ? Stack(
+            children: [
+              if (MediaQuery.of(context).size.width < tabletWidth)
+                const SalamtakBackground(),
+              SafeArea(
+                child: Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: LayoutBuilder(
+                    builder: (context, constraints) {
+                      return SingleChildScrollView(
+                        child: ConstrainedBox(
+                          constraints: BoxConstraints(
+                            minHeight: constraints.maxHeight,
+                            minWidth: constraints.maxWidth,
+                          ),
+                          child: IntrinsicHeight(
+                            child: Column(
+                              children: [
+                                if (MediaQuery.of(context).size.width <
+                                    tabletWidth)
+                                  const SalamtakAppBar(),
+                                const SizedBox(height: 16),
+                                Text(
+                                  context.l10n.profile,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headlineMedium
+                                      ?.copyWith(
+                                        color: lightGreen,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                ),
+                                const SizedBox(
+                                  height: 32,
+                                ),
+                                SizedBox(
+                                  height: 140,
+                                  width: 140,
+                                  child: Stack(
+                                    children: [
+                                      Align(
+                                        child: BlocBuilder<AppBloc, AppState>(
+                                          builder: (context, state) {
+                                            if (state.user.photoUrl == null) {
+                                              return SizedBox(
+                                                height: 120,
+                                                width: 120,
+                                                child: ClipOval(
+                                                  child: Icon(
+                                                    Icons.person_rounded,
+                                                    size: 120,
+                                                    color: lightGreen,
+                                                  ),
+                                                ),
+                                              );
+                                            }
+                                            return SizedBox(
+                                              height: 120,
+                                              width: 120,
+                                              child: ClipOval(
+                                                child: Image.network(
+                                                  state.user.photoUrl!,
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                        ),
+                                      ),
+                                      // Positioned(
+                                      //   right: 0,
+                                      //   bottom: 0,
+                                      //   child: IconButton(
+                                      //     onPressed: () {},
+                                      //     style: ButtonStyle(
+                                      //       backgroundColor:
+                                      //           MaterialStateProperty.all(
+                                      //         lightGreen.withOpacity(0.8),
+                                      //       ),
+                                      //       shape: MaterialStateProperty.all(
+                                      //         const CircleBorder(),
+                                      //       ),
+                                      //     ),
+                                      //     icon: const Icon(
+                                      //       Icons.camera_alt,
+                                      //       color: Colors.white,
+                                      //     ),
+                                      //   ),
+                                      // ),
+                                    ],
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 8,
+                                ),
+                                BlocBuilder<AppBloc, AppState>(
+                                  builder: (context, state) {
+                                    return Column(
+                                      children: [
+                                        Text(
+                                          state.user.phoneNumber ?? '',
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .titleLarge,
+                                        ),
+                                        const SizedBox(
+                                          height: 8,
+                                        ),
+                                        Text(
+                                          state.user.email ?? '',
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodyMedium,
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                ),
+                                const SizedBox(
+                                  height: 32,
+                                ),
+                                const ProfileTabView(),
+                              ],
+                            ),
+                          ),
+                        ),
+                      );
                     },
                   ),
-                  onTap: () async {
-                    final s = await changeDialog(context, context.l10n.name)
-                        as String?;
-                    if (s != null) {
-                      await context
-                          .read<ProfileCubit>()
-                          .nameChanged(s, context.read<AppBloc>().state.user);
-                    }
-
-                    log(s.toString());
-                  },
-                );
-              },
-            ),
-          ),
-          Card(
-            child: ListTile(
-              leading: const Icon(Icons.phone),
-              title: Text(context.l10n.phone),
-              subtitle: Text(
-                context.read<AppBloc>().state.user.phoneNumber ?? '',
+                ),
               ),
-              onTap: () async {
-                final value =
-                    await changeDialog(context, context.l10n.phone) as String?;
-                if (value != null) {
-                  await context.read<ProfileCubit>().phoneNumberChanged(
-                        value,
-                        context.read<AppBloc>().state.user,
-                      );
-                }
-              },
-            ),
-          ),
-          BlocBuilder<AppBloc, AppState>(
-            buildWhen: (previous, current) =>
-                previous.user.email != current.user.email,
-            builder: (context, state) {
-              if (state.user.email == null) {
-                return const SizedBox.shrink();
-              }
-              return Card(
-                child: ListTile(
-                  leading: const Icon(Icons.email),
-                  title: Text(context.l10n.email),
-                  subtitle: Text(state.user.email ?? ''),
-                ),
-              );
-            },
-          ),
-          const LinkWithEmail(),
-          BlocBuilder<ProfileCubit, ProfileState>(
-            builder: (context, state) {
-              if (state.providers.twitter) {
-                return const SizedBox.shrink();
-              }
-              return Card(
-                child: ListTile(
-                  leading: const Icon(Icons.link),
-                  title: Text(context.l10n.link_with_twitter),
-                  onTap: () {
-                    context.read<ProfileCubit>().linkWithTwitter();
-                  },
-                ),
-              );
-            },
-          ),
-          const Spacer(),
-          Card(
-            child: ListTile(
-              leading: const Icon(Icons.logout, color: Colors.red),
-              title: Text(
-                context.l10n.logout,
-                style: const TextStyle(color: Colors.red),
-              ),
-              onTap: () {
-                context.read<AppBloc>().add(AppLogoutRequested());
-              },
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Future<dynamic> changeDialog(BuildContext context, String title) {
-    return showDialog(
-      context: context,
-      builder: (context) {
-        final textController = TextEditingController();
-        return SimpleDialog(
-          title: Text(title),
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(16),
-              child: TextWithField(
-                text: title,
-                onChanged: (value) {
-                  textController.text = value;
-                },
-              ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                TextButton(
-                  onPressed: () {
-                    context.pop();
-                  },
-                  child: Text(context.l10n.cancel),
-                ),
-                TextButton(
-                  onPressed: () {
-                    context.pop(textController.text);
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text(context.l10n.changes_will_be_saved_soon),
-                      ),
-                    );
-                  },
-                  child: Text(context.l10n.save),
-                ),
-              ],
-            ),
-          ],
-        );
-      },
-    );
+            ],
+          )
+        : const LoginToContinueWidget();
   }
 }

@@ -49,6 +49,10 @@ class _RequestsDonationsListBodyState extends State<RequestsDonationsListBody> {
                         context.pushNamed(
                           Screens.medicationDetails.name,
                           extra: medication,
+                          queryParameters: <String, dynamic>{
+                            'requestType': medication.requestType.name,
+                            'medicationId': medication.id,
+                          }
                         );
                       },
                       child: Card(

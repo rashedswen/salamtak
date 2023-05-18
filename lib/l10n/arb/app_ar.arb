@@ -1,6 +1,7 @@
 {
     "app_name": "سلامتك",
 
+    "privacy_policy": "سياسة الخصوصية",
 
     "medication_name": "اسم الدواء",
 
@@ -26,7 +27,7 @@
 
     "add_request": "اضافة طلب (حوجة)",
 
-    "request": "طلب",
+    "request": "حوجة",
 
     "your_request_has_been_added_successfully": "تم اضافة طلبك بنجاح",
 
@@ -120,6 +121,52 @@
 
     "the_request_was_not_accepted_by_any_user": "لم يتم قبول الطلب من قبل اي مستخدم",
 
-    "link_with_twitter": "ربط بتويتر"
+    "link_with_twitter": "ربط بتويتر",
+
+    "delete_account": "حذف الحساب",
+
+    "delete" : "حذف",
+
+    "delete_account_confirmation": "هل انت متأكد من حذف الحساب؟",
+
+    "login_to_continue": "تسجيل الدخول للمتابعة",
+
+    "welcome": "مرحبا",
+
+    "welcome_to_salamtak": "مرحبا بك في سلامتك",
+
+    "welcome_to_salamtak_description": "سلامتك هو تطبيق يساعدك على الحصول على الدواء الذي تحتاجه بسهولة ويسر",
+
+    "continue_with_phone_number": "الاستمرار باستخدام رقم الجوال",
+
+    "or": "او",
+
+    "search": "بحث",
+
+    "type_medication_name": "اكتب اسم الدواء ...",
+
+    "more_info": "المزيد من المعلومات",
+
+    "no_description": "لا يوجد وصف",
+
+    "level_of_need": "مستوى الحوجة",
+
+    "medication_type": "نوع الدواء",
+
+    "edit": "تعديل",
+
+    "not_set": "غير محدد",
+
+    "requests_status": "حالة الطلبات",
+
+    "signup_with_phone_number": "انشاء حساب باستخدام رقم الجوال",
+
+    "sent_otp": "ارسال رمز التحقق",
+
+    "no_requests_found": "لا يوجد طلبات",
+
+    "medication_not_found": "الدواء غير موجود",
+
+    "please_login_to_continue": "الرجاء تسجيل الدخول للمتابعة"
 
 }

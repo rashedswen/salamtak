@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 enum MedicationStatus {
   pending,
   approved,
@@ -44,6 +46,25 @@ extension Status on MedicationStatus {
         return 'Expired';
       case MedicationStatus.deleted:
         return 'Deleted';
+    }
+  }
+
+  Color get color {
+    switch (this) {
+      case MedicationStatus.pending:
+        return Colors.orange;
+      case MedicationStatus.approved:
+        return Colors.green;
+      case MedicationStatus.rejected:
+        return Colors.red;
+      case MedicationStatus.donated:
+        return Colors.blue;
+      case MedicationStatus.received:
+        return Colors.purple;
+      case MedicationStatus.expired:
+        return Colors.grey;
+      case MedicationStatus.deleted:
+        return Colors.black;
     }
   }
 }

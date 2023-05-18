@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import '../../../../../app/bloc/app_bloc.dart';
-import '../../../../../core/widgets/salamtak_drawer.dart';
-import '../../../../medication_feature/domain/repository/medication_repository.dart';
-import '../cubit/cubit.dart';
-import '../widgets/dashboard_body.dart';
-import '../../../../../util/router/screen.dart';
+import 'package:salamtak/core/widgets/salamtak_drawer.dart';
+import 'package:salamtak/features/medication_feature/domain/repository/medication_repository.dart';
+import 'package:salamtak/features/user_feature/domain/repository/authentication_repository.dart';
+import 'package:salamtak/features/user_feature/presentation/dashboard/cubit/cubit.dart';
+import 'package:salamtak/features/user_feature/presentation/dashboard/widgets/dashboard_body.dart';
+import 'package:salamtak/features/user_feature/presentation/dashboard/widgets/web/dashboard_web_body.dart';
+import 'package:salamtak/features/user_feature/presentation/profile/cubit/cubit.dart';
+import 'package:salamtak/util/layout/responsive_layout.dart';
 
 /// {@template dashboard_page}
 /// A description for DashboardPage
@@ -21,17 +22,23 @@ class DashboardPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => DashboardCubit(
-        medicationRepository: context.read<MedicationRepository>(),
-      )..getRequestsAndDonations(),
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text('Dashboard Page'),
-          centerTitle: true,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => DashboardCubit(
+            medicationRepository: context.read<MedicationRepository>(),
+          )..getRequestsAndDonations(),
         ),
-        body: const DashboardView(),
-        drawer: const SalamtakDrawer(),
+        BlocProvider(
+          create: (context) => ProfileCubit(
+            authenticationRepository: context.read<AuthenticationRepository>(),
+            medicationRepository: context.read<MedicationRepository>(),
+          ),
+        ),
+      ],
+      child: const Scaffold(
+        body: DashboardView(),
+        drawer: SalamtakDrawer(),
       ),
     );
   }
@@ -42,13 +49,21 @@ class DashboardView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<AppBloc, AppState>(
+    return BlocListener<ProfileCubit, ProfileState>(
       listener: (context, state) {
-        if (state.status == AppStatus.unauthenticated) {
-          context.pushNamed(Screens.login.name);
+        if (state.status == ProfileStatus.error) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(state.error ?? 'An unknown error occured'),
+            ),
+          );
         }
       },
-      child: const DashboardBody(),
+      child: const ResponsiveLayout(
+        mobileBody: DashboardBody(),
+        tabletBody: DashboardBody(),
+        webBody: DashboardWebBody(),
+      ),
     );
   }
 }

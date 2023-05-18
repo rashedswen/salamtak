@@ -1,5 +1,6 @@
 enum Screens {
   login,
+  loginWithPhoneNumber,
   register,
   dashboard,
   profile,
@@ -15,6 +16,8 @@ enum Screens {
   adminMedicationRequestsDonations,
   doctors,
   userHistory,
+  privacyPolicy,
+  deleteAccount,
 }
 
 extension Routes on Screens {
@@ -22,6 +25,8 @@ extension Routes on Screens {
     switch (this) {
       case Screens.login:
         return '/login';
+      case Screens.loginWithPhoneNumber:
+        return '/login-with-phone-number';
       case Screens.register:
         return '/register';
       case Screens.dashboard:
@@ -52,6 +57,10 @@ extension Routes on Screens {
         return '/medication-details';
       case Screens.userHistory:
         return '/user-history';
+      case Screens.privacyPolicy:
+        return '/privacy-policy';
+      case Screens.deleteAccount:
+        return '/delete-account';
     }
   }
 
@@ -59,6 +68,8 @@ extension Routes on Screens {
     switch (this) {
       case Screens.login:
         return 'Login';
+      case Screens.loginWithPhoneNumber:
+        return 'Login With Phone Number';
       case Screens.register:
         return 'Register';
       case Screens.dashboard:
@@ -89,6 +100,10 @@ extension Routes on Screens {
         return 'Medication Details';
       case Screens.userHistory:
         return 'User History';
+      case Screens.privacyPolicy:
+        return 'Privacy Policy';
+      case Screens.deleteAccount:
+        return 'Delete Account';
     }
   }
 }

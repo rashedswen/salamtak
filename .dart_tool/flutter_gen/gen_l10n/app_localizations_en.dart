@@ -8,6 +8,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get app_name => 'Salamtak';
 
   @override
+  String get privacy_policy => 'Privacy Policy';
+
+  @override
   String get medication_name => 'Medication Name';
 
   @override
@@ -186,4 +189,73 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get link_with_twitter => 'Link with Twitter';
+
+  @override
+  String get delete_account => 'Delete Account';
+
+  @override
+  String get delete => 'Delete';
+
+  @override
+  String get delete_account_confirmation => 'Are you sure you want to delete your account?';
+
+  @override
+  String get login_to_continue => 'Login to continue';
+
+  @override
+  String get welcome => 'Welcome';
+
+  @override
+  String get welcome_to_salamtak => 'Welcome to Salamtak';
+
+  @override
+  String get welcome_to_salamtak_description => 'Salamtak is a platform that connects people who need medications with people who can help them';
+
+  @override
+  String get continue_with_phone_number => 'Continue with Phone Number';
+
+  @override
+  String get or => 'Or';
+
+  @override
+  String get search => 'Search';
+
+  @override
+  String get type_medication_name => 'Type medication name ...';
+
+  @override
+  String get more_info => 'More Info';
+
+  @override
+  String get no_description => 'No Description';
+
+  @override
+  String get level_of_need => 'Level of Need';
+
+  @override
+  String get medication_type => 'Medication Type';
+
+  @override
+  String get edit => 'Edit';
+
+  @override
+  String get not_set => 'Not Set';
+
+  @override
+  String get requests_status => 'Requests Status';
+
+  @override
+  String get signup_with_phone_number => 'Signup with Phone Number';
+
+  @override
+  String get sent_otp => 'Sent OTP';
+
+  @override
+  String get no_requests_found => 'No Requests Found';
+
+  @override
+  String get medication_not_found => 'Medication Not Found';
+
+  @override
+  String get please_login_to_continue => 'Please login to continue';
 }

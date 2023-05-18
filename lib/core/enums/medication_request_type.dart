@@ -1,4 +1,7 @@
-enum  MedicationRequestType {
+import 'package:flutter/material.dart';
+import 'package:salamtak/util/constants.dart';
+
+enum MedicationRequestType {
   request,
   donation,
   sell,
@@ -24,6 +27,17 @@ extension TypeMed on MedicationRequestType {
         return 'Donation';
       case MedicationRequestType.sell:
         return 'Sell';
+    }
+  }
+
+  Color get color {
+    switch (this) {
+      case MedicationRequestType.request:
+        return darkGreen;
+      case MedicationRequestType.donation:
+        return lightGreen;
+      case MedicationRequestType.sell:
+        return Colors.blueAccent;
     }
   }
 }

@@ -18,14 +18,38 @@ class MedicationFormCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onSelect,
-      child: SizedBox(
-        height: 100,
-        width: 90,
-        child: Card(
-          color: isSelected ? Colors.blue.shade50 : Colors.white,
-          child: Padding(
+    return Padding(
+      padding: const EdgeInsets.all(8),
+      child: InkWell(
+        onTap: onSelect,
+        child: SizedBox(
+          height: 100,
+          width: 90,
+          child: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  lightGreen,
+                  darkGreen,
+                ],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
+              borderRadius: BorderRadius.circular(8),
+              border: Border.all(
+                color: isSelected ? Colors.white : Colors.transparent,
+                width: 2,
+              ),
+              boxShadow: isSelected
+                  ? [
+                      BoxShadow(
+                        color: darkGreen.withOpacity(0.5),
+                        blurRadius: 4,
+                        offset: const Offset(0, 5),
+                      ),
+                    ]
+                  : null,
+            ),
             padding: const EdgeInsets.all(8),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -33,7 +57,7 @@ class MedicationFormCard extends StatelessWidget {
                 FaIcon(
                   icon,
                   size: 36,
-                  color: color,
+                  color: Colors.white,
                 ),
                 FittedBox(
                   child: Text(
@@ -41,6 +65,10 @@ class MedicationFormCard extends StatelessWidget {
                         ? form.arabicName
                         : form.englishName,
                     textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
                   ),
                 ),
               ],

@@ -1,4 +1,5 @@
 import 'package:file_picker/file_picker.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import '../../../../core/connection/network_info.dart';
 import '../../../../core/enums/enums.dart';
 import '../data_source/remote_datasource.dart';
@@ -172,6 +173,9 @@ class MedicationRepoisitoryImpl extends MedicationRepository {
   }) async {
     if (await networkInfo.isConnected) {
       try {
+        if(FirebaseAuth.instance.currentUser == null) {
+          throw Exception('must be logged in to accept a medication request/donation');
+        }
         if (medicationRequestType == MedicationRequestType.donation) {
           await remoteDatasource.acceptMedicationDonation(
             medicationId,

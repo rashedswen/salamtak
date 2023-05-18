@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import '../../../../../core/widgets/salamtak_drawer.dart';
-import '../../../domain/repository/authentication_repository.dart';
-import '../cubit/cubit.dart';
-import '../widgets/profile_body.dart';
+import 'package:salamtak/core/widgets/salamtak_drawer.dart';
+import 'package:salamtak/features/medication_feature/domain/repository/medication_repository.dart';
+import 'package:salamtak/features/user_feature/domain/repository/authentication_repository.dart';
+import 'package:salamtak/features/user_feature/presentation/profile/cubit/cubit.dart';
+import 'package:salamtak/features/user_feature/presentation/profile/widgets/profile_body.dart';
 
 /// {@template profile_page}
 /// A description for ProfilePage
@@ -21,14 +22,11 @@ class ProfilePage extends StatelessWidget {
     return BlocProvider(
       create: (context) => ProfileCubit(
         authenticationRepository: context.read<AuthenticationRepository>(),
+        medicationRepository: context.read<MedicationRepository>(),
       ),
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text('Profile Page'),
-          centerTitle: true,
-        ),
-        body: const ProfileView(),
-        drawer: const SalamtakDrawer(),
+      child: const Scaffold(
+        body: ProfileView(),
+        drawer: SalamtakDrawer(),
       ),
     );
   }
