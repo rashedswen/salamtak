@@ -52,10 +52,10 @@ flutter_native_splash:
   background_image: "assets/images/splash.jpg"
   android: true
   ios: true
-  web: true
+  web: false
 
   android_12:
-    image: assets/images/login_logo.png
+    image: assets/images/salamtak_splash_icon.png
     icon_background_color: "#ffffff"
     icon_background_color_dark: "#121212"
 
