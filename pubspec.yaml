@@ -9,7 +9,6 @@ environment:
 dependencies:
   bloc: ^8.1.1
   cloud_firestore: ^4.5.3
-  device_preview: ^1.1.0
   duration: ^3.0.12
   equatable: ^2.0.5
   file_picker: ^5.2.11
@@ -33,6 +32,8 @@ dependencies:
   internet_connection_checker: ^1.0.0+1
   intl: ^0.18.0
   json_annotation: ^4.8.1
+  flutter_native_splash: ^2.3.0
+
 
 dev_dependencies:
   bloc_test: ^9.1.1
@@ -46,6 +47,17 @@ dev_dependencies:
 dependency_overrides:
   intl: 0.18.0
 
+flutter_native_splash:
+  background_image: "assets/images/splash.jpg"
+  android: true
+  ios: true
+  web: false
+
+  android_12:
+    image: assets/images/salamtak_splash_icon.png
+    icon_background_color: "#ffffff"
+    icon_background_color_dark: "#121212"
+
 flutter:
   uses-material-design: true
   generate: true
@@ -58,4 +70,5 @@ flutter:
   assets:
     - assets/icons/
     - assets/images/
+    - assets/google_fonts
     

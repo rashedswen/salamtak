@@ -57,16 +57,16 @@ extension EmergencyLevelX on EmergencyLevel {
 
 extension EmgLVL on String {
   EmergencyLevel get toEmergencyLevel {
-    switch (this) {
-      case 'Low':
+    switch (toLowerCase()) {
+      case 'low':
         return EmergencyLevel.low;
-      case 'Medium':
+      case 'medium':
         return EmergencyLevel.medium;
-      case 'High':
+      case 'high':
         return EmergencyLevel.high;
-      case 'Critical':
+      case 'critical':
         return EmergencyLevel.critical;
-      case 'Unknown':
+      case 'unknown':
         return EmergencyLevel.unknown;
       default:
         return EmergencyLevel.unknown;
