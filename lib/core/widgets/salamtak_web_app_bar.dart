@@ -50,6 +50,20 @@ class SalamtakWebAppBar extends StatelessWidget {
           const Spacer(),
           TextButton(
             onPressed: () {
+              
+            },
+            child: Text(
+              context.l10n.contact_us,
+              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                    color: lightGreen,
+                  ),
+            ),
+          ),
+          const SizedBox(
+            width: 16,
+          ),
+          TextButton(
+            onPressed: () {
               context.pushNamed(
                 Screens.privacyPolicy.name,
               );

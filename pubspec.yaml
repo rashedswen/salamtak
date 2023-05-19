@@ -9,7 +9,6 @@ environment:
 dependencies:
   bloc: ^8.1.1
   cloud_firestore: ^4.5.3
-  device_preview: ^1.1.0
   duration: ^3.0.12
   equatable: ^2.0.5
   file_picker: ^5.2.11
@@ -71,4 +70,5 @@ flutter:
   assets:
     - assets/icons/
     - assets/images/
+    - assets/google_fonts
     

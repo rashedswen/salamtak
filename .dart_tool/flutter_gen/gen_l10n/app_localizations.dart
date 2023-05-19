@@ -602,6 +602,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Please login to continue'**
   String get please_login_to_continue;
+
+  /// No description provided for @contact_us.
+  ///
+  /// In en, this message translates to:
+  /// **'Contact Us'**
+  String get contact_us;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

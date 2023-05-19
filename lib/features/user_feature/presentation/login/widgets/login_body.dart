@@ -29,8 +29,8 @@ class LoginBody extends StatelessWidget {
                   ),
                   child: IntrinsicHeight(
                     child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Spacer(),
                         Image.asset(
                           'assets/images/logo_transparent.png',
                           height: 150,
@@ -76,13 +76,7 @@ class LoginBody extends StatelessWidget {
                             context.read<LoginCubit>().logInWithTwitter();
                           },
                         ),
-                        const Spacer(),
-                        TextButton(
-                          onPressed: () {
-                            context.read<LoginCubit>().logInAnonymously();
-                          },
-                          child: Text(context.l10n.login_as_guest),
-                        ),
+
                         const SizedBox(height: 20),
                       ],
                     ),

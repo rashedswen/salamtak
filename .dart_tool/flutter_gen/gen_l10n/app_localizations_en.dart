@@ -258,4 +258,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get please_login_to_continue => 'Please login to continue';
+
+  @override
+  String get contact_us => 'Contact Us';
 }
