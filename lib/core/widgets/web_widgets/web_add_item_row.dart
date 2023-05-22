@@ -30,16 +30,15 @@ class WebAddItemRow extends StatelessWidget {
               },
             ),
           ),
-          // SizedBox(
-          //   width: 300,
-          //   child: AddCardItem(
-          //     icon: FontAwesomeIcons
-          //         .arrowRightArrowLeft,
-          //     text: 'تبادل',
-          //     isVertical: false,
-          //     onTap: () {},
-          //   ),
-          // ),
+          SizedBox(
+            width: 300,
+            child: AddCardItem(
+              icon: FontAwesomeIcons.arrowRightArrowLeft,
+              text: 'تبادل',
+              isVertical: false,
+              onTap: () {},
+            ),
+          ),
           SizedBox(
             width: 300,
             child: AddCardItem(

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
@@ -76,6 +78,15 @@ class LoginBody extends StatelessWidget {
                             context.read<LoginCubit>().logInWithTwitter();
                           },
                         ),
+                        const SizedBox(height: 16),
+                        if (Platform.isIOS)
+                          SalamtalLoginButton(
+                            text: context.l10n.continue_with_apple,
+                            icon: FontAwesomeIcons.apple,
+                            onPressed: () {
+                              context.read<LoginCubit>().logInWithApple();
+                            },
+                          ),
 
                         const SizedBox(height: 20),
                       ],

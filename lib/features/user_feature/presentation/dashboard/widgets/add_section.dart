@@ -27,41 +27,40 @@ class AddSection extends StatelessWidget {
           ),
         ),
         Expanded(
-          child: AddCardItem(
-            icon: FontAwesomeIcons.capsules,
-            text: context.l10n.request,
-            onTap: () {
-              context.pushNamed(
-                Screens.addRequest.name,
+          child: LayoutBuilder(
+            builder: (context, constraints) {
+              return ConstrainedBox(
+                constraints: BoxConstraints(
+                  maxHeight: constraints.maxHeight,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      child: RowAddCard(
+                        icon: FontAwesomeIcons.capsules,
+                        text: context.l10n.request,
+                        onTap: () {
+                          context.pushNamed(
+                            Screens.addRequest.name,
+                          );
+                        },
+                      ),
+                    ),
+                    Expanded(
+                      child: RowAddCard(
+                        icon: FontAwesomeIcons.arrowRightArrowLeft,
+                        text: 'تبادل',
+                        isVertical: false,
+                        onTap: () {},
+                      ),
+                    ),
+                  ],
+                ),
               );
             },
           ),
         ),
-        // Expanded(
-        //   child: LayoutBuilder(
-        //     builder: (context, constraints) {
-        //       return ConstrainedBox(
-        //         constraints: BoxConstraints(
-        //           maxHeight: constraints.maxHeight,
-        //         ),
-        //         child: Column(
-        //           crossAxisAlignment: CrossAxisAlignment.start,
-        //           children: [
-        //             // Expanded(
-        //             //   child: RowAddCard(
-        //             //     icon: FontAwesomeIcons.arrowRightArrowLeft,
-        //             //     text: 'تبادل',
-        //             //     isVertical: false,
-        //             //     onTap: () {},
-        //             //   ),
-        //             // ),
-
-        //           ],
-        //         ),
-        //       );
-        //     },
-        //   ),
-        // ),
       ],
     );
   }

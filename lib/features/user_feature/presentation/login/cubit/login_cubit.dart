@@ -59,6 +59,16 @@ class LoginCubit extends Cubit<LoginState> {
     }
   }
 
+  Future<void> logInWithApple() async {
+    emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
+    try {
+      await _authenticationRepository.logInWithApple();
+      emit(state.copyWith(status: FormzSubmissionStatus.success));
+    } on Exception {
+      emit(state.copyWith(status: FormzSubmissionStatus.failure));
+    }
+  }
+
   Future<void> logInWithCredentials() async {
     if (!state.isValid) return;
     emit(state.copyWith(status: FormzSubmissionStatus.inProgress));

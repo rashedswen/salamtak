@@ -261,4 +261,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get contact_us => 'Contact Us';
+
+  @override
+  String get continue_with_apple => 'Continue with Apple';
 }

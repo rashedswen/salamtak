@@ -608,6 +608,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Contact Us'**
   String get contact_us;
+
+  /// No description provided for @continue_with_apple.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue with Apple'**
+  String get continue_with_apple;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
