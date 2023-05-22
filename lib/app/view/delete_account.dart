@@ -15,7 +15,7 @@ class DeleteAccountPage extends StatelessWidget {
           padding: const EdgeInsets.all(16),
           child: Text(
             '''
-you can delete your account by going to the profile page and clicking on the delete account button.
+you can delete your account by going to the profile page and going to setting and clicking on the delete account button.
 ''',
             style: Theme.of(context).textTheme.bodyLarge,
           ),

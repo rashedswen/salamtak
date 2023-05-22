@@ -63,6 +63,7 @@ flutter:
   generate: true
 
   fonts:
+
     - family: UiIcons
       fonts:
         - asset: assets/icons/fonts/ui_icons.ttf
@@ -70,5 +71,6 @@ flutter:
   assets:
     - assets/icons/
     - assets/images/
-    - assets/google_fonts
+    - assets/google_fonts/
+    
     

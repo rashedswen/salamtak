@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/src/bloc_builder.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/src/provider.dart';
 import 'package:salamtak/app/bloc/app_bloc.dart';
 import 'package:salamtak/features/user_feature/presentation/profile/cubit/profile_cubit.dart';
@@ -105,17 +106,46 @@ class ProfileInfoTab extends StatelessWidget {
         const SizedBox(
           height: 32,
         ),
-        ListTile(
-          title: Text(
-            context.l10n.delete_account,
-            style: Theme.of(context)
-                .textTheme
-                .bodyMedium
-                ?.copyWith(color: Colors.red),
-          ),
-          trailing: const Icon(
-            FontAwesomeIcons.squareXmark,
-            color: Colors.red,
+        InkWell(
+          onTap: () {
+            showDialog<bool>(
+              context: context,
+              builder: (_) => AlertDialog(
+                title: Text(context.l10n.delete_account),
+                content: Text(context.l10n.delete_account_confirmation),
+                actions: [
+                  TextButton(
+                    onPressed: () {
+                      context.pop(false);
+                    },
+                    child: const Text('Cancel'),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      context.pop(true);
+                    },
+                    child: const Text('Delete'),
+                  ),
+                ],
+              ),
+            ).then((value) {
+              if (value != null && value == true) {
+                context.read<ProfileCubit>().deleteAccount();
+              }
+            });
+          },
+          child: ListTile(
+            title: Text(
+              context.l10n.delete_account,
+              style: Theme.of(context)
+                  .textTheme
+                  .bodyMedium
+                  ?.copyWith(color: Colors.red),
+            ),
+            trailing: const Icon(
+              FontAwesomeIcons.squareXmark,
+              color: Colors.red,
+            ),
           ),
         ),
       ],
