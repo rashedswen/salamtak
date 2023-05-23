@@ -107,6 +107,12 @@ class AuthenticationRepositoryImpl extends AuthenticationRepository {
   }
 
   @override
+  Future<void> logInWithApple() async {
+    final appleProvider = firebase_auth.AppleAuthProvider();
+    await _firebaseAuth.signInWithProvider(appleProvider);
+  }
+
+  @override
   Future<void> logOut() async {
     try {
       await _firebaseAuth.signOut();
