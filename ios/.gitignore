@@ -6,6 +6,8 @@
 **/*sync/
 .sconsign.dblite
 .tags*
+f
+**/Runner/GoogleService-Info.plist
 **/.vagrant/
 **/DerivedData/
 Icon?
