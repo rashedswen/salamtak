@@ -5,10 +5,10 @@ import 'package:equatable/equatable.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
-import '../../../../../core/enums/medication_form.dart';
-import '../../../domain/entity/medication_donation.dart';
-import '../../../domain/repository/medication_repository.dart';
-import '../../../../../util/json/states_and_cities.dart';
+import 'package:salamtak/core/enums/medication_form.dart';
+import 'package:salamtak/features/medication_feature/domain/entity/medication_donation.dart';
+import 'package:salamtak/features/medication_feature/domain/repository/medication_repository.dart';
+import 'package:salamtak/util/json/states_and_cities.dart';
 
 part 'add_donation_state.dart';
 
@@ -58,13 +58,7 @@ class AddDonationCubit extends Cubit<AddDonationState> {
     emit(state.copyWith(status: AddDonationStatus.loading));
 
     String? image;
-    if (state.imageUrl != null) {
-      if (!kIsWeb) {
-        image = state.imageUrl?.path;
-      } else {
-        image = String?.fromCharCodes(state.imageUrl?.bytes ?? []);
-      }
-    }
+    image = imagePath(image);
 
     try {
       final donation = MedicationDonation(
@@ -77,7 +71,8 @@ class AddDonationCubit extends Cubit<AddDonationState> {
         image: image,
         location: state.location!.copyWith(address: state.address),
       );
-      await medicationRepository.addMedicationDonation(donation, state.imageUrl);
+      await medicationRepository.addMedicationDonation(
+          donation, state.imageUrl);
       emit(
         state.copyWith(
           status: AddDonationStatus.success,
@@ -91,5 +86,16 @@ class AddDonationCubit extends Cubit<AddDonationState> {
         ),
       );
     }
+  }
+
+  String? imagePath(String? image) {
+     if (state.imageUrl != null) {
+      if (!kIsWeb) {
+        image = state.imageUrl?.path;
+      } else {
+        image = String?.fromCharCodes(state.imageUrl?.bytes ?? []);
+      }
+    }
+    return image;
   }
 }

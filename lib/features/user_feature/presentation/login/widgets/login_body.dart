@@ -1,5 +1,4 @@
-import 'dart:io';
-
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
@@ -33,24 +32,38 @@ class LoginBody extends StatelessWidget {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Image.asset(
-                          'assets/images/logo_transparent.png',
-                          height: 150,
-                        ),
+                        if (Theme.of(context).brightness == Brightness.dark)
+                          ColorFiltered(
+                            colorFilter: const ColorFilter.mode(
+                              Colors.white,
+                              BlendMode.srcIn,
+                            ),
+                            child: Image.asset(
+                              'assets/images/logo_transparent.png',
+                              height: 150,
+                            ),
+                          )
+                        else
+                          Image.asset(
+                            'assets/images/logo_transparent.png',
+                            height: 150,
+                          ),
                         // const SignInWithEmailForm(),
                         const SizedBox(height: 72),
                         Text(
                           context.l10n.welcome,
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
+                            color: Theme.of(context).colorScheme.onSurface,
                           ),
                         ),
                         const SizedBox(height: 8),
                         Text(
                           context.l10n.login_to_continue,
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 16,
+                            color: Theme.of(context).colorScheme.onSurface,
                           ),
                         ),
                         const SizedBox(height: 64),
@@ -66,8 +79,9 @@ class LoginBody extends StatelessWidget {
                         const SizedBox(height: 16),
                         Text(
                           context.l10n.or,
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 16,
+                            color: Theme.of(context).colorScheme.onSurface,
                           ),
                         ),
                         const SizedBox(height: 16),
@@ -79,7 +93,7 @@ class LoginBody extends StatelessWidget {
                           },
                         ),
                         const SizedBox(height: 16),
-                        if (Platform.isIOS)
+                        if (defaultTargetPlatform == TargetPlatform.iOS)
                           SalamtalLoginButton(
                             text: context.l10n.continue_with_apple,
                             icon: FontAwesomeIcons.apple,

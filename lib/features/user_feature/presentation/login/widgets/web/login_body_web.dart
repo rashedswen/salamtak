@@ -30,16 +30,18 @@ class LoginWebBody extends StatelessWidget {
                       children: [
                         Text(
                           context.l10n.welcome,
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
+                            color: Theme.of(context).colorScheme.onPrimary,
                           ),
                         ),
                         const SizedBox(height: 8),
                         Text(
                           context.l10n.login_to_continue,
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 16,
+                            color: Theme.of(context).colorScheme.onPrimary,
                           ),
                         ),
                         const SizedBox(height: 64),
@@ -54,8 +56,9 @@ class LoginWebBody extends StatelessWidget {
                         const SizedBox(height: 16),
                         Text(
                           context.l10n.or,
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 16,
+                            color: Theme.of(context).colorScheme.onSurface,
                           ),
                         ),
                         const SizedBox(height: 16),
@@ -65,13 +68,6 @@ class LoginWebBody extends StatelessWidget {
                           onPressed: () {
                             context.read<LoginCubit>().logInWithTwitter();
                           },
-                        ),
-                        const SizedBox(height: 24),
-                        TextButton(
-                          onPressed: () {
-                            context.read<LoginCubit>().logInAnonymously();
-                          },
-                          child: Text(context.l10n.login_as_guest),
                         ),
                       ],
                     ),

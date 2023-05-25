@@ -13,6 +13,14 @@ abstract class AdminMedicationRepository {
     MedicationStatus status,
     String? rejectedReason,
   );
+  
+  Future<void> changeExchangeStatus(
+    String id,
+    MedicationStatus status,
+    String? rejectedReason,
+  );
+
+
 
   Future<List<AdminMedicationList>> getMedicationsRequestsAndDonations();
 }

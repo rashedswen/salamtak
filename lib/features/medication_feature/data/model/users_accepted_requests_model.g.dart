@@ -7,7 +7,7 @@ part of 'users_accepted_requests_model.dart';
 // **************************************************************************
 
 UsersAcceptedRequestsModel _$UsersAcceptedRequestsModelFromJson(
-        Map<String, dynamic> json) =>
+        Map<String, dynamic> json,) =>
     UsersAcceptedRequestsModel(
       id: json['id'] as String?,
       name: json['name'] as String?,
@@ -18,7 +18,7 @@ UsersAcceptedRequestsModel _$UsersAcceptedRequestsModelFromJson(
     );
 
 Map<String, dynamic> _$UsersAcceptedRequestsModelToJson(
-        UsersAcceptedRequestsModel instance) =>
+        UsersAcceptedRequestsModel instance,) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,

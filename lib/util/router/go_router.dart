@@ -5,6 +5,7 @@ import 'package:salamtak/app/view/privacy_policy.dart';
 import 'package:salamtak/features/admin_feature/presentation/accept_requests_donations/view/accept_requests_donations_page.dart';
 import 'package:salamtak/features/medication_feature/domain/entity/medication_list.dart';
 import 'package:salamtak/features/medication_feature/presentation/add_donation/view/add_donation_page.dart';
+import 'package:salamtak/features/medication_feature/presentation/add_exchange/add_exchange.dart';
 import 'package:salamtak/features/medication_feature/presentation/add_request/add_request.dart';
 import 'package:salamtak/features/medication_feature/presentation/medication_details/medication_details.dart';
 import 'package:salamtak/features/medication_feature/presentation/requests_donations_list/requests_donations_list.dart';
@@ -63,6 +64,13 @@ class AppRouter {
         path: Screens.addDonation.route,
         builder: (context, state) {
           return const AddDonationPage();
+        },
+      ),
+      GoRoute(
+        name: Screens.addExchange.name,
+        path: Screens.addExchange.route,
+        builder: (context, state) {
+          return const AddExchangePage();
         },
       ),
       GoRoute(

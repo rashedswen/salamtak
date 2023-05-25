@@ -3,7 +3,6 @@ import 'package:go_router/src/misc/extensions.dart';
 import 'package:provider/src/provider.dart';
 import 'package:salamtak/app/bloc/app_bloc.dart';
 import 'package:salamtak/l10n/l10n.dart';
-import 'package:salamtak/util/constants.dart';
 import 'package:salamtak/util/router/screen.dart';
 
 class SalamtakWebAppBar extends StatelessWidget {
@@ -25,7 +24,7 @@ class SalamtakWebAppBar extends StatelessWidget {
               onPressed: onSidebarTap,
               icon: Icon(
                 Icons.menu,
-                color: lightGreen,
+                color: Theme.of(context).primaryColor,
               ),
             ),
           InkWell(
@@ -34,11 +33,23 @@ class SalamtakWebAppBar extends StatelessWidget {
                 Screens.dashboard.name,
               );
             },
-            child: Image.asset(
-              'assets/images/logo_transparent.png',
-              width: 80,
-              height: 80,
-            ),
+            child: Theme.of(context).brightness == Brightness.dark
+                ? ColorFiltered(
+                    colorFilter: const ColorFilter.mode(
+                      Colors.white,
+                      BlendMode.srcIn,
+                    ),
+                    child: Image.asset(
+                      'assets/images/logo_transparent.png',
+                      width: 80,
+                      height: 80,
+                    ),
+                  )
+                : Image.asset(
+                    'assets/images/logo_transparent.png',
+                    width: 80,
+                    height: 80,
+                  ),
           ),
           // const SizedBox(
           //   width: 16,
@@ -49,13 +60,11 @@ class SalamtakWebAppBar extends StatelessWidget {
           // ),
           const Spacer(),
           TextButton(
-            onPressed: () {
-              
-            },
+            onPressed: () {},
             child: Text(
               context.l10n.contact_us,
               style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                    color: lightGreen,
+                    color: Theme.of(context).primaryColor,
                   ),
             ),
           ),
@@ -71,7 +80,7 @@ class SalamtakWebAppBar extends StatelessWidget {
             child: Text(
               context.l10n.privacy_policy,
               style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                    color: lightGreen,
+                    color: Theme.of(context).primaryColor,
                   ),
             ),
           ),
@@ -89,7 +98,7 @@ class SalamtakWebAppBar extends StatelessWidget {
               child: Text(
                 context.l10n.logout,
                 style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                      color: lightGreen,
+                      color: Theme.of(context).primaryColor,
                     ),
               ),
             )
@@ -103,7 +112,7 @@ class SalamtakWebAppBar extends StatelessWidget {
               child: Text(
                 context.l10n.login,
                 style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                      color: lightGreen,
+                      color: Theme.of(context).primaryColor,
                     ),
               ),
             ),

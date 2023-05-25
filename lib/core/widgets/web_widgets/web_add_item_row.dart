@@ -36,7 +36,11 @@ class WebAddItemRow extends StatelessWidget {
               icon: FontAwesomeIcons.arrowRightArrowLeft,
               text: 'تبادل',
               isVertical: false,
-              onTap: () {},
+              onTap: () {
+                context.pushNamed(
+                  Screens.addExchange.name,
+                );
+              },
             ),
           ),
           SizedBox(

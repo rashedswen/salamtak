@@ -1,11 +1,13 @@
 import 'package:file_picker/file_picker.dart';
-import '../../../../core/enums/enums.dart';
-import '../../data/model/models.dart';
-import '../entity/entities.dart';
-import '../entity/medication_donation.dart';
-import '../entity/medication_request.dart';
-import '../entity/users_accepted_requests.dart';
-import '../../../user_feature/domain/entity/salamtak_user.dart';
+import 'package:salamtak/core/enums/enums.dart';
+import 'package:salamtak/features/medication_feature/data/model/medication_exchange_model.dart';
+import 'package:salamtak/features/medication_feature/data/model/models.dart';
+import 'package:salamtak/features/medication_feature/domain/entity/entities.dart';
+import 'package:salamtak/features/medication_feature/domain/entity/medication_donation.dart';
+import 'package:salamtak/features/medication_feature/domain/entity/medication_exchange.dart';
+import 'package:salamtak/features/medication_feature/domain/entity/medication_request.dart';
+import 'package:salamtak/features/medication_feature/domain/entity/users_accepted_requests.dart';
+import 'package:salamtak/features/user_feature/domain/entity/salamtak_user.dart';
 
 abstract class MedicationRepository {
   // get Requests and Donations
@@ -13,9 +15,13 @@ abstract class MedicationRepository {
 
   Future<List<MedicationDonationModel>> getMedicationsDontations();
 
+  Future<List<MedicationExchange>> getMedicationsExchanges();
+
   Future<MedicationRequest> getMedicationRequest(String id);
 
   Future<MedicationDonation> getMedicationDonation(String id);
+
+  Future<MedicationExchange> getMedicationExchange(String id);
 
   // add
   Future<void> addMedicationRequest(
@@ -29,10 +35,18 @@ abstract class MedicationRepository {
     PlatformFile? image,
   );
 
+  Future<void> addMedicationExchange(
+    MedicationExchange medication,
+    PlatformFile? medicationImage,
+    PlatformFile? exchangeMedicationImage,
+  );
+
   // update
   Future<void> updateMedicationRequest(MedicationRequest medication);
 
   Future<void> updateMedicationDonation(MedicationDonation medication);
+
+  Future<void> updateMedicationExchange(MedicationExchange medication);
 
   // delete
   Future<void> deleteMedication(
@@ -54,4 +68,5 @@ abstract class MedicationRepository {
     String medicationId,
     MedicationRequestType requestType,
   );
+
 }

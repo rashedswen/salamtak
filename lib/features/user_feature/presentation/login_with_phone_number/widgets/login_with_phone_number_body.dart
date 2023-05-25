@@ -50,9 +50,11 @@ class _LoginWithPhoneNumberBodyState extends State<LoginWithPhoneNumberBody> {
                                 ),
                               Text(
                                 context.l10n.signup_with_phone_number,
-                                style: const TextStyle(
+                                style: TextStyle(
                                   fontSize: 20,
                                   fontWeight: FontWeight.bold,
+                                  color:
+                                      Theme.of(context).colorScheme.onSurface,
                                 ),
                               ),
                               const SizedBox(height: 48),
@@ -72,14 +74,24 @@ class _LoginWithPhoneNumberBodyState extends State<LoginWithPhoneNumberBody> {
                                           child: Directionality(
                                             textDirection: TextDirection.ltr,
                                             child: TextFormField(
-                                              style: const TextStyle(
+                                              style: TextStyle(
                                                 fontSize: 16,
                                                 fontWeight: FontWeight.w500,
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .onSurface,
                                               ),
                                               textDirection: TextDirection.ltr,
                                               keyboardType: TextInputType.phone,
                                               decoration: InputDecoration(
                                                 hintText: '249 123 456 789',
+                                                hintStyle: TextStyle(
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.w500,
+                                                  color: Theme.of(context)
+                                                      .colorScheme
+                                                      .onSurface,
+                                                ),
                                                 filled: true,
                                                 border: OutlineInputBorder(
                                                   borderSide: BorderSide.none,
@@ -139,10 +151,14 @@ class _LoginWithPhoneNumberBodyState extends State<LoginWithPhoneNumberBody> {
                                                         16,
                                                       ),
                                                       child: TextFormField(
-                                                        style: const TextStyle(
+                                                        style: TextStyle(
                                                           fontSize: 16,
                                                           fontWeight:
                                                               FontWeight.w500,
+                                                          color:
+                                                              Theme.of(context)
+                                                                  .colorScheme
+                                                                  .onSurface,
                                                         ),
                                                         keyboardType:
                                                             TextInputType
@@ -180,8 +196,8 @@ class _LoginWithPhoneNumberBodyState extends State<LoginWithPhoneNumberBody> {
                                                                   1 &&
                                                               i != 5) {
                                                             FocusScope.of(
-                                                                    context)
-                                                                .nextFocus();
+                                                              context,
+                                                            ).nextFocus();
                                                           }
                                                           context
                                                               .read<
@@ -192,8 +208,8 @@ class _LoginWithPhoneNumberBodyState extends State<LoginWithPhoneNumberBody> {
                                                               );
                                                           if (i == 5) {
                                                             FocusScope.of(
-                                                                    context)
-                                                                .unfocus();
+                                                              context,
+                                                            ).unfocus();
                                                             context
                                                                 .read<
                                                                     LoginWithPhoneNumberCubit>()

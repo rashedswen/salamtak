@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:salamtak/core/widgets/salamtak_drawer.dart';
+import 'package:salamtak/features/medication_feature/domain/repository/medication_repository.dart';
 import 'package:salamtak/features/medication_feature/presentation/add_exchange/cubit/cubit.dart';
 import 'package:salamtak/features/medication_feature/presentation/add_exchange/widgets/add_exchange_body.dart';
 
@@ -17,12 +20,15 @@ class AddExchangePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => AddExchangeCubit(),
+      create: (context) => AddExchangeCubit(
+        medicationRepository: context.read<MedicationRepository>(),
+      ),
       child: const Scaffold(
         body: AddExchangeView(),
+        drawer: SalamtakDrawer(),
       ),
     );
-  }    
+  }
 }
 
 /// {@template add_exchange_view}
@@ -34,6 +40,21 @@ class AddExchangeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const AddExchangeBody();
+    return BlocListener<AddExchangeCubit, AddExchangeState>(
+      listener: (context, state) {
+        if (state.status == AddExchangeStatus.success) {
+          context.pop();
+        }
+
+        if (state.status == AddExchangeStatus.error) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(state.errorMassage ?? 'Error'),
+            ),
+          );
+        }
+      },
+      child: const AddExchangeBody(),
+    );
   }
 }

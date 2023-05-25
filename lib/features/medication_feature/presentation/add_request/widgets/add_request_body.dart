@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:salamtak/app/bloc/app_bloc.dart';
 import 'package:salamtak/core/enums/enums.dart';
+import 'package:salamtak/core/widgets/location_section.dart';
 import 'package:salamtak/core/widgets/login_to_continue_widget.dart';
 import 'package:salamtak/core/widgets/salamtak_app_bar.dart';
 import 'package:salamtak/core/widgets/salamtak_background.dart';

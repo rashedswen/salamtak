@@ -5,6 +5,7 @@ enum MedicationRequestType {
   request,
   donation,
   sell,
+  exchange,
 }
 
 extension TypeMed on MedicationRequestType {
@@ -16,6 +17,8 @@ extension TypeMed on MedicationRequestType {
         return 'تبرع';
       case MedicationRequestType.sell:
         return 'بيع';
+      case MedicationRequestType.exchange:
+        return 'تبادل';
     }
   }
 
@@ -27,6 +30,8 @@ extension TypeMed on MedicationRequestType {
         return 'Donation';
       case MedicationRequestType.sell:
         return 'Sell';
+      case MedicationRequestType.exchange:
+        return 'Exchange';
     }
   }
 
@@ -38,19 +43,27 @@ extension TypeMed on MedicationRequestType {
         return lightGreen;
       case MedicationRequestType.sell:
         return Colors.blueAccent;
+      case MedicationRequestType.exchange:
+        return Colors.blueAccent;
     }
   }
 }
 
 extension MedReqType on String {
   MedicationRequestType get toMedicationRequestType {
-    switch (this) {
+    switch (toLowerCase()) {
       case 'طلب':
+      case 'request':
         return MedicationRequestType.request;
       case 'تبرع':
+      case 'donation':
         return MedicationRequestType.donation;
       case 'بيع':
+      case 'sell':
         return MedicationRequestType.sell;
+      case 'تبادل':
+      case 'exchange':
+        return MedicationRequestType.exchange;
       default:
         return MedicationRequestType.request;
     }

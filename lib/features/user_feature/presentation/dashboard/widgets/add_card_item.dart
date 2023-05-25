@@ -55,7 +55,7 @@ class AddCardItem extends StatelessWidget {
             FittedBox(
               child: Text(
                 text,
-                style: Theme.of(context).textTheme.headlineLarge?.copyWith(
+                style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                       color: const Color(0xffffffff),
                       letterSpacing: 1.5,
                     ),

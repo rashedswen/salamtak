@@ -30,7 +30,7 @@ class SelectImage extends StatelessWidget {
           style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.w500,
-            color: lightGreen,
+            color: Theme.of(context).primaryColor,
           ),
         ),
         const SizedBox(height: 16),
