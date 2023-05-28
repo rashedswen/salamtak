@@ -139,6 +139,8 @@
 
     "continue_with_phone_number": "الاستمرار باستخدام رقم الجوال",
 
+    "register_with_email": "تسجيل حساب بواسطة الايميل",
+
     "or": "او",
 
     "search": "بحث",
@@ -185,5 +187,7 @@
 
     "wanted_exchange_medication_type" : "نوع الدواء المطلوب للتبادل",
 
-    "offered_exchange_medication_type" : "نوع الدواء المعروض للتبادل"
+    "offered_exchange_medication_type" : "نوع الدواء المعروض للتبادل",
+
+    "continuez": "متابعة"
 }

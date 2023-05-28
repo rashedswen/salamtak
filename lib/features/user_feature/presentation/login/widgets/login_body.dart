@@ -1,12 +1,14 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:go_router/go_router.dart';
+import 'package:formz/formz.dart';
 import 'package:salamtak/core/widgets/salamtak_background.dart';
+import 'package:salamtak/core/widgets/salamtak_button.dart';
+import 'package:salamtak/core/widgets/text_with_field.dart';
 import 'package:salamtak/features/user_feature/presentation/login/cubit/cubit.dart';
+import 'package:salamtak/features/user_feature/presentation/login/widgets/login_body_shared.dart';
 import 'package:salamtak/features/user_feature/presentation/login/widgets/salamtal_login_button.dart';
 import 'package:salamtak/l10n/l10n.dart';
-import 'package:salamtak/util/router/screen.dart';
 
 class LoginBody extends StatelessWidget {
   const LoginBody({super.key});
@@ -49,60 +51,43 @@ class LoginBody extends StatelessWidget {
                             height: 150,
                           ),
                         // const SignInWithEmailForm(),
-                        const SizedBox(height: 72),
-                        Text(
-                          context.l10n.welcome,
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            color: Theme.of(context).colorScheme.onSurface,
-                          ),
-                        ),
-                        const SizedBox(height: 8),
-                        Text(
-                          context.l10n.login_to_continue,
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: Theme.of(context).colorScheme.onSurface,
-                          ),
-                        ),
-                        const SizedBox(height: 64),
+                        const SizedBox(height: 32),
+                        // Text(
+                        //   context.l10n.welcome,
+                        //   style: TextStyle(
+                        //     fontSize: 20,
+                        //     fontWeight: FontWeight.bold,
+                        //     color: Theme.of(context).colorScheme.onSurface,
+                        //   ),
+                        // ),
+                        // const SizedBox(height: 8),
+                        // Text(
+                        //   context.l10n.login_to_continue,
+                        //   style: TextStyle(
+                        //     fontSize: 16,
+                        //     color: Theme.of(context).colorScheme.onSurface,
+                        //   ),
+                        // ),
+                        // const SizedBox(height: 64),
+                        const LoginBodyShared(),
 
-                        SalamtalLoginButton(
-                          text: context.l10n.continue_with_phone_number,
-                          icon: FontAwesomeIcons.phone,
-                          onPressed: () {
-                            context
-                                .pushNamed(Screens.loginWithPhoneNumber.name);
-                          },
-                        ),
-                        const SizedBox(height: 16),
-                        Text(
-                          context.l10n.or,
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: Theme.of(context).colorScheme.onSurface,
-                          ),
-                        ),
-                        const SizedBox(height: 16),
-                        SalamtalLoginButton(
-                          text: context.l10n.continue_with_twitter,
-                          icon: FontAwesomeIcons.twitter,
-                          onPressed: () {
-                            context.read<LoginCubit>().logInWithTwitter();
-                          },
-                        ),
-                        const SizedBox(height: 16),
-                        if (defaultTargetPlatform == TargetPlatform.iOS)
-                          SalamtalLoginButton(
-                            text: context.l10n.continue_with_apple,
-                            icon: FontAwesomeIcons.apple,
-                            onPressed: () {
-                              context.read<LoginCubit>().logInWithApple();
-                            },
-                          ),
-
-                        const SizedBox(height: 20),
+                        // SalamtalLoginButton(
+                        //   text: context.l10n.continue_with_phone_number,
+                        //   icon: FontAwesomeIcons.phone,
+                        //   onPressed: () {
+                        //     context
+                        //         .pushNamed(Screens.loginWithPhoneNumber.name);
+                        //   },
+                        // ),
+                        // const SizedBox(height: 16),
+                        // SalamtalLoginButton(
+                        //   text: context.l10n.register_with_email,
+                        //   icon: FontAwesomeIcons.solidEnvelope,
+                        //   onPressed: () {
+                        //     context.pushNamed(Screens.register.name);
+                        //   },
+                        // ),
+                        // const SizedBox(height: 16),
                       ],
                     ),
                   ),

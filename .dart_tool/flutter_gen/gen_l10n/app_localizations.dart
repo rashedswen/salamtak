@@ -513,6 +513,12 @@ abstract class AppLocalizations {
   /// **'Continue with Phone Number'**
   String get continue_with_phone_number;
 
+  /// No description provided for @register_with_email.
+  ///
+  /// In en, this message translates to:
+  /// **'Register With Email'**
+  String get register_with_email;
+
   /// No description provided for @or.
   ///
   /// In en, this message translates to:
@@ -656,6 +662,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Offered Exchange Medication Type'**
   String get offered_exchange_medication_type;
+
+  /// No description provided for @continuez.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue'**
+  String get continuez;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

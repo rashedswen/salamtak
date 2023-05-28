@@ -18,7 +18,7 @@ class EmergencySection extends StatelessWidget {
       height: 100,
       decoration: BoxDecoration(
         border: Border.all(
-          color: Colors.grey.shade300,
+          color: Colors.grey.shade800,
         ),
         borderRadius: BorderRadius.circular(8),
         boxShadow: [

@@ -42,7 +42,7 @@ class _ProfileTabViewState extends State<ProfileTabView>
       mainAxisSize: MainAxisSize.min,
       children: [
         ColoredBox(
-          color: const Color(0xFFD2EBC7),
+          color: Theme.of(context).colorScheme.tertiary,
           child: TabBar(
             controller: tabViewController,
             indicatorColor: const Color(0xFFD0EFE9),
@@ -84,8 +84,14 @@ class _ProfileTabViewState extends State<ProfileTabView>
                         return SingleChildScrollView(
                           child: Column(
                             children: state.userRequests!.map((request) {
-                              return SizedBox(
+                              // check if position is even or odd
+                              final isEven =
+                                  state.userRequests!.indexOf(request) % 2 == 0;
+                              return Container(
                                 height: 100,
+                                color: !isEven
+                                    ? Theme.of(context).colorScheme.tertiary
+                                    : Colors.transparent,
                                 child: Row(
                                   children: [
                                     Container(
@@ -123,7 +129,9 @@ class _ProfileTabViewState extends State<ProfileTabView>
                                                 .textTheme
                                                 .bodyMedium
                                                 ?.copyWith(
-                                                  color: darkGreen,
+                                                  color: Theme.of(context)
+                                                      .colorScheme
+                                                      .onSurface,
                                                   fontWeight: FontWeight.bold,
                                                 ),
                                           ),
@@ -179,7 +187,17 @@ class _ProfileTabViewState extends State<ProfileTabView>
                       }
                       if (state.userRequests!.isEmpty) {
                         return Center(
-                          child: Text(context.l10n.no_requests_found),
+                          child: Text(
+                            context.l10n.no_requests_found,
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyMedium
+                                ?.copyWith(
+                                  color:
+                                      Theme.of(context).colorScheme.onSurface,
+                                ),
+                            textAlign: TextAlign.center,
+                          ),
                         );
                       }
                     }

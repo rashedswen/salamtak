@@ -75,7 +75,7 @@ class MedicationListItem extends StatelessWidget {
                       child: FaIcon(
                         medication.form.icon,
                         size: 50,
-                        color: Theme.of(context).textTheme.titleMedium?.color,
+                        color: Colors.black,
                       ),
                     ),
                   ),

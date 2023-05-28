@@ -12,7 +12,6 @@ import 'package:salamtak/features/medication_feature/presentation/add_request/wi
 import 'package:salamtak/features/medication_feature/presentation/add_request/widgets/medication_form_section.dart';
 import 'package:salamtak/features/medication_feature/presentation/add_request/widgets/select_image.dart';
 import 'package:salamtak/l10n/l10n.dart';
-import 'package:salamtak/util/constants.dart';
 import 'package:salamtak/util/json/states_and_cities.dart';
 
 /// {@template add_exchange_body}
@@ -71,7 +70,9 @@ class AddExchangeBody extends StatelessWidget {
                                     style: TextStyle(
                                       fontSize: 16,
                                       fontWeight: FontWeight.w500,
-                                      color: lightGreen,
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .onSurface,
                                     ),
                                   ),
                                   const SizedBox(height: 8),
@@ -88,7 +89,9 @@ class AddExchangeBody extends StatelessWidget {
                                     style: TextStyle(
                                       fontSize: 16,
                                       fontWeight: FontWeight.w500,
-                                      color: lightGreen,
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .onSurface,
                                     ),
                                   ),
                                   const SizedBox(height: 8),
@@ -137,7 +140,7 @@ class AddExchangeBody extends StatelessWidget {
                                                   .medicineImageChanged(value),
                                         ),
                                       ),
-                                      const SizedBox(height: 16),
+                                      const SizedBox(height: 32),
                                       Expanded(
                                         child: SelectImage(
                                           title: context.l10n

@@ -215,6 +215,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get continue_with_phone_number => 'Continue with Phone Number';
 
   @override
+  String get register_with_email => 'Register With Email';
+
+  @override
   String get or => 'Or';
 
   @override
@@ -285,4 +288,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get offered_exchange_medication_type => 'Offered Exchange Medication Type';
+
+  @override
+  String get continuez => 'Continue';
 }

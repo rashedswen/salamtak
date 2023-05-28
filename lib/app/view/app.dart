@@ -58,27 +58,28 @@ class AppView extends StatelessWidget {
       DeviceOrientation.portraitDown,
     ]);
     return MaterialApp.router(
-      themeMode: ThemeMode.light,
+      themeMode: ThemeMode.dark,
       theme: ThemeData(
-        brightness: Brightness.light,
         useMaterial3: true,
         appBarTheme: const AppBarTheme(color: Color(0xFF14967F)),
         colorScheme: ColorScheme.light(
           onPrimary: lemon,
+          tertiary: const Color(0xFFD2EBC7),
         ),
         primaryColor: darkGreen,
         scaffoldBackgroundColor: lemon,
         textTheme: GoogleFonts.cairoTextTheme(),
       ),
       darkTheme: ThemeData.dark().copyWith(
-        brightness: Brightness.dark,
         useMaterial3: true,
         appBarTheme: const AppBarTheme(color: Color(0xFF14967F)),
         colorScheme: const ColorScheme.dark(
           onPrimary: Colors.white,
+          tertiary: Color(0xFF131517),
+          surface: Color.fromARGB(255, 60, 60, 60),
         ),
         primaryColor: Colors.white,
-        scaffoldBackgroundColor: lemon,
+        scaffoldBackgroundColor: const Color(0xFF131517),
         textTheme: GoogleFonts.cairoTextTheme(),
       ),
       locale: const Locale('ar'),

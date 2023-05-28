@@ -72,35 +72,38 @@ class _MedicationDetailsTabViewState extends State<MedicationDetailsTabView>
             controller: tabViewController,
             children: [
               Card(
-                color: lemon,
+                color: Theme.of(context).colorScheme.surface,
                 child: Padding(
                   padding: const EdgeInsets.all(8),
                   child: Text(
                     widget.medicationItem.description ??
                         context.l10n.no_description,
-                    style: Theme.of(context).textTheme.bodyLarge,
+                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                          color: Theme.of(context).colorScheme.onSurface,
+                        ),
                   ),
                 ),
               ),
               Card(
-                color: lemon,
+                color: Theme.of(context).colorScheme.surface,
                 child: Padding(
                   padding: const EdgeInsets.all(8),
                   child: Column(
                     children: [
-                      const Spacer(),
                       Text(
                         widget.medicationItem.location
                                 ?.toLocalString(context.l10n.localeName) ??
                             '',
-                        style: Theme.of(context).textTheme.bodyLarge,
+                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                              color: Theme.of(context).colorScheme.onSurface,
+                            ),
                       ),
                     ],
                   ),
                 ),
               ),
               Card(
-                color: lemon,
+                color: Theme.of(context).colorScheme.surface,
                 child: Padding(
                   padding: const EdgeInsets.all(8),
                   child: Column(
@@ -119,7 +122,13 @@ class _MedicationDetailsTabViewState extends State<MedicationDetailsTabView>
                           Text(
                             widget.medicationItem.emergencyLevel?.arabicName ??
                                 '',
-                            style: Theme.of(context).textTheme.bodyLarge,
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyLarge
+                                ?.copyWith(
+                                  color:
+                                      Theme.of(context).colorScheme.onSurface,
+                                ),
                           ),
                         ],
                       ),
@@ -128,16 +137,25 @@ class _MedicationDetailsTabViewState extends State<MedicationDetailsTabView>
                         children: [
                           Text(
                             context.l10n.medication_type,
-                            style:
-                                Theme.of(context).textTheme.bodyLarge?.copyWith(
-                                      color: Theme.of(context).primaryColor,
-                                      fontWeight: FontWeight.bold,
-                                    ),
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyLarge
+                                ?.copyWith(
+                                  color:
+                                      Theme.of(context).colorScheme.onSurface,
+                                  fontWeight: FontWeight.bold,
+                                ),
                           ),
                           const SizedBox(width: 8),
                           Text(
                             widget.medicationItem.form.arabicName,
-                            style: Theme.of(context).textTheme.bodyLarge,
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyLarge
+                                ?.copyWith(
+                                  color:
+                                      Theme.of(context).colorScheme.onSurface,
+                                ),
                           ),
                         ],
                       ),

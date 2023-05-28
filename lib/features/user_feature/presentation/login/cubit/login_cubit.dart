@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:formz/formz.dart';
 import 'package:salamtak/features/user_feature/domain/repository/authentication_repository.dart';
 import 'package:salamtak/features/user_feature/util/errors/login_failure.dart';
@@ -35,6 +36,21 @@ class LoginCubit extends Cubit<LoginState> {
         status: FormzSubmissionStatus.initial,
       ),
     );
+  }
+
+  Future<void> checkIfUserExist() async {
+    emit(state.copyWith(emailfounded: Emailfounded.loading));
+    final userList = await FirebaseAuth.instance
+        .fetchSignInMethodsForEmail(state.email.value);
+    if (userList.isEmpty) {
+      emit(state.copyWith(emailfounded: Emailfounded.notFound));
+    } else {
+      emit(
+        state.copyWith(
+          emailfounded: Emailfounded.found,
+        ),
+      );
+    }
   }
 
   Future<void> logInWithTwitter() async {
@@ -92,7 +108,6 @@ class LoginCubit extends Cubit<LoginState> {
 
   Future<void> logInAnonymously() async {
     emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
-
     try {
       await _authenticationRepository.logInAnonymously();
       emit(state.copyWith(status: FormzSubmissionStatus.success));

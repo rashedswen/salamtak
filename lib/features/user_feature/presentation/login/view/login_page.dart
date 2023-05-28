@@ -42,13 +42,24 @@ class LoginView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<AppBloc, AppState>(
-      listener: (context, state) {
-        if (state.status == AppStatus.authenticated) {
-          print('authenticated');
-          context.pushReplacementNamed(Screens.dashboard.name);
-        }
-      },
+    return MultiBlocListener(
+      listeners: [
+        BlocListener<AppBloc, AppState>(
+          listener: (context, state) {
+            if (state.status == AppStatus.authenticated) {
+              print('authenticated');
+              context.pushReplacementNamed(Screens.dashboard.name);
+            }
+          },
+        ),
+        BlocListener<LoginCubit, LoginState>(
+          listener: (context, state) {
+            if (state.emailfounded == Emailfounded.notFound) {
+              context.pushNamed(Screens.register.name);
+            }
+          },
+        ),
+      ],
       child: const ResponsiveLayout(
         mobileBody: LoginBody(),
         tabletBody: LoginBody(),

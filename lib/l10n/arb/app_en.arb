@@ -139,6 +139,8 @@
 
     "continue_with_phone_number": "Continue with Phone Number",
 
+    "register_with_email": "Register With Email",
+
     "or": "Or",
 
     "search": "Search",
@@ -185,7 +187,9 @@
 
     "wanted_exchange_medication_type": "Wanted Exchange Medication Type",
 
-    "offered_exchange_medication_type": "Offered Exchange Medication Type"
+    "offered_exchange_medication_type": "Offered Exchange Medication Type",
+
+    "continuez": "Continue"
 
     
 }

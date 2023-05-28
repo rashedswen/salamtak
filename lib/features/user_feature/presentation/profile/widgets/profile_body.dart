@@ -6,16 +6,9 @@ import 'package:salamtak/core/widgets/salamtak_background.dart';
 import 'package:salamtak/features/user_feature/presentation/profile/cubit/cubit.dart';
 import 'package:salamtak/features/user_feature/presentation/profile/widgets/profile_tab_view.dart';
 import 'package:salamtak/l10n/l10n.dart';
-import 'package:salamtak/util/constants.dart';
 import 'package:salamtak/util/layout/dimensions.dart';
 
-/// {@template profile_body}
-/// Body of the ProfilePage.
-///
-/// Add what it does
-/// {@endtemplate}
 class ProfileBody extends StatefulWidget {
-  /// {@macro profile_body}
   const ProfileBody({super.key});
 
   @override
@@ -64,7 +57,9 @@ class _ProfileBodyState extends State<ProfileBody>
                                       .textTheme
                                       .headlineMedium
                                       ?.copyWith(
-                                        color: lightGreen,
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .onSurface,
                                         fontWeight: FontWeight.bold,
                                       ),
                                 ),
@@ -87,7 +82,9 @@ class _ProfileBodyState extends State<ProfileBody>
                                                   child: Icon(
                                                     Icons.person_rounded,
                                                     size: 120,
-                                                    color: lightGreen,
+                                                    color: Theme.of(context)
+                                                        .colorScheme
+                                                        .onSurface,
                                                   ),
                                                 ),
                                               );
@@ -137,18 +134,15 @@ class _ProfileBodyState extends State<ProfileBody>
                                       children: [
                                         Text(
                                           state.user.phoneNumber ?? '',
+                                          textDirection: TextDirection.ltr,
                                           style: Theme.of(context)
                                               .textTheme
-                                              .titleLarge,
-                                        ),
-                                        const SizedBox(
-                                          height: 8,
-                                        ),
-                                        Text(
-                                          state.user.email ?? '',
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .bodyMedium,
+                                              .titleLarge
+                                              ?.copyWith(
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .onSurface,
+                                              ),
                                         ),
                                       ],
                                     );
