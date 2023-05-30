@@ -3,12 +3,8 @@ import 'package:salamtak/core/widgets/salamtak_web_app_bar.dart';
 import 'package:salamtak/core/widgets/web_widgets/web_add_item_row.dart';
 import 'package:salamtak/features/user_feature/presentation/dashboard/widgets/list_of_items_section.dart';
 import 'package:salamtak/features/user_feature/presentation/profile/widgets/profile_body.dart';
-import 'package:salamtak/util/constants.dart';
-
-
 
 class DashboardWebBody extends StatefulWidget {
-
   const DashboardWebBody({super.key});
 
   @override
@@ -39,7 +35,7 @@ class _DashboardWebBodyState extends State<DashboardWebBody> {
                   if (isExpanded)
                     Container(
                       width: 350,
-                      color: lemon,
+                      color: Theme.of(context).colorScheme.surface,
                       child: const ProfileBody(),
                     ),
                   SizedBox(

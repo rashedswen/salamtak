@@ -6,6 +6,7 @@ class AppState extends Equatable {
   const AppState._({
     this.status = AppStatus.unauthenticated,
     this.user = SalamtakUser.empty,
+    this.isDarkMode = false,
   });
 
   const AppState.unauthenticated() : this._(status: AppStatus.unauthenticated);
@@ -15,6 +16,19 @@ class AppState extends Equatable {
 
   final AppStatus status;
   final SalamtakUser user;
+  final bool isDarkMode;
+
+  AppState copyWith({
+    AppStatus? status,
+    SalamtakUser? user,
+    bool? isDarkMode,
+  }) {
+    return AppState._(
+      status: status ?? this.status,
+      user: user ?? this.user,
+      isDarkMode: isDarkMode ?? this.isDarkMode,
+    );
+  }
 
   @override
   List<Object> get props => [status, user];

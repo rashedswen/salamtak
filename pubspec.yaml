@@ -1,6 +1,6 @@
 name: salamtak
 description: make getting medication and consultation easier
-version: 1.0.0+2
+version: 1.0.0+3
 publish_to: none
 
 environment:
@@ -33,6 +33,7 @@ dependencies:
   internet_connection_checker: ^1.0.0+1
   intl: ^0.18.0
   json_annotation: ^4.8.1
+  shared_preferences: ^2.1.1
   sign_in_with_apple: ^4.3.0
 
 dev_dependencies:

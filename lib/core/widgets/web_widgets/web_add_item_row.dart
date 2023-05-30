@@ -18,8 +18,7 @@ class WebAddItemRow extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          SizedBox(
-            width: 300,
+          Expanded(
             child: AddCardItem(
               icon: FontAwesomeIcons.handHoldingHeart,
               text: context.l10n.donation,
@@ -30,8 +29,7 @@ class WebAddItemRow extends StatelessWidget {
               },
             ),
           ),
-          SizedBox(
-            width: 300,
+          Expanded(
             child: AddCardItem(
               icon: FontAwesomeIcons.arrowRightArrowLeft,
               text: 'تبادل',
@@ -43,8 +41,7 @@ class WebAddItemRow extends StatelessWidget {
               },
             ),
           ),
-          SizedBox(
-            width: 300,
+          Expanded(
             child: AddCardItem(
               icon: FontAwesomeIcons.capsules,
               text: context.l10n.request,

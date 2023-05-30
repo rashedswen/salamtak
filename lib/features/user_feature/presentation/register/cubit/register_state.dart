@@ -56,7 +56,13 @@ class RegisterState extends Equatable with FormzMixin {
   }
 
   @override
-  List<FormzInput> get inputs => [name, email, password, address, phoneNumber];
+  List<FormzInput> get inputs => [
+        name,
+        email,
+        password,
+        // address,
+        // phoneNumber,
+      ];
 }
 
 class RegisterInitial extends RegisterState {
