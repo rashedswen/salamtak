@@ -2,6 +2,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:salamtak/app/bloc/app_bloc.dart';
 import 'package:salamtak/core/enums/enums.dart';
+import 'package:salamtak/core/widgets/location_section.dart';
 import 'package:salamtak/core/widgets/login_to_continue_widget.dart';
 import 'package:salamtak/core/widgets/salamtak_app_bar.dart';
 import 'package:salamtak/core/widgets/salamtak_background.dart';

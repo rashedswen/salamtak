@@ -75,6 +75,7 @@ class MedicationListItem extends StatelessWidget {
                       child: FaIcon(
                         medication.form.icon,
                         size: 50,
+                        color: Colors.black,
                       ),
                     ),
                   ),
@@ -85,16 +86,19 @@ class MedicationListItem extends StatelessWidget {
                     children: [
                       Text(
                         medication.name,
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
-                        ),
+                        style:
+                            Theme.of(context).textTheme.titleMedium?.copyWith(
+                                  color: Theme.of(context).primaryColor,
+                                ),
                       ),
                       const SizedBox(height: 8),
                       Text(
                         medication.description ?? '',
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                              color: Theme.of(context).primaryColor,
+                            ),
                       ),
                       const SizedBox(height: 8),
                       DecoratedBox(
@@ -150,6 +154,10 @@ class MedicationListItem extends StatelessWidget {
                       child: Center(
                         child: Text(
                           medication.emergencyLevel!.englishName,
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                     ),

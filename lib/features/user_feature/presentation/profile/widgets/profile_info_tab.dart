@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/src/bloc_builder.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
-import 'package:provider/src/provider.dart';
 import 'package:salamtak/app/bloc/app_bloc.dart';
 import 'package:salamtak/features/user_feature/presentation/profile/cubit/profile_cubit.dart';
 import 'package:salamtak/features/user_feature/presentation/profile/widgets/user_info_list_tile.dart';
@@ -33,7 +32,7 @@ class ProfileInfoTab extends StatelessWidget {
           },
         ),
         ColoredBox(
-          color: const Color(0xFFD2EBC7),
+          color: Theme.of(context).colorScheme.tertiary,
           child: UserInfoListTile(
             text: context.l10n.email,
             value: context.read<AppBloc>().state.user.email ??
@@ -82,7 +81,7 @@ class ProfileInfoTab extends StatelessWidget {
           builder: (blocContext, state) {
             if (!state.providers.twitter) {
               return ColoredBox(
-                color: const Color(0xFFD2EBC7),
+                color: Theme.of(context).colorScheme.tertiary,
                 child: ListTile(
                   onTap: () {
                     context.read<ProfileCubit>().linkWithTwitter();
@@ -90,7 +89,7 @@ class ProfileInfoTab extends StatelessWidget {
                   title: Text(
                     context.l10n.link_with_twitter,
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: Colors.grey,
+                          color: Theme.of(context).colorScheme.onSurface,
                         ),
                   ),
                   trailing: const FaIcon(
@@ -118,13 +117,13 @@ class ProfileInfoTab extends StatelessWidget {
                     onPressed: () {
                       context.pop(false);
                     },
-                    child: const Text('Cancel'),
+                    child: Text(context.l10n.cancel),
                   ),
                   TextButton(
                     onPressed: () {
                       context.pop(true);
                     },
-                    child: const Text('Delete'),
+                    child: Text(context.l10n.delete),
                   ),
                 ],
               ),

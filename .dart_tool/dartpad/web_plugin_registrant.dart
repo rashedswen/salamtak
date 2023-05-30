@@ -12,6 +12,7 @@ import 'package:firebase_auth_web/firebase_auth_web.dart';
 import 'package:firebase_core_web/firebase_core_web.dart';
 import 'package:firebase_storage_web/firebase_storage_web.dart';
 import 'package:flutter_native_splash/flutter_native_splash_web.dart';
+import 'package:sign_in_with_apple_web/sign_in_with_apple_web.dart';
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 
 void registerPlugins([final Registrar? pluginRegistrar]) {
@@ -22,5 +23,6 @@ void registerPlugins([final Registrar? pluginRegistrar]) {
   FirebaseCoreWeb.registerWith(registrar);
   FirebaseStorageWeb.registerWith(registrar);
   FlutterNativeSplashWeb.registerWith(registrar);
+  SignInWithApplePlugin.registerWith(registrar);
   registrar.registerMessageHandler();
 }

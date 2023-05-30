@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:salamtak/core/enums/emergency_level.dart';
 import 'package:salamtak/l10n/l10n.dart';
-import 'package:salamtak/util/constants.dart';
 
 class EmergencySection extends StatelessWidget {
   const EmergencySection({
@@ -19,7 +18,7 @@ class EmergencySection extends StatelessWidget {
       height: 100,
       decoration: BoxDecoration(
         border: Border.all(
-          color: Colors.grey.shade300,
+          color: Colors.grey.shade800,
         ),
         borderRadius: BorderRadius.circular(8),
         boxShadow: [
@@ -29,7 +28,7 @@ class EmergencySection extends StatelessWidget {
             offset: const Offset(0, 3),
           ),
         ],
-        color: lemon,
+        color: Theme.of(context).colorScheme.surface,
       ),
       width: double.infinity,
       child: Center(

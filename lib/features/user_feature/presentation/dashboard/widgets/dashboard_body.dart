@@ -43,7 +43,12 @@ class DashboardBody extends StatelessWidget {
                             children: [
                               Text(
                                 context.l10n.recent_requests_and_donations,
-                                style: Theme.of(context).textTheme.titleMedium,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .titleMedium
+                                    ?.copyWith(
+                                      color: Theme.of(context).primaryColor,
+                                    ),
                               ),
                               // const Spacer(),
                               // IconButton(

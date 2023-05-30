@@ -139,6 +139,8 @@
 
     "continue_with_phone_number": "Continue with Phone Number",
 
+    "register_with_email": "Register With Email",
+
     "or": "Or",
 
     "search": "Search",
@@ -171,6 +173,23 @@
 
     "contact_us": "Contact Us",
 
-    "continue_with_apple": "Continue with Apple"
+    "continue_with_apple": "Continue with Apple",
+    
+    "exchange": "Exchange",
+
+    "medication_wanted_in_exchange": "Medication Wanted in Exchange",
+
+    "medication_offered_in_exchange": "Medication Offered in Exchange",
+
+    "exhange_wanted_medication_image": "Exchange Wanted Medication Image (Optional)",
+
+    "exhange_offered_medication_image": "Exchange Offered Medication Image (Optional)",
+
+    "wanted_exchange_medication_type": "Wanted Exchange Medication Type",
+
+    "offered_exchange_medication_type": "Offered Exchange Medication Type",
+
+    "continuez": "Continue"
+
     
 }

@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:salamtak/app/bloc/app_bloc.dart';
 import 'package:salamtak/core/widgets/drawet_item.dart';
 import 'package:salamtak/l10n/l10n.dart';
+import 'package:salamtak/util/constants.dart';
 import 'package:salamtak/util/router/screen.dart';
 
 class SalamtakDrawer extends StatelessWidget {
@@ -15,7 +16,9 @@ class SalamtakDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
+      backgroundColor: Theme.of(context).brightness == Brightness.light
+          ? lightGreen
+          : lightGreen,
       child: Padding(
         padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
         child: LayoutBuilder(

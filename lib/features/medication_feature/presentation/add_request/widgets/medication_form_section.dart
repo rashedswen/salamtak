@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:salamtak/core/enums/enums.dart';
 import 'package:salamtak/features/medication_feature/presentation/add_request/widgets/add_request_body.dart';
 import 'package:salamtak/features/medication_feature/presentation/add_request/widgets/medication_form_info.dart';
-import 'package:salamtak/util/constants.dart';
 
 class MedicationFormSection extends StatelessWidget {
   const MedicationFormSection({
@@ -17,7 +16,7 @@ class MedicationFormSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: lemon,
+      color: Theme.of(context).colorScheme.surface,
       elevation: 6,
       child: Padding(
         padding:

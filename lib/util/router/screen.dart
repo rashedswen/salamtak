@@ -10,6 +10,7 @@ enum Screens {
   donations,
   addRequest,
   addDonation,
+  addExchange,
   medicationDetails,
   requestsAndDonationslist,
   approveMedicationsRequests,
@@ -45,6 +46,8 @@ extension Routes on Screens {
         return '/add-request';
       case Screens.addDonation:
         return '/add-donation';
+      case Screens.addExchange:
+        return '/add-exchange';
       case Screens.requestsAndDonationslist:
         return '/requests-donations-list';
       case Screens.doctors:
@@ -88,6 +91,8 @@ extension Routes on Screens {
         return 'Add Request';
       case Screens.addDonation:
         return 'Add Donation';
+      case Screens.addExchange:
+        return 'Add Exchange';
       case Screens.requestsAndDonationslist:
         return 'Requests Donations List';
       case Screens.doctors:

@@ -215,6 +215,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get continue_with_phone_number => 'Continue with Phone Number';
 
   @override
+  String get register_with_email => 'Register With Email';
+
+  @override
   String get or => 'Or';
 
   @override
@@ -264,4 +267,28 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get continue_with_apple => 'Continue with Apple';
+
+  @override
+  String get exchange => 'Exchange';
+
+  @override
+  String get medication_wanted_in_exchange => 'Medication Wanted in Exchange';
+
+  @override
+  String get medication_offered_in_exchange => 'Medication Offered in Exchange';
+
+  @override
+  String get exhange_wanted_medication_image => 'Exchange Wanted Medication Image (Optional)';
+
+  @override
+  String get exhange_offered_medication_image => 'Exchange Offered Medication Image (Optional)';
+
+  @override
+  String get wanted_exchange_medication_type => 'Wanted Exchange Medication Type';
+
+  @override
+  String get offered_exchange_medication_type => 'Offered Exchange Medication Type';
+
+  @override
+  String get continuez => 'Continue';
 }

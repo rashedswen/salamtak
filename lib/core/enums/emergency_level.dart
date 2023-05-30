@@ -42,13 +42,13 @@ extension EmergencyLevelX on EmergencyLevel {
   Color get color {
     switch (this) {
       case EmergencyLevel.low:
-        return Colors.green.shade200;
+        return const Color.fromARGB(255, 18, 120, 161);
       case EmergencyLevel.medium:
         return const Color(0xFF095D7E);
       case EmergencyLevel.high:
         return Colors.orange;
       case EmergencyLevel.critical:
-        return Colors.red;
+        return const Color(0xFFC93E32);
       case EmergencyLevel.unknown:
         return Colors.grey;
     }

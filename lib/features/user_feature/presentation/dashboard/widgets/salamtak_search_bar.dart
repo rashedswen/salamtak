@@ -27,6 +27,11 @@ class SalamtakSearchBar extends StatelessWidget {
           fillColor: Colors.white,
           filled: true,
           hintText: context.l10n.type_medication_name,
+          hintStyle: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w500,
+            color: lightGreen.withOpacity(0.5),
+          ),
           prefixIcon: Icon(
             Icons.search,
             color: lightGreen,

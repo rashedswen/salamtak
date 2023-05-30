@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:salamtak/util/constants.dart';
 
 class TextWithField extends StatefulWidget {
   const TextWithField({
@@ -50,7 +49,7 @@ class _TextWithFieldState extends State<TextWithField> {
           style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.w500,
-            color: lightGreen,
+            color: Theme.of(context).colorScheme.onSurface,
           ),
         ),
         const SizedBox(height: 8),
@@ -65,14 +64,16 @@ class _TextWithFieldState extends State<TextWithField> {
             maxLines: widget.maxLines,
             readOnly: widget.onTap != null,
             showCursor: widget.onTap == null,
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w500,
+              color: Theme.of(context).colorScheme.onSurface,
             ),
             keyboardType: widget.keyboardType,
             decoration: InputDecoration(
               hintText: widget.hintText,
               filled: true,
+              fillColor: Theme.of(context).colorScheme.surface,
               errorText: widget.errorText,
               border: OutlineInputBorder(
                 borderSide: BorderSide.none,

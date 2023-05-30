@@ -3,12 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:salamtak/app/bloc/app_bloc.dart';
 import 'package:salamtak/core/enums/enums.dart';
+import 'package:salamtak/core/widgets/location_section.dart';
 import 'package:salamtak/core/widgets/login_to_continue_widget.dart';
 import 'package:salamtak/core/widgets/salamtak_app_bar.dart';
 import 'package:salamtak/core/widgets/salamtak_background.dart';
 import 'package:salamtak/core/widgets/text_with_field.dart';
 import 'package:salamtak/features/medication_feature/presentation/add_donation/cubit/cubit.dart';
-import 'package:salamtak/features/medication_feature/presentation/add_donation/widgets/city_selector.dart';
+import 'package:salamtak/core/widgets/city_selector.dart';
 import 'package:salamtak/features/medication_feature/presentation/add_request/widgets/medication_form_section.dart';
 import 'package:salamtak/features/medication_feature/presentation/add_request/widgets/select_image.dart';
 import 'package:salamtak/l10n/l10n.dart';
@@ -199,49 +200,3 @@ class AddDonationBody extends StatelessWidget {
   }
 }
 
-class LocationSection extends StatelessWidget {
-  const LocationSection({
-    super.key,
-    required this.onLocationChanged,
-    this.selectedLocation,
-    required this.onAddressChanged,
-    this.selectedAddress,
-  });
-
-  final void Function(LocationSudan) onLocationChanged;
-  final LocationSudan? selectedLocation;
-  final void Function(String) onAddressChanged;
-  final String? selectedAddress;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          context.l10n.city,
-          style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w500,
-            color: lightGreen,
-          ),
-        ),
-        const SizedBox(
-          height: 8,
-        ),
-        CitySelector(
-          onTap: onLocationChanged,
-          selectedLocation: selectedLocation,
-        ),
-        const SizedBox(
-          height: 16,
-        ),
-        TextWithField(
-          text: context.l10n.address,
-          onChanged: onAddressChanged,
-          value: selectedAddress,
-        ),
-      ],
-    );
-  }
-}

@@ -5,18 +5,12 @@ import 'package:salamtak/app/bloc/app_bloc.dart';
 import 'package:salamtak/core/enums/enums.dart';
 import 'package:salamtak/core/widgets/salamtak_app_bar.dart';
 import 'package:salamtak/core/widgets/salamtak_background.dart';
+import 'package:salamtak/core/widgets/salamtak_button.dart';
 import 'package:salamtak/features/medication_feature/presentation/medication_details/cubit/cubit.dart';
 import 'package:salamtak/features/medication_feature/presentation/medication_details/widgets/medication_details_tab_view.dart';
 import 'package:salamtak/l10n/l10n.dart';
-import 'package:salamtak/util/constants.dart';
 
-/// {@template medication_details_body}
-/// Body of the MedicationDetailsPage.
-///
-/// Add what it does
-/// {@endtemplate}
 class MedicationDetailsBody extends StatelessWidget {
-  /// {@macro medication_details_body}
   const MedicationDetailsBody({super.key});
 
   @override
@@ -79,11 +73,15 @@ class MedicationDetailsBody extends StatelessWidget {
                                       width: 150,
                                       height: 150,
                                       decoration: BoxDecoration(
-                                        color: Colors.white,
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .surface,
                                         borderRadius: BorderRadius.circular(8),
                                         boxShadow: [
                                           BoxShadow(
-                                            color: Colors.grey.shade300,
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .onSurface,
                                             blurRadius: 4,
                                             offset: const Offset(0, 2),
                                           ),
@@ -99,6 +97,9 @@ class MedicationDetailsBody extends StatelessWidget {
                                               child: FaIcon(
                                                 medication.form.icon,
                                                 size: 200,
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .onSurface,
                                               ),
                                             ),
                                     ),
@@ -119,7 +120,9 @@ class MedicationDetailsBody extends StatelessWidget {
                                                   .textTheme
                                                   .headlineMedium
                                                   ?.copyWith(
-                                                    color: Colors.black,
+                                                    color: Theme.of(context)
+                                                        .colorScheme
+                                                        .onSurface,
                                                     fontWeight: FontWeight.bold,
                                                   ),
                                             ),
@@ -135,7 +138,9 @@ class MedicationDetailsBody extends StatelessWidget {
                                                 .textTheme
                                                 .bodyLarge
                                                 ?.copyWith(
-                                                  color: darkGreen,
+                                                  color: Theme.of(context)
+                                                      .colorScheme
+                                                      .onSurface,
                                                 ),
                                           ),
                                           // type
@@ -189,64 +194,21 @@ class MedicationDetailsBody extends StatelessWidget {
                                 children: [
                                   BlocBuilder<AppBloc, AppState>(
                                     builder: (context, stateapp) {
-                                      return InkWell(
+                                      return SalamtakButton(
+                                        text: medication.requestType ==
+                                                MedicationRequestType.donation
+                                            ? context.l10n.i_need_it
+                                            : context.l10n.i_can_help,
                                         onTap: () {
                                           context
                                               .read<MedicationDetailsCubit>()
                                               .acceptMedicatin(
-                                                stateapp.user,
+                                                context
+                                                    .read<AppBloc>()
+                                                    .state
+                                                    .user,
                                               );
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(
-                                            SnackBar(
-                                              content: Text(
-                                                context.l10n
-                                                    .request_sent_successfully,
-                                              ),
-                                              backgroundColor:
-                                                  Colors.green.shade400,
-                                            ),
-                                          );
                                         },
-                                        child: ElevatedButton(
-                                          onPressed: () {
-                                            context
-                                                .read<MedicationDetailsCubit>()
-                                                .acceptMedicatin(
-                                                  context
-                                                      .read<AppBloc>()
-                                                      .state
-                                                      .user,
-                                                );
-                                          },
-                                          style: ElevatedButton.styleFrom(
-                                            backgroundColor: lightGreen,
-                                            padding: const EdgeInsets.symmetric(
-                                              vertical: 8,
-                                              horizontal: 32,
-                                            ),
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(21),
-                                            ),
-                                          ),
-                                          child: Text(
-                                            medication.requestType ==
-                                                    MedicationRequestType
-                                                        .donation
-                                                ? context.l10n.i_need_it
-                                                : context.l10n.i_can_help,
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .bodyMedium
-                                                ?.copyWith(
-                                                  color: Colors.white,
-                                                  fontSize: 16,
-                                                  fontWeight: FontWeight.bold,
-                                                  letterSpacing: 1.5,
-                                                ),
-                                          ),
-                                        ),
                                       );
                                     },
                                   ),

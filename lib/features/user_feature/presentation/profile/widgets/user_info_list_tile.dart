@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:salamtak/features/medication_feature/presentation/add_donation/widgets/add_donation_body.dart';
+import 'package:salamtak/core/widgets/location_section.dart';
 import 'package:salamtak/l10n/l10n.dart';
 import 'package:salamtak/util/constants.dart';
 import 'package:salamtak/util/json/states_and_cities.dart';
@@ -169,19 +169,21 @@ class _UserInfoListTileState extends State<UserInfoListTile> {
         title: Text(
           widget.text,
           style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: Colors.grey,
+                color: Theme.of(context).colorScheme.onSurface,
               ),
         ),
         subtitle: Text(
           widget.value,
-          style: Theme.of(context).textTheme.bodyMedium,
+          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                color: Theme.of(context).colorScheme.onSurface,
+              ),
         ),
         trailing: TextButton(
           onPressed: _toggleEditing,
           child: Text(
             context.l10n.edit,
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  color: lightGreen,
+                  color: Theme.of(context).colorScheme.onSurface,
                 ),
           ),
         ),

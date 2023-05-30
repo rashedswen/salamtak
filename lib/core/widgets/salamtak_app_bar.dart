@@ -34,7 +34,7 @@ class SalamtakMobileAppBar extends StatelessWidget {
           },
           icon: Icon(
             FontAwesomeIcons.barsStaggered,
-            color: lightGreen,
+            color: Theme.of(context).primaryColor,
             size: 24,
           ),
         ),
@@ -45,11 +45,23 @@ class SalamtakMobileAppBar extends StatelessWidget {
               Screens.dashboard.name,
             );
           },
-          child: Image.asset(
-            'assets/images/logo_transparent.png',
-            width: 50,
-            height: 50,
-          ),
+          child: Theme.of(context).brightness == Brightness.light
+              ? Image.asset(
+                  'assets/images/logo_transparent.png',
+                  width: 50,
+                  height: 50,
+                )
+              : ColorFiltered(
+                  colorFilter: const ColorFilter.mode(
+                    Colors.white,
+                    BlendMode.srcIn,
+                  ),
+                  child: Image.asset(
+                    'assets/images/logo_transparent.png',
+                    width: 50,
+                    height: 50,
+                  ),
+                ),
         ),
       ],
     );

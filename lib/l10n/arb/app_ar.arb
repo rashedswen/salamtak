@@ -139,6 +139,8 @@
 
     "continue_with_phone_number": "الاستمرار باستخدام رقم الجوال",
 
+    "register_with_email": "تسجيل حساب بواسطة الايميل",
+
     "or": "او",
 
     "search": "بحث",
@@ -171,5 +173,21 @@
 
     "contact_us": "تواصل معنا",
 
-    "continue_with_apple": "الاستمرار باستخدام ابل"
+    "continue_with_apple": "الاستمرار باستخدام ابل",
+
+    "exchange": "تبادل",
+
+    "medication_wanted_in_exchange": "الدواء المطلوب للتبادل",
+
+    "medication_offered_in_exchange": "الدواء المعروض للتبادل",
+
+    "exhange_wanted_medication_image": "صورة الدواء المطلوب للتبادل",
+
+    "exhange_offered_medication_image": "صورة الدواء المعروض للتبادل",
+
+    "wanted_exchange_medication_type" : "نوع الدواء المطلوب للتبادل",
+
+    "offered_exchange_medication_type" : "نوع الدواء المعروض للتبادل",
+
+    "continuez": "متابعة"
 }

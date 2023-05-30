@@ -22,6 +22,7 @@ dependencies:
   flutter_launcher_icons: ^0.13.1
   flutter_localizations:
     sdk: flutter
+  flutter_native_splash: ^2.3.0
   flutter_svg: ^2.0.5
   font_awesome_flutter: ^10.4.0
   formz: ^0.6.0
@@ -32,8 +33,7 @@ dependencies:
   internet_connection_checker: ^1.0.0+1
   intl: ^0.18.0
   json_annotation: ^4.8.1
-  flutter_native_splash: ^2.3.0
-
+  sign_in_with_apple: ^4.3.0
 
 dev_dependencies:
   bloc_test: ^9.1.1
@@ -72,5 +72,3 @@ flutter:
     - assets/icons/
     - assets/images/
     - assets/google_fonts/
-    
-    

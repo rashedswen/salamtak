@@ -5,13 +5,10 @@ import 'package:salamtak/features/user_feature/presentation/dashboard/widgets/li
 import 'package:salamtak/features/user_feature/presentation/profile/widgets/profile_body.dart';
 import 'package:salamtak/util/constants.dart';
 
-/// {@template dashboard_body}
-/// Body of the DashboardPage.
-///
-/// Add what it does
-/// {@endtemplate}
+
+
 class DashboardWebBody extends StatefulWidget {
-  /// {@macro dashboard_body}
+
   const DashboardWebBody({super.key});
 
   @override
@@ -25,7 +22,9 @@ class _DashboardWebBodyState extends State<DashboardWebBody> {
     return Stack(
       children: [
         Image.asset(
-          'assets/images/dashboard_web.png',
+          Theme.of(context).brightness == Brightness.dark
+              ? 'assets/images/login_background_dark.png'
+              : 'assets/images/dashboard_web.png',
           fit: BoxFit.cover,
           width: double.infinity,
           height: double.infinity,

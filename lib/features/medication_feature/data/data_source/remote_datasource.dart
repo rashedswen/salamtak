@@ -5,12 +5,14 @@ import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:flutter/foundation.dart';
 import 'package:salamtak/core/enums/enums.dart';
+import 'package:salamtak/features/medication_feature/data/model/medication_exchange_model.dart';
 import 'package:salamtak/features/medication_feature/data/model/models.dart';
 import 'package:salamtak/features/medication_feature/data/model/users_accepted_requests_model.dart';
 import 'package:salamtak/features/user_feature/data/model/salamtak_user_model.dart';
 
 const String _medicationsRequestsCollection = 'requests';
 const String _medicationsDonationsCollection = 'donations';
+const String _medicationsExchangesCollection = 'exchanges';
 
 abstract class RemoteDatasource {
   Future<List<MedicationRequestModel>> getMedicationsRequests();
@@ -58,6 +60,11 @@ abstract class RemoteDatasource {
     MedicationStatus status,
   );
 
+  Future<void> changeMedicationExchangeStatus(
+    String id,
+    MedicationStatus medicationStatus,
+  );
+
   Future<void> acceptMedicationRequest(
     String medicationId,
     SalamtakUserModel user,
@@ -81,6 +88,18 @@ abstract class RemoteDatasource {
     String medicationId,
     MedicationRequestType requestType,
   );
+
+  Future<void> addMedicationExchange(
+      MedicationExchangeModel model,
+      PlatformFile? medicationImage,
+      PlatformFile? exchangeMedicationImage,
+  );
+
+  Future<MedicationExchangeModel> getMedicationExchange(String id);
+
+  Future<List<MedicationExchangeModel>> getMedicationsExchanges();
+
+  Future<void> updateMedicationExchange(MedicationExchangeModel model);
 }
 
 class FirebaseDatasource extends RemoteDatasource {
@@ -421,5 +440,82 @@ class FirebaseDatasource extends RemoteDatasource {
 
       return list;
     }
+  }
+
+  @override
+  Future<void> addMedicationExchange(
+    MedicationExchangeModel model,
+    PlatformFile? medicationImage,
+    PlatformFile? exchangeMedicationImage,
+  ) async {
+    String? imgUrl;
+    String? exchangeImgUrl;
+    if (medicationImage != null) {
+      imgUrl = await uploadImageToFirebase(medicationImage, 'exchanges');
+    }
+    if (exchangeMedicationImage != null) {
+      exchangeImgUrl =
+          await uploadImageToFirebase(exchangeMedicationImage, 'exchanges');
+    }
+
+    final medication = FirebaseFirestore.instance
+        .collection(_medicationsExchangesCollection)
+        .doc();
+
+    await medication.set(
+      model
+          .copyWith(
+            id: medication.id,
+            medicationImage: imgUrl,
+            medicationExchangeImage: exchangeImgUrl,
+          )
+          .toJson(),
+    );
+  }
+
+  @override
+  Future<MedicationExchangeModel> getMedicationExchange(String id) async {
+    final medication = await FirebaseFirestore.instance
+        .collection(_medicationsExchangesCollection)
+        .doc(id)
+        .get();
+
+    return MedicationExchangeModel.fromJson(medication.data()!);
+  }
+
+  @override
+  Future<List<MedicationExchangeModel>> getMedicationsExchanges() async {
+    final medications = await FirebaseFirestore.instance
+        .collection(_medicationsExchangesCollection)
+        .get();
+
+    return medications.docs
+        .map(
+          (medication) => MedicationExchangeModel.fromJson(
+            medication.data(),
+          ),
+        )
+        .toList();
+  }
+
+  @override
+  Future<void> updateMedicationExchange(MedicationExchangeModel model) async {
+    final medicationId = FirebaseFirestore.instance
+        .collection(_medicationsExchangesCollection)
+        .doc(model.id);
+
+    await medicationId.update(model.toJson());
+  }
+
+  @override
+  Future<void> changeMedicationExchangeStatus(
+      String id, MedicationStatus medicationStatus) async {
+    final medicationId = FirebaseFirestore.instance
+        .collection(_medicationsExchangesCollection)
+        .doc(id);
+
+    await medicationId.update({
+      'medicationStatus': medicationStatus.toString(),
+    });
   }
 }

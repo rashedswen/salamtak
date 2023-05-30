@@ -14,14 +14,16 @@ class CitySelector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: Colors.white,
+      color: Theme.of(context).colorScheme.surface,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       child: DropdownButton<LocationSudan>(
         value: selectedLocation,
         hint: const Text('اختر المدينة'),
         isExpanded: true,
-        style: Theme.of(context).textTheme.bodyLarge,
-        dropdownColor: Colors.white,
+        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+              color: Theme.of(context).colorScheme.onSurface,
+            ),
+        dropdownColor: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(10),
         underline: const SizedBox(),
         menuMaxHeight: 200,

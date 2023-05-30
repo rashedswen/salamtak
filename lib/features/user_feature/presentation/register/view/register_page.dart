@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import '../../../../../app/bloc/app_bloc.dart';
-import '../../../domain/repository/authentication_repository.dart';
-import '../cubit/cubit.dart';
-import '../widgets/register_body.dart';
-import '../../../../../l10n/l10n.dart';
-import '../../../../../util/router/screen.dart';
+import 'package:salamtak/app/bloc/app_bloc.dart';
+import 'package:salamtak/core/widgets/salamtak_drawer.dart';
+import 'package:salamtak/features/user_feature/domain/repository/authentication_repository.dart';
+import 'package:salamtak/features/user_feature/presentation/register/cubit/cubit.dart';
+import 'package:salamtak/features/user_feature/presentation/register/widgets/register_body.dart';
+import 'package:salamtak/features/user_feature/presentation/register/widgets/register_body_web.dart';
+import 'package:salamtak/util/layout/responsive_layout.dart';
+import 'package:salamtak/util/router/screen.dart';
 
 /// {@template register_page}
 /// A description for RegisterPage
@@ -25,11 +27,9 @@ class RegisterPage extends StatelessWidget {
       create: (context) => RegisterCubit(
         authenticationRepository: context.read<AuthenticationRepository>(),
       ),
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text(context.l10n.signup),
-        ),
-        body: const RegisterView(),
+      child: const Scaffold(
+        body: RegisterView(),
+        drawer: SalamtakDrawer(),
       ),
     );
   }
@@ -50,7 +50,11 @@ class RegisterView extends StatelessWidget {
           context.pushReplacementNamed(Screens.dashboard.name);
         }
       },
-      child: const RegisterBody(),
+      child: const ResponsiveLayout(
+        mobileBody: RegisterBody(),
+        tabletBody: RegisterBody(),
+        webBody: RegisterBodyWeb(),
+      ),
     );
   }
 }
