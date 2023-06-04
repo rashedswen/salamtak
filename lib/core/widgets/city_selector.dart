@@ -22,6 +22,7 @@ class CitySelector extends StatelessWidget {
         isExpanded: true,
         style: Theme.of(context).textTheme.bodyLarge?.copyWith(
               color: Theme.of(context).colorScheme.onSurface,
+              backgroundColor: Theme.of(context).colorScheme.surface,
             ),
         dropdownColor: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(10),

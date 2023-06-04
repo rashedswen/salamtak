@@ -45,6 +45,19 @@ class ProfileCubit extends Cubit<ProfileState> {
     _resetState();
   }
 
+  Future<void> savePhoneNumber() async {
+    if (state.phoneNumber == null) return;
+    try {
+      await _authenticationRepository.changeValue(
+        'phone_number',
+        state.phoneNumber,
+      );
+    } catch (e) {
+      emit(state.copyWith(status: ProfileStatus.error, error: e.toString()));
+    }
+    _resetState();
+  }
+
   Future<void> saveEmail() async {
     if (state.email == null) return;
     try {
@@ -72,6 +85,12 @@ class ProfileCubit extends Cubit<ProfileState> {
     String? value,
   ) async {
     emit(state.copyWith(name: value));
+  }
+
+  Future<void> phoneNumberChanged(
+    String? value,
+  ) async {
+    emit(state.copyWith(phoneNumber: value));
   }
 
   Future<void> emailChanged(

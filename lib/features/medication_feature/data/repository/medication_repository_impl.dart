@@ -179,17 +179,11 @@ class MedicationRepoisitoryImpl extends MedicationRepository {
             'must be logged in to accept a medication request/donation',
           );
         }
-        if (medicationRequestType == MedicationRequestType.donation) {
-          await remoteDatasource.acceptMedicationDonation(
-            medicationId,
-            user.toModel(),
-          );
-        } else {
-          await remoteDatasource.acceptMedicationRequest(
-            medicationId,
-            user.toModel(),
-          );
-        }
+        await remoteDatasource.acceptMedicationRequest(
+          medicationId,
+          user.toModel(),
+          medicationRequestType,
+        );
       } on Exception {
         rethrow;
       }

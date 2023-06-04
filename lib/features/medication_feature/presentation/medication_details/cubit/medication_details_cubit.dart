@@ -95,6 +95,12 @@ class MedicationDetailsCubit extends Cubit<MedicationDetailsState> {
   }
 
   Future<void> acceptMedicatin(SalamtakUser salamtakUser) async {
+    emit(
+      state.copyWith(
+        submitStatus: MedicationDetailsSubmitRequestStatus.loading,
+      ),
+    );
+    
     if (salamtakUser.isEmpty) {
       emit(
         state.copyWith(
@@ -118,11 +124,7 @@ class MedicationDetailsCubit extends Cubit<MedicationDetailsState> {
       return;
     }
 
-    emit(
-      state.copyWith(
-        submitStatus: MedicationDetailsSubmitRequestStatus.loading,
-      ),
-    );
+    
 
     try {
       await _medicationRepository.acceptMedication(

@@ -14,12 +14,10 @@ class EmergencySection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
     return Container(
       height: 100,
       decoration: BoxDecoration(
-        border: Border.all(
-          color: Colors.grey.shade800,
-        ),
         borderRadius: BorderRadius.circular(8),
         boxShadow: [
           BoxShadow(
@@ -28,7 +26,7 @@ class EmergencySection extends StatelessWidget {
             offset: const Offset(0, 3),
           ),
         ],
-        color: Theme.of(context).colorScheme.surface,
+        color: Theme.of(context).colorScheme.tertiary,
       ),
       width: double.infinity,
       child: Center(

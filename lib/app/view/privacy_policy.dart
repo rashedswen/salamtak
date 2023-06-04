@@ -245,7 +245,9 @@ If you have any questions about this Privacy Policy, You can contact us:
 
 By email: rashedswen@gmail.com
 ''',
-            style: Theme.of(context).textTheme.bodyLarge,
+            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                  color: Theme.of(context).colorScheme.onSurface,
+                ),
           ),
         ),
       ),

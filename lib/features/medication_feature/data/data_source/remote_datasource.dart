@@ -13,6 +13,8 @@ import 'package:salamtak/features/user_feature/data/model/salamtak_user_model.da
 const String _medicationsRequestsCollection = 'requests';
 const String _medicationsDonationsCollection = 'donations';
 const String _medicationsExchangesCollection = 'exchanges';
+const String _medicationsSellCollection = 'sell';
+const String _medicationsAcceptedRequestsCollection = 'accepted_requests';
 
 abstract class RemoteDatasource {
   Future<List<MedicationRequestModel>> getMedicationsRequests();
@@ -68,11 +70,7 @@ abstract class RemoteDatasource {
   Future<void> acceptMedicationRequest(
     String medicationId,
     SalamtakUserModel user,
-  );
-
-  Future<void> acceptMedicationDonation(
-    String medicationId,
-    SalamtakUserModel user,
+    MedicationRequestType requestType,
   );
 
   Future<List<MedicationDonationModel>> getUserMedicationDonations(
@@ -90,9 +88,9 @@ abstract class RemoteDatasource {
   );
 
   Future<void> addMedicationExchange(
-      MedicationExchangeModel model,
-      PlatformFile? medicationImage,
-      PlatformFile? exchangeMedicationImage,
+    MedicationExchangeModel model,
+    PlatformFile? medicationImage,
+    PlatformFile? exchangeMedicationImage,
   );
 
   Future<MedicationExchangeModel> getMedicationExchange(String id);
@@ -307,31 +305,53 @@ class FirebaseDatasource extends RemoteDatasource {
   }
 
   @override
-  Future<void> acceptMedicationDonation(
-    String medicationId,
-    SalamtakUserModel user,
-  ) async {
-    final donate = FirebaseFirestore.instance
-        .collection(_medicationsDonationsCollection)
-        .doc(medicationId)
-        .collection('users')
-        .doc(user.id);
-
-    await donate.set(user.toJson());
-  }
-
-  @override
   Future<void> acceptMedicationRequest(
     String medicationId,
     SalamtakUserModel user,
+    MedicationRequestType requestType,
   ) async {
+    String type;
+    switch (requestType) {
+      case MedicationRequestType.donation:
+        type = _medicationsDonationsCollection;
+        break;
+      case MedicationRequestType.request:
+        type = _medicationsRequestsCollection;
+        break;
+      case MedicationRequestType.exchange:
+        type = _medicationsExchangesCollection;
+        break;
+      case MedicationRequestType.sell:
+        type = _medicationsSellCollection;
+        break;
+    }
+
     final request = FirebaseFirestore.instance
-        .collection(_medicationsRequestsCollection)
+        .collection(type)
         .doc(medicationId)
         .collection('users')
         .doc(user.id);
 
-    await request.set(user.toJson());
+    final requestInCol = FirebaseFirestore.instance
+        .collection(_medicationsAcceptedRequestsCollection)
+        .doc();
+
+    final batch = FirebaseFirestore.instance.batch()
+    ..set(request, user.toJson())
+    ..set(requestInCol, {
+      'id': requestInCol.id,
+      'userId': user.id,
+      'name': user.name,
+      'medicationId': medicationId,
+      'medicationType': requestType.englishName,
+    });
+
+    await batch.commit().catchError((error) {
+      throw FirebaseException(
+        plugin: 'Firestore',
+        message: 'Failed to write batch: $error',
+      );
+    });
   }
 
   @override
@@ -509,7 +529,9 @@ class FirebaseDatasource extends RemoteDatasource {
 
   @override
   Future<void> changeMedicationExchangeStatus(
-      String id, MedicationStatus medicationStatus) async {
+    String id,
+    MedicationStatus medicationStatus,
+  ) async {
     final medicationId = FirebaseFirestore.instance
         .collection(_medicationsExchangesCollection)
         .doc(id);

@@ -3,10 +3,11 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:formz/formz.dart';
-import '../../../domain/entity/salamtak_user.dart';
-import '../../../domain/repository/authentication_repository.dart';
-import '../../../util/validators.dart';
-import '../../../../../util/json/states_and_cities.dart';
+import 'package:salamtak/features/user_feature/domain/entity/salamtak_user.dart';
+import 'package:salamtak/features/user_feature/domain/repository/authentication_repository.dart';
+import 'package:salamtak/features/user_feature/util/validators.dart';
+import 'package:salamtak/util/json/states_and_cities.dart';
+
 part 'register_state.dart';
 
 class RegisterCubit extends Cubit<RegisterState> {

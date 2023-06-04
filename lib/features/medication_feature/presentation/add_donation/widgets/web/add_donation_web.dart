@@ -10,12 +10,10 @@ import 'package:salamtak/core/widgets/salamtak_button.dart';
 import 'package:salamtak/core/widgets/text_with_field.dart';
 import 'package:salamtak/core/widgets/web_widgets/web_add_item_row.dart';
 import 'package:salamtak/features/medication_feature/presentation/add_donation/cubit/cubit.dart';
-import 'package:salamtak/core/widgets/city_selector.dart';
 import 'package:salamtak/features/medication_feature/presentation/add_request/widgets/add_request_body.dart';
 import 'package:salamtak/features/medication_feature/presentation/add_request/widgets/medication_form_info.dart';
 import 'package:salamtak/features/medication_feature/presentation/add_request/widgets/select_image.dart';
 import 'package:salamtak/l10n/l10n.dart';
-import 'package:salamtak/util/constants.dart';
 import 'package:salamtak/util/json/states_and_cities.dart';
 
 /// {@template add_donation_body}
@@ -57,13 +55,17 @@ class AddDonationWebBody extends StatelessWidget {
                                   const SizedBox(height: 32),
                                   Expanded(
                                     child: Card(
-                                      color: lemon,
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .tertiary,
                                       child: Padding(
                                         padding: const EdgeInsets.symmetric(
                                           horizontal: 32,
                                           vertical: 16,
                                         ),
                                         child: Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
                                           children: [
                                             Expanded(
                                               child: Column(
@@ -194,29 +196,56 @@ class AddDonationWebBody extends StatelessWidget {
                                             Expanded(
                                               child: Column(
                                                 children: [
-                                                  Wrap(
-                                                    alignment:
-                                                        WrapAlignment.center,
-                                                    spacing: 8,
-                                                    children: medicineFormList
-                                                        .map(
-                                                          (item) =>
-                                                              MedicationFormCard(
-                                                            form: item.form,
-                                                            onSelect: () => context
-                                                                .read<
-                                                                    AddDonationCubit>()
-                                                                .formChanged(
-                                                                  item.form,
-                                                                ),
-                                                            icon: item.icon,
-                                                            color: item.color,
-                                                            isSelected:
-                                                                state.form ==
-                                                                    item.form,
+                                                  Container(
+                                                    width: double.infinity,
+                                                    decoration: BoxDecoration(
+                                                      border: Border.all(
+                                                        color: Colors
+                                                            .grey.shade300,
+                                                      ),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                        8,
+                                                      ),
+                                                      boxShadow: [
+                                                        BoxShadow(
+                                                          color: Colors.black
+                                                              .withOpacity(0.3),
+                                                          blurRadius: 12,
+                                                          offset: const Offset(
+                                                            0,
+                                                            3,
                                                           ),
-                                                        )
-                                                        .toList(),
+                                                        ),
+                                                      ],
+                                                      color: Theme.of(context)
+                                                          .colorScheme
+                                                          .tertiary,
+                                                    ),
+                                                    child: Wrap(
+                                                      alignment:
+                                                          WrapAlignment.center,
+                                                      spacing: 8,
+                                                      children: medicineFormList
+                                                          .map(
+                                                            (item) =>
+                                                                MedicationFormCard(
+                                                              form: item.form,
+                                                              onSelect: () => context
+                                                                  .read<
+                                                                      AddDonationCubit>()
+                                                                  .formChanged(
+                                                                    item.form,
+                                                                  ),
+                                                              icon: item.icon,
+                                                              color: item.color,
+                                                              isSelected:
+                                                                  state.form ==
+                                                                      item.form,
+                                                            ),
+                                                          )
+                                                          .toList(),
+                                                    ),
                                                   ),
                                                   LocationSection(
                                                     selectedLocation:

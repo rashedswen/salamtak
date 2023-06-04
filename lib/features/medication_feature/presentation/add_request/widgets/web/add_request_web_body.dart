@@ -9,14 +9,12 @@ import 'package:salamtak/core/widgets/salamtak_background.dart';
 import 'package:salamtak/core/widgets/salamtak_button.dart';
 import 'package:salamtak/core/widgets/text_with_field.dart';
 import 'package:salamtak/core/widgets/web_widgets/web_add_item_row.dart';
-import 'package:salamtak/features/medication_feature/presentation/add_donation/widgets/widgets.dart';
 import 'package:salamtak/features/medication_feature/presentation/add_request/cubit/cubit.dart';
 import 'package:salamtak/features/medication_feature/presentation/add_request/widgets/add_request_body.dart';
 import 'package:salamtak/features/medication_feature/presentation/add_request/widgets/emergency_section.dart';
 import 'package:salamtak/features/medication_feature/presentation/add_request/widgets/medication_form_info.dart';
 import 'package:salamtak/features/medication_feature/presentation/add_request/widgets/select_image.dart';
 import 'package:salamtak/l10n/l10n.dart';
-import 'package:salamtak/util/constants.dart';
 import 'package:salamtak/util/json/states_and_cities.dart';
 
 /// {@template add_request_body}
@@ -57,13 +55,16 @@ class AddRequestWebBody extends StatelessWidget {
                                   const WebAddItemRow(),
                                   const SizedBox(height: 32),
                                   Card(
-                                    color: lemon,
+                                    color:
+                                        Theme.of(context).colorScheme.tertiary,
                                     child: Padding(
                                       padding: const EdgeInsets.symmetric(
                                         horizontal: 32,
                                         vertical: 16,
                                       ),
                                       child: Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: [
                                           Expanded(
                                             child: Column(
@@ -88,7 +89,8 @@ class AddRequestWebBody extends StatelessWidget {
                                                           .read<
                                                               AddRequestCubit>()
                                                           .descriptionChanged(
-                                                              value),
+                                                            value,
+                                                          ),
                                                 ),
                                                 const SizedBox(height: 16),
                                                 Row(
@@ -105,7 +107,8 @@ class AddRequestWebBody extends StatelessWidget {
                                                                 .read<
                                                                     AddRequestCubit>()
                                                                 .imageChanged(
-                                                                    value),
+                                                                  value,
+                                                                ),
                                                       ),
                                                     ),
                                                     const SizedBox(height: 16),
@@ -115,9 +118,9 @@ class AddRequestWebBody extends StatelessWidget {
                                                             .prescription_image,
                                                         image:
                                                             state.prescription,
-                                                        onImageChanged:
-                                                            (PlatformFile
-                                                                value) {
+                                                        onImageChanged: (
+                                                          PlatformFile value,
+                                                        ) {
                                                           context
                                                               .read<
                                                                   AddRequestCubit>()
@@ -132,64 +135,68 @@ class AddRequestWebBody extends StatelessWidget {
                                               ],
                                             ),
                                           ),
-                                          const SizedBox(width: 64),
+                                          const SizedBox(width: 32),
                                           Expanded(
                                             child: Column(
                                               children: [
-                                                SizedBox(
+                                                Container(
                                                   width: double.infinity,
-                                                  child: DecoratedBox(
-                                                    decoration: BoxDecoration(
-                                                      border: Border.all(
-                                                        color: Colors
-                                                            .grey.shade300,
-                                                      ),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              8),
-                                                      boxShadow: [
-                                                        BoxShadow(
-                                                          color: Colors.black
-                                                              .withOpacity(0.3),
-                                                          blurRadius: 12,
-                                                          offset: const Offset(
-                                                              0, 3),
+                                                  decoration: BoxDecoration(
+                                                    border: Border.all(
+                                                      color:
+                                                          Colors.grey.shade300,
+                                                    ),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                      8,
+                                                    ),
+                                                    boxShadow: [
+                                                      BoxShadow(
+                                                        color: Colors.black
+                                                            .withOpacity(0.3),
+                                                        blurRadius: 12,
+                                                        offset: const Offset(
+                                                          0,
+                                                          3,
                                                         ),
-                                                      ],
-                                                      color: lemon,
-                                                    ),
-                                                    child: Wrap(
-                                                      alignment:
-                                                          WrapAlignment.center,
-                                                      spacing: 8,
-                                                      children: medicineFormList
-                                                          .map(
-                                                            (item) =>
-                                                                MedicationFormCard(
-                                                              form: item.form,
-                                                              onSelect: () => context
-                                                                  .read<
-                                                                      AddRequestCubit>()
-                                                                  .formChanged(
+                                                      ),
+                                                    ],
+                                                    color: Theme.of(context)
+                                                        .colorScheme
+                                                        .tertiary,
+                                                  ),
+                                                  child: Wrap(
+                                                    alignment:
+                                                        WrapAlignment.center,
+                                                    spacing: 8,
+                                                    children: medicineFormList
+                                                        .map(
+                                                          (item) =>
+                                                              MedicationFormCard(
+                                                            form: item.form,
+                                                            onSelect: () => context
+                                                                .read<
+                                                                    AddRequestCubit>()
+                                                                .formChanged(
+                                                                  item.form,
+                                                                ),
+                                                            icon: item.icon,
+                                                            color: item.color,
+                                                            isSelected:
+                                                                state.form ==
                                                                     item.form,
-                                                                  ),
-                                                              icon: item.icon,
-                                                              color: item.color,
-                                                              isSelected:
-                                                                  state.form ==
-                                                                      item.form,
-                                                            ),
-                                                          )
-                                                          .toList(),
-                                                    ),
+                                                          ),
+                                                        )
+                                                        .toList(),
                                                   ),
                                                 ),
                                                 const SizedBox(height: 16),
                                                 EmergencySection(
                                                   selectedLevel:
                                                       state.emergencyLevel,
-                                                  onTap: (EmergencyLevel
-                                                          value) =>
+                                                  onTap: (
+                                                    EmergencyLevel value,
+                                                  ) =>
                                                       context
                                                           .read<
                                                               AddRequestCubit>()
@@ -208,7 +215,8 @@ class AddRequestWebBody extends StatelessWidget {
                                                           .read<
                                                               AddRequestCubit>()
                                                           .addressChanged(
-                                                              value),
+                                                            value,
+                                                          ),
                                                   onLocationChanged: (
                                                     LocationSudan value,
                                                   ) =>
@@ -216,7 +224,8 @@ class AddRequestWebBody extends StatelessWidget {
                                                           .read<
                                                               AddRequestCubit>()
                                                           .locationChanged(
-                                                              value),
+                                                            value,
+                                                          ),
                                                 ),
                                               ],
                                             ),

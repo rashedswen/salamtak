@@ -84,23 +84,23 @@ class RegisterBodyShared extends StatelessWidget {
           //       .address
           //       .value,
           // ),
-          // BlocBuilder<RegisterCubit, RegisterState>(
-          //   buildWhen: (previous, current) =>
-          //       previous.phoneNumber != current.phoneNumber,
-          //   builder: (context, state) {
-          //     return TextWithField(
-          //       text: context.l10n.phone,
-          //       hintText: '249xxxxxxxxx',
-          //       onChanged: (value) {
-          //         context
-          //             .read<RegisterCubit>()
-          //             .phoneNumberChanged(value);
-          //       },
-          //       errorText:
-          //           state.phoneNumber.displayError?.name,
-          //     );
-          //   },
-          // ),
+          BlocBuilder<RegisterCubit, RegisterState>(
+            buildWhen: (previous, current) =>
+                previous.phoneNumber != current.phoneNumber,
+            builder: (context, state) {
+              return TextWithField(
+                text: context.l10n.phone,
+                hintText: '249xxxxxxxxx',
+                onChanged: (value) {
+                  context
+                      .read<RegisterCubit>()
+                      .phoneNumberChanged(value);
+                },
+                errorText:
+                    state.phoneNumber.displayError?.name,
+              );
+            },
+          ),
           const SizedBox(height: 24),
           BlocBuilder<RegisterCubit, RegisterState>(
             buildWhen: (previous, current) => current.isValid,

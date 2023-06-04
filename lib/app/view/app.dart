@@ -58,6 +58,7 @@ class AppView extends StatelessWidget {
       DeviceOrientation.portraitDown,
     ]);
     return MaterialApp.router(
+      themeMode: ThemeMode.light,
       theme: ThemeData(
         useMaterial3: true,
         appBarTheme: const AppBarTheme(color: Color(0xFF14967F)),

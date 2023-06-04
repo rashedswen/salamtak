@@ -19,6 +19,21 @@ class ProfileInfoTab extends StatelessWidget {
         UserInfoListTile(
           text: context.l10n.name,
           value:
+              context.read<AppBloc>().state.user.phoneNumber ?? context.l10n.not_set,
+          onTap: () {},
+          onChanged: (value) {
+            context.read<ProfileCubit>().nameChanged(value);
+          },
+          onSave: () {
+            context.read<ProfileCubit>().saveName();
+          },
+          onCancel: () {
+            context.read<ProfileCubit>().nameChanged(null);
+          },
+        ),
+        UserInfoListTile(
+          text: context.l10n.name,
+          value:
               context.read<AppBloc>().state.user.name ?? context.l10n.not_set,
           onTap: () {},
           onChanged: (value) {

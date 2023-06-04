@@ -61,7 +61,7 @@ class RegisterState extends Equatable with FormzMixin {
         email,
         password,
         // address,
-        // phoneNumber,
+        phoneNumber,
       ];
 }
 

@@ -16,7 +16,7 @@ class MedicationFormSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: Theme.of(context).colorScheme.surface,
+      color: Theme.of(context).colorScheme.tertiary,
       elevation: 6,
       child: Padding(
         padding:
