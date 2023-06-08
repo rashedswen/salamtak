@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
-import '../../data/model/salamtak_user_model.dart';
-import '../../../../util/json/states_and_cities.dart';
+import 'package:salamtak/features/user_feature/data/model/salamtak_user_model.dart';
+import 'package:salamtak/util/json/states_and_cities.dart';
 
 class SalamtakUser extends Equatable {
   /// {@macro user}
@@ -86,7 +86,6 @@ class SalamtakUser extends Equatable {
         location,
         isActivated,
         authorization,
-        location,
         phoneNumber,
       ];
 }
