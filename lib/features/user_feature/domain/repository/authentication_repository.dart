@@ -31,14 +31,17 @@ abstract class AuthenticationRepository {
 
   Future<void> changeValue(String key, dynamic value);
 
+  // TODO(2): implement this in profile page
   Future<void> linkWithEmailAndPassowrd(String email, String password);
 
   Future<void> linkWithTwitter();
 
+  // TODO(3): implement this in profile page
   Future<void> linkWithPhoneNumber(String phoneNumber);
 
   Future<ProvidersId> getProviders();
 
+  //! TODO(4): not work, need bug fix
   Future<void> deleteAccount();
 
   Future<void> loginWithPhoneNumber(String phoneNumber);

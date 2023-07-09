@@ -48,6 +48,7 @@ class MedicationDetailsCubit extends Cubit<MedicationDetailsState> {
             .getMedicationRequest(state.medicationId);
         medicationInfo = medicationsInfo.toModel().toMedicationListItem();
       }
+      // TODO(6): add exchange info
 
       emit(
         state.copyWith(
@@ -65,6 +66,7 @@ class MedicationDetailsCubit extends Cubit<MedicationDetailsState> {
     }
   }
 
+  // TODO(7): Display in UI
   Future<void> _getUsersAcceptedRequest() async {
     emit(
       state.copyWith(
@@ -114,7 +116,7 @@ class MedicationDetailsCubit extends Cubit<MedicationDetailsState> {
     final userAlreadyAccepted = state.usersAcceptedRequest?.any(
       (element) => element.id == salamtakUser.id,
     );
-    if (userAlreadyAccepted == true) {
+    if (userAlreadyAccepted != null && userAlreadyAccepted == true) {
       emit(
         state.copyWith(
           submitStatus: MedicationDetailsSubmitRequestStatus.error,

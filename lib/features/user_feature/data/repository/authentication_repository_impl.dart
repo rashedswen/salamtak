@@ -11,6 +11,7 @@ class AuthenticationRepositoryImpl extends AuthenticationRepository {
       : _firebaseAuth = firebaseAuth ?? firebase_auth.FirebaseAuth.instance;
 
   final firebase_auth.FirebaseAuth _firebaseAuth;
+  
   @override
   SalamtakUser get currentUser {
     final firebaseUser = _firebaseAuth.currentUser;

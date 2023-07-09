@@ -105,15 +105,4 @@ class LoginCubit extends Cubit<LoginState> {
       emit(state.copyWith(status: FormzSubmissionStatus.failure));
     }
   }
-
-  Future<void> logInAnonymously() async {
-    emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
-    try {
-      await _authenticationRepository.logInAnonymously();
-      emit(state.copyWith(status: FormzSubmissionStatus.success));
-    } catch (e) {
-      print(e);
-      emit(state.copyWith(status: FormzSubmissionStatus.failure));
-    }
-  }
 }

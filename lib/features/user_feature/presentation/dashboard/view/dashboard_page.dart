@@ -60,8 +60,8 @@ class DashboardView extends StatelessWidget {
         }
       },
       child: const ResponsiveLayout(
-        mobileBody: DashboardBody(),
-        tabletBody: DashboardBody(),
+        mobileBody: DashboardBodyMobile(),
+        tabletBody: DashboardBodyMobile(),
         webBody: DashboardWebBody(),
       ),
     );

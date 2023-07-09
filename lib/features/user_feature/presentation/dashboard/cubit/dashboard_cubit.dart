@@ -19,13 +19,18 @@ class DashboardCubit extends Cubit<DashboardState> {
   FutureOr<void> getRequestsAndDonations() async {
     emit(const DashboardLoading());
     try {
+      // get medications list
       final donations = await _medicationRepository.getMedicationsDontations();
       final requests = await _medicationRepository.getMedicationsRequests();
-      final donationsMapped = donations.map((e) => e.toMedicationListItem());
-      final requestMapeed = requests.map((e) => e.toMedicationListItem());
+      // mapped to medication list item[toMedicationListItem]
+      final donationsMapped =
+          donations.map((e) => e.toMedicationListItem()).toList();
+      final requestMapeed =
+          requests.map((e) => e.toMedicationListItem()).toList();
 
       final list = <MedicationItem>[...requestMapeed, ...donationsMapped]
         ..sort((a, b) => b.createdDate.compareTo(a.createdDate));
+      // only show approved medications
       final s = list
           .where((element) => element.status == MedicationStatus.approved)
           .toList();

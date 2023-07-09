@@ -21,11 +21,11 @@ class AppRouter {
   static GoRouter router = GoRouter(
     redirect: (context, state) {
       final loggingIn = state.location == Screens.login.route;
-      final registering = state.location == Screens.register.route;
-      final privacyPolicy = state.location == Screens.privacyPolicy.route;
-      final deleteAccount = state.location == Screens.deleteAccount.route;
-      final loginWithPhoneNumber =
-          state.location == Screens.loginWithPhoneNumber.route;
+      // final registering = state.location == Screens.register.route;
+      // final privacyPolicy = state.location == Screens.privacyPolicy.route;
+      // final deleteAccount = state.location == Screens.deleteAccount.route;
+      // final loginWithPhoneNumber =
+      //     state.location == Screens.loginWithPhoneNumber.route;
       // final resetingPassword = state.location == Screens.resetPassword.route;
       final loggedIn =
           context.read<AppBloc>().state.status == AppStatus.authenticated;

@@ -37,7 +37,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
     emit(
       state,
     );
-    await Future.delayed(const Duration(seconds: 2));
+    await Future<void>.delayed(const Duration(seconds: 2));
 
     if (state.status == AppStatus.authenticated) {
       final userMod = await _authenticationRepository.getUser();

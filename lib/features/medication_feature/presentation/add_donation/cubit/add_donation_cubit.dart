@@ -57,8 +57,7 @@ class AddDonationCubit extends Cubit<AddDonationState> {
   Future<void> addDonation() async {
     emit(state.copyWith(status: AddDonationStatus.loading));
 
-    String? image;
-    image = imagePath(image);
+    final image = imagePath();
 
     try {
       final donation = MedicationDonation(
@@ -72,7 +71,9 @@ class AddDonationCubit extends Cubit<AddDonationState> {
         location: state.location!.copyWith(address: state.address),
       );
       await medicationRepository.addMedicationDonation(
-          donation, state.imageUrl);
+        donation,
+        state.imageUrl,
+      );
       emit(
         state.copyWith(
           status: AddDonationStatus.success,
@@ -81,15 +82,16 @@ class AddDonationCubit extends Cubit<AddDonationState> {
     } catch (e) {
       emit(
         state.copyWith(
-          errorMassage: 'fill all fields and check your internet connection',
+          errorMassage: 'fill all fields or check your internet connection',
           status: AddDonationStatus.failure,
         ),
       );
     }
   }
 
-  String? imagePath(String? image) {
-     if (state.imageUrl != null) {
+  String? imagePath() {
+    String? image;
+    if (state.imageUrl != null) {
       if (!kIsWeb) {
         image = state.imageUrl?.path;
       } else {

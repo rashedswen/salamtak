@@ -22,6 +22,7 @@ class RequestsDonationsListBloc
   }
   final MedicationRepository _medicationRepository;
 
+  // TODO(8): add exchange medication
   FutureOr<void> _getListOfMedicationsRequestDonation(
     GetListOfMedicationsRequestDonation event,
     Emitter<RequestsDonationsListState> emit,

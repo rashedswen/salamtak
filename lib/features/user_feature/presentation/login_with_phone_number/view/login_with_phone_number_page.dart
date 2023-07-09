@@ -5,11 +5,9 @@ import 'package:salamtak/features/user_feature/presentation/login_with_phone_num
 import 'package:salamtak/features/user_feature/presentation/login_with_phone_number/widgets/login_with_phone_number_body.dart';
 import 'package:salamtak/util/router/screen.dart';
 
-/// {@template login_with_phone_number_page}
-/// A description for LoginWithPhoneNumberPage
-/// {@endtemplate}
+@Deprecated('Not Working in sudan')
 class LoginWithPhoneNumberPage extends StatelessWidget {
-  /// {@macro login_with_phone_number_page}
+  @Deprecated('Not Working in sudan')
   const LoginWithPhoneNumberPage({super.key});
 
   /// The static route for LoginWithPhoneNumberPage

@@ -35,6 +35,7 @@ dependencies:
   json_annotation: ^4.8.1
   shared_preferences: ^2.1.1
   sign_in_with_apple: ^4.3.0
+  twilio_flutter: ^0.0.9
 
 dev_dependencies:
   bloc_test: ^9.1.1

@@ -11,9 +11,9 @@ import 'package:salamtak/l10n/l10n.dart';
 ///
 /// Add what it does
 /// {@endtemplate}
-class DashboardBody extends StatelessWidget {
+class DashboardBodyMobile extends StatelessWidget {
   /// {@macro dashboard_body}
-  const DashboardBody({super.key});
+  const DashboardBodyMobile({super.key});
 
   @override
   Widget build(BuildContext context) {

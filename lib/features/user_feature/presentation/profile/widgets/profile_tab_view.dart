@@ -86,7 +86,7 @@ class _ProfileTabViewState extends State<ProfileTabView>
                             children: state.userRequests!.map((request) {
                               // check if position is even or odd
                               final isEven =
-                                  state.userRequests!.indexOf(request) % 2 == 0;
+                                  state.userRequests!.indexOf(request).isEven;
                               return Container(
                                 height: 100,
                                 color: !isEven
